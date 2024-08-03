@@ -168,7 +168,7 @@ const FrontPage = () => {
             />
           </div>
           <div className="mt-4 md:mt-0 md:ml-6">
-            <p className="text-xl md:text-4xl font-bold text-black md:ml-12">
+            <p className="text-xl ml-10 md:text-4xl font-bold text-black md:ml-12">
               Africa
             </p>
             <div>
