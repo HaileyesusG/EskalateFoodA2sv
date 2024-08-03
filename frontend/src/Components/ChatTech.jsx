@@ -8,7 +8,7 @@ import { IoSend } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setChat, removeChat } from "../features/chat/chatSlice";
-let socket = io("http://localhost:5001");
+let socket = io("https://africadeploybackend.onrender.com");
 const ChatTech = ({ user }) => {
   const todo = useSelector((state) => state.chat.chat);
   const dispatch2 = useDispatch();

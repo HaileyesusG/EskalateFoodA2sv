@@ -21,7 +21,7 @@ const AdminChat = ({ user3 }) => {
   const [name, setname] = useState("");
   const [visible, setVisible] = useState(false);
   const [Counter, setCounter] = useState(0);
-  let socket = io("http://localhost:5001");
+  let socket = io("https://africadeploybackend.onrender.com");
   //let { admin, dispatch } = useUserContextA();
   let { chat5, dispatchChat } = useUserContextChat();
   let chat = todo;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-const socket = io("http://localhost:5001");
+const socket = io("https://africadeploybackend.onrender.com");
 import { useUserContextA } from "../Hooks/useUserContextA";
 import { useRegister } from "../Hooks/useRegister";
 import { useNavigate } from "react-router-dom";

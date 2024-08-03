@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-let socket = io("http://localhost:5001");
+let socket = io("https://africadeploybackend.onrender.com");
 import { useLocation, useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { FaAddressBook } from "react-icons/fa";

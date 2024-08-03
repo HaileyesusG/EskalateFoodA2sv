@@ -19,7 +19,7 @@ const LoginC = () => {
     if (image) setViewer(true);
   };
   useEffect(() => {
-    setSocket(io("http://localhost:5001"));
+    setSocket(io("https://africadeploybackend.onrender.com"));
   }, []);
   useEffect(() => {
     socket?.emit("newUser", email);

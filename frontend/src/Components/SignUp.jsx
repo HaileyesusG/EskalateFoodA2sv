@@ -12,7 +12,7 @@ import { FaTools } from "react-icons/fa";
 import hiloe5 from "../assets/Ai_3.png";
 import SuccessMessage from "./Thankyou";
 import { io } from "socket.io-client";
-const socket = io("http://localhost:5001");
+const socket = io("https://africadeploybackend.onrender.com");
 const SignUp = () => {
   const { signup, isLoading, error } = useSignUp();
   const [email, setEmail] = useState("");

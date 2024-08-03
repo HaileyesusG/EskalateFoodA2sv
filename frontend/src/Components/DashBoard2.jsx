@@ -21,7 +21,7 @@ const Dashboard2 = () => {
   customer = customer[0];
   const token = "Bearer " + customer.token;
   const _id = customer._id;
-  let socket = io("http://localhost:5001");
+  let socket = io("https://africadeploybackend.onrender.com");
   let [json, setJson] = useState([]);
   let response;
   const [typeOfProblem, setProblem] = useState("");
