@@ -18,6 +18,13 @@ const bodyParser = require("body-parser");
 DbConnection();
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(
+  cors({
+    origin: "https://africadeployfrontend.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 app.use("/api/Customer", path);
 app.use("/api/Tech", path2);
 app.use("/api/Book", path3);
@@ -31,8 +38,9 @@ let boddy = [];
 const serv = http.createServer(app);
 const io = new Server(serv, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://africadeployfrontend.onrender.com",
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 let onlineuser = [];
