@@ -21,6 +21,7 @@ export const useSignIn = () => {
       body: JSON.stringify({ email, password }),
     });
     console.log(response);
+    console.log("ApI", API_BASE_URL);
     return;
     const json = await response.json();
     if (!response.ok) {
