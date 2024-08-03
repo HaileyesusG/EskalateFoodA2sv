@@ -1,11 +1,10 @@
-import { Navigate, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { Navigate, useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import hiloe from "../assets/AiM.jpeg";
 import hiloe2 from "../assets/AiM2.jpeg";
 import hiloe3 from "../assets/logo.jpg";
 import hiloe4 from "../assets/AiM4.jpeg";
 import hiloe5 from "../assets/Ai_6.jfif";
-import { Link } from "react-scroll";
 import {
   Navigation,
   Pagination,
@@ -39,6 +38,33 @@ const FrontPage = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    // Smooth scrolling functionality
+    const handleScroll = (event) => {
+      event.preventDefault();
+      const targetId = event.currentTarget.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 50, // Adjust offset for fixed header
+          behavior: "smooth",
+        });
+      }
+    };
+
+    const links = document.querySelectorAll("a[href^='#']");
+    links.forEach((link) => {
+      link.addEventListener("click", handleScroll);
+    });
+
+    // Clean up the event listeners
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener("click", handleScroll);
+      });
+    };
+  }, []);
+
   return (
     <div>
       <nav className="bg-yellow-400 w-full z-10 shadow-md">
@@ -65,60 +91,24 @@ const FrontPage = () => {
             </div>
           </div>
           <div className="hidden md:flex space-x-8 text-lg">
-            <Link
-              to="home"
-              className="cursor-pointer hover:text-red-500"
-              smooth={true}
-              duration={500}
-              offset={-50}
-            >
+            <a href="#home" className="cursor-pointer hover:text-red-500">
               Home
-            </Link>
-            <Link
-              to="about"
-              className="cursor-pointer hover:text-red-500"
-              smooth={true}
-              duration={500}
-              offset={-50}
-            >
+            </a>
+            <a href="#about" className="cursor-pointer hover:text-red-500">
               About
-            </Link>
-            <Link
-              to="services"
-              className="cursor-pointer hover:text-red-500"
-              smooth={true}
-              duration={500}
-              offset={-50}
-            >
+            </a>
+            <a href="#services" className="cursor-pointer hover:text-red-500">
               Services
-            </Link>
-            <Link
-              to="page"
-              className="cursor-pointer hover:text-red-500"
-              smooth={true}
-              duration={500}
-              offset={-50}
-            >
+            </a>
+            <a href="#page" className="cursor-pointer hover:text-red-500">
               Page
-            </Link>
-            <Link
-              to="package"
-              className="cursor-pointer hover:text-red-500"
-              smooth={true}
-              duration={500}
-              offset={-50}
-            >
+            </a>
+            <a href="#package" className="cursor-pointer hover:text-red-500">
               Package
-            </Link>
-            <Link
-              to="contact"
-              className="cursor-pointer hover:text-red-500"
-              smooth={true}
-              duration={500}
-              offset={-50}
-            >
+            </a>
+            <a href="#contact" className="cursor-pointer hover:text-red-500">
               Contact
-            </Link>
+            </a>
           </div>
           <div className="md:hidden">
             <button
@@ -145,66 +135,24 @@ const FrontPage = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="flex flex-col items-center space-y-4 py-4">
-              <Link
-                to="home"
-                className="cursor-pointer hover:text-red-500"
-                onClick={toggleMenu}
-                smooth={true}
-                duration={500}
-                offset={-50}
-              >
+              <a href="#home" className="cursor-pointer hover:text-red-500">
                 Home
-              </Link>
-              <Link
-                to="about"
-                className="cursor-pointer hover:text-red-500"
-                onClick={toggleMenu}
-                smooth={true}
-                duration={500}
-                offset={-50}
-              >
+              </a>
+              <a href="#about" className="cursor-pointer hover:text-red-500">
                 About
-              </Link>
-              <Link
-                to="services"
-                className="cursor-pointer hover:text-red-500"
-                onClick={toggleMenu}
-                smooth={true}
-                duration={500}
-                offset={-50}
-              >
+              </a>
+              <a href="#services" className="cursor-pointer hover:text-red-500">
                 Services
-              </Link>
-              <Link
-                to="page"
-                className="cursor-pointer hover:text-red-500"
-                onClick={toggleMenu}
-                smooth={true}
-                duration={500}
-                offset={-50}
-              >
+              </a>
+              <a href="#page" className="cursor-pointer hover:text-red-500">
                 Page
-              </Link>
-              <Link
-                to="package"
-                className="cursor-pointer hover:text-red-500"
-                onClick={toggleMenu}
-                smooth={true}
-                duration={500}
-                offset={-50}
-              >
+              </a>
+              <a href="#package" className="cursor-pointer hover:text-red-500">
                 Package
-              </Link>
-              <Link
-                to="contact"
-                className="cursor-pointer hover:text-red-500"
-                onClick={toggleMenu}
-                smooth={true}
-                duration={500}
-                offset={-50}
-              >
+              </a>
+              <a href="#contact" className="cursor-pointer hover:text-red-500">
                 Contact
-              </Link>
+              </a>
             </div>
           </div>
         )}
