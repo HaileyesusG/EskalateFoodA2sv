@@ -4,7 +4,7 @@ const socket = io("https://africadeploybackend.onrender.com");
 import { useUserContextA } from "../Hooks/useUserContextA";
 import { useRegister } from "../Hooks/useRegister";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { FaCheckCircle } from "react-icons/fa";
 import { FaTools } from "react-icons/fa";
 import { FaMoon, FaPerson } from "react-icons/fa6";
@@ -123,10 +123,13 @@ const Admin = ({ user3 }) => {
 
   let array = [];
   const Applicantfeatcher = async () => {
-    const response = await fetch("/api/Applicants/GetAllApplicant", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/Applicants/GetAllApplicant`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const json = await response.json();
     setArray3(json);
     setNotify(array3.length);
@@ -175,13 +178,15 @@ const Admin = ({ user3 }) => {
     setdisplay12("visible");
     setdisplay11("hidden");
   };
-
   const findApplicant = async (d) => {
     setApplicantId(d);
-    const response = await fetch("/api/Applicants/GetApplicant/" + d, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/Applicants/GetApplicant/${d}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     console.log("the d", d);
 
     const data = await response.json();
@@ -220,7 +225,7 @@ const Admin = ({ user3 }) => {
         setdisplay8("hidden");
         array3.shift();
         const response = await fetch(
-          "/api/Applicants/deleteApplicant/" + ApplicantId,
+          `${API_BASE_URL}/api/Applicants/deleteApplicant/${ApplicantId}`,
           {
             method: "DELETE",
             body: JSON.stringify({
@@ -247,7 +252,7 @@ const Admin = ({ user3 }) => {
     array3.shift();
     //socket.emit("Rejected", admin._id);
     const response = await fetch(
-      "/api/Applicants/deleteApplicant/" + ApplicantId,
+      `${API_BASE_URL}/api/Applicants/deleteApplicant/${ApplicantId}`,
       {
         method: "DELETE",
         body: JSON.stringify({
@@ -270,7 +275,7 @@ const Admin = ({ user3 }) => {
     }
   };
   const RechargeBalance = async (amountt) => {
-    const response = await fetch("/api/Admin/RechargeBalance", {
+    const response = await fetch(`${API_BASE_URL}/api/Admin/RechargeBalance`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -290,7 +295,7 @@ const Admin = ({ user3 }) => {
     const user = JSON.parse(localStorage.getItem("admin"));
     const token = "Bearer " + user.token;
 
-    response = await fetch("/api/Customer/GetCustomer", {
+    response = await fetch(`${API_BASE_URL}/api/Customer/GetCustomer`, {
       headers: { authorization: token },
     });
     setJson(await response.json());
@@ -306,8 +311,7 @@ const Admin = ({ user3 }) => {
     setIsCustomer(false);
     const user = JSON.parse(localStorage.getItem("admin"));
     const token = "Bearer " + user.token;
-
-    response = await fetch("/api/Tech/GetTech", {
+    response = await fetch(`${API_BASE_URL}/api/Tech/GetTech`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -324,13 +328,13 @@ const Admin = ({ user3 }) => {
   });
   const featcher2 = async (id) => {
     if (isCustomer) {
-      response = await fetch("/api/Customer/" + id, {
+      response = await fetch(`${API_BASE_URL}/api/Customer/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
       setJson(await response.json());
     } else {
-      response = await fetch("/api/tech/" + id, {
+      response = await fetch(`${API_BASE_URL}/api/tech/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });

@@ -8,6 +8,7 @@ import { IoSend } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setChat, removeChat } from "../features/chat/chatSlice";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 let socket = io("https://africadeploybackend.onrender.com");
 const ChatTech = ({ user }) => {
   const todo = useSelector((state) => state.chat.chat);
@@ -36,7 +37,7 @@ const ChatTech = ({ user }) => {
   let response;
   useEffect(() => {
     const featcher = async () => {
-      response = await fetch("/api/Chat/GetChat", {});
+      response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
       const json = await response.json();
       const filteredChat = json.filter(
         (chat) =>
@@ -57,7 +58,7 @@ const ChatTech = ({ user }) => {
   }, [dispatch2]);
 
   const featcher2 = async () => {
-    response = await fetch("/api/admin/GetAdmin", {});
+    response = await fetch(`${API_BASE_URL}/api/admin/GetAdmin`, {});
     const json = await response.json();
     setCollector(json);
   };
@@ -75,7 +76,7 @@ const ChatTech = ({ user }) => {
   }, [dispatch2]);
 
   const featcher3 = async (id) => {
-    response = await fetch("/api/Chat/GetChat", {});
+    response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
     const json = await response.json();
     const filteredChat = json.filter(
       (chat) =>
@@ -133,7 +134,7 @@ const ChatTech = ({ user }) => {
     setBench(null);
   };
   const handleDelete = async (id, _id) => {
-    const response = await fetch("/api/Chat/" + _id, {
+    const response = await fetch(`${API_BASE_URL}/api/Chat/${_id}`, {
       method: "DELETE",
 
       headers: { "Content-Type": "application/json" },

@@ -7,6 +7,7 @@ import { useUserContextChat } from "../Hooks/useUserContextChat";
 import { IoSend } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { setChat, removeChat } from "../features/chat/chatSlice";
 const AdminChat = ({ user3 }) => {
   const todo = useSelector((state) => state.chat.chat);
@@ -29,7 +30,7 @@ const AdminChat = ({ user3 }) => {
   let response;
   useEffect(() => {
     const featcher = async () => {
-      response = await fetch("/api/Chat/GetChat", {});
+      response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
       const json = await response.json();
       const filteredChat = json.filter(
         (chat) =>
@@ -50,7 +51,7 @@ const AdminChat = ({ user3 }) => {
   }, [dispatch2]);
 
   const featcher3 = async (id) => {
-    response = await fetch("/api/Chat/GetChat", {});
+    response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
     const json = await response.json();
     const filteredChat = json.filter(
       (chat) =>
@@ -67,7 +68,7 @@ const AdminChat = ({ user3 }) => {
     // console.log("The collector2 ", collector2);
   };
   const featcher2 = async () => {
-    response = await fetch("/api/tech/GetTech", {});
+    response = await fetch(`${API_BASE_URL}/api/tech/GetTech`, {});
     const json = await response.json();
     setCollector(json);
     console.log("in featcher");
@@ -126,9 +127,8 @@ const AdminChat = ({ user3 }) => {
     setBench(null);
     setProfile(profile2);
   };
-
   const handleDelete = async (id, _id) => {
-    const response = await fetch("/api/Chat/" + _id, {
+    const response = await fetch(`${API_BASE_URL}/api/Chat/${_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });

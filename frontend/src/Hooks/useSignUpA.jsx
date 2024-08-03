@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useSignUpA = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -27,7 +28,7 @@ export const useSignUpA = () => {
     formdata.append("email", email);
     formdata.append("password", password);
     formdata.append("testImage", testImage);
-    const response = await fetch("/api/Admin/AdminCreate", {
+    const response = await fetch(`${API_BASE_URL}/api/Admin/AdminCreate`, {
       method: "POST",
       body: formdata,
     });

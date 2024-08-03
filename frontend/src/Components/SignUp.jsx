@@ -11,6 +11,7 @@ import { PiGenderFemaleDuotone } from "react-icons/pi";
 import { FaTools } from "react-icons/fa";
 import hiloe5 from "../assets/Ai_3.png";
 import SuccessMessage from "./Thankyou";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { io } from "socket.io-client";
 const socket = io("https://africadeploybackend.onrender.com");
 const SignUp = () => {
@@ -91,7 +92,7 @@ const SignUp = () => {
       return;
     }
 
-    const response = await fetch("/api/Applicants/GenerateOtp", {
+    const response = await fetch(`${API_BASE_URL}/api/Applicants/GenerateOtp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

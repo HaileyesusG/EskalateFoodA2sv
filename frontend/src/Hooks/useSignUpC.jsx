@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useUserContextC } from "../Hooks/useUserContextC";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useSignUpC = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -9,13 +10,16 @@ export const useSignUpC = () => {
   const signupC = async (phonenumber) => {
     setIsLoading(true);
     setError(null);
-    const response = await fetch("/api/Customer/CustomerCreate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        phonenumber,
-      }),
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/Customer/CustomerCreate`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phonenumber,
+        }),
+      }
+    );
     const json = await response.json();
     if (!response.ok) {
       setIsLoading(false);

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Form } from "react-router-dom";
 import { useUserContextC } from "../Hooks/useUserContextC";
-
 import { Navigate, useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useSignInC = () => {
   const red = useNavigate();
   const [error, setError] = useState(null);
@@ -12,8 +12,7 @@ export const useSignInC = () => {
   const signinC = async (email, password) => {
     setIsLoading(true);
     setError(null);
-
-    const response = await fetch("/api/Customer/LoginCustomer", {
+    const response = await fetch(`${API_BASE_URL}/api/Customer/LoginCustomer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

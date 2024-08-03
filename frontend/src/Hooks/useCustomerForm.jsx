@@ -2,6 +2,7 @@ import { useState } from "react";
 import { io } from "socket.io-client";
 import { useUserContextC } from "../Hooks/useUserContextC";
 import { Navigate, useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useCustomerForm = () => {
   let socket = io("https://africadeploybackend.onrender.com");
   const red = useNavigate();
@@ -17,7 +18,7 @@ export const useCustomerForm = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/Book/BookCreate", {
+    const response = await fetch(`${API_BASE_URL}/api/Book/BookCreate`, {
       method: "POST",
       headers: { "Content-Type": "application/json", authorization: token },
       body: JSON.stringify({

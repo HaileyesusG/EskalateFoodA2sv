@@ -13,6 +13,7 @@ import hiloe5 from "../assets/A_15.jpeg";
 import hiloe6 from "../assets/A_16.avif";
 import hiloe7 from "../assets/A_17.jpg";
 import hiloe8 from "../assets/A_19.avif";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import hiloe9 from "../assets/A_21.jpg";
 import { ImHappy2 } from "react-icons/im";
 import axios from "axios";
@@ -53,7 +54,7 @@ const Dashboard2 = () => {
 
   const { CustomerForm, error, TaskDelete } = useCustomerForm();
   let featcher = async () => {
-    response = await fetch("/api/Accepted/GetOneCustomer", {
+    response = await fetch(`${API_BASE_URL}/api/Accepted/GetOneCustomer`, {
       headers: { authorization: token },
     });
     setJson(await response.json());
@@ -145,7 +146,7 @@ const Dashboard2 = () => {
     }
   }, []);
 
-  const response2 = fetch("/api/Customer/" + _id, {
+  const response2 = fetch(`${API_BASE_URL}/api/Customer/${_id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ location }),

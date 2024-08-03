@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignUp from "./Components/SignUp";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import Login from "./Components/LogIn";
 import LoginC from "./Components/LogInC";
 import LoginA from "./Components/LogInA";
@@ -53,10 +54,11 @@ function App() {
       console.log("not found2");
     }
   }, []);
-
   //user
   const featch = async (id) => {
-    const response = await fetch("/api/tech/GetOneTechById/" + id);
+    const response = await fetch(
+      `${API_BASE_URL}/api/tech/GetOneTechById/${id}`
+    );
     const json = await response.json();
     if (!response.ok) {
       console.log("can not log");
@@ -71,7 +73,9 @@ function App() {
   };
   //admin
   const featch2 = async (id) => {
-    const response = await fetch("/api/admin/GetOneAdminById/" + id);
+    const response = await fetch(
+      `${API_BASE_URL}/api/admin/GetOneAdminById/${id}`
+    );
     const json = await response.json();
     if (!response.ok) {
       console.log("can not log");

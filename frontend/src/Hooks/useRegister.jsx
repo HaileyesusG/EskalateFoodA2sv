@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const socket = io("https://africadeploybackend.onrender.com");
 export const useRegister = () => {
   const [error, setError] = useState(null);
@@ -22,7 +23,7 @@ export const useRegister = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/Tech/TechCreate", {
+    const response = await fetch(`${API_BASE_URL}/api/Tech/TechCreate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

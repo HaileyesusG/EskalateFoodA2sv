@@ -8,7 +8,7 @@ import { FaTools } from "react-icons/fa";
 import { FaMoon, FaPerson } from "react-icons/fa6";
 import { AiFillPhone } from "react-icons/ai";
 import { MdEditLocationAlt } from "react-icons/md";
-import { FaSun } from "react-icons/fa";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { PiGenderFemaleDuotone } from "react-icons/pi";
 import { IoMdNotifications } from "react-icons/io";
 import { BiSolidMessageDetail } from "react-icons/bi";
@@ -101,7 +101,7 @@ const Home = ({ user3 }) => {
   let featcher = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = "Bearer " + user.token;
-    response = await fetch("/api/Accepted/GetOneTech", {
+    response = await fetch(`${API_BASE_URL}/api/Accepted/GetOneTech`, {
       headers: { authorization: token },
     });
     const d = await response.json();
@@ -148,7 +148,7 @@ const Home = ({ user3 }) => {
       console.log("in the out", Email, techEmail);
       if (Email == techEmail) {
         console.log("in the", Email, techEmail);
-        const response = await fetch("/api/book/updateBooking", {
+        const response = await fetch(`${API_BASE_URL}/api/book/updateBooking`, {
           method: "POST",
           body: JSON.stringify({
             Customer__id,
@@ -206,16 +206,19 @@ const Home = ({ user3 }) => {
     setDisabled(true);
     setdisplay10("hidden");
     try {
-      const response1 = await fetch("/api/Accepted/toBeFinished/" + _id, {
-        method: "POST",
-        body: JSON.stringify({
-          department: Customer.department,
-          customerId: Customer.customer_id,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const response1 = await fetch(
+        `${API_BASE_URL}/api/Accepted/toBeFinished/${_id}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            department: Customer.department,
+            customerId: Customer.customer_id,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       const response = await fetch(
-        "/api/book/UpdateTechBook/" + Customer.customer_id,
+        `${API_BASE_URL}/api/book/UpdateTechBook/${Customer.customer_id}`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -274,23 +277,29 @@ const Home = ({ user3 }) => {
     });
   }, [socket]);
   const Finished = async () => {
-    const response1 = await fetch("/api/Accepted/GetLatestAccept/" + _id, {
-      method: "GET",
-      "Content-Type": "application/json",
-    });
+    const response1 = await fetch(
+      `${API_BASE_URL}/api/Accepted/GetLatestAccept/${_id}`,
+      {
+        method: "GET",
+        "Content-Type": "application/json",
+      }
+    );
 
     const json = await response1.json();
     const departmentt = json.department;
     const myId = json.customerId;
     const work = { myId };
-    const response = await fetch("/api/tech/updateFinish/" + _id, {
-      method: "PATCH",
-      body: JSON.stringify({
-        work,
-        departmentt,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/tech/updateFinish/${_id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          work,
+          departmentt,
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     if (response.ok) {
       const json = await response.json();
       const {
@@ -324,10 +333,13 @@ const Home = ({ user3 }) => {
       );
     }
     setdisplay10("visible");
-    const resp = await fetch("/api/Accepted/DeleteLatestAccept/" + _id, {
-      method: "DELETE",
-      "Content-Type": "application/json",
-    });
+    const resp = await fetch(
+      `${API_BASE_URL}/api/Accepted/DeleteLatestAccept/${_id}`,
+      {
+        method: "DELETE",
+        "Content-Type": "application/json",
+      }
+    );
   };
   const declined = () => {
     // socket.emit("Decline", "Declined");
@@ -420,7 +432,7 @@ const Home = ({ user3 }) => {
     );
   }, [location]);
   const response2 = () =>
-    fetch("/api/Tech/" + _id, {
+    fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ location: location }),
@@ -445,7 +457,7 @@ const Home = ({ user3 }) => {
     setdisplay2("hidden");
     setdisplay3("visible");
     setLocationName(event);
-    const response2 = fetch("/api/Tech/" + _id, {
+    const response2 = fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ event }),

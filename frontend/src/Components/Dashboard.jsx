@@ -14,6 +14,7 @@ import { CgSmartHomeRefrigerator } from "react-icons/cg";
 import { GiCampCookingPot } from "react-icons/gi";
 import { FaPaintRoller } from "react-icons/fa6";
 import { MdRoofing } from "react-icons/md";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import axios from "axios";
 import { FaUser } from "react-icons/fa6";
 import SignUpC from "./SignUpC";
@@ -99,11 +100,14 @@ const Dashboard = () => {
       dispatch2({ type: "LOGIN", payload: Customer });
 
       if (Customer) {
-        const response2 = fetch("/api/Customer/" + Customer._id, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ location: location }),
-        });
+        const response2 = fetch(
+          `${API_BASE_URL}/api/Customer/${Customer._id}`,
+          {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ location: location }),
+          }
+        );
       }
 
       setCustomer(Customer);
@@ -128,7 +132,9 @@ const Dashboard = () => {
 
   const { CustomerForm, isLoading, error, who } = useCustomerForm();
   let featcher = async () => {
-    const response = await fetch("/api/Accepted/GetOneCustomer/" + _id);
+    const response = await fetch(
+      `${API_BASE_URL}/api/Accepted/GetOneCustomer/${_id}`
+    );
     const c = await response.json();
     setJson(c);
   };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const socket = io("https://africadeploybackend.onrender.com");
 export const useSignUp = () => {
   const [error, setError] = useState(null);
@@ -35,10 +36,13 @@ export const useSignUp = () => {
     formdata.append("testImages", testImage2);
     formdata.append("testImages", testImage3);
     formdata.append("testImages", testImage4);
-    const response = await fetch("/api/Applicants/ApplicantCreate", {
-      method: "POST",
-      body: formdata,
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/Applicants/ApplicantCreate`,
+      {
+        method: "POST",
+        body: formdata,
+      }
+    );
     const json = await response.json();
     if (!response.ok) {
       setIsLoading(false);
