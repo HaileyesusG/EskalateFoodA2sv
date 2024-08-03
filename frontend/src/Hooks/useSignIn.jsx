@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { useUserContext } from "../Hooks/useUserContext";
 import { setTech } from "../features/tech/techSlice";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ export const useSignIn = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/tech/LoginTech", {
+    const response = await fetch(`${API_BASE_URL}/api/tech/LoginTech`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
