@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignUp from "./Components/SignUp";
-import Login from "./components/LogIn";
+import Login from "./Components/LogIn";
 import LoginC from "./Components/LogInC";
 import LoginA from "./Components/LogInA";
 import Dashboard from "./Components/Dashboard";
