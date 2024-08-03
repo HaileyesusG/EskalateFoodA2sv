@@ -1,0 +1,35 @@
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useUserContextChat } from "../Hooks/useUserContextChat";
+import { useDispatch } from "react-redux";
+import { setChat, addChat } from "../features/chat/chatSlice";
+export const useSendMessage = () => {
+  const dispatch2 = useDispatch();
+  const red = useNavigate();
+  //const { user, dispatch } = useUserContext();
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+  const { chat, dispatchChat } = useUserContextChat();
+  const sendMessage = async (Sender_id, Receiver_id, Message, image) => {
+    setIsLoading(true);
+    setError(null);
+    if (Receiver_id !== "") {
+      const response = await fetch("/api/Chat/ChatCreate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Sender_id, Receiver_id, Message, image }),
+      });
+      const json = await response.json();
+      console.log("the json file is", json);
+      if (response.ok) {
+        // setIsLoading(false);
+        //dispatchChat({ type: "CREATE_CHAT", payload: json });
+        dispatch2(setChat(json));
+        //red("/Home");
+        //save the user on local storage
+        //localStorage.setItem("user", JSON.stringify(json));
+      }
+    }
+  };
+  return { sendMessage, isLoading, error };
+};

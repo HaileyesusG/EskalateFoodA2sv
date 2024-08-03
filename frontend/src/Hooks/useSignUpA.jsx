@@ -1,0 +1,47 @@
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+export const useSignUpA = () => {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+  const red = useNavigate();
+  const signupA = async (
+    department,
+    firstname,
+    lastname,
+    gender,
+    phonenumber,
+    location,
+    email,
+    password,
+    testImage
+  ) => {
+    setIsLoading(true);
+    setError(null);
+    let formdata = new FormData();
+    formdata.append("department", department);
+    formdata.append("firstname", firstname);
+    formdata.append("lastname", lastname);
+    formdata.append("gender", gender);
+    formdata.append("phonenumber", phonenumber);
+    formdata.append("location", location);
+    formdata.append("email", email);
+    formdata.append("password", password);
+    formdata.append("testImage", testImage);
+    const response = await fetch("/api/Admin/AdminCreate", {
+      method: "POST",
+      body: formdata,
+    });
+    const json = await response.json();
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(json.message);
+    }
+    if (response.ok) {
+      setIsLoading(false);
+      red("/LoginA");
+      //save the user on local storage
+      //localStorage.setItem('user')
+    }
+  };
+  return { signupA, isLoading, error };
+};
