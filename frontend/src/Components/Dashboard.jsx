@@ -242,12 +242,12 @@ const Dashboard = () => {
     setIsButtonHidden(false);
   };
   const handleOrderNow = async (e) => {
-    setIsLoading2(true);
     e.preventDefault();
     if (department == "") {
       console.log("please select dep");
       return;
     }
+    setIsLoading2(true);
     setIsOpen(true);
     setIsButtonHidden(true);
 
