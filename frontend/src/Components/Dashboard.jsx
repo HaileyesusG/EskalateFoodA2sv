@@ -277,18 +277,18 @@ const Dashboard = () => {
   }, [socket, phonenumber]);
   return (
     <div key={refereshKey}>
-      <div className=" absolute ml-8 sm:mt-11 flex ">
+      <div className="absolute mt-5 ml-8 sm:mt-11 flex">
         <div>
-          <ImLocation className=" text-[30px] text-pink-600  shadow font-bold" />
-          <p className="text[10px] sm:text[30px] ">ይህ የGPS </p>
-          <p className="text[10px] sm:text[30px] "> ግምታዊ </p>
-          <p className="text[10px] sm:text[30px] ">አድራሻዎት </p>
-          <p className="ml-4 text[10px] sm:text[30px]">ነው</p>
+          <ImLocation className="text-[30px] text-pink-600 shadow font-bold" />
+          <p className="text-[10px] sm:text-[30px]">ይህ የGPS </p>
+          <p className="text-[10px] sm:text-[30px]"> ግምታዊ </p>
+          <p className="text-[10px] sm:text-[30px]">አድራሻዎት </p>
+          <p className="ml-4 text-[10px] sm:text-[30px]">ነው</p>
         </div>
         <div className="w-[90px] md:w-[400px] ml-3">
-          <h3 className="  ">{location}</h3>
+          <h3>{location}</h3>
         </div>
-        <div className="sm:ml-[600px] ml-12 ">
+        <div className="ml-12 sm:ml-[600px]">
           <div className={disp2}>
             <div className="flex mr-10">
               <input
@@ -297,9 +297,9 @@ const Dashboard = () => {
                 onFocus={() => setdisplay("visible")}
                 value={query}
                 placeholder="Location"
-                className="bg-transparent   h-[35px] w-[300px]  border-2 block focus:outline-none focus:border-white  rounded-2xl   px-4 placeholder-white "
+                className="bg-transparent h-[35px] w-[300px] border-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white"
               />
-              <ImLocation className=" mt-2 absolute ml-[270px]" />
+              <ImLocation className="mt-2 absolute ml-[270px]" />
             </div>
           </div>
 
@@ -308,35 +308,33 @@ const Dashboard = () => {
               <li
                 key={suggestion.place_id}
                 onClick={() => handleChoiceChange(suggestion.display_name)}
-                className=" "
               >
                 <div className="flex">
-                  <ImLocation className="text-2xl p-1 " />
+                  <ImLocation className="text-2xl p-1" />
                   {suggestion.display_name}
                 </div>
               </li>
             ))}
           </ul>
           {error3 && <p>Error: {error3}</p>}
-          <div className={disp3}>
+          <div className={"ml-16 sm:ml-0 " + disp3}>
             <MdEditLocationAlt
               onClick={makeVisible}
-              className=" text-[30px]  text-pink-600  shadow font-bold cursor-pointer"
+              className="text-[30px] ml-3 text-pink-600 shadow font-bold cursor-pointer"
             />
             <h4>አድራሻዎትን </h4>
             <h4 className="ml-2">ያስተካክሉ</h4>
           </div>
         </div>
       </div>
-      <div className="mt-3 sm:flex absolute">
-        <div className=" ml-7  w-16 h-16 mt-[140px] sm:ml-[300px] rounded-full overflow-hidden">
-          <img src={hiloe6} alt="" className=" rounded-full " />
+      <div className="mt-10 sm:flex absolute">
+        <div className="ml-7 w-16 h-16 mt-[140px] sm:ml-[300px] rounded-full overflow-hidden">
+          <img src={hiloe6} alt="" className="rounded-full" />
         </div>
-
-        <h2 className="sm:ml-3 ml-4 text-[10px] sm:mt-[145px] sm:text-[20px] ">
+        <h2 className="ml-4 sm:ml-3 sm:mt-[145px] text-[10px] sm:text-[20px]">
           Africa Customer Service
         </h2>
-        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-64 sm:ml-[300px] sm:mt-[135px] mt-[-70px] ">
+        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-80 sm:ml-[300px] mt-[-70px] sm:mt-[135px]">
           {Customer ? (
             <FaUser className="text-[20px] ml-3 mt-3" />
           ) : (
@@ -347,30 +345,29 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      <div className="  bg-opacity-50 backdrop-filter backdrop-blur-lg ml-20     absolute flex mt-[230px] sm:ml-[555px]  text-[35px]  rounded-2xl ">
-        <h4 className="ml-5">Booking</h4>
+      <div className="absolute flex mt-[260px] ml-28 sm:ml-[555px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[35px] rounded-2xl">
+        <h4 className="ml-5 sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+          Booking
+        </h4>
       </div>
       {signup && (
-        <div className=" h-screen w-screen bg-black bg-opacity-80 backdrop-filter backdrop-blur-none">
-          {
-            <div className="cursor-pointer">
-              <IoMdClose
-                className="absolute ml-[1290px] text-white text-2xl mt-10 "
-                onClick={handlesignup}
-              />
-              <SignUpC onConfirm={handlesignup2} onCancel={handlesignup} />
-            </div>
-          }
+        <div className="h-screen w-screen bg-black bg-opacity-80 backdrop-filter backdrop-blur-none">
+          <div className="cursor-pointer">
+            <IoMdClose
+              className="absolute ml-[1290px] text-white text-2xl mt-10"
+              onClick={handlesignup}
+            />
+            <SignUpC onConfirm={handlesignup2} onCancel={handlesignup} />
+          </div>
         </div>
       )}
       {((signup2 && !isButtonHidden) || error) && (
-        <div className="bg-opacity-50 backdrop-filter backdrop-blur-lg    absolute  mt-[300px] sm:ml-[410px] ml-3   text-[10px] font-bold rounded-2xl ">
-          <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]    ">
+        <div className="absolute mt-[320px] ml-10 sm:ml-[410px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl">
+          <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (
-              <div className="">
+              <div key={divIndex}>
                 <div
-                  key={divIndex}
-                  className={`sm:w-20 sm:h-20 w-16 h-16 rounded-full flex flex-col items-center m-4 cursor-pointer ${
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex flex-col items-center m-4 cursor-pointer ${
                     selectedDiv === divIndex
                       ? "border-2 border-orange-500 hover:border-orange-500"
                       : "border-2 hover:border-orange-500"
@@ -378,30 +375,28 @@ const Dashboard = () => {
                   onClick={() => handleDivClick(divIndex)}
                 >
                   {divIndex == 0 ? (
-                    <FaSatelliteDish className="hover:border-orange-500 sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <FaSatelliteDish className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 1 ? (
-                    <PiTelevisionFill className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <PiTelevisionFill className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 2 ? (
-                    <CgSmartHomeRefrigerator className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <CgSmartHomeRefrigerator className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 3 ? (
-                    <GiGasStove className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <GiGasStove className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 4 ? (
-                    <GiCampCookingPot className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <GiCampCookingPot className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 5 ? (
-                    <MdOutlinePlumbing className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <MdOutlinePlumbing className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 6 ? (
-                    <FaPaintRoller className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <FaPaintRoller className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : divIndex == 7 ? (
-                    <MdRoofing className="sm:w-14 sm:h-14 w-10 h-10 rounded-full mt-2 ml-1 text-green-700" />
+                    <MdRoofing className="w-10 h-10 sm:w-14 sm:h-14 rounded-full mt-2 ml-1 text-green-700" />
                   ) : (
                     ""
                   )}
                 </div>
                 <div
                   className={`mt-2 ${
-                    selectedDiv === divIndex
-                      ? "text-orange-500 ml-10"
-                      : " ml-10"
+                    selectedDiv === divIndex ? "text-orange-500 ml-10" : "ml-10"
                   }`}
                 >
                   {divIndex == 0
@@ -425,8 +420,7 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-
-          <div id="Div7" className={"w-56  "}>
+          <div id="Div7" className="w-56">
             <form className="mt-2">
               <textarea
                 cols={55}
@@ -434,20 +428,18 @@ const Dashboard = () => {
                 value={typeOfProblem}
                 placeholder="Try to explain about the problem that you are facing"
                 onChange={(e) => setProblem(e.target.value)}
-                className="mt-3 ml-6 w-72 sm:ml-14 h-20 placeholder:font-semibold  placeholder:text-[13px]  border-2 border-gray-200 p-3"
+                className="mt-3 ml-4 sm:ml-14 w-72 sm:w-96 h-20 placeholder:font-semibold placeholder:text-[13px] border-2 border-gray-200 p-3"
               ></textarea>
-
               {error == "No Internet Connection" ? (
-                <div className="text-white  absolute mt-[60px] ml-28">
+                <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
                   <div className="h-6 w-40 bg-red-600 rounded-full ml-11">
                     <div className="ml-5 mt-1 absolute">{error}</div>
                   </div>
-
                   <br />
                 </div>
               ) : error == "No  Technician Found" ||
                 error == "NO Technician found" ? (
-                <div className="text-white  absolute mt-[60px] ml-28">
+                <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
                   <div className="h-6 w-40 bg-red-600 rounded-full ml-11">
                     <div className="ml-5 mt-1 absolute">{error}</div>
                   </div>
@@ -458,56 +450,49 @@ const Dashboard = () => {
         </div>
       )}
       {signup3 &&
-        (!signup2 || Customer != "" ? (
+        (!signup2 || Customer !== "" ? (
           (!isButtonHidden || error) && (
             <button
-              className=" bg-green-500 hover:bg-green-400 text-white  h-[48px] w-48 border-2  rounded-3xl font-semibold hover:to-purple-800 transition delay-200   absolute mt-[740px] flex sm:mt-[665px] sm:ml-[550px] ml-20  "
+              className="bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-24 sm:mt-[680px] sm:ml-[550px]"
               onClick={handleOrderNow}
             >
-              {" "}
-              <div>
-                <div className="flex justify-center items-center ml-[30px]">
-                  <FaAddressBook className="mt-3 ml-5" />
-                  <h1 className="ml-2 mt-2">BOOK</h1>
-                </div>
+              <div className="flex justify-center items-center ml-[30px]">
+                <FaAddressBook className="mt-3 ml-5" />
+                <h1 className="ml-2 mt-2">BOOK</h1>
               </div>
             </button>
           )
         ) : (
           <button
-            className=" bg-yellow-400 hover:bg-yellow-300  h-[48px] w-96 border-2  rounded-3xl font-semibold hover:to-purple-800 transition delay-200   absolute flex mt-[665px] sm:ml-[450px] ml-3  "
+            className="bg-yellow-400 hover:bg-yellow-300 h-[48px] w-80 sm:w-96 border-2 rounded-3xl font-semibold transition delay-200 mt-[760px] absolute flex ml-7 sm:mt-[665px] sm:ml-[450px]"
             onClick={handlesignup}
           >
-            <div>
-              <div className="flex justify-center items-center ml-[70px]">
-                <BsFillTelephoneFill className="mt-3 ml-5" />
-                <h1 className="ml-2 mt-2">ADD PHONE NUMBER</h1>
-              </div>
+            <div className="flex justify-center items-center ml-[45px] sm:ml-[70px]">
+              <BsFillTelephoneFill className="mt-3 ml-5" />
+              <h1 className="ml-2 mt-2">ADD PHONE NUMBER</h1>
             </div>
           </button>
         ))}
       {isLoading2 && (
-        <div>
-          <div className=" h-56 w-full absolute mt-80 sm:ml-[548px] ml-16 ">
-            <BeatLoader color="#A0E713" loading={true} size={60} />
-            <h1>Looking For A Provider... </h1>
-          </div>
+        <div className="h-56 w-full absolute mt-80 ml-28 sm:ml-[548px]">
+          <BeatLoader color="#A0E713" loading={true} size={60} />
+          <h1>Looking For A Provider... </h1>
         </div>
       )}
       {isAccept && (
         <div>
           {array3.map((p) => (
-            <div className="absolute mt-72 sm:ml-[548px] ml-6 flex">
+            <div key={p.id} className="absolute mt-96 ml-6 sm:ml-[548px] flex">
               <div className="h-24 w-24 rounded-full">
                 <img
                   src={"/images/" + p.image}
+                  alt=""
                   className="h-24 w-24 rounded-full"
                 />
               </div>
               <div className="flex space-x-2 mt-10 ml-3 font-bold">
                 <p>{p.firstname}</p>
                 <p>{p.lastname}</p>
-                <br />
                 <BsFillTelephoneFill />
                 <p>{p.phonenumber}</p>
               </div>
@@ -518,28 +503,27 @@ const Dashboard = () => {
           ))}
         </div>
       )}
-      {isLoading2 ||
-        (isAccept && (
-          <div className="flex">
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded sm:ml-[580px] ml-6  absolute mt-[430px]"
-              onClick={handleCancelOrder}
-            >
-              Cancel Order
-            </button>
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded sm:ml-[780px] ml-6 absolute mt-[430px]"
-              onClick={handleCancelOrder2}
-            >
-              Close
-            </button>
-          </div>
-        ))}
+      {(isLoading2 || isAccept) && (
+        <div className="flex ml-28 sm:ml-0 ">
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px]  sm:ml-[520px]"
+            onClick={handleCancelOrder}
+          >
+            Cancel Order
+          </button>
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px] ml-36 sm:ml-[720px]"
+            onClick={handleCancelOrder2}
+          >
+            Close
+          </button>
+        </div>
+      )}
       <div
+        id="map"
         ref={mapRef}
-        className="absolute  mt-[800px] w-full sm:ml-[260px] h-80  sm:mt-[750px]  rounded-xl overflow-hidden"
+        className="absolute mt-[830px] sm:mt-[750px] w-full h-80 sm:ml-[260px] rounded-xl overflow-hidden"
       />
-
       <div className="absolute hidden">
         <button onClick={featcher}>
           <h1>Hiso</h1>
