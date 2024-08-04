@@ -360,7 +360,7 @@ const Dashboard = () => {
         </div>
       )}
       {((signup2 && !isButtonHidden) || error) && (
-        <div className="absolute mt-[320px] ml-12 sm:ml-[410px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl">
+        <div className="absolute mt-[320px] ml-[52px] sm:ml-[410px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl">
           <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (
               <div key={divIndex}>
@@ -451,7 +451,7 @@ const Dashboard = () => {
         (!signup2 || Customer !== "" ? (
           (!isButtonHidden || error) && (
             <button
-              className="bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-24 sm:mt-[680px] sm:ml-[550px]"
+              className="bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-28 sm:mt-[680px] sm:ml-[550px]"
               onClick={handleOrderNow}
             >
               <div className="flex justify-center items-center ml-[30px]">
