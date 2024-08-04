@@ -170,7 +170,9 @@ const FrontPage = () => {
             />
           </div>
           <div className="mt-4 md:mt-0 md:ml-[-50px] text-center md:text-left">
-            <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
+            <p className="text-xl md:text-4xl font-bold text-black md:ml-5">
+              Africa
+            </p>
             <p className="text-xl md:text-4xl text-yellow-400 font-bold">
               CustomerService
             </p>
