@@ -360,7 +360,7 @@ const Dashboard = () => {
         </div>
       )}
       {((signup2 && !isButtonHidden) || error) && (
-        <div className="absolute mt-[320px] ml-10 sm:ml-[410px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl">
+        <div className="absolute mt-[320px] ml-12 sm:ml-[410px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl">
           <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (
               <div key={divIndex}>
@@ -520,7 +520,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className="absolute mt-[830px] sm:mt-[750px] w-full h-80 sm:ml-[260px] rounded-xl overflow-hidden"
+        className="absolute mt-[850px] sm:mt-[750px] w-full h-80 sm:ml-[260px] rounded-xl overflow-hidden"
       />
       <div className="absolute hidden">
         <button onClick={featcher}>
