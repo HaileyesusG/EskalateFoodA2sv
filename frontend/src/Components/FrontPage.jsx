@@ -26,10 +26,13 @@ import "swiper/css/effect-fade";
 
 const FrontPage = () => {
   const handleSignIn = () => {
-    red("/Transition2");
+    red("/LogIn");
   };
   const handleSignUp = () => {
-    red("/Transition");
+    red("/SignUp");
+  };
+  const handleOrder = () => {
+    red("/DashBoard");
   };
   const red = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,29 +71,34 @@ const FrontPage = () => {
   return (
     <div>
       <nav className="bg-yellow-400 w-full z-10 shadow-md">
-        <div className="container mx-auto flex items-center justify-between p-4">
-          <div className="text-2xl font-bold text-black">
-            <div className="flex">
-              <Link to="home" smooth={true} duration={500} offset={-50}>
-                Africa
-              </Link>
-              <div className="ml-7 flex space-x-3">
-                <button
-                  className="w-20 h-10 bg-yellow-500 rounded-2xl  text-[15px]  hover:bg-yellow-300 hover:text-black"
-                  onClick={handleSignIn}
+        <div className="container mx-auto flex flex-wrap items-center justify-between p-4">
+          <div className="text-2xl font-bold text-black flex justify-between w-full md:w-auto">
+            <Link to="home" smooth={true} duration={500} offset={-50}>
+              Africa
+            </Link>
+            <div className="md:hidden">
+              <button
+                className="text-black focus:outline-none"
+                onClick={toggleMenu}
+              >
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  LogIn
-                </button>
-                <button
-                  className="w-20 h-10 bg-yellow-500 rounded-2xl  text-[15px]  hover:bg-yellow-300 hover:text-black "
-                  onClick={handleSignUp}
-                >
-                  SignUp
-                </button>
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>
+                </svg>
+              </button>
             </div>
           </div>
-          <div className="hidden md:flex space-x-8 text-lg">
+          <div className="hidden md:flex md:items-center md:justify-between md:w-auto md:space-x-8">
             <a href="#home" className="cursor-pointer hover:text-red-500">
               Home
             </a>
@@ -110,75 +118,65 @@ const FrontPage = () => {
               Contact
             </a>
           </div>
-          <div className="md:hidden">
+          <div className="flex space-x-3">
             <button
-              className="text-black focus:outline-none"
-              onClick={toggleMenu}
+              className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+              onClick={handleSignIn}
             >
-              <svg
-                className="w-8 h-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
+              LogIn
+            </button>
+            <button
+              className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
+              onClick={handleOrder}
+            >
+              Order Online
             </button>
           </div>
         </div>
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="flex flex-col items-center space-y-4 py-4">
-              <a href="#home" className="cursor-pointer hover:text-red-500">
-                Home
-              </a>
-              <a href="#about" className="cursor-pointer hover:text-red-500">
-                About
-              </a>
-              <a href="#services" className="cursor-pointer hover:text-red-500">
-                Services
-              </a>
-              <a href="#page" className="cursor-pointer hover:text-red-500">
-                Page
-              </a>
-              <a href="#package" className="cursor-pointer hover:text-red-500">
-                Package
-              </a>
-              <a href="#contact" className="cursor-pointer hover:text-red-500">
-                Contact
-              </a>
-            </div>
+          <div className="md:hidden flex flex-col items-center space-y-4 py-4">
+            <a href="#home" className="cursor-pointer hover:text-red-500">
+              Home
+            </a>
+            <a href="#about" className="cursor-pointer hover:text-red-500">
+              About
+            </a>
+            <a href="#services" className="cursor-pointer hover:text-red-500">
+              Services
+            </a>
+            <a href="#page" className="cursor-pointer hover:text-red-500">
+              Page
+            </a>
+            <a href="#package" className="cursor-pointer hover:text-red-500">
+              Package
+            </a>
+            <a href="#contact" className="cursor-pointer hover:text-red-500">
+              Contact
+            </a>
+            <a href="#order" className="cursor-pointer hover:text-red-500">
+              Order Online
+            </a>
           </div>
         )}
       </nav>
 
-      <div className="main-container mt-6 w-screen">
-        <div className="flex flex-col md:flex-row ml-4 md:ml-11 items-center">
+      <div className="main-container mt-6 w-full px-4 md:px-0">
+        <div className="flex flex-col items-center md:flex-row md:justify-between md:items-center">
           <div className="flex justify-center md:block">
             <img
               src={hiloe3}
               alt="Profile"
-              className="rounded-full w-[80px] h-[80px] md:w-[100px] md:h-[100px] object-cover"
+              className="rounded-full w-20 h-20 md:w-24 md:h-24 object-cover"
             />
           </div>
-          <div className="mt-4 md:mt-0 md:ml-6">
-            <p className="text-xl ml-10 md:text-4xl font-bold text-black md:ml-12">
-              Africa
+          <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+            <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
+            <p className="text-xl md:text-4xl text-yellow-400 font-bold">
+              CustomerService
             </p>
-            <div>
-              <p className="text-xl md:text-4xl text-yellow-400 font-bold">
-                CustomerService
-              </p>
-            </div>
           </div>
-          <div className="flex flex-col md:flex-row mt-4 md:mt-0 md:ml-auto md:mr-4">
-            <div className="mb-4 md:mb-0 md:mr-28">
+          <div className="flex flex-col mt-4 md:flex-row md:items-center md:space-x-4">
+            <div className="mb-4 md:mb-0">
               <h4 className="text-center md:text-left">CALL US</h4>
               <h4 className="text-center md:text-left">+251960295512</h4>
             </div>
@@ -272,6 +270,11 @@ const FrontPage = () => {
       <div id="contact">
         <h2 className="text-center mt-8 text-3xl">Contact Section</h2>
         {/* Add your Contact section content here */}
+      </div>
+
+      <div id="order">
+        <h2 className="text-center mt-8 text-3xl">Order Online Section</h2>
+        {/* Add your Order Online section content here */}
       </div>
     </div>
   );
