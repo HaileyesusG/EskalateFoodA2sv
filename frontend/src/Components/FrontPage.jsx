@@ -169,7 +169,7 @@ const FrontPage = () => {
               className="rounded-full w-20 h-20 md:w-24 md:h-24 object-cover"
             />
           </div>
-          <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+          <div className="mt-4 md:mt-0 md:ml-[-50px] text-center md:text-left">
             <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
             <p className="text-xl md:text-4xl text-yellow-400 font-bold">
               CustomerService
