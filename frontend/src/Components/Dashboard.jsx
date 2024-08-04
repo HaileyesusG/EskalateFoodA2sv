@@ -114,9 +114,7 @@ const Dashboard = () => {
       setCustomer(Customer);
     } else {
       customer = customer[0];
-      setId(customer);
-      setPhone(customer.phonenumber);
-      console.log("not found2U", storedCustomer);
+      console.log("not found2U", customer);
     }
   }, [location, refereshKey]);
 
