@@ -29,7 +29,10 @@ const FrontPage = () => {
     red("/LogIn");
   };
   const handleSignUp = () => {
-    red("/SignUp");
+    red("/SignUpA");
+  };
+  const handleSignInA = () => {
+    red("/LogInA");
   };
   const handleOrder = () => {
     red("/DashBoard");
@@ -153,9 +156,18 @@ const FrontPage = () => {
             <a href="#contact" className="cursor-pointer hover:text-red-500">
               Contact
             </a>
-            <a href="#order" className="cursor-pointer hover:text-red-500">
-              Order Online
-            </a>
+            <button
+              className="w-4 h-4 bg-yellow-500 rounded-2xl text-[5px] hover:bg-yellow-300 hover:text-black"
+              onClick={handleSignUp}
+            >
+              Signup A
+            </button>
+            <button
+              className="w-4 h-4 bg-yellow-500 rounded-2xl text-[5px] hover:bg-yellow-300 hover:text-black"
+              onClick={handleSignInA}
+            >
+              LogIn A
+            </button>
           </div>
         )}
       </nav>
@@ -169,10 +181,8 @@ const FrontPage = () => {
               className="rounded-full w-20 h-20 md:w-24 md:h-24 object-cover"
             />
           </div>
-          <div className="mt-4 md:mt-0 md:ml-[-50px] text-center md:text-left">
-            <p className="text-xl md:text-4xl font-bold text-black md:ml-5">
-              Africa
-            </p>
+          <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+            <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
             <p className="text-xl md:text-4xl text-yellow-400 font-bold">
               CustomerService
             </p>

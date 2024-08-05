@@ -278,10 +278,10 @@ const Dashboard = () => {
       <div className="absolute mt-5 ml-8 sm:mt-11 flex">
         <div>
           <ImLocation className="text-[30px] text-pink-600 shadow font-bold" />
-          <p className="text-[10px] sm:text-[30px]">ይህ የGPS </p>
-          <p className="text-[10px] sm:text-[30px]"> ግምታዊ </p>
-          <p className="text-[10px] sm:text-[30px]">አድራሻዎት </p>
-          <p className="ml-4 text-[10px] sm:text-[30px]">ነው</p>
+          <p className="text-[10px] ">ይህ የGPS </p>
+          <p className="text-[10px] "> ግምታዊ </p>
+          <p className="text-[10px] ">አድራሻዎት </p>
+          <p className="ml-4 text-[10px] ">ነው</p>
         </div>
         <div className="w-[90px] md:w-[400px] ml-3">
           <h3>{location}</h3>
@@ -315,7 +315,7 @@ const Dashboard = () => {
             ))}
           </ul>
           {error3 && <p>Error: {error3}</p>}
-          <div className={"ml-16 sm:ml-0 " + disp3}>
+          <div className={"ml-[60px]  " + disp3}>
             <MdEditLocationAlt
               onClick={makeVisible}
               className="text-[30px] ml-3 text-pink-600 shadow font-bold cursor-pointer"
@@ -325,14 +325,14 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10 sm:flex absolute">
-        <div className="ml-7 w-16 h-16 mt-[140px] sm:ml-[300px] rounded-full overflow-hidden">
+      <div className="mt-10 ml-2 sm:flex absolute">
+        <div className="ml-7 w-16 h-16 mt-[140px] sm:ml-[40px] rounded-full overflow-hidden">
           <img src={hiloe6} alt="" className="rounded-full" />
         </div>
         <h2 className="ml-4 sm:ml-3 sm:mt-[145px] text-[10px] sm:text-[20px]">
           Africa Customer Service
         </h2>
-        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-80 sm:ml-[300px] mt-[-70px] sm:mt-[135px]">
+        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-72 sm:ml-[620px] mt-[-70px] sm:mt-[135px] xs:ml-80 xs2:ml-[520px] md:ml-[950px]">
           {Customer ? (
             <FaUser className="text-[20px] ml-3 mt-3" />
           ) : (
@@ -343,7 +343,7 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      <div className="absolute flex mt-[260px] ml-28 sm:ml-[555px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[35px] rounded-2xl">
+      <div className="xs2:ml-60 absolute flex mt-[260px] ml-24 sm:ml-[555px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[35px] rounded-2xl">
         <h4 className="ml-5 sm:text-base md:text-lg lg:text-xl xl:text-2xl">
           Booking
         </h4>
@@ -360,7 +360,7 @@ const Dashboard = () => {
         </div>
       )}
       {((signup2 && !isButtonHidden) || error) && (
-        <div className="absolute mt-[320px] ml-14 sm:ml-[410px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl">
+        <div className="xs:ml-[70px] xs2:ml-40 absolute mt-[320px] ml-[25px] sm:ml-[230px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl md:ml-[380px]">
           <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (
               <div key={divIndex}>
@@ -426,7 +426,7 @@ const Dashboard = () => {
                 value={typeOfProblem}
                 placeholder="Try to explain about the problem that you are facing"
                 onChange={(e) => setProblem(e.target.value)}
-                className="mt-3 ml-4 sm:ml-14 w-72 sm:w-96 h-20 placeholder:font-semibold placeholder:text-[13px] border-2 border-gray-200 p-3"
+                className="xs:ml-2 mt-3 ml-1  sm:ml-14 w-72 sm:w-96 h-20 placeholder:font-semibold placeholder:text-[13px] border-2 border-gray-200 p-3"
               ></textarea>
               {error == "No Internet Connection" ? (
                 <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
@@ -451,7 +451,7 @@ const Dashboard = () => {
         (!signup2 || Customer !== "" ? (
           (!isButtonHidden || error) && (
             <button
-              className="bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-28 sm:mt-[680px] sm:ml-[550px]"
+              className="xs:ml-[120px] xs2:ml-[211px] bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[98px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
               onClick={handleOrderNow}
             >
               <div className="flex justify-center items-center ml-[30px]">
@@ -520,7 +520,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className="absolute mt-[850px] sm:mt-[750px] w-full h-80 sm:ml-[260px] rounded-xl overflow-hidden"
+        className=" xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[850px] sm:mt-[750px] w-[360px] sm:w-[780px] h-80 sm:ml-[80px] rounded-xl md:w-[1110px] md:h-[400px] overflow-hidden "
       />
       <div className="absolute hidden">
         <button onClick={featcher}>

@@ -163,6 +163,11 @@ const SignUp = () => {
     <div>
       {View2 && (
         <div className=" mt-12   h-[990px] w-[700px] ml-[300px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white">
+          <img
+            className="object-fill w-screen h-full absolute"
+            src={hiloe5}
+            alt=""
+          />
           {!isOtpSent ? (
             <div className="absolute ml-2">
               <form onSubmit={generateOtp} className="to-blue-100">
@@ -385,7 +390,7 @@ const SignUp = () => {
               </div> */}
                 </div>
                 <div className="flex space-x-12 ml-16 mt-3">
-                  <div>
+                  <div className="ml-[-50px] sm:ml-auto">
                     <div className="bg-transparent cursor-pointer w-24 h-24 rounded-full border-2 border-green-300 ">
                       <label htmlFor="fileInput" className="">
                         {testImage ? (
@@ -575,7 +580,6 @@ const SignUp = () => {
           <SuccessMessage />
         </div>
       )}
-      <img className="object-fill w-screen h-full" src={hiloe5} alt="" />
     </div>
   );
 };

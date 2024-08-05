@@ -548,7 +548,14 @@ const Home = ({ user3 }) => {
         <div className={disp7}>
           <ChatTech user={user4} />
         </div>
-        <div id="map" className={" " + disp6}></div>
+        <div
+          id="map"
+          ref={mapRef}
+          className={
+            " xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[50px] sm:mt-[150px] w-[160px] sm:w-[580px] h-80 sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
+            disp6
+          }
+        />
         <div className={"hidden "} id="MyHistory">
           {" "}
           {Json && (
@@ -931,8 +938,8 @@ const Home = ({ user3 }) => {
           </button>
         </div>
       </div>
-      <div className="mt-12">
-        <div className="border-[1px] w-72">
+      <div className="mt-12  w-32 sm:w-full">
+        <div className="border-[1px] sm:w-72 w-32">
           <h2 className="ml-16">Menu</h2>
         </div>
         <div className="ml-14 mt-8 space-y-4">
