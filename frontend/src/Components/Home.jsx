@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import { useUserContext } from "../Hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +29,7 @@ const socket = io("https://africadeploybackend.onrender.com");
 let array3 = [];
 let timeoutId = null;
 const Home = ({ user3 }) => {
+  const mapRef = useRef(null);
   const dispatch2 = useDispatch();
   const todo = useSelector((state) => state.tech.tech);
   //dispatch2(setTech(todo));
