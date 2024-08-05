@@ -34,6 +34,9 @@ const FrontPage = () => {
   const handleSignInA = () => {
     red("/LogInA");
   };
+  const handleSignUpT = () => {
+    red("/SignUp");
+  };
   const handleOrder = () => {
     red("/DashBoard");
   };
@@ -167,6 +170,12 @@ const FrontPage = () => {
               onClick={handleSignInA}
             >
               LogIn A
+            </button>
+            <button
+              className="w-4 h-4 bg-yellow-500 rounded-2xl text-[5px] hover:bg-yellow-300 hover:text-black"
+              onClick={handleSignUpT}
+            >
+              Signup A
             </button>
           </div>
         )}
