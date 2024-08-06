@@ -36,7 +36,6 @@ const AdminChat = ({ user3 }) => {
           adminId: user3._id,
           techId: idd,
         }),
-        headers: { "Content-Type": "application/json" },
       });
       const json = await response.json();
       if (response.ok) {
@@ -57,7 +56,6 @@ const AdminChat = ({ user3 }) => {
         adminId: user3._id,
         techId: id,
       }),
-      headers: { "Content-Type": "application/json" },
     });
     const json = await response.json();
     if (response.ok) {
