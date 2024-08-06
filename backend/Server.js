@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://africadeployfrontend.onrender.com",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
