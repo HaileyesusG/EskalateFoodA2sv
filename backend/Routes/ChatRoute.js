@@ -7,7 +7,7 @@ const {
 
 const express = require("express");
 const router = express.Router();
-router.route("/GetChat").get(GetChat);
+router.route("/GetChat").post(GetChat);
 //router.route("/GetOneTech").get(AuthenticationTech, GetOneTech);
 router.route("/ChatCreate").post(ChatCreate);
 router.route("DeleteChat/:id").delete(DeleteChat);
