@@ -24,8 +24,8 @@ export const useRegister = () => {
     setError(null);
 
     const response = await fetch(`${API_BASE_URL}/api/Tech/TechCreate`, {
-      method: "POST",
       headers: { "Content-Type": "application/json" },
+      method: "POST",
       body: JSON.stringify({
         department,
         firstname,

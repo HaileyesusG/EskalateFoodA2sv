@@ -16,8 +16,8 @@ export const useSignIn = () => {
     setError(null);
 
     const response = await fetch(`${API_BASE_URL}/api/tech/LoginTech`, {
-      method: "POST",
       headers: { "Content-Type": "application/json" },
+      method: "POST",
       body: JSON.stringify({ email, password }),
     });
     console.log(response);

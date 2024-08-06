@@ -31,6 +31,7 @@ const AdminChat = ({ user3 }) => {
   useEffect(() => {
     const featcher = async () => {
       response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
+        headers: { "Content-Type": "application/json" },
         method: "POST",
         body: JSON.stringify({
           adminId: user3._id,
@@ -51,6 +52,7 @@ const AdminChat = ({ user3 }) => {
 
   const featcher3 = async (id) => {
     response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
+      headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify({
         adminId: user3._id,

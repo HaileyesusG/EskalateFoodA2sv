@@ -16,8 +16,8 @@ export const useSendMessage = () => {
     setError(null);
     if (Receiver_id !== "") {
       const response = await fetch(`${API_BASE_URL}/api/Chat/ChatCreate`, {
-        method: "POST",
         headers: { "Content-Type": "application/json" },
+        method: "POST",
         body: JSON.stringify({ Sender_id, Receiver_id, Message, image }),
       });
       const json = await response.json();

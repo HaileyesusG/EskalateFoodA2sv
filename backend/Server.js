@@ -23,6 +23,7 @@ app.use(
     origin: "https://africadeployfrontend.onrender.com",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: "Content-Type,Authorization",
   })
 );
 app.use("/api/Customer", path);

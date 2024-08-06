@@ -150,12 +150,12 @@ const Home = ({ user3 }) => {
       if (Email == techEmail) {
         console.log("in the", Email, techEmail);
         const response = await fetch(`${API_BASE_URL}/api/book/updateBooking`, {
+          headers: { "Content-Type": "application/json" },
           method: "POST",
           body: JSON.stringify({
             Customer__id,
             _id,
           }),
-          headers: { "Content-Type": "application/json" },
         });
         if (response.ok) {
           const json = await response.json();

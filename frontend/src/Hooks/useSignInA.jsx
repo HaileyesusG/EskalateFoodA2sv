@@ -14,8 +14,8 @@ export const useSignInA = () => {
     setIsLoading(true);
     setError(null);
     const response = await fetch(`${API_BASE_URL}/api/Admin/LoginAdmin`, {
-      method: "POST",
       headers: { "Content-Type": "application/json" },
+      method: "POST",
       body: JSON.stringify({ email, password }),
     });
     const json = await response.json();

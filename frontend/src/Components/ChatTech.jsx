@@ -135,9 +135,8 @@ const ChatTech = ({ user }) => {
   };
   const handleDelete = async (id, _id) => {
     const response = await fetch(`${API_BASE_URL}/api/Chat/${_id}`, {
-      method: "DELETE",
-
       headers: { "Content-Type": "application/json" },
+      method: "DELETE",
     });
     const json = response.json();
     socket.emit("Deleted2", Id);

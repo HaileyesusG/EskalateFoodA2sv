@@ -13,8 +13,8 @@ export const useSignUpC = () => {
     const response = await fetch(
       `${API_BASE_URL}/api/Customer/CustomerCreate`,
       {
-        method: "POST",
         headers: { "Content-Type": "application/json" },
+        method: "POST",
         body: JSON.stringify({
           phonenumber,
         }),
