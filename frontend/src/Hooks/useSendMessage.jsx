@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useUserContextChat } from "../Hooks/useUserContextChat";
 import { useDispatch } from "react-redux";
 import { setChat, addChat } from "../features/chat/chatSlice";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useSendMessage = () => {
   const dispatch2 = useDispatch();
   const red = useNavigate();
@@ -14,7 +15,7 @@ export const useSendMessage = () => {
     setIsLoading(true);
     setError(null);
     if (Receiver_id !== "") {
-      const response = await fetch("/api/Chat/ChatCreate", {
+      const response = await fetch(`${API_BASE_URL}/api/Chat/ChatCreate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Sender_id, Receiver_id, Message, image }),

@@ -563,6 +563,7 @@ const Admin = ({ user3 }) => {
                       src={profile}
                       className="w-[150px] h-[150px] rounded-full "
                       onClick={handleChoiceChange3}
+                      alt="Admin Image"
                     />
                   </div>
                 </div>
@@ -881,6 +882,7 @@ const Admin = ({ user3 }) => {
             src={profile}
             className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
             onClick={handleChoiceChange3}
+            alt="Admin Profile"
           />
         </div>
 
