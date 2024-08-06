@@ -26,6 +26,7 @@ app.use(
     allowedHeaders: "Content-Type,Authorization",
   })
 );
+app.options('/api/*', cors());
 app.use("/api/Customer", path);
 app.use("/api/Tech", path2);
 app.use("/api/Book", path3);
