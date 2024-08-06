@@ -716,7 +716,7 @@ const Admin = ({ user3 }) => {
                       onChange={(e) => setImage4(e.target.value)}
                       value={image4}
                       className="bg-transparent hidden   h-[25px] w-[200px] border-2 border-black focus:outline-none focus:border-orange-500  rounded-lg   px-4   "
-                      id="myInput6"
+                      id="myInput7"
                     />
                   </div>
                 </div>
@@ -878,7 +878,6 @@ const Admin = ({ user3 }) => {
         </div>
 
         <div className="rounded-2xl ml-80 mt-1">
-          <div>Hi Haile {profile} </div>
           <img
             src={profile}
             className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
