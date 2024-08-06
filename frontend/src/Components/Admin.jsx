@@ -708,7 +708,7 @@ const Admin = ({ user3 }) => {
                       onChange={(e) => setImage3(e.target.value)}
                       value={image3}
                       className="bg-transparent hidden   h-[25px] w-[200px] border-2 border-black focus:outline-none focus:border-orange-500  rounded-lg   px-4   "
-                      id="myInput5"
+                      id="myInput6"
                     />
                     <input
                       placeholder="image"
@@ -878,41 +878,13 @@ const Admin = ({ user3 }) => {
         </div>
 
         <div className="rounded-2xl ml-80 mt-1">
+          <div>Hi Haile {profile} </div>
           <img
             src={profile}
             className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
             onClick={handleChoiceChange3}
             alt="Admin Profile"
           />
-        </div>
-
-        <div>
-          <div>
-            {CustomerList.length !== 0 ? (
-              <h3>
-                These are the last {CustomerList.length} places that you have
-                worked
-              </h3>
-            ) : null}
-            {CustomerList.length !== 0
-              ? CustomerList.map((r, index) => (
-                  <div key={index}>
-                    {" "}
-                    {
-                      <ul>
-                        <li>Customers_First_Name: {r.Customer_firstname}</li>
-                        <li>Customers_Last_Name: {r.Customer_lastname}</li>
-                        <li>
-                          Customers_Phone_Number: {r.Customer_phonenumber}
-                        </li>
-                        <li>Customers_Location: {r.Customer_location}</li>
-                        <li>Date: {r.createdAt}</li>
-                      </ul>
-                    }
-                  </div>
-                ))
-              : null}
-          </div>
         </div>
       </div>
       <div className="mt-12">
