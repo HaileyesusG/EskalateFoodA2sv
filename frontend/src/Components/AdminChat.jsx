@@ -30,18 +30,18 @@ const AdminChat = ({ user3 }) => {
   let response;
   useEffect(() => {
     const featcher = async () => {
-      response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
+      response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
+        method: "POST",
+        body: JSON.stringify({
+          adminId: user3._id,
+          techId: idd,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
       const json = await response.json();
-      const filteredChat = json.filter(
-        (chat) =>
-          (chat.Sender_id.toString() === user3._id.toString() &&
-            chat.Receiver_id.toString() === idd.toString()) ||
-          (chat.Receiver_id.toString() === user3._id.toString() &&
-            chat.Sender_id.toString() === idd.toString())
-      );
       if (response.ok) {
         // dispatchChat({ type: "SET_CHAT", payload: filteredChat });
-        dispatch2(setChat(filteredChat));
+        dispatch2(setChat(json));
       }
       // setCollector2(filteredChat);
       // console.log("The collector2 ", collector2);
@@ -51,18 +51,18 @@ const AdminChat = ({ user3 }) => {
   }, [dispatch2]);
 
   const featcher3 = async (id) => {
-    response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
+    response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
+      method: "POST",
+      body: JSON.stringify({
+        adminId: user3._id,
+        techId: id,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
     const json = await response.json();
-    const filteredChat = json.filter(
-      (chat) =>
-        (chat.Sender_id.toString() === user3._id.toString() &&
-          chat.Receiver_id.toString() === id.toString()) ||
-        (chat.Receiver_id.toString() === user3._id.toString() &&
-          chat.Sender_id.toString() === id.toString())
-    );
     if (response.ok) {
       //dispatchChat({ type: "SET_CHAT", payload: filteredChat });
-      dispatch2(setChat(filteredChat));
+      dispatch2(setChat(json));
     }
     // setCollector2(filteredChat);
     // console.log("The collector2 ", collector2);

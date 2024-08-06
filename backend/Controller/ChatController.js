@@ -17,8 +17,19 @@ const ChatCreate = async (req, res) => {
 //Get all(if Super Admin is Available for the future)
 
 const GetChat = async (req, res) => {
-  const cv = await Chat.find({});
-  res.status(200).json(cv);
+  const { adminId, techId } = req.body;
+  try {
+    const messages = await Chat.find({
+      $or: [
+        { Sender_id: adminId, Receiver_id: techId },
+        { Sender_id: techId, Sender_id: adminId },
+      ],
+    }).sort({ timestamp: 1 });
+    res.status(200).json(messages);
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    throw error;
+  }
 };
 
 //delete chat
