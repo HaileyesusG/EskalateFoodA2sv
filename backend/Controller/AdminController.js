@@ -17,12 +17,7 @@ const AdminCreate = async (req, res) => {
     email,
     password,
   } = req.body;
-  const image1 = req.file;
-  if (image1 === undefined) {
-    return res.status(400).json({ message: "insert image" });
-  }
-
-  const image2 = image1.filename;
+  const image1 = req.file.path;
 
   try {
     const admins = await Admin.SignUp(
@@ -34,7 +29,7 @@ const AdminCreate = async (req, res) => {
       location,
       email,
       password,
-      image2
+      image1
     );
 
     res.status(200).json({
@@ -45,7 +40,7 @@ const AdminCreate = async (req, res) => {
       phonenumber,
       location,
       email,
-      image2,
+      image1,
     });
   } catch (err) {
     res.status(400).json({ message: err.message });

@@ -53,10 +53,10 @@ const ApplicantCreate = async (req, res) => {
       phonenumber,
       email,
       password,
-      image: image1.filename,
-      image2: image2.filename,
-      image3: image3.filename,
-      image4: image4 ? image4.filename : "",
+      image: image1.path,
+      image2: image2.path,
+      image3: image3.path,
+      image4: image4 ? image4.path : "",
     });
     departmentArray.forEach((value) => {
       applicants.department.push(value);

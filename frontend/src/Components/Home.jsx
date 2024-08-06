@@ -663,7 +663,7 @@ const Home = ({ user3 }) => {
                   </div>
                   <div className="mt-14 ml-24">
                     <img
-                      src={"/images/" + profile}
+                      src={profile}
                       className="w-[150px] h-[150px] rounded-full "
                       onClick={handleChoiceChange3}
                     />
@@ -926,7 +926,7 @@ const Home = ({ user3 }) => {
           </div>
           <div className="rounded-2xl ml-2 ">
             <img
-              src={"/images/" + profile}
+              src={profile}
               className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
               onClick={handleChoiceChange3}
             />

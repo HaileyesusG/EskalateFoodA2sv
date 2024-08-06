@@ -432,7 +432,7 @@ const Admin = ({ user3 }) => {
                     <div className="ml-3 mt-1">
                       <div className="flex ">
                         <img
-                          src={"/images/" + r.image}
+                          src={r.image}
                           className="mr-2 w-14 h-14 rounded-full"
                         />
                         <div className="mt-2">{r.firstname}</div>
@@ -560,7 +560,7 @@ const Admin = ({ user3 }) => {
                   </div>
                   <div className="mt-14 ml-24">
                     <img
-                      src={"/images/" + profile}
+                      src={profile}
                       className="w-[150px] h-[150px] rounded-full "
                       onClick={handleChoiceChange3}
                     />
@@ -729,7 +729,7 @@ const Admin = ({ user3 }) => {
               {iView && (
                 <div className="rounded-2xl  mt-1 absolute ">
                   <img
-                    src={"/images/" + image}
+                    src={image}
                     className="w-[400px] h-[400px] rounded-2xl cursor-pointer"
                     onClick={() => setIView(false)}
                   />
@@ -737,7 +737,7 @@ const Admin = ({ user3 }) => {
               )}
               <div className="rounded-2xl  mt-1">
                 <img
-                  src={"/images/" + image}
+                  src={image}
                   className="w-[100px] h-[100px] rounded-2xl cursor-pointer hover:w-[120px] hover:h-[120px] hover:animate-pulse"
                   onClick={() => setIView(true)}
                 />
@@ -745,7 +745,7 @@ const Admin = ({ user3 }) => {
               {iView2 && (
                 <div className="rounded-2xl  mt-1 absolute w-[600px] ">
                   <img
-                    src={"/images/" + image2}
+                    src={image2}
                     className="w-[600px] h-[300px] rounded-2xl cursor-pointer ml-[-35px]"
                     onClick={() => setIView2(false)}
                   />
@@ -753,7 +753,7 @@ const Admin = ({ user3 }) => {
               )}
               <div className="rounded-2xl  mt-1">
                 <img
-                  src={"/images/" + image2}
+                  src={image2}
                   className="w-[100px] h-[100px] rounded-2xl cursor-pointer hover:w-[120px] hover:h-[120px] hover:animate-pulse "
                   onClick={() => setIView2(true)}
                 />
@@ -761,7 +761,7 @@ const Admin = ({ user3 }) => {
               {iView3 && (
                 <div className="rounded-2xl  mt-1 absolute w-[600px]">
                   <img
-                    src={"/images/" + image3}
+                    src={image3}
                     className="w-[600px] h-[300px] rounded-2xl cursor-pointer ml-[-15px]"
                     onClick={() => setIView3(false)}
                   />
@@ -769,7 +769,7 @@ const Admin = ({ user3 }) => {
               )}
               <div className="rounded-2xl  mt-1">
                 <img
-                  src={"/images/" + image3}
+                  src={image3}
                   className="w-[100px] h-[100px] rounded-2xl cursor-pointer hover:w-[120px] hover:h-[120px] hover:animate-pulse"
                   onClick={() => setIView3(true)}
                 />
@@ -777,7 +777,7 @@ const Admin = ({ user3 }) => {
               {iView4 && image4 != "" && (
                 <div className="rounded-2xl  mt-1 absolute ">
                   <img
-                    src={"/images/" + image4}
+                    src={image4}
                     className="w-[400px] h-[400px] rounded-2xl cursor-pointer"
                     onClick={() => setIView4(false)}
                   />
@@ -786,7 +786,7 @@ const Admin = ({ user3 }) => {
               {image4 != "" && (
                 <div className="rounded-2xl  mt-1">
                   <img
-                    src={"/images/" + image4}
+                    src={image4}
                     className="w-[100px] h-[100px] rounded-2xl cursor-pointer hover:w-[120px] hover:h-[120px] hover:animate-pulse"
                     onClick={() => setIView4(true)}
                   />
@@ -878,7 +878,7 @@ const Admin = ({ user3 }) => {
 
         <div className="rounded-2xl ml-80 mt-1">
           <img
-            src={"/images/" + profile}
+            src={profile}
             className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
             onClick={handleChoiceChange3}
           />

@@ -7,18 +7,10 @@ const {
 } = require("../Controller/ApplicantController");
 
 const multer = require("multer");
+const { storage } = require("../MiddleWare/cloudinary");
+const upload = multer({ storage });
 
-const Storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "../../SENIOR_PROJECT2/frontend/public/images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "_" + file.originalname);
-  },
-});
-const upload = multer({
-  storage: Storage,
-}).fields([{ name: "testImages", maxCount: 4 }]);
+upload.fields([{ name: "testImages", maxCount: 4 }]);
 const express = require("express");
 const router = express.Router();
 router.route("/GetApplicant/:id").get(GetApplicant);

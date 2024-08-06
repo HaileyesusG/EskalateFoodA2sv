@@ -482,11 +482,7 @@ const Dashboard = () => {
           {array3.map((p) => (
             <div key={p.id} className="absolute mt-96 ml-6 sm:ml-[548px] flex">
               <div className="h-24 w-24 rounded-full">
-                <img
-                  src={"/images/" + p.image}
-                  alt=""
-                  className="h-24 w-24 rounded-full"
-                />
+                <img src={p.image} alt="" className="h-24 w-24 rounded-full" />
               </div>
               <div className="flex space-x-2 mt-10 ml-3 font-bold">
                 <p>{p.firstname}</p>

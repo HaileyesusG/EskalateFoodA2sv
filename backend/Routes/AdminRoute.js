@@ -7,20 +7,9 @@ const {
 } = require("../Controller/AdminController");
 
 const multer = require("multer");
-// const AuthenticationAdmin = require("../MiddleWare/AuthenticationAdmin");
-const Storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "../../SENIOR_PROJECT/frontend/public/images");
-  },
-
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "_" + file.originalname);
-  },
-});
-const upload = multer({
-  storage: Storage,
-}).single("testImage");
-
+const { storage } = require("../MiddleWare/cloudinary");
+const upload = multer({ storage });
+upload.single("testImage");
 const express = require("express");
 const router = express.Router();
 router.route("/GetAdmin").get(GetAdmin);
