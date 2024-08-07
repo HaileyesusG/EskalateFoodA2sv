@@ -3,11 +3,11 @@ const acceptSchema = mongoose.Schema(
   {
     Customer_firstname: {
       type: String,
-      required: [true, "Please enter first Name"],
+      default: "",
     },
     Customer_lastname: {
       type: String,
-      required: [true, "Please enter last Name"],
+      default: "",
     },
     Customer_id: {
       type: mongoose.Schema.Types.ObjectId,
