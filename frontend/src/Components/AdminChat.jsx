@@ -118,7 +118,7 @@ const AdminChat = ({ user3 }) => {
       if (msg.Receiver_id === user3._id) {
         setBench(msg.Message);
         setBench2(msg.Message);
-        console.log("the log2", msg.Message);
+
         featcher3(idd);
         setCounter((prev) => prev + 1);
         socket.emit("Message_Counter", Counter);

@@ -126,7 +126,6 @@ const ChatTech = ({ user }) => {
       if (msg.Receiver_id === Id) {
         setBench(msg.Message);
         setBench2(msg.Message);
-        console.log("the log2", msg.Message);
         featcher3(msg.Sender_id);
       }
     });

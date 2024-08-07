@@ -21,7 +21,6 @@ export const useSendMessage = () => {
         body: JSON.stringify({ Sender_id, Receiver_id, Message, image }),
       });
       const json = await response.json();
-      console.log("the json file is", json);
       if (response.ok) {
         // setIsLoading(false);
         //dispatchChat({ type: "CREATE_CHAT", payload: json });

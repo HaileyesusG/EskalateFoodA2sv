@@ -308,7 +308,6 @@ const Admin = ({ user3 }) => {
     setdisplay5("hidden");
     setdisplay7("hidden");
     setdisplay7("hidden");
-    console.log("the json is 1", Json);
   };
   let featcher3 = async () => {
     setJson([]);
@@ -327,7 +326,6 @@ const Admin = ({ user3 }) => {
     setdisplay7("hidden");
 
     setdisplay7("hidden");
-    console.log("the json is", Json);
   };
   socket.on(
     "locationChange",
