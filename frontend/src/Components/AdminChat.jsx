@@ -79,10 +79,19 @@ const AdminChat = ({ user3 }) => {
       featcher2();
       console.log("the message");
     });
+
+    return () => {
+      socket.off("ShowTech");
+    };
+  }, [dispatch2]);
+  useEffect(() => {
     socket.on("Deleted2", (msg) => {
       featcher3(msg);
       console.log("the message Deleted3");
     });
+    return () => {
+      socket.off("Deleted2");
+    };
   }, [dispatch2]);
 
   useEffect(() => {
@@ -103,9 +112,7 @@ const AdminChat = ({ user3 }) => {
       featcher3(idd);
     }
   };
-  socket.on("receive_message2", (msg) => {
-    setBench2(msg.Message);
-  });
+
   useEffect(() => {
     socket.on("receive_message2", (msg) => {
       if (msg.Receiver_id === user3._id) {
@@ -120,7 +127,7 @@ const AdminChat = ({ user3 }) => {
     return () => {
       socket.off("receive_message2");
     };
-  }, [bench2]);
+  }, [socket]);
 
   const clicked = (id, name, profile2) => {
     setVisible(!visible);

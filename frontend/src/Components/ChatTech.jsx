@@ -68,11 +68,19 @@ const ChatTech = ({ user }) => {
       featcher2();
       console.log("the message");
     });
+    return () => {
+      socket.off("ShowTech");
+    };
+  }, [dispatch2]);
+  useEffect(() => {
     socket.on("Deleted", (msg) => {
       featcher3(msg);
       setVisible(true);
       console.log("the message Deleted");
     });
+    return () => {
+      socket.off("Deleted");
+    };
   }, [dispatch2]);
 
   const featcher3 = async (id) => {
@@ -112,9 +120,7 @@ const ChatTech = ({ user }) => {
       featcher3(idd);
     }
   };
-  socket.on("receive_message", (msg) => {
-    setBench2(msg.Message);
-  });
+
   useEffect(() => {
     socket.on("receive_message", (msg) => {
       if (msg.Receiver_id === Id) {
@@ -127,7 +133,7 @@ const ChatTech = ({ user }) => {
     return () => {
       socket.off("receive_message");
     };
-  }, [bench2]);
+  }, [socket]);
 
   const clicked = (id, name, profile) => {
     setVisible(!visible);
