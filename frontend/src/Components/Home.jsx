@@ -556,7 +556,7 @@ const Home = ({ user3 }) => {
           id="map"
           ref={mapRef}
           className={
-            " xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[50px] sm:mt-[150px] w-[160px] sm:w-[580px] h-80 sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
+            " xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[50px] sm:mt-[150px] w-[660px] sm:w-[580px] h-80 sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
             disp6
           }
         />
