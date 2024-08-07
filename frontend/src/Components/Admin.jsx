@@ -140,6 +140,9 @@ const Admin = ({ user3 }) => {
       Applicantfeatcher();
       // array3.push(msg._id);
     });
+    return () => {
+      socket.off("MyObject");
+    };
   }, [socket]);
   useEffect(() => {
     Applicantfeatcher();
@@ -245,6 +248,9 @@ const Admin = ({ user3 }) => {
         setdisplay9("visible");
       }
     });
+    return () => {
+      socket.off("ErrorM");
+    };
     //socket.emit("Registred", admin._id);
   };
 
@@ -323,9 +329,16 @@ const Admin = ({ user3 }) => {
     setdisplay7("hidden");
     console.log("the json is", Json);
   };
-  socket.on("locationChange", (msg) => {
-    featcher3();
-  });
+  socket.on(
+    "locationChange",
+    (msg) => {
+      featcher3();
+      return () => {
+        socket.off("locationChange");
+      };
+    },
+    [socket]
+  );
   const featcher2 = async (id) => {
     if (isCustomer) {
       response = await fetch(`${API_BASE_URL}/api/Customer/${id}`, {
