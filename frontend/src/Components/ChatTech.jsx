@@ -37,18 +37,18 @@ const ChatTech = ({ user }) => {
   let response;
   useEffect(() => {
     const featcher = async () => {
-      response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
-      const json = await response.json();
-      const filteredChat = json.filter(
-        (chat) =>
-          (chat.Sender_id.toString() === Id.toString() &&
-            chat.Receiver_id.toString() === idd.toString()) ||
-          (chat.Receiver_id.toString() === Id.toString() &&
-            chat.Sender_id.toString() === idd.toString())
-      );
+      response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
+        method: "POST",
+        body: JSON.stringify({
+          adminId: user._id,
+          techId: idd,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
       if (response.ok) {
+        const json = await response.json();
         //dispatchChat({ type: "SET_CHAT", payload: filteredChat });
-        dispatch2(setChat(filteredChat));
+        dispatch2(setChat(json));
       }
       // setCollector2(filteredChat);
       // console.log("The collector2 ", collector2);
@@ -76,18 +76,18 @@ const ChatTech = ({ user }) => {
   }, [dispatch2]);
 
   const featcher3 = async (id) => {
-    response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {});
-    const json = await response.json();
-    const filteredChat = json.filter(
-      (chat) =>
-        (chat.Sender_id.toString() === Id.toString() &&
-          chat.Receiver_id.toString() === id.toString()) ||
-        (chat.Receiver_id.toString() === Id.toString() &&
-          chat.Sender_id.toString() === id.toString())
-    );
+    response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
+      method: "POST",
+      body: JSON.stringify({
+        adminId: user._id,
+        techId: id,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
     if (response.ok) {
+      const json = await response.json();
       //dispatchChat({ type: "SET_CHAT", payload: filteredChat });
-      dispatch2(setChat(filteredChat));
+      dispatch2(setChat(json));
     }
     // setCollector2(filteredChat);
     // console.log("The collector2 ", collector2);
@@ -124,6 +124,9 @@ const ChatTech = ({ user }) => {
         featcher3(msg.Sender_id);
       }
     });
+    return () => {
+      socket.off("receive_message");
+    };
   }, [bench2]);
 
   const clicked = (id, name, profile) => {

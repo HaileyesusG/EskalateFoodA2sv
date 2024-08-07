@@ -117,6 +117,9 @@ const AdminChat = ({ user3 }) => {
         socket.emit("Message_Counter", Counter);
       }
     });
+    return () => {
+      socket.off("receive_message2");
+    };
   }, [bench2]);
 
   const clicked = (id, name, profile2) => {

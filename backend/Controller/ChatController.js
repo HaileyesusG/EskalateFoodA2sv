@@ -9,9 +9,8 @@ const ChatCreate = async (req, res) => {
     Message,
     image,
   });
-  const chat = await Chat.find({});
 
-  res.status(200).json(chat);
+  res.status(200).json([chats]);
 };
 
 //Get all(if Super Admin is Available for the future)
@@ -22,13 +21,12 @@ const GetChat = async (req, res) => {
     const messages = await Chat.find({
       $or: [
         { Sender_id: adminId, Receiver_id: techId },
-        { Sender_id: techId, Sender_id: adminId },
+        { Sender_id: techId, Receiver_id: adminId },
       ],
-    }).sort({ timestamp: 1 });
+    });
     res.status(200).json(messages);
   } catch (error) {
-    console.error("Error fetching messages:", error);
-    throw error;
+    console.log("Error fetching messages:", error);
   }
 };
 

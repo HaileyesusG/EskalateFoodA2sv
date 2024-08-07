@@ -276,6 +276,9 @@ const Home = ({ user3 }) => {
       }
       setNotify2((prev) => prev + 1);
     });
+    return () => {
+      socket.off("warning");
+    };
   }, [socket]);
   const Finished = async () => {
     const response1 = await fetch(
