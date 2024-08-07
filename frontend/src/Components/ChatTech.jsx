@@ -135,7 +135,6 @@ const ChatTech = ({ user }) => {
   }, [socket]);
 
   const clicked = (id, name, profile) => {
-    dispatch2(setChat([{}]));
     setVisible(!visible);
     setIdd(id);
     setname(name);
