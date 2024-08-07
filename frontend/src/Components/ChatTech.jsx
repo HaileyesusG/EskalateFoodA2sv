@@ -84,6 +84,7 @@ const ChatTech = ({ user }) => {
   }, [dispatch2]);
 
   const featcher3 = async (id) => {
+    dispatch2(setChat([{}]));
     response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {
       method: "POST",
       body: JSON.stringify({
