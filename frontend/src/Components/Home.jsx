@@ -285,7 +285,7 @@ const Home = ({ user3 }) => {
       `${API_BASE_URL}/api/Accepted/GetLatestAccept/${_id}`,
       {
         method: "GET",
-        "Content-Type": "application/json",
+        headers: { "Content-Type": "application/json" },
       }
     );
 
@@ -296,12 +296,12 @@ const Home = ({ user3 }) => {
     const response = await fetch(
       `${API_BASE_URL}/api/tech/updateFinish/${_id}`,
       {
+        headers: { "Content-Type": "application/json" },
         method: "PATCH",
         body: JSON.stringify({
           work,
           departmentt,
         }),
-        headers: { "Content-Type": "application/json" },
       }
     );
     if (response.ok) {
@@ -341,7 +341,7 @@ const Home = ({ user3 }) => {
       `${API_BASE_URL}/api/Accepted/DeleteLatestAccept/${_id}`,
       {
         method: "DELETE",
-        "Content-Type": "application/json",
+        headers: { "Content-Type": "application/json" },
       }
     );
   };
