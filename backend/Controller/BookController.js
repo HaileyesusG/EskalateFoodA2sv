@@ -3,10 +3,10 @@ const Technician = require("../Model/Technician");
 const Customers = require("../Model/Customer");
 const haversine = require("haversine-distance");
 const io = require("socket.io-client");
-const socket = io("http://localhost:5001");
-const { Server } = require("socket.io");
-const mongoose = require("mongoose");
-
+const socket = io("https://africadeploybackend.onrender.com");
+const { Mutex } = require("async-mutex");
+const technicianMutex = new Mutex();
+const assignOtherMutex = new Mutex();
 let counter = 0;
 const requestTimeouts = {};
 let assignQueue = [];
@@ -19,10 +19,9 @@ let addToAssignQueue;
 let addToAssignQueue2;
 //Create
 const BookCreate = async (req, res) => {
-  const result = await Technician.updateMany(
-    { status: "free" },
-    { $set: { status2: "not" } }
-  );
+  // Acquire the lock before proceeding
+  const release = await technicianMutex.acquire();
+
   Counter++;
   let nearestDriver = [];
   if (Counter > 1) {
@@ -92,6 +91,7 @@ const BookCreate = async (req, res) => {
         department: { $in: departmentArray },
         status: "free",
         status2: "not",
+        __v: { $eq: 0 },
       });
       let newTech2;
       if (
@@ -157,6 +157,7 @@ const BookCreate = async (req, res) => {
       }
       if (nearestDriver.length == 0) {
         res.status(404).send({ error: "NO Technician found" });
+        return;
       }
 
       for (const person of nearestDriver) {
@@ -209,6 +210,7 @@ const BookCreate = async (req, res) => {
       const minperson45 = await Technician.findByIdAndUpdate(
         { _id: latestMember._id },
         { status2: "loading" },
+        { $inc: { __v: 1 } },
         { new: true }
       );
       const numberOftimes = latestMember.numberOftimes + 1;
@@ -241,6 +243,7 @@ const BookCreate = async (req, res) => {
         //console.log(db);
       } catch (error) {
         res.status(400).json({ error: error.message });
+        return;
       }
       console.log("the aba wde ", db);
       socket.emit("booking1", { db, latestMember });
@@ -285,6 +288,7 @@ const BookCreate = async (req, res) => {
           await AssignOther(num, RequestId);
         } catch (error) {
           console.log("Error in AssignOther:", error);
+          return;
         } finally {
           await processAssignQueue(num);
         }
@@ -322,10 +326,19 @@ const BookCreate = async (req, res) => {
     });
   } catch (err) {
     console.error("Error during driver reassignment:", err);
+  } finally {
+    // const result = await Technician.updateMany(
+    //   { status: "free", status2: { $ne: "not" } }, // Additional condition to check status2
+    //   { $set: { status2: "not" } }
+    // );
+    // Release the lock
+    release();
   }
 
   // Lock variable to ensure AssignOther runs sequentially
   let AssignOther = async (id, RequestId) => {
+    // Acquire the lock before proceeding
+    const release2 = await assignOtherMutex.acquire();
     let nearestDistance = Infinity;
     let leastTime = Infinity;
     let leastWork = Infinity;
@@ -405,6 +418,7 @@ const BookCreate = async (req, res) => {
           //return
         }
       } catch (error) {
+        //console.log("the error Technician", error);
         res.status(400).json({ message: error.message });
         return;
       }
@@ -574,6 +588,13 @@ const BookCreate = async (req, res) => {
       }, 30000);
     } catch (err) {
       console.error("Error during driver reassignment:", err);
+    } finally {
+      // const result = await Technician.updateMany(
+      //   { status: "free", status2: { $ne: "not" } }, // Additional condition to check status2
+      //   { $set: { status2: "not" } }
+      // );
+      // Release the lock
+      release2();
     }
 
     socket.once("Finished", async (msg) => {
