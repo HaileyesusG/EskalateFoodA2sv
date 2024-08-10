@@ -332,7 +332,7 @@ const Dashboard = () => {
         <h2 className="ml-4 sm:ml-3 sm:mt-[145px] text-[10px] sm:text-[20px]">
           Africa Customer Service
         </h2>
-        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-72 sm:ml-[620px] mt-[-70px] sm:mt-[135px] xs:ml-80 xs2:ml-[520px] md:ml-[950px]">
+        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-80 sm:ml-[620px] mt-[-70px] sm:mt-[135px] xs:ml-80 xs2:ml-[520px] md:ml-[950px]">
           {Customer ? (
             <FaUser className="text-[20px] ml-3 mt-3" />
           ) : (
@@ -360,7 +360,7 @@ const Dashboard = () => {
         </div>
       )}
       {((signup2 && !isButtonHidden) || error) && (
-        <div className="xs:ml-[70px] xs2:ml-40 absolute mt-[320px] ml-[40px] sm:ml-[230px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl md:ml-[380px]">
+        <div className="xs:ml-[70px] xs2:ml-40 absolute mt-[320px] ml-[44px] sm:ml-[230px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl md:ml-[380px]">
           <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (
               <div key={divIndex}>
@@ -426,7 +426,7 @@ const Dashboard = () => {
                 value={typeOfProblem}
                 placeholder="Try to explain about the problem that you are facing"
                 onChange={(e) => setProblem(e.target.value)}
-                className="xs:ml-2 mt-3 ml-1  sm:ml-14 w-72 sm:w-96 h-20 placeholder:font-semibold placeholder:text-[13px] border-2 border-gray-200 p-3"
+                className="xs:ml-2 mt-3 ml-4  sm:ml-14 w-72 sm:w-96 h-20 placeholder:font-semibold placeholder:text-[13px] border-2 border-gray-200 p-3"
               ></textarea>
               {error == "No Internet Connection" ? (
                 <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
@@ -516,7 +516,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className=" xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[850px] sm:mt-[750px] w-[360px] sm:w-[780px] h-80 sm:ml-[80px] rounded-xl md:w-[1110px] md:h-[400px] overflow-hidden "
+        className=" xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[850px] sm:mt-[750px] w-[360px] sm:w-[780px] h-80 sm:ml-[80px] rounded-xl md:w-[1110px] md:h-[400px] overflow-hidden ml-5"
       />
       <div className="absolute hidden">
         <button onClick={featcher}>
