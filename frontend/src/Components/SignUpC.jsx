@@ -7,21 +7,27 @@ const SignUpC = ({ onConfirm, onCancel }) => {
   const [phonenumber, setPhonenumber] = useState("");
   const [validPhoneNumber, setValidPhoneNumber] = useState(true);
   const [validPhoneNumber2, setValidPhoneNumber2] = useState(true);
-  const handlePhoneNumberChange = (event) => {
+  
+const handlePhoneNumberChange = (event) => {
     const { value } = event.target;
+
+    // Trim leading and trailing spaces from the phone number
+    const trimmedValue = value.trim();
+
     setValidPhoneNumber2(true);
-    setPhonenumber(value);
+    setPhonenumber(trimmedValue); // Store the trimmed phone number
 
     // Validate phone number
     const phoneRegex = /^(09|07)\d{8}$/; // Regular expression pattern for 10-digit phone number
-    const isValid = phoneRegex.test(value);
-    console.log("isvalid", isValid);
+    const isValid = phoneRegex.test(trimmedValue);
+    console.log("isValid", isValid);
     setValidPhoneNumber(isValid);
-    if (value == "") {
+
+    if (trimmedValue === "") {
       console.log("abebe");
       setValidPhoneNumber(true);
     }
-  };
+};
 
   const handleSumit = async (e) => {
     e.preventDefault();
