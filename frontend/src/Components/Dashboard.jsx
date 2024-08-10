@@ -315,7 +315,7 @@ const Dashboard = () => {
             ))}
           </ul>
           {error3 && <p>Error: {error3}</p>}
-          <div className={"ml-[60px]  " + disp3}>
+          <div className={"ml-[70px]  " + disp3}>
             <MdEditLocationAlt
               onClick={makeVisible}
               className="text-[30px] ml-3 text-pink-600 shadow font-bold cursor-pointer"
@@ -343,7 +343,7 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      <div className="xs2:ml-60 absolute flex mt-[260px] ml-24 sm:ml-[555px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[35px] rounded-2xl">
+      <div className="xs2:ml-60 absolute flex mt-[260px] ml-32 sm:ml-[555px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[35px] rounded-2xl">
         <h4 className="ml-5 sm:text-base md:text-lg lg:text-xl xl:text-2xl">
           Booking
         </h4>
@@ -516,7 +516,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className=" xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[850px] sm:mt-[750px] w-[360px] sm:w-[780px] h-80 sm:ml-[80px] rounded-xl md:w-[1110px] md:h-[400px] overflow-hidden ml-5"
+        className=" xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[850px] sm:mt-[750px] w-[360px] sm:w-[780px] h-80 sm:ml-[80px] rounded-xl md:w-[1110px] md:h-[400px] overflow-hidden ml-7"
       />
       <div className="absolute hidden">
         <button onClick={featcher}>
