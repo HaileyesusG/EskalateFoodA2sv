@@ -157,7 +157,7 @@ const updateFinish = async (req, res) => {
     })
     .sort({ createdAt: -1 });
   let minperson = await Technician.findById(id);
-  if (minperson.status == "free") {
+  if (minperson.status == "free" && minperson.status2 == "not") {
     return;
   }
   const UpdateS = await model.findByIdAndUpdate(
