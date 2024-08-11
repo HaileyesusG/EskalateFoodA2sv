@@ -96,7 +96,7 @@ const Dashboard = () => {
     if (storedCustomer) {
       const Customer = JSON.parse(storedCustomer);
       setId(Customer._id);
-      setPhone(Customer.phonenumber);
+      setPhone(Customer.phone);
       customer = Customer;
       dispatch2({ type: "LOGIN", payload: Customer });
 
@@ -261,7 +261,7 @@ const Dashboard = () => {
       const { MyCustomer, Technicians } = msg;
       console.log("the phone", MyCustomer);
       console.log("the Technicians", Technicians);
-      if (phonenumber === MyCustomer.phonenumber) {
+      if (phonenumber === MyCustomer.Customer_phonenumber) {
         setIsAccept(true);
         setIsLoading2(false);
         setTechEmail(Technicians.email);
