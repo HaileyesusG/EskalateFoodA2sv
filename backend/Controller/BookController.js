@@ -750,7 +750,7 @@ const updateBooking = async (req, res) => {
   }
 
   const tech = await Technician.findById(_id);
-  if (tech.status !== "free") {
+  if (tech.status !== "free" || tech.status2 !== "not") {
     const tech = await Technician.findByIdAndUpdate(
       { _id: _id },
       { status: "free" },
