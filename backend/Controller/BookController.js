@@ -265,7 +265,11 @@ const BookCreate = async (req, res) => {
       phone = await Technician.find({ _id }).select("phonenumber");
       //Timeout
       requestTimeouts[RequestId] = setTimeout(async () => {
-        socket.emit("UnAccept", phone);
+        //socket.emit("UnAccept", phone);
+        const minperson45 = await Technician.findByIdAndUpdate(
+          { _id: _id },
+          { status2: "not" }
+        );
         await addToAssignQueue(num, RequestId);
       }, 30000);
       addToAssignQueue = async (num, RequestId) => {
