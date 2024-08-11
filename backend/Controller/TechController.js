@@ -102,6 +102,7 @@ const LoginTech = async (req, res) => {
     const gender = techs.gender;
     const location = techs.location;
     const status = techs.status;
+    const status2 = techs.status2;
     //token
     const token = createToken(_id);
     res.status(200).json({
@@ -117,6 +118,7 @@ const LoginTech = async (req, res) => {
       _id,
       deposit,
       status,
+      status2,
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
