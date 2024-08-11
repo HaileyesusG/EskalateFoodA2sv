@@ -51,6 +51,7 @@ const Home = ({ user3 }) => {
   const Gender = user ? user.gender : "";
   const Phonenumber = user ? user.phonenumber : "";
   const status = user ? user.status : "";
+  const status2 = user ? user.status2 : "";
   const [Email, setEmail] = useState(user ? user.email : "");
   useEffect(() => {
     setEmail(user ? user.email : "");
@@ -170,6 +171,7 @@ const Home = ({ user3 }) => {
             image,
             location,
             status,
+            status2,
             _id,
           } = json;
           dispatch2(
@@ -184,6 +186,7 @@ const Home = ({ user3 }) => {
               email: email,
               image: image,
               status: status,
+              status2: status2,
               location: location,
               _id: _id,
             })
@@ -243,6 +246,7 @@ const Home = ({ user3 }) => {
           image,
           location,
           status,
+          status2,
           _id,
         } = json;
         dispatch2(
@@ -257,6 +261,7 @@ const Home = ({ user3 }) => {
             email: email,
             image: image,
             status: status,
+            status2: status2,
             location: location,
             _id: _id,
           })
@@ -317,6 +322,7 @@ const Home = ({ user3 }) => {
         image,
         location,
         status,
+        status2,
         _id,
       } = json;
       dispatch2(
@@ -331,6 +337,7 @@ const Home = ({ user3 }) => {
           email: email,
           image: image,
           status: status,
+          status2: status2,
           location: location,
           _id: _id,
         })
@@ -430,6 +437,7 @@ const Home = ({ user3 }) => {
         email: Email,
         image: profile,
         status: status,
+        status2: status2,
         location: location,
         _id: _id,
       })
@@ -860,7 +868,7 @@ const Home = ({ user3 }) => {
             <FaMoon className="ml-3 mt-3" />
           </div>
 
-          {status == "free" || status == "" ? (
+          {(status == "free" || status == "") && status2 == "not" ? (
             <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
               {/* "absolute text-[19px] ml-6 mt-3 text-red-600 flex" */}
               <div

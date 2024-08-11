@@ -19,6 +19,7 @@ export const techReducer = createSlice({
         image,
         location,
         status,
+        status2,
       } = action.payload;
       const tech = {
         id: nanoid(),
@@ -33,6 +34,7 @@ export const techReducer = createSlice({
         image: image,
         location: location,
         status: status,
+        status2: status2,
       };
       state.tech.push(tech);
     },
@@ -52,6 +54,7 @@ export const techReducer = createSlice({
         image: todo.image,
         location: todo.location,
         status: todo.status,
+        status2: todo.status2,
         _id: todo._id,
       }));
       state.tech = techs;
@@ -69,6 +72,7 @@ export const techReducer = createSlice({
         image,
         location,
         status,
+        status2,
       } = action.payload;
       const existingTodo = state.tech.find((todo) => todo.id === id);
       if (existingTodo) {
@@ -81,6 +85,7 @@ export const techReducer = createSlice({
           (existingTodo.email = email),
           (existingTodo.image = image),
           (existingTodo.status = status),
+          (existingTodo.status2 = status2),
           (existingTodo.location = location);
       }
     },
