@@ -164,20 +164,11 @@ const updateFinish = async (req, res) => {
     { _id: UpdateB._id },
     { Status: "completed" }
   );
-  let minperson4 = await Technician.findById(id);
-  const numberOfworks = minperson4.numberOfworks + 1;
-  let deposit;
-  if (minperson4.department === "TV") {
-
-    deposit = minperson4.deposit - 200;
-  }
-  if (minperson4.department === "DISH") {
-    deposit = minperson4.deposit - 30;
-  }
+  
   const status = "free";
   const status2 = "not";
   const minperson45 = await Technician.findByIdAndUpdate(
-    { _id: minperson4._id },
+    { _id:id },
     { numberOfworks},{ deposit}, {status}, {status2 },{new:true}
   );
   res.status(200).json(minperson45);
