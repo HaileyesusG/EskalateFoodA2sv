@@ -168,7 +168,7 @@ const updateFinish = async (req, res) => {
   const numberOfworks = minperson4.numberOfworks + 1;
   let deposit;
   if (minperson4.department === "TV") {
-    minperson4;
+
     deposit = minperson4.deposit - 200;
   }
   if (minperson4.department === "DISH") {
