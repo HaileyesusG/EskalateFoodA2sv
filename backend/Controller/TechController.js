@@ -180,7 +180,7 @@ const updateFinish = async (req, res) => {
   const status2 = "not";
   const minperson45 = await Technician.findByIdAndUpdate(
     { _id: minperson4._id },
-    { numberOfworks, deposit, status, status2 }
+    { numberOfworks},{ deposit}, {status}, {status2 }
   );
   const Respon = await Technician.findById(id);
   res.status(200).json(Respon);
