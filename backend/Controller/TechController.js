@@ -165,12 +165,13 @@ const updateFinish = async (req, res) => {
     { Status: "completed" }
   );
   
-  const status = "free";
-  const status2 = "not";
-  const minperson45 = await Technician.findByIdAndUpdate(
-    { _id:id },
-    {status}, {status2 },{new:true}
-  );
+const status = "free";
+const status2 = "not";
+const minperson45 = await Technician.findByIdAndUpdate(
+  { _id: id },                        // Query to find the document by _id
+  { status, status2 },                // Update operation to set both status and status2
+  { new: true }                       // Option to return the updated document
+);
   res.status(200).json(minperson45);
   let customer = await Customers.findById(work.myId);
 
