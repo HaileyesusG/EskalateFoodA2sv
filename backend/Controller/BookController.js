@@ -648,9 +648,9 @@ const UpdateTechBook = async (req, res) => {
   const { id } = req.params;
   const { email } = req.body;
   try {
-    const Techid = await Technician.find({ email: email });
+    const Techid = await Technician.findOne({ email: email });
     const data = await Technician.findByIdAndUpdate(
-      { _id: Techid[0]._id },
+      { _id: Techid._id },
       { status: "busy" },
       { new: true }
     );
@@ -672,7 +672,7 @@ const UpdateTechBook = async (req, res) => {
       { new: true }
     );
     const MyCustomer = await model.findById(book._id);
-    const Technicians = await Technician.findById(Techid[0]._id);
+    const Technicians = await Technician.findById(Techid._id);
     const AcceptObject = { MyCustomer, Technicians };
     socket.emit("IsAccept", AcceptObject);
     res.status(200).json(data);
