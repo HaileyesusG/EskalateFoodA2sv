@@ -186,7 +186,7 @@ const BookCreate = async (req, res) => {
           //   { _id: customer_id },
           //   { status2: "tobook" }
           // );
-          const minperson45 = await Technician.updateMany({ status2: "not" });
+    
           throw Error("No  Technician Found");
           //return
         }
