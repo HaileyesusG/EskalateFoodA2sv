@@ -151,12 +151,11 @@ const updateFinish = async (req, res) => {
   console.log("the id is is", id);
   console.log("the work is", work);
   console.log("the departmentt is", departmentt);
-  const UpdateB = await model
-    .findOne({
-      Technician_id: id,
-      customer_id: work.myId,
-      Status: "accepted",
-    })
+  const UpdateB = await model.findOne({
+  Technician_id: id,
+  customer_id: work.myId,
+  Status: { $in: ["accepted", "canceled"] },
+});
     .sort({ createdAt: -1 });
   let minperson = await Technician.findById(id);
   if (minperson.status == "free" && minperson.status2 == "not") {
