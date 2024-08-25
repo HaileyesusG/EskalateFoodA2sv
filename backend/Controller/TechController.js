@@ -155,8 +155,7 @@ const updateFinish = async (req, res) => {
   Technician_id: id,
   customer_id: work.myId,
   Status: { $in: ["accepted", "canceled"] },
-});
-    .sort({ createdAt: -1 });
+}).sort({ createdAt: -1 });
   let minperson = await Technician.findById(id);
   if (minperson.status == "free" && minperson.status2 == "not") {
     return;
