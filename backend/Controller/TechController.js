@@ -180,10 +180,9 @@ const updateFinish = async (req, res) => {
   const status2 = "not";
   const minperson45 = await Technician.findByIdAndUpdate(
     { _id: minperson4._id },
-    { numberOfworks},{ deposit}, {status}, {status2 }
+    { numberOfworks},{ deposit}, {status}, {status2 },{new:true}
   );
-  const Respon = await Technician.findById(id);
-  res.status(200).json(Respon);
+  res.status(200).json(minperson45);
   let customer = await Customers.findById(work.myId);
 
   if (customer) {
