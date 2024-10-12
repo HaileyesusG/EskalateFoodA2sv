@@ -135,11 +135,19 @@ const SignUp = () => {
   useEffect(() => {
     console.log("the is opt", isOtpSent);
   }, [isOtpSent]);
-  socket.once("isLoading", (msg) => {
-    setView(msg);
-    setView2(false);
-    console.log("in loading ", msg);
-  });
+  useEffect(() => {
+    socket.on("isLoading", (msg) => {
+      console.log("the email", email);
+      if (msg == email) {
+        setView(true);
+        setView2(false);
+        console.log("in loading ", msg);
+      }
+    });
+    return () => {
+      socket.off("isLoading");
+    };
+  }, [socket, email]);
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);

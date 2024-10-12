@@ -53,9 +53,9 @@ const ChatTech = ({ user }) => {
       // setCollector2(filteredChat);
       // console.log("The collector2 ", collector2);
     };
-    featcher();
+    //featcher();
     featcher3(idd);
-  }, [dispatch2]);
+  }, [socket, dispatch2]);
 
   const featcher2 = async () => {
     response = await fetch(`${API_BASE_URL}/api/admin/GetAdmin`, {});
