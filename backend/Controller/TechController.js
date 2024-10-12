@@ -151,13 +151,11 @@ const updateFinish = async (req, res) => {
   console.log("the id is is", id);
   console.log("the work is", work);
   console.log("the departmentt is", departmentt);
-  const UpdateB = await model
-    .findOne({
-      Technician_id: id,
-      customer_id: work.myId,
-      Status: "accepted",
-    })
-    .sort({ createdAt: -1 });
+  const UpdateB = await model.findOne({
+  Technician_id: id,
+  customer_id: work.myId,
+  Status: { $in: ["accepted", "canceled"] },
+}).sort({ createdAt: -1 });
   let minperson = await Technician.findById(id);
   if (minperson.status == "free" && minperson.status2 == "not") {
     return;
@@ -166,24 +164,15 @@ const updateFinish = async (req, res) => {
     { _id: UpdateB._id },
     { Status: "completed" }
   );
-  let minperson4 = await Technician.findById(id);
-  const numberOfworks = minperson4.numberOfworks + 1;
-  let deposit;
-  if (minperson4.department === "TV") {
-    minperson4;
-    deposit = minperson4.deposit - 200;
-  }
-  if (minperson4.department === "DISH") {
-    deposit = minperson4.deposit - 30;
-  }
-  const status = "free";
-  const status2 = "not";
-  const minperson45 = await Technician.findByIdAndUpdate(
-    { _id: minperson4._id },
-    { numberOfworks, deposit, status, status2 }
-  );
-  const Respon = await Technician.findById(id);
-  res.status(200).json(Respon);
+  
+const status = "free";
+const status2 = "not";
+const minperson45 = await Technician.findByIdAndUpdate(
+  { _id: id },                        // Query to find the document by _id
+  { status, status2 },                // Update operation to set both status and status2
+  { new: true }                       // Option to return the updated document
+);
+  res.status(200).json(minperson45);
   let customer = await Customers.findById(work.myId);
 
   if (customer) {
