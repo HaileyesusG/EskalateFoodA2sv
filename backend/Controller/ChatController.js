@@ -17,6 +17,8 @@ const ChatCreate = async (req, res) => {
 
 const GetChat = async (req, res) => {
   const { adminId, techId } = req.body;
+  console.log("adminid", adminId);
+  console.log("techid", techId);
   try {
     const messages = await Chat.find({
       $or: [

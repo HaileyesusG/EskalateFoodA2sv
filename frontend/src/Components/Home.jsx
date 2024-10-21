@@ -118,7 +118,16 @@ const Home = ({ user3 }) => {
   useEffect(() => {
     socket.on("booking", async (msg) => {
       const { db, latestMember } = msg;
-      if (Email === latestMember.email) {
+
+      // Flattening the array of arrays into a single array of objects
+      const flattenedArray = latestMember.flat();
+      console.log("flattenedArray ", flattenedArray);
+      // Check if Email exists in any of the objects
+      const emailExists = flattenedArray.some((member) => {
+        return member.email === Email;
+      });
+
+      if (emailExists) {
         setCustomer_id(db.customer_id);
         array3.push(db);
         setNotify(array3.length);
@@ -144,8 +153,18 @@ const Home = ({ user3 }) => {
   }, [socket, Email]);
   //
   useEffect(() => {
-    socket.on("cancel", async (msg) => {
+    socket.on("cancelR", async (msg) => {
       const { techEmail, _idd } = msg;
+      if (techEmail == "") {
+        const response = await fetch(`${API_BASE_URL}/api/book/beforeBooking`, {
+          method: "POST",
+          body: JSON.stringify({
+            _idd,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        return;
+      }
       const Customer__id = _idd;
       console.log("in the out", Email, techEmail);
       if (Email == techEmail) {
@@ -198,7 +217,7 @@ const Home = ({ user3 }) => {
     });
 
     return () => {
-      socket.off("cancel");
+      socket.off("cancelR");
     };
   }, [socket, Email]);
 

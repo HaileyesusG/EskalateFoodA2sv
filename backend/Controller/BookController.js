@@ -8,12 +8,12 @@ const { Mutex } = require("async-mutex");
 const technicianMutex = new Mutex();
 const assignOtherMutex = new Mutex();
 let counter = 0;
+let continueBooking = true;
 const requestTimeouts = {};
 let assignQueue = [];
 let assignQueue2 = [];
 let isProcessingQueue = false;
 let isProcessingQueue2 = false;
-let ProviderId = [];
 let Counter = 0;
 let addToAssignQueue;
 let addToAssignQueue2;
@@ -21,12 +21,10 @@ let addToAssignQueue2;
 const BookCreate = async (req, res) => {
   // Acquire the lock before proceeding
   const release = await technicianMutex.acquire();
-
+  continueBooking = true;
   Counter++;
   let nearestDriver = [];
-  if (Counter > 1) {
-    ProviderId = [];
-  }
+
   try {
     const { typeOfProblem, department } = req.body;
     const departmentArray = department.split(","); // Convert the string to an array
@@ -87,7 +85,6 @@ const BookCreate = async (req, res) => {
 
       //tech
       const tech2 = await Technician.find({
-        _id: { $nin: ProviderId },
         department: { $in: departmentArray },
         status: "free",
         status2: "not",
@@ -160,70 +157,6 @@ const BookCreate = async (req, res) => {
         return;
       }
 
-      for (const person of nearestDriver) {
-        if (person.numberOfworks < leastWork) {
-          leastWork = person.numberOfworks;
-        }
-      }
-      const newTech4 = nearestDriver.filter(
-        (t) => t.numberOfworks <= leastWork
-      );
-      for (const person of newTech4) {
-        if (person.numberOftimes < leastTime) {
-          leastTime = person.numberOftimes;
-        }
-      }
-      const newTech5 = newTech4.filter((t) => t.numberOftimes <= leastTime);
-      //console.log("the newtech4", newTech4);
-      console.log("the shortest distance D", nearestDistance);
-      console.log("the shortest distance W", leastWork);
-      console.log("the shortest distance T", leastTime);
-      const minperson = [...newTech5];
-
-      try {
-        if (minperson.length === 0) {
-          // let minperson444 = await Customers.findByIdAndUpdate(
-          //   { _id: customer_id },
-          //   { status2: "tobook" }
-          // );
-    
-          throw Error("No  Technician Found");
-          //return
-        }
-      } catch (error) {
-        res.status(400).json({ message: error.message });
-        return;
-      }
-
-      let latestMember = null;
-      let latestDate = null;
-      for (const key in minperson) {
-        if (minperson.hasOwnProperty(key)) {
-          const member = minperson[key];
-          if (!latestDate || member.createdAt < latestDate) {
-            latestMember = member;
-            latestDate = member.createdAt;
-          }
-        }
-      }
-      console.log("the latest member ", latestMember);
-      const minperson45 = await Technician.findByIdAndUpdate(
-        { _id: latestMember._id },
-        { status2: "loading" },
-        { $inc: { __v: 1 } },
-        { new: true }
-      );
-      const numberOftimes = latestMember.numberOftimes + 1;
-      ProviderId.push(latestMember._id);
-      const minperson4 = await Technician.findByIdAndUpdate(
-        { _id: latestMember._id },
-        { numberOftimes }
-      );
-      const Technician_id = minperson4._id;
-      const Technician_firstname = minperson4.firstname;
-      const Technician_lastname = minperson4.lastname;
-      const Technician_email = minperson4.email;
-
       let db;
       try {
         db = await model.create({
@@ -233,10 +166,6 @@ const BookCreate = async (req, res) => {
           department,
           Customer_location,
           customer_id,
-          Technician_id,
-          Technician_firstname,
-          Technician_lastname,
-          Technician_email,
         });
 
         //res.status(200).json(db);
@@ -245,7 +174,17 @@ const BookCreate = async (req, res) => {
         res.status(400).json({ error: error.message });
         return;
       }
+      for (const driver of nearestDriver) {
+        const minperson45 = await Technician.findByIdAndUpdate(
+          { _id: driver._id },
+          { status2: "loading" },
+          { new: true }
+        );
+      }
       console.log("the aba wde ", db);
+
+      console.log("the nearestDriver ", nearestDriver);
+      let latestMember = [...nearestDriver];
       socket.emit("booking1", { db, latestMember });
       //
 
@@ -255,30 +194,34 @@ const BookCreate = async (req, res) => {
       );
 
       ////
-      const Request = await model.find({
+      const Request = await model.findOne({
         customer_id: customer_id,
         Status: "pending",
       });
-      const RequestId = Request[0]._id;
-      const num = minperson4._id;
-      let _id = num;
-      phone = await Technician.find({ _id }).select("phonenumber");
+      const RequestId = Request._id;
       //Timeout
       requestTimeouts[RequestId] = setTimeout(async () => {
-        //socket.emit("UnAccept", phone);
-        const minperson45 = await Technician.findByIdAndUpdate(
-          { _id: _id },
-          { status2: "not" }
-        );
-        await addToAssignQueue(num, RequestId);
+        for (const tech of nearestDriver) {
+          if (tech.status == "free") {
+            await Technician.updateOne(
+              { _id: tech._id },
+              { $set: { status2: "not" } }
+            );
+          }
+        }
+        await addToAssignQueue(RequestId);
       }, 30000);
-      addToAssignQueue = async (num, RequestId) => {
+      addToAssignQueue = async (RequestId) => {
+        if (continueBooking == false) {
+          console.log("Booking process stopped.");
+          return; // Stop booking process
+        }
         assignQueue.push(RequestId);
         if (!isProcessingQueue) {
-          await processAssignQueue(num);
+          await processAssignQueue();
         }
       };
-      const processAssignQueue = async (num) => {
+      const processAssignQueue = async () => {
         if (assignQueue.length === 0) {
           isProcessingQueue = false;
           return;
@@ -289,12 +232,12 @@ const BookCreate = async (req, res) => {
         const RequestId = assignQueue.shift();
 
         try {
-          await AssignOther(num, RequestId);
+          await AssignOther(RequestId);
         } catch (error) {
           console.log("Error in AssignOther:", error);
           return;
         } finally {
-          await processAssignQueue(num);
+          await processAssignQueue();
         }
       };
     };
@@ -340,7 +283,7 @@ const BookCreate = async (req, res) => {
   }
 
   // Lock variable to ensure AssignOther runs sequentially
-  let AssignOther = async (id, RequestId) => {
+  let AssignOther = async (RequestId) => {
     // Acquire the lock before proceeding
     const release2 = await assignOtherMutex.acquire();
     let nearestDistance = Infinity;
@@ -348,25 +291,9 @@ const BookCreate = async (req, res) => {
     let leastWork = Infinity;
     let nearestDriver = [];
 
-    // const minperson45 = await Technician.findByIdAndUpdate(
-    //   { _id: id },
-    //   { status2: "not" }
-    // );
-
     try {
       let bookers = await model.find({ _id: RequestId, Status: "pending" });
       if (bookers.length === 0) {
-        const techniciansToUpdate = await Technician.find({
-          status: "free",
-          status2: "loading",
-        });
-        // Update the status2 field for matched technicians to 'stop'
-        await Promise.all(
-          techniciansToUpdate.map(async (technician) => {
-            technician.status2 = "not";
-            await technician.save();
-          })
-        );
         return;
       }
       console.log("request booker", bookers);
@@ -387,208 +314,176 @@ const BookCreate = async (req, res) => {
       let typeOfProblem;
 
       const status = "free";
-      let filter3;
-      if (
-        bookers[0].department == "TV" ||
-        bookers[0].department == "FRIDGE" ||
-        bookers[0].department == "PAINTING"
-      ) {
-        filter3 = await Technician.find({
-          _id: { $nin: ProviderId },
-          department: { $in: bookers[0].department.split(",") },
-          status: status,
-          status2: "not",
-          deposit: { $gte: 200 },
-        });
-      }
-      if (bookers[0].department == "DISH") {
-        filter3 = await Technician.find({
-          _id: { $nin: ProviderId },
-          department: { $in: bookers[0].department.split(",") },
-          status: status,
-          status2: "not",
-          deposit: { $gte: 50 },
-        });
+      let filter3 = [];
+      for (const Pend of bookers) {
+        if (
+          Pend.department == "TV" ||
+          Pend.department == "FRIDGE" ||
+          Pend.department == "PAINTING"
+        ) {
+          const filter = await Technician.find({
+            department: { $in: Pend.department.split(",") },
+            status: status,
+            status2: "not",
+            deposit: { $gte: 200 },
+          });
+          filter3.push(filter);
+        }
+        if (Pend.department == "DISH") {
+          const filter = await Technician.find({
+            department: { $in: Pend.department.split(",") },
+            status: status,
+            status2: "not",
+            deposit: { $gte: 50 },
+          });
+          filter3.push(filter);
+        }
       }
       try {
         if (filter3.length === 0) {
-          let minperson444 = await Technician.findByIdAndUpdate(
-            { _id: id },
-            { status2: "not" }
-          );
           await model.findByIdAndDelete(RequestId);
-          await Technician.updateMany({ status2: "not" });
-          throw Error("No  Technician Found");
+          console.log("NO Technician found n");
+          throw Error("NO Technician found");
           //return
         }
       } catch (error) {
-        //console.log("the error Technician", error);
         res.status(400).json({ message: error.message });
         return;
       }
 
       let slat;
       let slon;
-      try {
-        const response = await fetch(
-          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-            mminn.Customer_location
-          )}&key=9ddcd8b5269349368ef7069e700d9e77`
-        );
-        const data = await response.json();
-        if (!response.ok) {
-          console.log({ message: "No Internet Connection" });
-        }
-
-        if (data.results.length > 0) {
-          const { lat, lng } = data.results[0].geometry;
-          slat = lat;
-          slon = lng;
-          console.log("slat", slat);
-          console.log("slon", slon);
-        } else {
-          console.log("No results found");
-        }
-      } catch (error) {
-        //return res.status(400).json({ message: "No Internet Connection5" });
-      }
-      const customerCoords = {
-        latitude: slat,
-        longitude: slon,
-      };
-      for (const person of filter3) {
+      let customerCor = [];
+      for (const Pend of bookers) {
         try {
-          const response2 = await fetch(
+          const response = await fetch(
             `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-              person.location
+              Pend.Customer_location
             )}&key=9ddcd8b5269349368ef7069e700d9e77`
           );
-          const data2 = await response2.json();
+          const data = await response.json();
+          if (!response.ok) {
+            console.log({ message: "No Internet Connection" });
+          }
 
-          if (data2.results.length > 0) {
-            const { lat, lng } = data2.results[0].geometry;
-            console.log("lat", lat);
-            console.log("lng", lng);
-            const driverCoords = {
-              latitude: lat,
-              longitude: lng,
-            };
-            const distance = haversine(customerCoords, driverCoords);
-            if (distance < nearestDistance) {
-              nearestDistance = distance;
-              nearestDriver = [person];
-            } else if (distance === nearestDistance) {
-              nearestDriver.push(person); // Add this driver to the list of nearest drivers
-            }
+          if (data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry;
+            slat = lat;
+            slon = lng;
+            console.log("slat", slat);
+            console.log("slon", slon);
           } else {
-            console.log("No results found");
+            console.log("No results found1");
           }
         } catch (error) {
-          console.log({ message: "No Internet Connection" });
-          return;
+          //return res.status(400).json({ message: "No Internet Connection5" });
+        }
+        const customerCoords = {
+          latitude: slat,
+          longitude: slon,
+        };
+        customerCor.push(customerCoords);
+      }
+
+      for (const person of filter3) {
+        for (const p of person) {
+          try {
+            const response2 = await fetch(
+              `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+                p.location
+              )}&key=9ddcd8b5269349368ef7069e700d9e77`
+            );
+            const data2 = await response2.json();
+            console.log("the person location is ", person);
+            console.log("the data2 is ", data2);
+            if (data2.results.length > 0) {
+              const { lat, lng } = data2.results[0].geometry;
+              console.log("lat", lat);
+              console.log("lng", lng);
+              const driverCoords = {
+                latitude: lat,
+                longitude: lng,
+              };
+              for (const custCord of customerCor) {
+                const distance = haversine(custCord, driverCoords);
+                if (distance < nearestDistance) {
+                  nearestDistance = distance;
+                  nearestDriver = [person];
+                } else if (distance === nearestDistance) {
+                  nearestDriver.push(person); // Add this driver to the list of nearest drivers
+                }
+              }
+            } else {
+              console.log("No results found2");
+            }
+          } catch (error) {
+            console.log({ message: "No Internet Connection" });
+            return;
+          }
         }
       }
       if (nearestDriver.length == 0) {
-        console.log({ error: "NO Technician found" });
-      }
-
-      for (const person of filter3) {
-        if (person.numberOfworks < leastWork) {
-          leastWork = person.numberOfworks;
-        }
-      }
-
-      const filter4 = filter3.filter((w) => w.numberOfworks <= leastWork);
-
-      for (const person of filter4) {
-        if (person.numberOftimes < leastTime) {
-          leastTime = person.numberOftimes;
-        }
-      }
-      console.log("leasFilter4tT", leastTime);
-      const filter5 = filter4.filter((w) => w.numberOftimes <= leastTime);
-      //console.log("filter 5", filter5);
-      const minperson8 = [...filter5];
-
-      for (let key in minperson8) {
-        if (minperson8.hasOwnProperty(key)) {
-          let member = minperson8[key];
-          if (!latestDate || member.createdAt < latestDate) {
-            latestMember = member;
-            latestDate = member.createdAt;
-          }
-        }
-      }
-      console.log("the latest member 2 ", latestMember);
-      const minperson45 = await Technician.findByIdAndUpdate(
-        { _id: latestMember._id },
-        { status2: "loading" },
-        { new: true }
-      );
-      if (latestMember == null) {
         await model.findByIdAndDelete(RequestId);
-        const minperson45 = await Technician.findByIdAndUpdate(
-          { _id: latestMember._id },
-          { status2: "not" },
-          { new: true }
-        );
-
-        console.log("NO Technician found");
+        res.status(404).send({ error: "NO Technician found" });
+        console.log({ error: "NO Technician found" });
         return;
       }
 
-      //console.log("his name is", Technician_email);
-      let numberOftimes = latestMember.numberOftimes + 1;
-      let minperson4 = await Technician.findByIdAndUpdate(
-        { _id: latestMember._id },
-        { numberOftimes }
-      );
-      ProviderId.push(minperson4._id);
+      console.log("the nearestDriver 2 ", nearestDriver);
+      for (const driver of nearestDriver) {
+        for (const p of driver) {
+          const minperson45 = await Technician.findByIdAndUpdate(
+            { _id: p._id },
+            { status2: "loading" },
+            { new: true }
+          );
+        }
+      }
 
-      ////////
-      //console.log("the mminn is", mmin);
-
-      let updated = await Technician.find({});
-
-      //res.status(200).json(db);
-
-      numd = minperson4._id;
-      let _id = numd;
-      phone = await Technician.find({ _id }).select("phonenumber");
       //Assign All
-      Customer_firstname = bookers[0].Customer_firstname;
-      Customer_lastname = bookers[0].Customer_lastname;
-      Customer_phonenumber = bookers[0].Customer_phonenumber;
-      Customer_location = bookers[0].Customer_location;
-      customer_id = bookers[0].customer_id;
-      department = bookers[0].department;
-      typeOfProblem = bookers[0].typeOfProblem;
+      for (const Pend of bookers) {
+        Customer_firstname = Pend.Customer_firstname;
+        Customer_lastname = Pend.Customer_lastname;
+        Customer_phonenumber = Pend.Customer_phonenumber;
+        Customer_location = Pend.Customer_location;
+        customer_id = Pend.customer_id;
+        department = Pend.department;
+        typeOfProblem = Pend.typeOfProblem;
 
-      const db = {
-        Customer_firstname,
-        Customer_lastname,
-        Customer_phonenumber,
-        Customer_location,
-        customer_id,
-        department,
-        typeOfProblem,
-      };
-      console.log("My name is Fkade , abebe, haile");
-      console.log("the target customer", db);
-      socket.emit("booking1", { db, latestMember });
-      console.log("end of Assign Other");
+        const db = {
+          Customer_firstname,
+          Customer_lastname,
+          Customer_phonenumber,
+          Customer_location,
+          customer_id,
+          department,
+          typeOfProblem,
+        };
+        latestMember = [...nearestDriver];
+        console.log("the target customer", db);
+        socket.emit("booking1", { db, latestMember });
+        console.log("end of Assign Other");
+      }
+
       if (requestTimeouts[RequestId]) {
         clearTimeout(requestTimeouts[RequestId]);
         console.log("Timeout cleared for request ID:", RequestId);
       }
       requestTimeouts[RequestId] = setTimeout(async () => {
-        socket.emit("UnAccept", phone);
-        const minperson45 = await Technician.findByIdAndUpdate(
-          { _id: numd },
-          { status2: "not" }
-        );
+        // socket.emit("UnAccept", phone);
+        for (const tech of nearestDriver) {
+          for (const p of tech) {
+            if (p.status == "free") {
+              await Technician.updateOne(
+                { _id: p._id },
+                { $set: { status2: "not" } }
+              );
+            }
+          }
+        }
+
         console.log("he did not accept too 2", RequestId);
-        await addToAssignQueue(numd, RequestId);
+        await addToAssignQueue(RequestId);
       }, 30000);
     } catch (err) {
       console.error("Error during driver reassignment:", err);
@@ -647,6 +542,8 @@ const BookCreate = async (req, res) => {
 const UpdateTechBook = async (req, res) => {
   const { id } = req.params;
   const { email } = req.body;
+  console.log("the id is becase ", id);
+  console.log("the email becase ", email);
   try {
     const Techid = await Technician.findOne({ email: email });
     const data = await Technician.findByIdAndUpdate(
@@ -657,7 +554,6 @@ const UpdateTechBook = async (req, res) => {
     const book = await model
       .findOne({
         customer_id: id,
-        Technician_id: data._id,
         Status: "pending",
       })
       .sort({ createdAt: -1 });
@@ -743,7 +639,7 @@ const DeleteBook = async (req, res) => {
 const updateBooking = async (req, res) => {
   const { Customer__id, _id } = req.body;
   const sv = await model
-    .findOne({ customer_id: Customer__id, Technician_id: _id })
+    .findOne({ customer_id: Customer__id })
     .sort({ createdAt: -1 });
   if (sv.Status != "completed") {
     const update = await model.findByIdAndUpdate(
@@ -754,7 +650,7 @@ const updateBooking = async (req, res) => {
   }
 
   const tech = await Technician.findById(_id);
-  if (tech.status != "free" || tech.status2 != "not") {
+  if (tech.status !== "free" || tech.status2 !== "not") {
     const tech = await Technician.findByIdAndUpdate(
       { _id: _id },
       { status: "free" },
@@ -765,7 +661,22 @@ const updateBooking = async (req, res) => {
     res.status(200).json(tech2);
   }
 };
-
+//
+const beforeBooking = async (req, res) => {
+  const { _idd } = req.body;
+  console.log("in before booking");
+  continueBooking = false;
+  const result = await Technician.updateMany(
+    { status2: "loading" },
+    { $set: { status2: "not" } }
+  );
+  const result2 = await model.updateMany(
+    { customer_id: _idd, Status: "pending" },
+    { $set: { Status: "canceled" } }
+  );
+  console.log("gebtenal");
+  return;
+};
 module.exports = {
   BookCreate,
   GetBook,
@@ -774,4 +685,5 @@ module.exports = {
   DeleteBook,
   UpdateTechBook,
   updateBooking,
+  beforeBooking,
 };

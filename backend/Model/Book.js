@@ -18,23 +18,6 @@ const bookSchema = mongoose.Schema(
       required: true,
       ref: "Customer",
     },
-    Technician_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Tech",
-    },
-    Technician_firstname: {
-      type: String,
-      required: [true, "Please enter Tech first Name"],
-    },
-    Technician_lastname: {
-      type: String,
-      required: [true, "Please enter last Name"],
-    },
-    Technician_email: {
-      type: String,
-      required: [true, "Please enter Tech email"],
-    },
     department: {
       type: String,
       required: [true, "Please enter department"],

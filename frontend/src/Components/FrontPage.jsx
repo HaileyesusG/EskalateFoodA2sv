@@ -183,14 +183,14 @@ const FrontPage = () => {
 
       <div className="main-container mt-6 w-full px-4 md:px-0">
         <div className="flex flex-col items-center md:flex-row md:justify-between md:items-center">
-          <div className="flex justify-center md:block">
+          <div className="flex justify-center md:first-letter:mt-[-25px] md:block">
             <img
-              src={hiloe3}
+              src={hiloe5}
               alt="Profile"
               className="rounded-full w-20 h-20 md:w-24 md:h-24 object-cover"
             />
           </div>
-          <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+          <div className="mt-4 md:mt-0 md:ml-[-500px] text-center md:text-left">
             <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
             <p className="text-xl md:text-4xl text-yellow-400 font-bold">
               CustomerService
