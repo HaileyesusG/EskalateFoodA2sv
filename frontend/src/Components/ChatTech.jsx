@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setChat, removeChat } from "../features/chat/chatSlice";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-let socket = io("https://africadeploybackend.onrender.com");
+let socket = io(API_BASE_URL);
 const ChatTech = ({ user }) => {
   const todo = useSelector((state) => state.chat.chat);
   const dispatch2 = useDispatch();

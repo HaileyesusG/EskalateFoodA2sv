@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
-let socket = io("https://africadeploybackend.onrender.com");
 import { useLocation, useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { FaAddressBook } from "react-icons/fa";
@@ -15,6 +14,7 @@ import { GiCampCookingPot } from "react-icons/gi";
 import { FaPaintRoller } from "react-icons/fa6";
 import { MdRoofing } from "react-icons/md";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+let socket = io(API_BASE_URL);
 import axios from "axios";
 import { FaUser } from "react-icons/fa6";
 import SignUpC from "./SignUpC";

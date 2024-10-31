@@ -6,7 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import hiloe5 from "../assets/admin2.jpg";
 import { useUserContextA } from "../Hooks/useUserContextA";
-//import { useUserContext } from "../Hooks/useUserContext";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const LoginA = () => {
   // let { admin, dispatch } = useUserContextA();
   // const red = useNavigate();
@@ -29,7 +29,7 @@ const LoginA = () => {
     if (image) setViewer(true);
   };
   useEffect(() => {
-    setSocket(io("https://africadeploybackend.onrender.com"));
+    setSocket(io(API_BASE_URL));
   }, []);
   useEffect(() => {
     socket?.emit("newUser", email);

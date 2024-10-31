@@ -21,7 +21,7 @@ import { setTech } from "./features/tech/techSlice";
 import { setAdmin } from "./features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
-const socket = io("https://africadeploybackend.onrender.com");
+const socket = io(API_BASE_URL);
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState();
