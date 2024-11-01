@@ -28,6 +28,9 @@ app.use(
   })
 );
 app.options("/api/*", cors());
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public", index.html));
+});
 app.use(express.static(paz.join(__dirname, "public")));
 app.use("/api/Customer", path);
 app.use("/api/Tech", path2);
