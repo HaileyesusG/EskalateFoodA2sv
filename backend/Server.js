@@ -30,9 +30,6 @@ app.use(
 app.options("/api/*", cors());
 
 app.use(express.static(paz.join(__dirname, "build")));
-app.get("*", (req, res) => {
-  res.sendFile(paz.resolve(__dirname, "build", index.html));
-});
 app.use("/api/Customer", path);
 app.use("/api/Tech", path2);
 app.use("/api/Book", path3);
@@ -40,6 +37,9 @@ app.use("/api/Accepted", path4);
 app.use("/api/Admin", path5);
 app.use("/api/Chat", path6);
 app.use("/api/Applicants", ApplicantRoute);
+app.get("*", (req, res) => {
+  res.sendFile(paz.resolve(__dirname, "build", index.html));
+});
 let logged = [];
 let boddy = [];
 const serv = http.createServer(app);
