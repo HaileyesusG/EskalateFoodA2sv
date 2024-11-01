@@ -35,7 +35,7 @@ app.use("/api/Accepted", path4);
 app.use("/api/Admin", path5);
 app.use("/api/Chat", path6);
 app.use("/api/Applicants", ApplicantRoute);
-app.use(express.static(paz.join(__dirname, "build")));
+app.use(express.static(paz.join(__dirname, "src")));
 let logged = [];
 let boddy = [];
 const serv = http.createServer(app);
