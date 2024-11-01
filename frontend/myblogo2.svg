@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="640pt" height="640pt" viewBox="0 0 640 640"
+ preserveAspectRatio="xMidYMid meet">
+
+ <!-- Define a circular clipping path -->
+ <defs>
+   <clipPath id="circleClip">
+     <circle cx="320" cy="320" r="320"/>
+   </clipPath>
+ </defs>
+
+ <!-- Apply clipping path to ensure everything remains within a circle -->
+ <g transform="translate(0,640) scale(0.1,-0.1)"
+    fill="#000000" stroke="none" clip-path="url(#circleClip)">
+   <path d="M0 3200 l0 -3200 3200 0 3200 0 0 3200 0 3200 -3200 0 -3200 0 0 -3200z m3600 3126 ... (remaining path data here) ... " />
+ </g>
+</svg>
