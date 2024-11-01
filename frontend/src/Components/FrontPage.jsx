@@ -1,4 +1,6 @@
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import { IoCall } from "react-icons/io5";
+import { IoMail } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import hiloe from "../assets/AiM.jpeg";
 import hiloe2 from "../assets/AiM2.jpeg";
@@ -190,7 +192,7 @@ const FrontPage = () => {
               className="rounded-full w-20 h-20 md:w-24 md:h-24 object-cover"
             />
           </div>
-          <div className="mt-4 md:mt-0 md:ml-[-500px] text-center md:text-left">
+          <div className="mt-4 md:mt-0 lg:ml-[-500px] text-center md:text-left">
             <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
             <p className="text-xl md:text-4xl text-yellow-400 font-bold">
               CustomerService
@@ -198,11 +200,18 @@ const FrontPage = () => {
           </div>
           <div className="flex flex-col mt-4 md:flex-row md:items-center md:space-x-4">
             <div className="mb-4 md:mb-0">
-              <h4 className="text-center md:text-left">CALL US</h4>
+              <div className="flex">
+                <IoCall /> <h4 className="text-center md:text-left">CALL US</h4>
+              </div>
+
               <h4 className="text-center md:text-left">+251960295512</h4>
             </div>
             <div>
-              <h4 className="text-center md:text-left">MAIL US</h4>
+              <div className="flex">
+                <IoMail />
+                <h4 className="text-center md:text-left">MAIL US</h4>
+              </div>
+
               <h4 className="text-center md:text-left">
                 AfricaDish9@gmail.com
               </h4>
