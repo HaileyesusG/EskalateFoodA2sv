@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const socket = io("https://africadeploybackend.onrender.com");
+const socket = io(API_BASE_URL);
 export const useSignUp = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);

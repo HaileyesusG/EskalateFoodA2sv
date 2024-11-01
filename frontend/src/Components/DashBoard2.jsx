@@ -22,7 +22,7 @@ const Dashboard2 = () => {
   customer = customer[0];
   const token = "Bearer " + customer.token;
   const _id = customer._id;
-  let socket = io("https://africadeploybackend.onrender.com");
+  let socket = io(API_BASE_URL);
   let [json, setJson] = useState([]);
   let response;
   const [typeOfProblem, setProblem] = useState("");

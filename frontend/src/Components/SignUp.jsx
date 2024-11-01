@@ -13,7 +13,7 @@ import hiloe5 from "../assets/Ai_3.png";
 import SuccessMessage from "./Thankyou";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { io } from "socket.io-client";
-const socket = io("https://africadeploybackend.onrender.com");
+const socket = io(API_BASE_URL);
 const SignUp = () => {
   const { signup, isLoading, error } = useSignUp();
   const [email, setEmail] = useState("");

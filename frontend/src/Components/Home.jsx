@@ -25,7 +25,7 @@ import { useDispatch } from "react-redux";
 import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import ChatTech from "./ChatTech";
-const socket = io("https://africadeploybackend.onrender.com");
+const socket = io(API_BASE_URL);
 let array3 = [];
 let timeoutId = null;
 const Home = ({ user3 }) => {

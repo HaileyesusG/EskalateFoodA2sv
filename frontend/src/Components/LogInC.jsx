@@ -5,7 +5,7 @@ import { useSignInC } from "../Hooks/useSignInC";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import hiloe5 from "../assets/Ai_4.jfif";
-//import { useUserContext } from "../Hooks/useUserContext";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const LoginC = () => {
   const [email, setEmail] = useState("");
   const [viewr, setViewer] = useState(null);
@@ -19,7 +19,7 @@ const LoginC = () => {
     if (image) setViewer(true);
   };
   useEffect(() => {
-    setSocket(io("https://africadeploybackend.onrender.com"));
+    setSocket(io(API_BASE_URL));
   }, []);
   useEffect(() => {
     socket?.emit("newUser", email);

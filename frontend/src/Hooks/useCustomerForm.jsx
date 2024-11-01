@@ -4,7 +4,7 @@ import { useUserContextC } from "../Hooks/useUserContextC";
 import { Navigate, useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useCustomerForm = () => {
-  let socket = io("https://africadeploybackend.onrender.com");
+  let socket = io(API_BASE_URL);
   const red = useNavigate();
   let { customer, dispatch } = useUserContextC();
   const [error, setError] = useState(null);
