@@ -337,7 +337,7 @@ const Dashboard = () => {
         <h2 className="ml-2 sm:ml-3 mt-[130px] sm:mt-[140px] text-[8px] sm:text-[20px]">
           Africa Customer Service
         </h2>
-        <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-auto mt-[-60px] sm:mt-[130px] md:ml-[750px]">
+        <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-[340px] mt-[-40px] sm:mt-[130px] md:ml-[750px]">
           {Customer ? (
             <FaUser className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2" />
           ) : (
@@ -350,7 +350,7 @@ const Dashboard = () => {
       </div>
 
       {/* Booking Section */}
-      <div className="mt-[180px] sm:mt-[260px] ml-40 sm:ml-60 md:ml-[550px] absolute bg-opacity-50 backdrop-filter backdrop-blur-lg text-[20px] sm:text-[35px] rounded-2xl">
+      <div className="mt-[280px] sm:mt-[260px] ml-40 sm:ml-60 md:ml-[550px] absolute bg-opacity-50 backdrop-filter backdrop-blur-lg text-[20px] sm:text-[35px] rounded-2xl">
         <h4 className="text-sm sm:text-lg md:text-xl lg:text-2xl">Booking</h4>
       </div>
       {signup && (
