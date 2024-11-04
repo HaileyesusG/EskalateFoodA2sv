@@ -275,29 +275,29 @@ const Dashboard = () => {
   }, [socket, phonenumber]);
   return (
     <div key={refereshKey}>
-      <div className="absolute mt-5 ml-8 sm:mt-11 flex">
+      <div className="absolute mt-5 ml-4 sm:mt-8 sm:ml-6 flex flex-wrap w-full items-center space-x-4 sm:space-x-8 lg:space-x-10 container">
         <div>
-          <ImLocation className="text-[30px] text-pink-600 shadow font-bold" />
-          <p className="text-[10px] ">ይህ የGPS </p>
-          <p className="text-[10px] "> ግምታዊ </p>
-          <p className="text-[10px] ">አድራሻዎት </p>
-          <p className="ml-4 text-[10px] ">ነው</p>
+          <ImLocation className="text-[20px] sm:text-[30px] text-pink-600 shadow font-bold" />
+          <p className="text-[8px] sm:text-[10px]">ይህ የGPS </p>
+          <p className="text-[8px] sm:text-[10px]">ግምታዊ </p>
+          <p className="text-[8px] sm:text-[10px]">አድራሻዎት </p>
+          <p className="ml-2 sm:ml-4 text-[8px] sm:text-[10px]">ነው</p>
         </div>
-        <div className="w-[90px] md:w-[400px] ml-3">
-          <h3>{location}</h3>
+        <div className="w-[90px] md:w-[300px] lg:w-[400px] ml-2 sm:ml-3">
+          <h3 className="text-xs sm:text-sm md:text-base">{location}</h3>
         </div>
-        <div className="ml-12 sm:ml-[600px]">
+        <div className="ml-6 sm:ml-20 lg:ml-40">
           <div className={disp2}>
-            <div className="flex mr-10">
+            <div className="flex mr-4 sm:mr-10">
               <input
                 type="text"
                 onChange={handleInputChange}
                 onFocus={() => setdisplay("visible")}
                 value={query}
                 placeholder="Location"
-                className="bg-transparent h-[35px] w-[300px] border-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white"
+                className="bg-transparent h-[30px] sm:h-[35px] w-[200px] sm:w-[250px] md:w-[300px] border-2 block focus:outline-none focus:border-white rounded-2xl px-2 sm:px-4 placeholder-white"
               />
-              <ImLocation className="mt-2 absolute ml-[270px]" />
+              <ImLocation className="mt-1 sm:mt-2 absolute ml-[170px] sm:ml-[230px]" />
             </div>
           </div>
 
@@ -306,47 +306,52 @@ const Dashboard = () => {
               <li
                 key={suggestion.place_id}
                 onClick={() => handleChoiceChange(suggestion.display_name)}
+                className="text-xs sm:text-sm"
               >
-                <div className="flex">
-                  <ImLocation className="text-2xl p-1" />
-                  {suggestion.display_name}
+                <div className="flex items-center">
+                  <ImLocation className="text-lg sm:text-2xl p-1" />
+                  <span>{suggestion.display_name}</span>
                 </div>
               </li>
             ))}
           </ul>
-          {error3 && <p>Error: {error3}</p>}
-          <div className={"ml-[70px]  " + disp3}>
+          {error3 && <p className="text-xs sm:text-sm">Error: {error3}</p>}
+          <div
+            className={`w-auto mt-[-64px] sm:mt-[-84px] ${disp3} ml-80 md:ml-[1000px]`}
+          >
             <MdEditLocationAlt
               onClick={makeVisible}
-              className="text-[30px] ml-3 text-pink-600 shadow font-bold cursor-pointer"
+              className="text-[20px] sm:text-[30px] ml-2 sm:ml-3 text-pink-600 shadow font-bold cursor-pointer"
             />
-            <h4>አድራሻዎትን </h4>
-            <h4 className="ml-2">ያስተካክሉ</h4>
+            <h4 className="text-[8px] sm:text-[10px]">አድራሻዎትን </h4>
+            <h4 className="ml-1 sm:ml-2 text-[8px] sm:text-[10px]">ያስተካክሉ</h4>
           </div>
         </div>
       </div>
-      <div className="mt-10 ml-2 sm:flex absolute">
-        <div className="ml-7 w-16 h-16 mt-[140px] sm:ml-[40px] rounded-full overflow-hidden">
+
+      {/* Profile Picture and Title */}
+      <div className="mt-10 ml-2 flex flex-wrap items-center sm:flex-nowrap absolute">
+        <div className="ml-5 sm:ml-10 w-14 h-14 sm:w-16 sm:h-16 mt-[120px] sm:mt-[140px] rounded-full overflow-hidden">
           <img src={hiloe6} alt="" className="rounded-full" />
         </div>
-        <h2 className="ml-4 sm:ml-3 sm:mt-[145px] text-[10px] sm:text-[20px]">
+        <h2 className="ml-2 sm:ml-3 mt-[130px] sm:mt-[140px] text-[8px] sm:text-[20px]">
           Africa Customer Service
         </h2>
-        <div className="h-[50px] w-[50px] rounded-full border-2 border-gray-300 ml-80 sm:ml-[620px] mt-[-70px] sm:mt-[135px] xs:ml-80 xs2:ml-[520px] md:ml-[950px]">
+        <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-auto mt-[-60px] sm:mt-[130px] md:ml-[750px]">
           {Customer ? (
-            <FaUser className="text-[20px] ml-3 mt-3" />
+            <FaUser className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2" />
           ) : (
             <IoPersonAdd
-              className="text-[20px] ml-3 mt-3 cursor-pointer"
+              className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2 cursor-pointer"
               onClick={handlesignup}
             />
           )}
         </div>
       </div>
-      <div className="xs2:ml-60 absolute flex mt-[260px] ml-32 sm:ml-[555px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[35px] rounded-2xl">
-        <h4 className="ml-5 sm:text-base md:text-lg lg:text-xl xl:text-2xl">
-          Booking
-        </h4>
+
+      {/* Booking Section */}
+      <div className="mt-[180px] sm:mt-[260px] ml-40 sm:ml-60 md:ml-[550px] absolute bg-opacity-50 backdrop-filter backdrop-blur-lg text-[20px] sm:text-[35px] rounded-2xl">
+        <h4 className="text-sm sm:text-lg md:text-xl lg:text-2xl">Booking</h4>
       </div>
       {signup && (
         <div className="h-screen w-screen bg-black bg-opacity-80 backdrop-filter backdrop-blur-none">
@@ -462,7 +467,7 @@ const Dashboard = () => {
           )
         ) : (
           <button
-            className="bg-yellow-400 hover:bg-yellow-300 h-[48px] w-80 sm:w-96 border-2 rounded-3xl font-semibold transition delay-200 mt-[760px] absolute flex ml-7 sm:mt-[665px] sm:ml-[450px]"
+            className="bg-yellow-400 hover:bg-yellow-300 h-[48px] w-80 sm:w-96 border-2 rounded-3xl font-semibold transition delay-200 mt-[760px] absolute flex ml-10 sm:mt-[685px] sm:ml-[435px]"
             onClick={handlesignup}
           >
             <div className="flex justify-center items-center ml-[45px] sm:ml-[70px]">
@@ -516,7 +521,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className=" xs:w-[410px] absolute xs2:ml-10 xs2:w-[550px] mt-[850px] sm:mt-[750px] w-[360px] sm:w-[780px] h-80 sm:ml-[80px] rounded-xl md:w-[1110px] md:h-[400px] overflow-hidden ml-7"
+        className=" absolute   mt-[850px] sm:mt-[750px] w-full sm:w-full h-80 sm:ml-[80px] rounded-xl lg:ml-28 lg:w-[1000px] lg:h-[500px]  md:h-[700px] overflow-hidden "
       />
       <div className="absolute hidden">
         <button onClick={featcher}>
@@ -530,6 +535,9 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+
+      {/* Sign Up and Loader Modals */}
+      {/* Continue adapting the rest of the code similarly... */}
     </div>
   );
 };
