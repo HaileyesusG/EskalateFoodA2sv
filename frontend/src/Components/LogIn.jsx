@@ -25,47 +25,49 @@ const Login = () => {
   }, [email]);
 
   return (
-    <div>
-      <div className=" mt-56   h-[500px] w-[700px] ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white">
-        <div className="absolute">
+    <div className="relative w-full h-screen">
+      <div className="mt-20 sm:mt-56 h-auto sm:h-[500px] w-[90%] sm:w-[700px] mx-auto sm:ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white md:ml-24">
+        <div className="absolute w-full">
           <form onSubmit={handleSumit}>
-            <div className=" flex flex-col justify-center ml-[290px] mb-6 mt-12">
-              <h3 className=" font-bold text-3xl text-white">Log In</h3>
+            <div className="flex flex-col justify-center items-center mb-6 mt-12">
+              <h3 className="font-bold text-2xl sm:text-3xl text-white">
+                Log In
+              </h3>
             </div>
 
-            <div className="flex flex-col space-y-5 ml-48 ">
-              <div className="flex">
+            <div className="flex flex-col space-y-5 items-center">
+              <div className="flex w-[90%] sm:w-auto justify-center relative">
                 <input
                   type="email"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  className="bg-transparent   h-[35px] w-[300px]  border-b-2 block focus:outline-none focus:border-white  rounded-2xl   px-4 placeholder-white text-white "
+                  className="bg-transparent h-[35px] w-full sm:w-[300px] border-b-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white text-white"
                 />
-                <MdEmail className="text-white mt-2 absolute ml-[270px]" />
+                <MdEmail className="text-white mt-2 absolute right-3" />
               </div>
-              <div className="flex">
+              <div className="flex w-[90%] sm:w-auto justify-center relative">
                 <input
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   placeholder="Password"
-                  className="bg-transparent   h-[35px] w-[300px]  border-b-2 block focus:outline-none focus:border-white  rounded-2xl   px-4 placeholder-white text-white "
+                  className="bg-transparent h-[35px] w-full sm:w-[300px] border-b-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white text-white"
                 />
-                <RiLockPasswordFill className="text-white mt-2 absolute ml-[270px]" />
+                <RiLockPasswordFill className="text-white mt-2 absolute right-3" />
               </div>
               <button
                 disabled={isLoading}
-                className="bg-gradient-to-b hover:text-black h-[35px] w-[300px] border-2  from-orange-300 rounded-3xl font-bold hover:to-purple-500 transition delay-200 text-white"
+                className="bg-gradient-to-b hover:text-black h-[35px] w-[90%] sm:w-[300px] border-2 from-orange-300 rounded-3xl font-bold hover:to-purple-500 transition delay-200 text-white"
               >
                 Log In
               </button>
-              {error && <div>{error}</div>}
+              {error && <div className="text-red-500 text-sm">{error}</div>}
             </div>
           </form>
         </div>
       </div>
-      <img className="object-fill w-full h-full" src={hiloe5} alt="" />
+      <img className="object-cover w-full h-full" src={hiloe5} alt="" />
     </div>
   );
 };
