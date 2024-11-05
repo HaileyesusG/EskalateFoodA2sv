@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <div className="mt-20 sm:mt-56 h-auto sm:h-[500px] w-[90%] sm:w-[700px] mx-auto sm:ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white md:ml-24">
+      <div className="mt-20 ml-5 sm:mt-56 h-auto sm:h-[500px] w-[90%] sm:w-[700px] mx-auto sm:ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white md:ml-24 lg:ml-64">
         <div className="absolute w-full">
           <form onSubmit={handleSumit}>
             <div className="flex flex-col justify-center items-center mb-6 mt-12">
