@@ -7,8 +7,8 @@ const SignUpC = ({ onConfirm, onCancel }) => {
   const [phonenumber, setPhonenumber] = useState("");
   const [validPhoneNumber, setValidPhoneNumber] = useState(true);
   const [validPhoneNumber2, setValidPhoneNumber2] = useState(true);
-  
-const handlePhoneNumberChange = (event) => {
+
+  const handlePhoneNumberChange = (event) => {
     const { value } = event.target;
 
     // Trim leading and trailing spaces from the phone number
@@ -27,7 +27,7 @@ const handlePhoneNumberChange = (event) => {
       console.log("abebe");
       setValidPhoneNumber(true);
     }
-};
+  };
 
   const handleSumit = async (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const handlePhoneNumberChange = (event) => {
 
   return (
     <div>
-      <div className="h-[300px] w-[90%] max-w-[500px] ml-auto mr-auto mt-10 md:ml-[420px] md:mt-40 absolute bg-white border-[1px] rounded-lg">
+      <div className="h-[300px] w-[90%] max-w-[500px] ml-[18px] mr-auto mt-10 md:ml-[220px] md:mt-40 absolute bg-white border-[1px] rounded-lg lg:ml-96">
         <div className="absolute inset-0">
           <form onSubmit={handleSumit} className="to-blue-100">
             <div className="flex flex-col justify-center items-center mb-6 mt-8">
