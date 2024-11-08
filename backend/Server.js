@@ -110,6 +110,14 @@ io.on("connection", (socket) => {
       socket.off("isLoading");
     };
   });
+
+  socket.on("isLoading12", (msg) => {
+    io.emit("isLoading12", msg);
+    return () => {
+      socket.off("isLoading12");
+    };
+  });
+
   socket.on("Respon", (msg) => {
     io.emit("respon2", msg);
     return () => {

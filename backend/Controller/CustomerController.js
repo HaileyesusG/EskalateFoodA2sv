@@ -1,4 +1,8 @@
 const Customer = require("../Model/Customer");
+const otpGenerator = require("otp-generator");
+const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+let otpStore = {}; // Temporary store for OTPs
 const jwt = require("jsonwebtoken");
 //Token Generator
 const createToken = (_id) => {
@@ -7,9 +11,27 @@ const createToken = (_id) => {
 
 //Sign Up
 const CustomerCreate = async (req, res) => {
-  const { phonenumber } = req.body;
+  const { phonenumber, otp } = req.body;
 
   try {
+    const storedOtpData = otpStore[phonenumber];
+
+    if (!storedOtpData) {
+      return res.status(400).send({ message: "OTP not generated or expired" });
+    }
+
+    const isOtpValid = await bcrypt.compare(otp, storedOtpData.otp);
+    const isOtpExpired = Date.now() > storedOtpData.otpExpiry;
+
+    if (isOtpExpired) {
+      delete otpStore[phonenumber];
+      return res.status(400).send({ message: "OTP expired" });
+    }
+
+    if (!isOtpValid) {
+      return res.status(400).send({ message: "Invalid OTP" });
+    }
+
     const customers = await Customer.SignUp(phonenumber);
     console.log("cutomers", customers);
     //token
@@ -21,6 +43,53 @@ const CustomerCreate = async (req, res) => {
   } catch (err) {
     console.error("the error", err);
     res.status(400).json({ message: err.message });
+  }
+};
+
+//Generate OTP
+const GenerateOtp = async (req, res) => {
+  const { phonenumber } = req.body;
+  try {
+    // Generate OTP
+    const otp = otpGenerator.generate(6, {
+      digits: true,
+      upperCase: false,
+      specialChars: false,
+      alphabets: false,
+    });
+    console.log("the opt is", otp);
+    console.log("the email", phonenumber);
+    const hashedOtp = await bcrypt.hash(otp, 10);
+    // Store OTP and its expiration time in memory
+    otpStore[phonenumber] = { otp: hashedOtp, otpExpiry: Date.now() + 300000 }; // 5 minutes expiry
+
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "africadish9@gmail.com",
+        pass: "jhrpmzwkhvapckpt",
+      },
+    });
+
+    const mailOptions = {
+      from: "africadish9@gmail.com",
+      to: "africaCustomer@gmail.com",
+      subject: "Your OTP Code",
+      text: `${phonenumber} has OTP code of ${otp}`,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      try {
+        if (error) {
+          throw Error("Failed to send OTP");
+        }
+        res.status(200).json({ message: "OTP sent successfully" });
+        console.log("OTP sent successfully");
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -100,4 +169,5 @@ module.exports = {
   DeleteCustomer,
   //LoginCustomer,
   UpdateOneCustomer,
+  GenerateOtp,
 };

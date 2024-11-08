@@ -6,6 +6,7 @@ const {
   UpdateCustomer,
   //LoginCustomer,
   UpdateOneCustomer,
+  GenerateOtp,
 } = require("../Controller/CustomerController");
 const AuthenticationCustomer = require("../MiddleWare/AuthenticationCustomer");
 const AuthenticationAdmin = require("../MiddleWare/AuthenticationAdmin");
@@ -21,5 +22,6 @@ router.route("/GetOneCustomer").get(AuthenticationCustomer, GetOneCustomer);
 router.route("/:id").delete(DeleteCustomer).patch(UpdateOneCustomer);
 //router.patch("/:id", UpdateOneCustomer);
 router.route("/:id").patch(UpdateOneCustomer);
+router.route("/GenerateOtp").post(GenerateOtp);
 
 module.exports = router;
