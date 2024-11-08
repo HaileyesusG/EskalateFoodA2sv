@@ -72,6 +72,9 @@
   "react-spinners": "^0.14.1",
   
     
+  "react-toastify": "^10.0.6",
+  
+    
   "socket.io-client": "^4.7.2",
   
     
