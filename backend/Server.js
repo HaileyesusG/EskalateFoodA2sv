@@ -118,6 +118,13 @@ io.on("connection", (socket) => {
     };
   });
 
+  socket.on("notSuccess", (msg) => {
+    io.emit("notSuccess", msg);
+    return () => {
+      socket.off("notSuccess");
+    };
+  });
+
   socket.on("Respon", (msg) => {
     io.emit("respon2", msg);
     return () => {

@@ -110,7 +110,19 @@ const SignUpC = ({ onConfirm, onCancel }) => {
       socket.off("isLoading12");
     };
   }, [socket, phonenumber]);
-
+  //
+  useEffect(() => {
+    socket.on("notSuccess", (msg) => {
+      const { PhoneNumber, error } = msg;
+      console.log("the email", phonenumber);
+      if (PhoneNumber == phonenumber) {
+        toastify(error);
+      }
+    });
+    return () => {
+      socket.off("notSuccess");
+    };
+  }, [socket, phonenumber]);
   return (
     <div>
       <div className="h-[300px] w-[90%] max-w-[500px] ml-[18px] mr-auto mt-10 md:ml-[220px] md:mt-40 absolute bg-white border-[1px] rounded-lg lg:ml-96">

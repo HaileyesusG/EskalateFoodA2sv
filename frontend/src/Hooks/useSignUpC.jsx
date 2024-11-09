@@ -27,6 +27,10 @@ export const useSignUpC = () => {
     if (!response.ok) {
       setIsLoading(false);
       setError(json.message);
+      const error = json.message;
+      const PhoneNumber = phonenumber;
+      const data = { PhoneNumber, error };
+      socket.emit("notSuccess", data);
     }
     if (response.ok) {
       setIsLoading(false);
