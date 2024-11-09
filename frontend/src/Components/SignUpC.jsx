@@ -181,7 +181,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
             </form>
           </div>
         ) : (
-          <div className="mt-24 sm:ml-24 ml-7">
+          <div className="mt-24 sm:ml-24 ml-8">
             <input
               type="text"
               value={otp}
