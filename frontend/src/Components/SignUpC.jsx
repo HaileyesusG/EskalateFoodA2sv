@@ -58,10 +58,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
     setValidPhoneNumber2(validPhoneNumber);
     if (!validPhoneNumber) return;
     await signupC(phonenumber, otp);
-    if (error) {
-      setLoading(false);
-      toastify(error); // Display error only when button is clicked
-    }
+
     //onConfirm();
   };
 
@@ -117,6 +114,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
       console.log("the email", phonenumber);
       if (PhoneNumber == phonenumber) {
         toastify(error);
+        setLoading(false);
       }
     });
     return () => {
@@ -183,7 +181,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
             </form>
           </div>
         ) : (
-          <div className="mt-24 sm:ml-24 ml-9">
+          <div className="mt-24 sm:ml-24 ml-7">
             <input
               type="text"
               value={otp}
