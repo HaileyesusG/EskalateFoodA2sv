@@ -163,7 +163,10 @@ const SignUpC = ({ onConfirm, onCancel }) => {
                 </button>
               </div>
               <div className="bg-red-500 mt-2 rounded-md text-white p-2 mx-4">
-                {!validPhoneNumber2 && toastify("PhoneNumber is invalid")}
+                {error && <div className="text-center">{error}</div>}
+                {!validPhoneNumber2 && (
+                  <p className="text-center">PhoneNumber is invalid.</p>
+                )}
               </div>
             </form>
           </div>
