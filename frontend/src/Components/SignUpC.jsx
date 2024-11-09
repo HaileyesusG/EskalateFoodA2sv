@@ -41,13 +41,13 @@ const SignUpC = ({ onConfirm, onCancel }) => {
 
   const toastify = (message) => {
     toast.error(message, {
-      position: "bottom-right",
+      position: "top-right",
       style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
     });
   };
   const toastify2 = (message) => {
     toast.success(message, {
-      position: "bottom-right",
+      position: "top-right",
       style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
     });
   };
@@ -56,7 +56,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
     e.preventDefault();
     setValidPhoneNumber2(validPhoneNumber);
     if (!validPhoneNumber) return;
-    await signupC(phonenumber);
+    await signupC(phonenumber, otp);
     if (error) {
       toastify(error); // Display error only when button is clicked
     }
@@ -163,7 +163,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
             </form>
           </div>
         ) : (
-          <div className="mt-24 sm:ml-24 ml-5">
+          <div className="mt-24 sm:ml-24 ml-14">
             <input
               type="text"
               value={otp}
