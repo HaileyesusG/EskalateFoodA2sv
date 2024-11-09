@@ -68,6 +68,11 @@ const SignUpC = ({ onConfirm, onCancel }) => {
   //Generate OTP
   const generateOtp = async (e) => {
     setLoading(true);
+    setValidPhoneNumber2(validPhoneNumber);
+    if (!validPhoneNumber) {
+      setLoading(false);
+      return;
+    }
     e.preventDefault();
     const response = await fetch(`${API_BASE_URL}/api/customer/GenerateOtp`, {
       method: "POST",
