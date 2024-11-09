@@ -67,13 +67,14 @@ const SignUpC = ({ onConfirm, onCancel }) => {
 
   //Generate OTP
   const generateOtp = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setValidPhoneNumber2(validPhoneNumber);
     if (!validPhoneNumber) {
       setLoading(false);
       return;
     }
-    e.preventDefault();
+
     const response = await fetch(`${API_BASE_URL}/api/customer/GenerateOtp`, {
       method: "POST",
       headers: {
@@ -162,10 +163,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
                 </button>
               </div>
               <div className="bg-red-500 mt-2 rounded-md text-white p-2 mx-4">
-                {error && <div className="text-center">{error}</div>}
-                {!validPhoneNumber2 && (
-                  <p className="text-center">PhoneNumber is invalid.</p>
-                )}
+                {!validPhoneNumber2 && toastify("PhoneNumber is invalid")}
               </div>
             </form>
           </div>
