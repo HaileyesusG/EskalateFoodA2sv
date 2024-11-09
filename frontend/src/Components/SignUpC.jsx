@@ -22,7 +22,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
     const { value } = event.target;
 
     // Trim leading and trailing spaces from the phone number
-    const trimmedValue = value.trim();
+    const trimmedValue = value.replace(/\s+/g, "");
 
     setValidPhoneNumber2(true);
     setPhonenumber(trimmedValue); // Store the trimmed phone number
