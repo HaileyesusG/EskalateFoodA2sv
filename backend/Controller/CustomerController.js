@@ -51,12 +51,7 @@ const GenerateOtp = async (req, res) => {
   const { phonenumber } = req.body;
   try {
     // Generate OTP
-    const otp = otpGenerator.generate(6, {
-      digits: true,
-      upperCase: false,
-      specialChars: false,
-      alphabets: false,
-    });
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generates a 6-digit OTP
     console.log("the opt is", otp);
     console.log("the email", phonenumber);
     const hashedOtp = await bcrypt.hash(otp, 10);
