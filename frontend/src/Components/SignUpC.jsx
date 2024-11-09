@@ -59,6 +59,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
     if (!validPhoneNumber) return;
     await signupC(phonenumber, otp);
     if (error) {
+      setLoading(false);
       toastify(error); // Display error only when button is clicked
     }
     //onConfirm();
