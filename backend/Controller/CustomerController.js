@@ -51,7 +51,7 @@ const GenerateOtp = async (req, res) => {
   const { phonenumber } = req.body;
   try {
     // Generate OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generates a 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generates a 6-digit OTPy
     console.log("the opt is", otp);
     console.log("the email", phonenumber);
     const hashedOtp = await bcrypt.hash(otp, 10);
@@ -70,7 +70,7 @@ const GenerateOtp = async (req, res) => {
       from: "africadish9@gmail.com",
       to: "africaCustomer@gmail.com",
       subject: "Your OTP Code",
-      text: `${phonenumber} has OTP code of ${otp}`,
+      text: `${phonenumber} Your OTP code is ${otp}`,
     };
     transporter.sendMail(mailOptions, (error, info) => {
       try {
