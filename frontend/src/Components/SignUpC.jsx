@@ -54,6 +54,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
 
   const handleSumit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setValidPhoneNumber2(validPhoneNumber);
     if (!validPhoneNumber) return;
     await signupC(phonenumber, otp);
@@ -163,7 +164,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
             </form>
           </div>
         ) : (
-          <div className="mt-24 sm:ml-24 ml-14">
+          <div className="mt-24 sm:ml-24 ml-9">
             <input
               type="text"
               value={otp}
