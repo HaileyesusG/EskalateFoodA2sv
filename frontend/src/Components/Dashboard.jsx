@@ -78,11 +78,23 @@ const Dashboard = () => {
       setError2("Geolocation is not supported by this browser.");
     }
   };
+  //kill booking
+
+  const killBooking = async () => {
+    const response2 = await fetch(
+      `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  };
   useEffect(() => {
     GPS();
     const interval = setInterval(() => {
       GPS();
-    }, 5 * 60 * 1000); // 5 minutes in milliseconds
+      killBooking();
+    }, 2 * 60 * 1000); // 2 minutes in milliseconds
 
     // Clean up the interval on component unmount
     return () => {

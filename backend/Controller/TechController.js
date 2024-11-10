@@ -3,7 +3,7 @@ const Customers = require("../Model/Customer");
 const Accepted = require("../Model/Accepted");
 const Technician = require("../Model/Technician");
 const io = require("socket.io-client");
-const backEndUrl = process.env.VITE_API_BASE_URL
+const backEndUrl = process.env.VITE_API_BASE_URL;
 const socket = io(backEndUrl);
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
@@ -149,126 +149,139 @@ const GetOneTech1 = async (req, res) => {
 const updateFinish = async (req, res) => {
   const { id } = req.params;
   const { work, departmentt } = req.body;
-  console.log("the id is is", id);
-  console.log("the work is", work);
-  console.log("the departmentt is", departmentt);
-  const UpdateB = await model
-    .findOne({
-      customer_id: work.myId,
-      Status: "accepted",
-    })
-    .sort({ createdAt: -1 });
-  let minperson = await Technician.findById(id);
-  if (minperson.status == "free" && minperson.status2 == "not") {
-    return;
-  }
-  const UpdateS = await model.findByIdAndUpdate(
-    { _id: UpdateB._id },
-    { Status: "completed" }
-  );
-  let minperson4 = await Technician.findById(id);
-  const numberOfworks = minperson4.numberOfworks + 1;
-  let deposit;
-  if (minperson4.department === "TV") {
-    minperson4;
-    deposit = minperson4.deposit - 200;
-  }
-  if (minperson4.department === "DISH") {
-    deposit = minperson4.deposit - 30;
-  }
-  const status = "free";
-  const status2 = "not";
-  const minperson45 = await Technician.findByIdAndUpdate(
-    { _id: minperson4._id },
-    { numberOfworks, deposit, status, status2 }
-  );
-  const Respon = await Technician.findById(id);
-  res.status(200).json(Respon);
-  let customer = await Customers.findById(work.myId);
+  try {
+    console.log("the id is is", id);
+    console.log("the work is", work);
+    console.log("the departmentt is", departmentt);
+    const UpdateB = await model
+      .findOne({
+        customer_id: work.myId,
+        Status: "accepted",
+      })
+      .sort({ createdAt: -1 });
+    if (UpdateB) {
+      let minperson = await Technician.findById(id);
+      if (minperson.status == "free" && minperson.status2 == "not") {
+        return;
+      }
+      const UpdateS = await model.findByIdAndUpdate(
+        { _id: UpdateB._id },
+        { Status: "completed" }
+      );
+      let minperson4 = await Technician.findById(id);
+      // const numberOfworks = minperson4.numberOfworks + 1;
+      // let deposit;
+      // if (minperson4.department === "TV") {
+      //   minperson4;
+      //   deposit = minperson4.deposit - 200;
+      // }
+      // if (minperson4.department === "DISH") {
+      //   deposit = minperson4.deposit - 30;
+      // }
+      const status = "free";
+      const status2 = "not";
+      const minperson45 = await Technician.findByIdAndUpdate(
+        { _id: id },
+        { status, status2 }
+      );
+      const Respon = await Technician.findById(id);
+      res.status(200).json(Respon);
+      let customer = await Customers.findById(work.myId);
 
-  if (customer) {
-    const Customer_firstname = customer.firstname || "";
-    const Customer_lastname = customer.lastname || "";
-    const Customer_id = customer._id || "";
-    const Technician_id = minperson45._id || "";
-    const Technician_firstname = minperson45.firstname || "";
-    const Technician_lastname = minperson45.lastname || "";
-    const Technician_email = minperson45.email || "";
-    const department = departmentt;
-    const Customer_phonenumber = customer.phonenumber || "";
-    const Customer_location = customer.location || "";
+      if (customer) {
+        const Customer_firstname = customer.firstname || "";
+        const Customer_lastname = customer.lastname || "";
+        const Customer_id = customer._id || "";
+        const Technician_id = minperson45._id || "";
+        const Technician_firstname = minperson45.firstname || "";
+        const Technician_lastname = minperson45.lastname || "";
+        const Technician_email = minperson45.email || "";
+        const department = departmentt;
+        const Customer_phonenumber = customer.phonenumber || "";
+        const Customer_location = customer.location || "";
 
-    const report = await Accepted.create({
-      Customer_id: Customer_id,
-      Customer_firstname: Customer_firstname,
-      Customer_lastname: Customer_lastname,
-      Technician_id: Technician_id,
-      Technician_firstname: Technician_firstname,
-      Technician_lastname: Technician_lastname,
-      Technician_email: Technician_email,
-      department: department,
-      Customer_phonenumber: Customer_phonenumber,
-      Customer_location: Customer_location,
-    });
-    let minperson48 = await Technician.findById(id);
-    const Department2 = minperson48.department;
-    if (Department2.includes("TV") || Department2.includes("FRIDGE")) {
-      if (minperson48.deposit <= 200) {
-        const tosend = await Accepted.find({
+        const report = await Accepted.create({
+          Customer_id: Customer_id,
+          Customer_firstname: Customer_firstname,
+          Customer_lastname: Customer_lastname,
           Technician_id: Technician_id,
-        })
-          .sort({ _id: -1 })
-          .limit(5);
+          Technician_firstname: Technician_firstname,
+          Technician_lastname: Technician_lastname,
+          Technician_email: Technician_email,
+          department: department,
+          Customer_phonenumber: Customer_phonenumber,
+          Customer_location: Customer_location,
+        });
+        let minperson48 = await Technician.findById(id);
+        const Department2 = minperson48.department;
+        if (Department2.includes("TV") || Department2.includes("FRIDGE")) {
+          if (minperson48.deposit <= 200) {
+            const tosend = await Accepted.find({
+              Technician_id: Technician_id,
+            })
+              .sort({ _id: -1 })
+              .limit(5);
 
-        socket.emit("warning", tosend);
+            socket.emit("warning", tosend);
+          }
+        }
+        if (Department2.includes("DISH")) {
+          if (minperson48.deposit <= 30) {
+            const tosend = await Accepted.find({ Technician_id: Technician_id })
+              .sort({ _id: -1 })
+              .limit(5);
+
+            socket.emit("warning", tosend);
+          }
+        }
+        if (Department2.includes("STOVE") && Department2.includes("TV")) {
+          if (minperson48.deposit <= 200) {
+            const tosend = await Accepted.find({ Technician_id: Technician_id })
+              .sort({ _id: -1 })
+              .limit(5);
+
+            socket.emit("warning", tosend);
+          }
+        }
+        if (Department2.includes("DISH") && Department2.includes("TV")) {
+          if (minperson48.deposit <= 200) {
+            const tosend = await Accepted.find({ Technician_id: Technician_id })
+              .sort({ _id: -1 })
+              .limit(5);
+
+            socket.emit("warning", tosend);
+          }
+        }
+        if (Department2.includes("STOVE") && Department2.includes("TV")) {
+          if (minperson48.deposit <= 200) {
+            const tosend = await Accepted.find({ Technician_id: Technician_id })
+              .sort({ _id: -1 })
+              .limit(5);
+
+            socket.emit("warning", tosend);
+          }
+        }
+
+        if (Department2.includes("STOVE") || Department2.includes("MITAD")) {
+          if (minperson48.deposit <= 100) {
+            const tosend = await Accepted.find({ Technician_id: Technician_id })
+              .sort({ _id: -1 })
+              .limit(5);
+
+            socket.emit("warning", tosend);
+          }
+        }
       }
+    } else {
+      const result = await Technician.updateMany(
+        { status2: "loading" },
+        { $set: { status2: "not" } }
+      );
+      b;
+      throw Error("Unexpected Server Error");
     }
-    if (Department2.includes("DISH")) {
-      if (minperson48.deposit <= 30) {
-        const tosend = await Accepted.find({ Technician_id: Technician_id })
-          .sort({ _id: -1 })
-          .limit(5);
-
-        socket.emit("warning", tosend);
-      }
-    }
-    if (Department2.includes("STOVE") && Department2.includes("TV")) {
-      if (minperson48.deposit <= 200) {
-        const tosend = await Accepted.find({ Technician_id: Technician_id })
-          .sort({ _id: -1 })
-          .limit(5);
-
-        socket.emit("warning", tosend);
-      }
-    }
-    if (Department2.includes("DISH") && Department2.includes("TV")) {
-      if (minperson48.deposit <= 200) {
-        const tosend = await Accepted.find({ Technician_id: Technician_id })
-          .sort({ _id: -1 })
-          .limit(5);
-
-        socket.emit("warning", tosend);
-      }
-    }
-    if (Department2.includes("STOVE") && Department2.includes("TV")) {
-      if (minperson48.deposit <= 200) {
-        const tosend = await Accepted.find({ Technician_id: Technician_id })
-          .sort({ _id: -1 })
-          .limit(5);
-
-        socket.emit("warning", tosend);
-      }
-    }
-
-    if (Department2.includes("STOVE") || Department2.includes("MITAD")) {
-      if (minperson48.deposit <= 100) {
-        const tosend = await Accepted.find({ Technician_id: Technician_id })
-          .sort({ _id: -1 })
-          .limit(5);
-
-        socket.emit("warning", tosend);
-      }
-    }
+  } catch (err) {
+    res.status(400).json({ message: err });
   }
 };
 //update one

@@ -3,7 +3,7 @@ const Technician = require("../Model/Technician");
 const Customers = require("../Model/Customer");
 const haversine = require("haversine-distance");
 const io = require("socket.io-client");
-const backEndUrl = process.env.VITE_API_BASE_URL
+const backEndUrl = process.env.VITE_API_BASE_URL;
 const socket = io(backEndUrl);
 const { Mutex } = require("async-mutex");
 const technicianMutex = new Mutex();
@@ -678,6 +678,15 @@ const beforeBooking = async (req, res) => {
   console.log("gebtenal");
   return;
 };
+//
+const killBooking = async (req, res) => {
+  const { id } = req.params;
+  const updateBook = await model.updateMany(
+    { customer_id: id, Status: "pending" },
+    { $set: { Status: "faild" } }
+  );
+  res.status(200).json(updateBook);
+};
 module.exports = {
   BookCreate,
   GetBook,
@@ -687,4 +696,5 @@ module.exports = {
   UpdateTechBook,
   updateBooking,
   beforeBooking,
+  killBooking,
 };

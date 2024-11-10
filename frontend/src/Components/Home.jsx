@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
-import { useUserContext } from "../Hooks/useUserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -29,6 +30,12 @@ const socket = io(API_BASE_URL);
 let array3 = [];
 let timeoutId = null;
 const Home = ({ user3 }) => {
+  const toastify = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
+    });
+  };
   const mapRef = useRef(null);
   const dispatch2 = useDispatch();
   const todo = useSelector((state) => state.tech.tech);
@@ -361,6 +368,9 @@ const Home = ({ user3 }) => {
           _id: _id,
         })
       );
+    } else {
+      const json = await response.json();
+      toastify(json.message);
     }
     setdisplay10("visible");
     const resp = await fetch(
@@ -752,6 +762,7 @@ const Home = ({ user3 }) => {
             />
             <h3>አድራሻዎትን </h3>
             <h3 className="ml-2">ያስተካክሉ</h3>
+            <ToastContainer />
           </div>
         </div>
         <div
