@@ -681,11 +681,15 @@ const beforeBooking = async (req, res) => {
 //
 const killBooking = async (req, res) => {
   const { id } = req.params;
-  const updateBook = await model.updateMany(
-    { customer_id: id, Status: "pending" },
-    { $set: { Status: "faild" } }
-  );
-  res.status(200).json(updateBook);
+  try {
+    const updateBook = await model.updateMany(
+      { customer_id: id, Status: "pending" },
+      { $set: { Status: "faild" } }
+    );
+    res.status(200).json(updateBook);
+  } catch (err) {
+    console.log("the unexpected error ", err);
+  }
 };
 module.exports = {
   BookCreate,
