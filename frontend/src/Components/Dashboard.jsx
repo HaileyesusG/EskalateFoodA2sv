@@ -81,6 +81,7 @@ const Dashboard = () => {
   //kill booking
 
   const killBooking = async () => {
+    console.log("in kill booking");
     const response2 = await fetch(
       `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
       {
