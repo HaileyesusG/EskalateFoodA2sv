@@ -88,7 +88,7 @@ const Dashboard = () => {
   };
   //kill booking
 
-  const killBooking = () => {
+  const killBooking = async () => {
     console.log("in kill booking");
     const storedCustomer = localStorage.getItem("customer");
     if (storedCustomer) {
@@ -100,6 +100,11 @@ const Dashboard = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
+      if (!response2.ok) {
+        const json = await response2.json();
+        toastify(json.message);
+        setIsLoading2(false);
+      }
     }
   };
   useEffect(() => {
@@ -459,21 +464,12 @@ const Dashboard = () => {
                 onChange={(e) => setProblem(e.target.value)}
                 className="xs:ml-2 mt-3 ml-4  sm:ml-14 w-72 sm:w-96 h-20 placeholder:font-semibold placeholder:text-[13px] border-2 border-gray-200 p-3"
               ></textarea>
-              {error == "No Internet Connection" ? (
+              {error && (
                 <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
-                  <div className="h-6 w-40 bg-red-600 rounded-full ml-11">
-                    {toastify(error)}
-                  </div>
+                  {toastify(error)}
                   <br />
                 </div>
-              ) : error == "No  Technician Found" ||
-                error == "NO Technician found" ? (
-                <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
-                  <div className="h-6 w-40 bg-red-600 rounded-full ml-11">
-                    {toastify(error)}
-                  </div>
-                </div>
-              ) : null}
+              )}
             </form>
           </div>
         </div>
