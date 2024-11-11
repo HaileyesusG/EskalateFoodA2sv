@@ -489,7 +489,7 @@ const Dashboard = () => {
         </div>
       )}
       {signup3 &&
-        (!signup2 || Customer !== "" ? (
+        (!signup2 || Customer !== ""||!isLoading2 ? (
           (!isButtonHidden || error) && (
             <button
               className="xs:ml-[120px] xs2:ml-[211px] bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[98px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
