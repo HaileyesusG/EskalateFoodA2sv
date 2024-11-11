@@ -106,6 +106,7 @@ const Dashboard = () => {
         if (!response2.ok) {
           const json = await response2.json();
           toastify(json.message);
+          console.log("the error ", json.message);
         }
       } catch (error) {
         // Handle network or other errors
