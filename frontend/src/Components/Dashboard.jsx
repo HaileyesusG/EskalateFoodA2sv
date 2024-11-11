@@ -29,6 +29,7 @@ import { ImLocation } from "react-icons/im";
 let array3 = [];
 const Dashboard = () => {
   const mapRef = useRef(null);
+  const intervalRef = useRef(null);
   const [typeOfProblem, setProblem] = useState("");
   const [department, setDepartment] = useState("");
   const [signup, setSignup] = useState(false);
@@ -111,12 +112,14 @@ const Dashboard = () => {
     GPS();
     const interval = setInterval(() => {
       GPS();
-      killBooking();
-    }, 2 * 60 * 1000); // 2 minutes in milliseconds
+    }, 3 * 60 * 1000); // 3 minutes in milliseconds
 
     // Clean up the interval on component unmount
     return () => {
       clearInterval(interval);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []);
 
@@ -235,10 +238,7 @@ const Dashboard = () => {
       setError("Error fetching suggestions.");
     }
   };
-  const red = useNavigate();
-  const handleOrder = () => {
-    red("/signupC");
-  };
+
   const handlesignup2 = () => {
     setSignup(!signup);
     setSignup2(!signup2);
@@ -265,12 +265,8 @@ const Dashboard = () => {
     socket.emit("cancel", IDS);
   };
   //
-  const handleCancelOrder2 = () => {
-    setIsOpen(false);
-    setIsLoading2(false);
-    setIsAccept(false);
-    setIsButtonHidden(false);
-  };
+
+  //booking
   const handleOrderNow = async (e) => {
     e.preventDefault();
     if (department == "") {
@@ -282,6 +278,15 @@ const Dashboard = () => {
     setIsOpen(true);
     setIsButtonHidden(true);
 
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    // Start a new interval
+    intervalRef.current = setInterval(() => {
+      killBooking();
+      clearInterval(intervalRef.current); // Clear the interval after killBooking is called
+      intervalRef.current = null; // Optional: Reset ref to prevent potential re-clear errors
+    }, 3 * 60 * 1000); // 3 minutes
     //return;
     socket.emit("loggedIn", customer);
     await CustomerForm(typeOfProblem, department);
