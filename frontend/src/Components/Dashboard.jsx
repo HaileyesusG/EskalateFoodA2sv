@@ -99,7 +99,7 @@ const Dashboard = () => {
     const interval = setInterval(() => {
       GPS();
       killBooking();
-    }, 1 * 60 * 1000); // 2 minutes in milliseconds
+    }, 2 * 60 * 1000); // 2 minutes in milliseconds
 
     // Clean up the interval on component unmount
     return () => {
