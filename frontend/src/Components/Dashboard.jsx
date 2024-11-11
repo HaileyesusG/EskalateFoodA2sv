@@ -82,19 +82,24 @@ const Dashboard = () => {
 
   const killBooking = () => {
     console.log("in kill booking");
-    const response2 = fetch(
-      `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const storedCustomer = localStorage.getItem("customer");
+    if (storedCustomer) {
+      const Customer = JSON.parse(storedCustomer);
+      const response2 = fetch(
+        `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
   };
   useEffect(() => {
     GPS();
     const interval = setInterval(() => {
       GPS();
-    }, 2 * 60 * 1000); // 2 minutes in milliseconds
+      killBooking();
+    }, 1 * 60 * 1000); // 2 minutes in milliseconds
 
     // Clean up the interval on component unmount
     return () => {
@@ -121,7 +126,6 @@ const Dashboard = () => {
             body: JSON.stringify({ location: location }),
           }
         );
-        killBooking();
       }
 
       setCustomer(Customer);
