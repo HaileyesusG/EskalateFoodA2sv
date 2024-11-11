@@ -94,17 +94,25 @@ const Dashboard = () => {
     const storedCustomer = localStorage.getItem("customer");
     if (storedCustomer) {
       const Customer = JSON.parse(storedCustomer);
-      const response2 = fetch(
-        `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+      try {
+        const response2 = await fetch(
+          `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
+          {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        if (!response2.ok) {
+          const json = await response2.json();
+          toastify(json.message);
         }
-      );
-      if (!response2.ok) {
-        const json = await response2.json();
-        toastify(json.message);
-        setIsLoading2(false);
+      } catch (error) {
+        // Handle network or other errors
+        console.error("Error occurred:", error);
+        toastify("An error occurred while processing your request.");
+      } finally {
+        setIsLoading2(false); // Ensure loading state is set to false
       }
     }
   };
