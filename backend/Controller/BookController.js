@@ -680,6 +680,7 @@ const beforeBooking = async (req, res) => {
 };
 //
 const killBooking = async (req, res) => {
+  console.log("i am in kill booking");
   const { id } = req.params;
   try {
     const updateBook = await model.updateMany(

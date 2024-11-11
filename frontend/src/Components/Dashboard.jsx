@@ -80,9 +80,9 @@ const Dashboard = () => {
   };
   //kill booking
 
-  const killBooking = async () => {
+  const killBooking = () => {
     console.log("in kill booking");
-    const response2 = await fetch(
+    const response2 = fetch(
       `${API_BASE_URL}/api/Book/killBooking/${Customer._id}`,
       {
         method: "PATCH",
@@ -94,7 +94,6 @@ const Dashboard = () => {
     GPS();
     const interval = setInterval(() => {
       GPS();
-      killBooking();
     }, 2 * 60 * 1000); // 2 minutes in milliseconds
 
     // Clean up the interval on component unmount
@@ -122,6 +121,7 @@ const Dashboard = () => {
             body: JSON.stringify({ location: location }),
           }
         );
+        killBooking();
       }
 
       setCustomer(Customer);
