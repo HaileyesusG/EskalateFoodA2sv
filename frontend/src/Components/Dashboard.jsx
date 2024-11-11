@@ -409,7 +409,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-      {((signup2 && !isButtonHidden) || error) && (
+      {((signup2 && !isButtonHidden) || error || !isLoading2) && (
         <div className="xs:ml-[70px] xs2:ml-40 absolute mt-[320px] ml-[44px] sm:ml-[230px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl md:ml-[380px]">
           <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (

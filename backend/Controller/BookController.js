@@ -689,7 +689,7 @@ const killBooking = async (req, res) => {
     );
     if (updateBook) throw Error("NO Technician found");
   } catch (err) {
-    res.status(400).json({ message: err });
+    res.status(400).json({ message: err.message });
   }
 };
 module.exports = {

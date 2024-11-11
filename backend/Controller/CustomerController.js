@@ -41,7 +41,7 @@ const CustomerCreate = async (req, res) => {
     console.log("token", token);
     res.status(200).json({ _id, phone, token });
   } catch (err) {
-    console.error("the error", err);
+    console.log("the error", err);
     res.status(400).json({ message: err.message });
   }
 };
