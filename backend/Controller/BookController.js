@@ -687,9 +687,9 @@ const killBooking = async (req, res) => {
       { customer_id: id, Status: "pending" },
       { $set: { Status: "faild" } }
     );
-    res.status(200).json(updateBook);
+    throw Error("NO Technician found");
   } catch (err) {
-    console.log("the unexpected error ", err);
+    res.status(400).json({ message: err });
   }
 };
 module.exports = {

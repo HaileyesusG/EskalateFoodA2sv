@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FaAddressBook } from "react-icons/fa";
 import { IoPersonAdd } from "react-icons/io5";
 import { useUserContextC } from "../Hooks/useUserContextC";
@@ -52,6 +54,12 @@ const Dashboard = () => {
   const [techEmail, setTechEmail] = useState("");
   const [_id, setId] = useState(null);
   const [phonenumber, setPhone] = useState(null);
+  const toastify = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
+    });
+  };
   const GPS = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -261,7 +269,8 @@ const Dashboard = () => {
   const handleOrderNow = async (e) => {
     e.preventDefault();
     if (department == "") {
-      console.log("please select dep");
+      console.log();
+      toastify("Please Select Department");
       return;
     }
     setIsLoading2(true);
@@ -453,7 +462,7 @@ const Dashboard = () => {
               {error == "No Internet Connection" ? (
                 <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
                   <div className="h-6 w-40 bg-red-600 rounded-full ml-11">
-                    <div className="ml-5 mt-1 absolute">{error}</div>
+                    {toastify(error)}
                   </div>
                   <br />
                 </div>
@@ -461,7 +470,7 @@ const Dashboard = () => {
                 error == "NO Technician found" ? (
                 <div className="text-white absolute mt-[60px] sm:ml-28 ml-8">
                   <div className="h-6 w-40 bg-red-600 rounded-full ml-11">
-                    <div className="ml-5 mt-1 absolute">{error}</div>
+                    {toastify(error)}
                   </div>
                 </div>
               ) : null}
@@ -522,16 +531,10 @@ const Dashboard = () => {
       {(isLoading2 || isAccept) && (
         <div className="flex ml-28 sm:ml-0 ">
           <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px]  sm:ml-[520px]"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px]  sm:ml-[530px] ml-10"
             onClick={handleCancelOrder}
           >
             Cancel Order
-          </button>
-          <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px] ml-36 sm:ml-[720px]"
-            onClick={handleCancelOrder2}
-          >
-            Close
           </button>
         </div>
       )}
@@ -555,6 +558,7 @@ const Dashboard = () => {
 
       {/* Sign Up and Loader Modals */}
       {/* Continue adapting the rest of the code similarly... */}
+      <ToastContainer />
     </div>
   );
 };
