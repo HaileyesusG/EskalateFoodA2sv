@@ -9,7 +9,7 @@ import { io } from "socket.io-client";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const socket = io(API_BASE_URL);
 import hiloe5 from "../assets/bg1.avif";
-const logOutC = ({ onConfirm, onCancel, user }) => {
+const LogOutC = ({ onConfirm, onCancel, user }) => {
   const [phonenumber, setPhonenumber] = useState("");
 
   const toastify = (message) => {
@@ -92,4 +92,4 @@ const logOutC = ({ onConfirm, onCancel, user }) => {
     </div>
   );
 };
-export default logOutC;
+export default LogOutC;

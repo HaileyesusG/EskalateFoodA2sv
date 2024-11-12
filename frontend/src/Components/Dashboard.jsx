@@ -20,7 +20,7 @@ let socket = io(API_BASE_URL);
 import axios from "axios";
 import { FaUser } from "react-icons/fa6";
 import SignUpC from "./SignUpC";
-import logOutC from "./logOutC";
+import LogOutC from "./logOutC";
 import { IoMdClose } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { GiGasStove } from "react-icons/gi";
@@ -255,6 +255,7 @@ const Dashboard = () => {
     setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
+    setIsLoading2(false);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
     setRefereshKey((prev) => prev + 1);
@@ -268,8 +269,9 @@ const Dashboard = () => {
   };
   const handlesignup3 = () => {
     setSignup4(!signup4);
-    setSignup2(!signup2);
-    setSignup3(!signup3);
+    setSignup2(false);
+    setSignup3(false);
+    setIsLoading2(false);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -429,7 +431,7 @@ const Dashboard = () => {
               className="absolute ml-[1290px] text-white text-2xl mt-10"
               onClick={handlesignup}
             />
-            <logOutC
+            <LogOutC
               onConfirm={handlesignup3}
               onCancel={handlesignup}
               user={Customer}
@@ -579,7 +581,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className=" absolute ml-3  mt-[850px] sm:mt-[750px] w-full sm:w-full h-80 sm:ml-[80px] rounded-xl lg:ml-28 lg:w-[1000px] lg:h-[500px]  md:h-[400px] overflow-hidden md:ml-32 md:w-96 "
+        className=" absolute ml-3  mt-[850px] sm:mt-[750px] w-full sm:w-full h-80 sm:ml-[80px] rounded-xl lg:ml-28 lg:w-[1000px] lg:h-[500px]  md:h-[400px] overflow-hidden md:ml-56 md:w-full "
       />
       <div className="absolute hidden">
         <button onClick={featcher}>
