@@ -35,6 +35,7 @@ const Dashboard = () => {
   const [signup, setSignup] = useState(false);
   const [signup2, setSignup2] = useState(true);
   const [signup3, setSignup3] = useState(true);
+  const [signup4, setSignup4] = useState(false);
   const [refereshKey, setRefereshKey] = useState(0);
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -250,6 +251,7 @@ const Dashboard = () => {
 
   const handlesignup2 = () => {
     setSignup(!signup);
+    setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
     const myDiv2 = document.getElementById("map");
@@ -257,6 +259,14 @@ const Dashboard = () => {
     setRefereshKey((prev) => prev + 1);
   };
   const handlesignup = () => {
+    setSignup(!signup);
+    setSignup4(!signup4);
+    setSignup2(!signup2);
+    setSignup3(!signup3);
+    const myDiv2 = document.getElementById("map");
+    myDiv2.classList.toggle("hidden");
+  };
+  const handlesignup3 = () => {
     setSignup(!signup);
     setSignup2(!signup2);
     setSignup3(!signup3);
@@ -384,7 +394,10 @@ const Dashboard = () => {
         </h2>
         <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-[340px] mt-[-40px] sm:mt-[130px] md:ml-[750px]">
           {Customer ? (
-            <FaUser className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2" />
+            <FaUser
+              className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2 cursor-pointer"
+              onClick={handlesignup3}
+            />
           ) : (
             <IoPersonAdd
               className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2 cursor-pointer"
@@ -406,6 +419,17 @@ const Dashboard = () => {
               onClick={handlesignup}
             />
             <SignUpC onConfirm={handlesignup2} onCancel={handlesignup} />
+          </div>
+        </div>
+      )}
+      {signup4 && (
+        <div className="h-screen w-screen bg-black bg-opacity-80 backdrop-filter backdrop-blur-none">
+          <div className="cursor-pointer">
+            <IoMdClose
+              className="absolute ml-[1290px] text-white text-2xl mt-10"
+              onClick={handlesignup}
+            />
+            <logOutC onConfirm={handlesignup2} onCancel={handlesignup} />
           </div>
         </div>
       )}
@@ -492,7 +516,7 @@ const Dashboard = () => {
         (!signup2 || Customer !== "" ? (
           (!isButtonHidden || error || !isLoading2) && (
             <button
-              className="xs:ml-[120px] xs2:ml-[211px] bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[98px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
+              className=" bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[101px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
               onClick={handleOrderNow}
             >
               <div className="flex justify-center items-center ml-[30px]">
@@ -503,7 +527,7 @@ const Dashboard = () => {
           )
         ) : (
           <button
-            className="bg-yellow-400 hover:bg-yellow-300 h-[48px] w-80 sm:w-96 border-2 rounded-3xl font-semibold transition delay-200 mt-[760px] absolute flex ml-10 sm:mt-[685px] sm:ml-[435px]"
+            className="bg-yellow-400 hover:bg-yellow-300 h-[48px] w-80 sm:w-96 border-2 rounded-3xl font-semibold transition delay-200 mt-[760px] absolute flex ml-12 sm:mt-[685px] sm:ml-[435px]"
             onClick={handlesignup}
           >
             <div className="flex justify-center items-center ml-[45px] sm:ml-[70px]">
