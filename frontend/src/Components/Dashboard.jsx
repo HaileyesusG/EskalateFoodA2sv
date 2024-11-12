@@ -578,11 +578,11 @@ const Dashboard = () => {
           </button>
         </div>
       )}
-      <div
+      {/* <div
         id="map"
         ref={mapRef}
         className=" absolute ml-3  mt-[850px] sm:mt-[750px] w-full sm:w-full h-80 sm:ml-[80px] rounded-xl lg:ml-28 lg:w-[1000px] lg:h-[500px]  md:h-[400px] overflow-hidden md:ml-56 md:w-full "
-      />
+      /> */}
       <div className="absolute hidden">
         <button onClick={featcher}>
           <h1>Hiso</h1>
