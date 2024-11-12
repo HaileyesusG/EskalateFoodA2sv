@@ -20,6 +20,7 @@ let socket = io(API_BASE_URL);
 import axios from "axios";
 import { FaUser } from "react-icons/fa6";
 import SignUpC from "./SignUpC";
+import logOutC from "./logOutC";
 import { IoMdClose } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { GiGasStove } from "react-icons/gi";
