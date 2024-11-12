@@ -268,6 +268,7 @@ const Dashboard = () => {
   };
   const handlesignup3 = () => {
     setSignup(!signup);
+    setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
     const myDiv2 = document.getElementById("map");
@@ -429,7 +430,11 @@ const Dashboard = () => {
               className="absolute ml-[1290px] text-white text-2xl mt-10"
               onClick={handlesignup}
             />
-            <logOutC onConfirm={handlesignup2} onCancel={handlesignup} />
+            <logOutC
+              onConfirm={handlesignup3}
+              onCancel={handlesignup}
+              user={Customer}
+            />
           </div>
         </div>
       )}
