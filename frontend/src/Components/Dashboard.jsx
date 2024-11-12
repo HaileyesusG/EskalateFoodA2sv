@@ -551,7 +551,7 @@ const Dashboard = () => {
       <div
         id="map"
         ref={mapRef}
-        className=" absolute   mt-[850px] sm:mt-[750px] w-full sm:w-full h-80 sm:ml-[80px] rounded-xl lg:ml-28 lg:w-[1000px] lg:h-[500px]  md:h-[700px] overflow-hidden "
+        className=" absolute ml-3  mt-[850px] sm:mt-[750px] w-full sm:w-full h-80 sm:ml-[80px] rounded-xl lg:ml-28 lg:w-[1000px] lg:h-[500px]  md:h-[600px] overflow-hidden md:ml-28 "
       />
       <div className="absolute hidden">
         <button onClick={featcher}>
