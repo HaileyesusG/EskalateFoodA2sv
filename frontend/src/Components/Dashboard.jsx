@@ -522,7 +522,7 @@ const Dashboard = () => {
         (!signup2 || Customer !== "" ? (
           (!isButtonHidden || error || !isLoading2) && (
             <button
-              className=" bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[101px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
+              className=" bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[103px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
               onClick={handleOrderNow}
             >
               <div className="flex justify-center items-center ml-[30px]">
