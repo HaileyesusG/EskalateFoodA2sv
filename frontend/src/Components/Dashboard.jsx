@@ -261,14 +261,12 @@ const Dashboard = () => {
   };
   const handlesignup = () => {
     setSignup(!signup);
-    setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
   const handlesignup3 = () => {
-    setSignup(!signup);
     setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
