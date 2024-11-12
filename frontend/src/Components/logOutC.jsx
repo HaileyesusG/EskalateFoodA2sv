@@ -28,7 +28,6 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
   //logOut
   const logOut = (e) => {
     e.preventDefault();
-    setLoading(true);
     localStorage.removeItem("customer");
     onConfirm();
     red("/dashboard");
@@ -48,19 +47,7 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
     };
   }, [socket, phonenumber]);
   //
-  useEffect(() => {
-    socket.on("notSuccess", (msg) => {
-      const { PhoneNumber, error } = msg;
-      console.log("the email", phonenumber);
-      if (PhoneNumber == phonenumber) {
-        toastify(error);
-        setLoading(false);
-      }
-    });
-    return () => {
-      socket.off("notSuccess");
-    };
-  }, [socket, phonenumber]);
+
   return (
     <div>
       <div className="h-[300px] w-[90%] max-w-[500px] ml-[18px] mr-auto mt-10 md:ml-[220px] md:mt-40 absolute bg-white border-[1px] rounded-lg lg:ml-96">
@@ -71,7 +58,7 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
             <div className="flex justify-center items-center space-y-3 flex-col">
               <div className="flex flex-col space-y-5">
                 <div className="flex relative">
-                  <strong>{user.phonenumber}</strong>
+                  <strong>{user.phone}</strong>
                 </div>
               </div>
             </div>
