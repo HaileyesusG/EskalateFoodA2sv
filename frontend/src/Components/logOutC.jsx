@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSignUpC } from "../Hooks/useSignUpC";
+import { useUserContextC } from "../Hooks/useUserContextC";
 import { AiFillPhone } from "react-icons/ai";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,7 +11,7 @@ const socket = io(API_BASE_URL);
 import hiloe5 from "../assets/bg1.avif";
 const LogOutC = ({ onConfirm, onCancel, user }) => {
   const [phonenumber, setPhonenumber] = useState("");
-
+  const { customer, dispatch2 } = useUserContextC();
   const toastify = (message) => {
     toast.error(message, {
       position: "top-right",
@@ -29,6 +29,7 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
   const logOut = (e) => {
     e.preventDefault();
     localStorage.removeItem("customer");
+    dispatch2({ type: "LOGOUT", payload: [] });
     onConfirm();
     red("/dashboard");
   };

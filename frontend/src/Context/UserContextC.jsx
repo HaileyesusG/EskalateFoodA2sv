@@ -6,7 +6,7 @@ export const userReducer = (state, action) => {
     case "LOGIN":
       return { ...state, customer: [...state.customer, action.payload] };
     case "LOGOUT":
-      return { customer: null };
+      return { customer: [] };
     default:
       return state;
   }
