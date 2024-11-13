@@ -273,6 +273,8 @@ const Dashboard = () => {
     setSignup4(false);
     setSignup3(true);
     setIsLoading2(false);
+    const myDiv2 = document.getElementById("map");
+    myDiv2.classList.toggle("hidden");
   };
   const handlesignup3 = () => {
     setSignup4(!signup4);
@@ -402,7 +404,7 @@ const Dashboard = () => {
           Africa Customer Service
         </h2>
         <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-[340px] mt-[-40px] sm:mt-[130px] md:ml-[750px]">
-          {Customer && customer ? (
+          {Customer && customer.length == 0 ? (
             <FaUser
               className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2 cursor-pointer"
               onClick={handlesignup3}
