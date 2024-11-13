@@ -267,6 +267,14 @@ const Dashboard = () => {
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
+  const handlesignup4 = () => {
+    setSignup(flase);
+    setSignup2(false);
+    setSignup3(true);
+    setIsLoading2(false);
+    const myDiv2 = document.getElementById("map");
+    myDiv2.classList.toggle("hidden");
+  };
   const handlesignup3 = () => {
     setSignup4(!signup4);
     setSignup2(!signup2);
@@ -433,7 +441,7 @@ const Dashboard = () => {
             />
             <LogOutC
               onConfirm={handlesignup3}
-              onCancel={handlesignup}
+              onCancel={handlesignup4}
               user={Customer}
             />
           </div>
