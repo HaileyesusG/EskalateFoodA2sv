@@ -268,7 +268,6 @@ const Dashboard = () => {
     myDiv2.classList.toggle("hidden");
   };
   const handlesignup4 = (e) => {
-    e.preventDefault();
     setSignup(false);
     setSignup2(false);
     setSignup3(true);
