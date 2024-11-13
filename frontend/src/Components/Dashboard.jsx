@@ -252,7 +252,6 @@ const Dashboard = () => {
 
   const handlesignup2 = () => {
     setSignup(!signup);
-    setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
     setIsLoading2(false);
