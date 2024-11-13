@@ -160,7 +160,7 @@ const Dashboard = () => {
       customer = customer[0];
       console.log("not found2U", customer);
     }
-  }, [location, refereshKey]);
+  }, [location, refereshKey, customer]);
 
   const token = customer ? "Bearer " + customer.token : "";
 
@@ -401,7 +401,7 @@ const Dashboard = () => {
           Africa Customer Service
         </h2>
         <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-[340px] mt-[-40px] sm:mt-[130px] md:ml-[750px]">
-          {Customer && customer ? (
+          {Customer ? (
             <FaUser
               className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2 cursor-pointer"
               onClick={handlesignup3}
