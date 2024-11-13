@@ -262,7 +262,7 @@ const Dashboard = () => {
     setRefereshKey((prev) => prev + 1);
   };
   const handlesignup = () => {
-    setSignup(!signup);
+    setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
     setIsLoading2(false);
@@ -446,7 +446,7 @@ const Dashboard = () => {
               onClick={handlesignup}
             />
             <LogOutC
-              onConfirm={handlesignup3}
+              onConfirm={handlesignup2}
               onCancel={handlesignup4}
               user={Customer}
             />
