@@ -262,8 +262,9 @@ const Dashboard = () => {
   };
   const handlesignup = () => {
     setSignup(!signup);
-    setSignup2(!signup2);
+    setSignup2(false);
     setSignup3(!signup3);
+    setIsLoading2(false);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
