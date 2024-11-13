@@ -268,12 +268,10 @@ const Dashboard = () => {
     myDiv2.classList.toggle("hidden");
   };
   const handlesignup4 = () => {
-    setSignup(flase);
+    setSignup(false);
     setSignup2(false);
     setSignup3(true);
     setIsLoading2(false);
-    const myDiv2 = document.getElementById("map");
-    myDiv2.classList.toggle("hidden");
   };
   const handlesignup3 = () => {
     setSignup4(!signup4);
