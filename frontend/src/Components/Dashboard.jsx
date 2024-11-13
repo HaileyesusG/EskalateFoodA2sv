@@ -254,7 +254,7 @@ const Dashboard = () => {
     setSignup(!signup);
     setSignup2(!signup2);
     setSignup3(!signup3);
-    setIsLoading2(false);
+    setIsLoading2(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
     setRefereshKey((prev) => prev + 1);
@@ -263,7 +263,7 @@ const Dashboard = () => {
     setSignup(!signup);
     setSignup2(!signup2);
     setSignup3(!signup3);
-    setIsLoading2(false);
+    setIsLoading2(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -272,7 +272,7 @@ const Dashboard = () => {
     setSignup2(false);
     setSignup4(false);
     setSignup3(true);
-    setIsLoading2(false);
+    setIsLoading2(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -280,7 +280,7 @@ const Dashboard = () => {
     setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(false);
-    setIsLoading2(false);
+    setIsLoading2(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -404,7 +404,7 @@ const Dashboard = () => {
           Africa Customer Service
         </h2>
         <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-[340px] mt-[-40px] sm:mt-[130px] md:ml-[750px]">
-          {Customer && customer.length == 0 ? (
+          {Customer && customer.length > 0 ? (
             <FaUser
               className="text-[16px] sm:text-[20px] ml-2 sm:ml-3 mt-2 cursor-pointer"
               onClick={handlesignup3}

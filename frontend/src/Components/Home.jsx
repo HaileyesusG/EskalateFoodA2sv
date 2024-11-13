@@ -593,7 +593,7 @@ const Home = ({ user3 }) => {
           id="map"
           ref={mapRef}
           className={
-            "  absolute   mt-[50px] sm:mt-[150px] w-full sm:w-[580px] h-[500px] sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
+            "  absolute   mt-[50px] sm:mt-[150px] w-full sm:w-[580px] h-[700px] sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
             disp6
           }
         />
