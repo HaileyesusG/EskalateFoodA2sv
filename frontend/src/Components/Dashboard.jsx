@@ -255,6 +255,7 @@ const Dashboard = () => {
     setSignup(!signup);
     setSignup2(!signup2);
     setIsLoading2(false);
+    setSignup3(!signup3);
     setIsLoading3(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
@@ -274,6 +275,7 @@ const Dashboard = () => {
     setSignup2(false);
     setSignup4(false);
     setIsLoading2(false);
+    setSignup3(!signup3);
     setIsLoading3(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
