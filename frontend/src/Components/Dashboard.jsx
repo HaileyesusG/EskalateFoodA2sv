@@ -262,7 +262,7 @@ const Dashboard = () => {
     setRefereshKey((prev) => prev + 1);
   };
   const handlesignup = () => {
-    setSignup4(!signup4);
+    setSignup(!signup);
     setSignup2(!signup2);
     setSignup3(!signup3);
     setIsLoading2(false);
@@ -281,7 +281,6 @@ const Dashboard = () => {
     myDiv2.classList.toggle("hidden");
   };
   const handlesignup3 = () => {
-    setSignup4(!signup4);
     setSignup2(!signup2);
     setSignup3(!signup3);
     setIsLoading2(false);
@@ -446,7 +445,7 @@ const Dashboard = () => {
               onClick={handlesignup}
             />
             <LogOutC
-              onConfirm={handlesignup2}
+              onConfirm={handlesignup3}
               onCancel={handlesignup4}
               user={Customer}
             />
@@ -533,7 +532,7 @@ const Dashboard = () => {
         </div>
       )}
       {signup3 &&
-        (!signup2 || Customer !== "" ? (
+        (!signup2 || (Customer && customer.length > 0) ? (
           (!isButtonHidden || error || !isLoading2) && (
             <button
               className=" bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[103px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
