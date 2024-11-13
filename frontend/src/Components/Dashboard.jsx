@@ -54,6 +54,7 @@ const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isButtonHidden, setIsButtonHidden] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
+  const [isLoading3, setIsLoading3] = useState(true);
   const [techEmail, setTechEmail] = useState("");
   const [_id, setId] = useState(null);
   const [phonenumber, setPhone] = useState(null);
@@ -253,8 +254,8 @@ const Dashboard = () => {
   const handlesignup2 = () => {
     setSignup(!signup);
     setSignup2(!signup2);
-    setSignup3(!signup3);
-    setIsLoading2(true);
+    setIsLoading2(false);
+    setIsLoading3(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
     setRefereshKey((prev) => prev + 1);
@@ -263,7 +264,8 @@ const Dashboard = () => {
     setSignup(!signup);
     setSignup2(!signup2);
     setSignup3(!signup3);
-    setIsLoading2(true);
+    setIsLoading2(false);
+    setIsLoading3(false);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -271,16 +273,17 @@ const Dashboard = () => {
     setSignup(false);
     setSignup2(false);
     setSignup4(false);
-    setSignup3(true);
-    setIsLoading2(true);
+    setIsLoading2(false);
+    setIsLoading3(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
   const handlesignup3 = () => {
     setSignup4(!signup4);
     setSignup2(!signup2);
-    setSignup3(false);
-    setIsLoading2(true);
+    setSignup3(!signup3);
+    setIsLoading2(false);
+    setIsLoading3(false);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -448,7 +451,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-      {((signup2 && !isButtonHidden) || error || !isLoading2) && (
+      {((signup2 && !isButtonHidden) || error || !isLoading2) && isLoading3 && (
         <div className="  absolute mt-[320px] ml-[53px] sm:ml-[230px] bg-opacity-50 backdrop-filter backdrop-blur-lg text-[10px] font-bold rounded-2xl md:ml-[380px]">
           <div className="flex flex-wrap justify-center w-[300px] sm:w-[480px]">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((divIndex) => (
