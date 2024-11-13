@@ -262,7 +262,7 @@ const Dashboard = () => {
   };
   const handlesignup = () => {
     setSignup(!signup);
-    setSignup2(false);
+    setSignup2(!signup2);
     setSignup3(!signup3);
     setIsLoading2(false);
     const myDiv2 = document.getElementById("map");
@@ -270,7 +270,7 @@ const Dashboard = () => {
   };
   const handlesignup3 = () => {
     setSignup4(!signup4);
-    setSignup2(false);
+    setSignup2(!signup2);
     setSignup3(false);
     setIsLoading2(false);
     const myDiv2 = document.getElementById("map");
