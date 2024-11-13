@@ -267,7 +267,8 @@ const Dashboard = () => {
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
-  const handlesignup4 = () => {
+  const handlesignup4 = (e) => {
+    e.preventDefault();
     setSignup(false);
     setSignup2(false);
     setSignup3(true);

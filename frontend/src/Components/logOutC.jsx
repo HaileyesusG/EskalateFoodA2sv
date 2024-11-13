@@ -27,7 +27,6 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
 
   //logOut
   const logOut = (e) => {
-    e.preventDefault();
     localStorage.removeItem("customer");
     dispatch2({ type: "LOGOUT", payload: [] });
     onConfirm();
