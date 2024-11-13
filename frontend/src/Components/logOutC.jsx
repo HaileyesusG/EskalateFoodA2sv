@@ -63,18 +63,17 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
               </div>
             </div>
             <div className="flex justify-center mt-8 space-x-4">
-              <button className="h-[48px] w-24 border-2 bg-green-500 hover:bg-green-400 rounded-md text-white font-serif transition delay-200 text-[15px]" onClick={}>
+              <button className="h-[48px] w-24 border-2 bg-green-500 hover:bg-green-400 rounded-md text-white font-serif transition delay-200 text-[15px]">
                 LogOut
               </button>
-              
             </div>
           </form>
           <button
-                className="h-[48px] w-24 border-2 bg-red-500 hover:bg-red-400 rounded-md text-white font-serif transition delay-200 text-[15px]"
-                onClick={onCancel}
-              >
-                Cancel
-              </button>
+            className="h-[48px] w-24 border-2 bg-red-500 hover:bg-red-400 rounded-md text-white font-serif transition delay-200 text-[15px]"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
