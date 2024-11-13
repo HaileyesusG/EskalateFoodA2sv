@@ -26,9 +26,9 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
   };
 
   //logOut
-  const logOut = (e) => {
+  const logOut = () => {
     localStorage.removeItem("customer");
-    dispatch2({ type: "LOGOUT", payload: [] });
+    dispatch2({ type: "LOGOUT" });
     onConfirm();
     red("/dashboard");
   };
@@ -52,7 +52,7 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
     <div>
       <div className="h-[300px] w-[90%] max-w-[500px] ml-[18px] mr-auto mt-10 md:ml-[220px] md:mt-40 absolute bg-white border-[1px] rounded-lg lg:ml-96">
         <div className="absolute inset-0">
-          <form onSubmit={logOut} className="to-blue-100">
+          <div className="to-blue-100">
             <div className="flex flex-col justify-center items-center mb-6 mt-8"></div>
 
             <div className="flex justify-center items-center space-y-3 flex-col">
@@ -62,18 +62,21 @@ const LogOutC = ({ onConfirm, onCancel, user }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-8 space-x-4">
-              <button className="h-[48px] w-24 border-2 bg-green-500 hover:bg-green-400 rounded-md text-white font-serif transition delay-200 text-[15px]">
-                LogOut
-              </button>
-            </div>
-          </form>
-          <button
-            className="h-[48px] w-24 border-2 bg-red-500 hover:bg-red-400 rounded-md text-white font-serif transition delay-200 text-[15px]"
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
+          </div>
+          <div className="flex justify-center mt-8 space-x-4">
+            <button
+              className="h-[48px] w-24 border-2 bg-green-500 hover:bg-green-400 rounded-md text-white font-serif transition delay-200 text-[15px]"
+              onClick={logOut}
+            >
+              LogOut
+            </button>
+            <button
+              className="h-[48px] w-24 border-2 bg-red-500 hover:bg-red-400 rounded-md text-white font-serif transition delay-200 text-[15px]"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
