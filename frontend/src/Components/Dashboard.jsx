@@ -286,6 +286,7 @@ const Dashboard = () => {
     setSignup4(!signup4);
     setIsLoading2(false);
     setIsLoading3(false);
+    setIsLoading3(true);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -434,7 +435,7 @@ const Dashboard = () => {
               className="absolute ml-[1290px] text-white text-2xl mt-10"
               onClick={handlesignup}
             />
-            <SignUpC onConfirm={handlesignup2} onCancel={handlesignup} />
+            <SignUpC onConfirm={handlesignup2} onCancel={handlesignup2} />
           </div>
         </div>
       )}
@@ -533,7 +534,7 @@ const Dashboard = () => {
         </div>
       )}
       {signup3 &&
-        (!signup2 || (Customer && customer.length > 0) ? (
+        (Customer && customer.length > 0 ? (
           (!isButtonHidden || error || !isLoading2) && (
             <button
               className=" bg-green-500 hover:bg-green-400 text-white h-[48px] w-48 border-2 rounded-3xl font-semibold transition delay-200 absolute mt-[760px] flex ml-[103px] sm:mt-[680px] md:ml-[530px] sm:ml-[370px]"
