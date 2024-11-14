@@ -1,9 +1,5 @@
 const jwt = require("jsonwebtoken");
 const Customer = require("../Model/Customer");
-const io = require("socket.io-client");
-const socket = io("http://localhost:5001");
-const { Server } = require("socket.io");
-
 const AuthenticationCustomer = async (req, res, next) => {
   //verify
   const { authorization } = req.headers;

@@ -163,8 +163,6 @@ const Dashboard = () => {
     }
   }, [location, refereshKey]);
 
-  const token = customer ? "Bearer " + customer.token : "";
-
   let [json, setJson] = useState([]);
 
   const handleDivClick = (divIndex) => {
