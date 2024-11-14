@@ -286,6 +286,8 @@ const Dashboard = () => {
     setSignup4(!signup4);
     setIsLoading2(false);
     setIsLoading3(true);
+    const myDiv2 = document.getElementById("map");
+    myDiv2.classList.toggle("hidden");
   };
 
   const handlesignup3 = () => {
