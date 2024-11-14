@@ -68,9 +68,6 @@ io.on("connection", (socket) => {
   isFirstConnection = false;
   socket.on("newUser", (email) => {
     addNewUser(email);
-    return () => {
-      socket.off("newUser");
-    };
   });
   socket.on("booking1", (msg) => {
     const { db, latestMember } = msg;
