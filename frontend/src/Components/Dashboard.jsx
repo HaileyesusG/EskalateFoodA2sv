@@ -280,13 +280,21 @@ const Dashboard = () => {
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
+  const handlesignup5 = () => {
+    setSignup2(!signup2);
+    setSignup3(!signup3);
+    setSignup4(!signup4);
+    setIsLoading2(false);
+    setIsLoading3(true);
+  };
+
   const handlesignup3 = () => {
     setSignup2(!signup2);
     setSignup3(!signup3);
     setSignup4(!signup4);
     setIsLoading2(false);
     setIsLoading3(false);
-    setIsLoading3(true);
+    setIsLoading3(false);
     const myDiv2 = document.getElementById("map");
     myDiv2.classList.toggle("hidden");
   };
@@ -447,7 +455,7 @@ const Dashboard = () => {
               onClick={handlesignup}
             />
             <LogOutC
-              onConfirm={handlesignup3}
+              onConfirm={handlesignup5}
               onCancel={handlesignup4}
               user={Customer}
             />
