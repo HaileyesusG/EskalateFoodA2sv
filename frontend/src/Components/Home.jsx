@@ -452,13 +452,11 @@ const Home = ({ user3 }) => {
   useEffect(() => {
     socket.on("techList", async (msg) => {
       const { technicians, Technicians } = msg;
-      console.log("The tech ", technicians);
-      console.log("The techT ", Technicians);
+
       // Filter out all technicians whose email does not match Technicians.email
       const filteredTechnicians = technicians.filter((member) => {
         return member.email !== Technicians.email;
       });
-      console.log("filteredTechnicians ", filteredTechnicians);
       const emailExists = filteredTechnicians.some((member) => {
         return member.email === Email;
       });
@@ -1033,6 +1031,8 @@ const Home = ({ user3 }) => {
           </div>
         </div>
       </div>
+      {/* Modal that shows if task is accepted */}
+      {isTaskAccepted && <TaskAcceptedModal />}
     </div>
   );
 };
