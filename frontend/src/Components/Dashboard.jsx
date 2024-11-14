@@ -161,7 +161,7 @@ const Dashboard = () => {
       customer = customer[0];
       console.log("not found2U", customer);
     }
-  }, [location, refereshKey, customer]);
+  }, [location, refereshKey]);
 
   const token = customer ? "Bearer " + customer.token : "";
 
