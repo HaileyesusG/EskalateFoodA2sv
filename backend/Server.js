@@ -68,6 +68,9 @@ io.on("connection", (socket) => {
   isFirstConnection = false;
   socket.on("newUser", (email) => {
     addNewUser(email);
+    return () => {
+      socket.off("newUser");
+    };
   });
   socket.on("booking1", (msg) => {
     const { db, latestMember } = msg;
@@ -95,6 +98,14 @@ io.on("connection", (socket) => {
       socket.off("IsAccept");
     };
   });
+
+  socket.on("techList", (msg) => {
+    io.emit("techList", msg);
+    return () => {
+      socket.off("techList");
+    };
+  });
+
   socket.on("Accept", (msg) => {
     io.emit("Accept2", msg);
     return () => {

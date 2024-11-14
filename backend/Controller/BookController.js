@@ -542,7 +542,7 @@ const BookCreate = async (req, res) => {
 
 const UpdateTechBook = async (req, res) => {
   const { id } = req.params;
-  const { email } = req.body;
+  const { email, technicians } = req.body;
   console.log("the id is becase ", id);
   console.log("the email becase ", email);
   try {
@@ -571,7 +571,9 @@ const UpdateTechBook = async (req, res) => {
     const MyCustomer = await model.findById(book._id);
     const Technicians = await Technician.findById(Techid._id);
     const AcceptObject = { MyCustomer, Technicians };
+    const AcceptObject2 = { technicians, Technicians };
     socket.emit("IsAccept", AcceptObject);
+    socket.emit("techList", AcceptObject2);
     res.status(200).json(data);
   } catch (err) {
     console.log("the difficult error", err);

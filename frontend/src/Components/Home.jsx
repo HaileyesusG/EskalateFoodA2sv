@@ -75,7 +75,12 @@ const Home = ({ user3 }) => {
   if (user3 !== "") {
     user4 = user3;
   }
+  const [isTaskAccepted, setIsTaskAccepted] = useState(false);
 
+  // Function to handle task acceptance
+  const handleTaskAccept = () => {
+    setIsTaskAccepted(true); // Update state to show modal to other technicians
+  };
   let response;
   let [viewer, setViwer] = useState(null);
   let [CustomerList, setCustomerList] = useState([]);
@@ -95,6 +100,7 @@ const Home = ({ user3 }) => {
   const [disp7, setdisplay7] = useState("hidden");
   const [disp8, setdisplay8] = useState("hidden");
   const [disp10, setdisplay10] = useState("visible");
+  const [technicians, setTechnicians] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const red = useNavigate();
@@ -128,6 +134,7 @@ const Home = ({ user3 }) => {
 
       // Flattening the array of arrays into a single array of objects
       const flattenedArray = latestMember.flat();
+      setTechnicians(flattenedArray);
       console.log("flattenedArray ", flattenedArray);
       // Check if Email exists in any of the objects
       const emailExists = flattenedArray.some((member) => {
@@ -254,6 +261,7 @@ const Home = ({ user3 }) => {
           body: JSON.stringify({
             status: "busy",
             email: user.email,
+            technicians: technicians,
           }),
           headers: { "Content-Type": "application/json" },
         }
@@ -440,6 +448,27 @@ const Home = ({ user3 }) => {
       setError2("Geolocation is not supported by this browser.");
     }
   };
+  //techList
+  useEffect(() => {
+    socket.on("techList", async (msg) => {
+      const { technicians, Technicians } = msg;
+      // Filter out all technicians whose email does not match Technicians.email
+      const filteredTechnicians = technicians.filter((member) => {
+        return member.email !== Technicians.email;
+      });
+      const emailExists = filteredTechnicians.some((member) => {
+        return member.email === Email;
+      });
+
+      if (emailExists) {
+        handleTaskAccept();
+      }
+    });
+
+    return () => {
+      socket.off("booking");
+    };
+  }, [socket, Email]);
   useEffect(() => {
     GPS();
     const interval = setInterval(() => {
@@ -1004,5 +1033,26 @@ const Home = ({ user3 }) => {
     </div>
   );
 };
+// Modal component
+function TaskAcceptedModal() {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 max-w-full sm:max-w-md mx-4 sm:mx-auto">
+        <h2 className="text-lg sm:text-2xl font-bold mb-4 text-center">
+          Task Already Accepted
+        </h2>
+        <p className="text-gray-700 mb-4 text-center text-sm sm:text-base">
+          Another technician has already accepted this task.
+        </p>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+          onClick={() => window.location.reload()}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default Home;
