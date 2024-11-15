@@ -352,6 +352,7 @@ const Dashboard = () => {
         setIsAccept(true);
         setIsLoading2(false);
         setIsLoading3(false);
+        setSignup3(false);
         setTechEmail(Technicians.email);
         console.log("the is loading2 is", isLoading2);
         array3.push(Technicians);

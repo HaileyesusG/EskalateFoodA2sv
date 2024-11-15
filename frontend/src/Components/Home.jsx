@@ -619,422 +619,449 @@ const Home = ({ user3 }) => {
         {/* Modal that shows if task is accepted */}
         {isTaskAccepted && <TaskAcceptedModal />}
       </div>
-      <div className=" overflow-y-auto   m-3 absolute  w-[1010px] h-[470px] mt-[138px] ml-72">
-        <div className={disp7}>
-          <ChatTech user={user4} />
-        </div>
-        <div
-          id="map"
-          ref={mapRef}
-          className={
-            "  absolute   mt-[50px] sm:mt-[150px] w-full sm:w-[580px] h-[700px] sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
-            disp6
-          }
-        />
-        <div className={"hidden "} id="MyHistory">
-          {" "}
-          {Json && (
-            <div className="ml-36">
-              <h1 className="ml-56 text-3xl font-bold">Your Work History</h1>
-              {Json.map((r, index) => (
-                <div
-                  key={index}
-                  className=" bg-gray-200 space-y-9 cursor-pointer hover:bg-cyan-300 border-[1px] border-y-black text-2xl font-mono"
-                >
-                  <ul>
-                    <li>{r.Customer_firstname}</li>
-                    <li>{r.Customer_phonenumber}</li>
-                    <li>{r.Customer_location}</li>
-                    <li>{r.department}</li>
-                    <li>{r.createdAt}</li>
-                  </ul>
-                </div>
-              ))}
+      {!isTaskAccepted && (
+        <div>
+          <div className=" overflow-y-auto   m-3 absolute  w-[1010px] h-[470px] mt-[138px] ml-72">
+            <div className={disp7}>
+              <ChatTech user={user4} />
             </div>
-          )}
-        </div>
-        <div className={disp5}>
-          <div className="flex ">
-            <div className="flex w-60  border-r-gray-200 h-[740px]">
-              <div className="mt-[120px] ml-3 font-bold flex">
-                <MdAccountCircle className=" ml-24 text-[65px] hover:text-green-200 text-green-500 " />
-                <div className="mt-2 ml-2">Personal Informations</div>
-              </div>
-              <div className="flex">
-                <div className=" ml-28  w-96 mt-10 ">
-                  <div className=" border-b-gray-300 ml-10  h-16">
-                    <h1 className="text-2xl font-bold">
-                      Personal Information's
-                    </h1>
-                  </div>
-                  <div>
-                    <div className="flex ml-10">
-                      <FaTools className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">
-                        Department
-                      </h1>
-                    </div>
-                    <div className=" border-b-gray-300 ml-10  h-16 mt-7 overflow-y-scroll">
-                      {Department2 != "" &&
-                        Department2.map((p) => (
-                          <div className="font-bold">{p}</div>
-                        ))}
-                    </div>
-                  </div>
-                  <div className=" border-b-gray-300 ml-10  h-16 mt-7">
-                    <div className="flex">
-                      <FaUser className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">
-                        First Name
-                      </h1>
-                    </div>
-                    {Firstname}
-                  </div>
-                  <div className=" border-b-gray-300 ml-10  h-16 mt-7">
-                    <div className="flex">
-                      <FaUser className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">Lastname</h1>
-                    </div>
-                    {Lastname}
-                  </div>
-
-                  <div className=" border-b-gray-300 ml-10  h-16 mt-7">
-                    <div className="flex">
-                      <PiGenderFemaleDuotone className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">Gender</h1>
-                    </div>
-                    {Gender}
-                  </div>
-                  <div className=" border-b-gray-300 ml-10  h-16 mt-7">
-                    <div className="flex">
-                      <AiFillPhone className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">
-                        Phonenumber
-                      </h1>
-                    </div>
-                    {Phonenumber}
-                  </div>
-                  <div className=" border-b-gray-300 ml-10  h-16 mt-7">
-                    <div className="flex">
-                      <MdEmail className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">Email</h1>
-                    </div>
-                    {Email}
-                  </div>
-                  <div className=" border-b-gray-300 ml-10  h-16 mt-7">
-                    <div className="flex">
-                      <ImLocation className="text-2xl text-green-500" />
-                      <h1 className="text-[18] font-semibold ml-2">Location</h1>
-                    </div>
-                    {Location}
-                  </div>
-                </div>
-                <div className="  w-96">
-                  <div className="ml-24 mt-5 text-[18px]">Update Profile</div>
-                  <div className="absolute mt-44 ml-48  ">
-                    <FaPen className="absolute ml-2 mt-2 text-white text-[13px]" />
-                    <FaCircle className="text-green-500 text-3xl" />
-                  </div>
-                  <div className="mt-14 ml-24">
-                    <img
-                      src={profile}
-                      className="w-[150px] h-[150px] rounded-full "
-                      onClick={handleChoiceChange3}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className=" flex mt-7 ">
-        <div
-          className={" w-[1400px]  absolute  " + disp4}
-          onClick={handleChoiceChange4}
-        >
-          <div className="bg-gray-200 mt-32 ml-[1000px] w-80 h-96  text-2xl space-y-4 rounded-lg">
-            <div className="absolute space-y-4">
-              <div
-                className="flex ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg"
-                onClick={handleChoiceChange5}
-              >
-                <CgProfile className="mt-3 ml-3" />
-                <p className="text-[15px] ml-3 mt-2">My Profile</p>
-              </div>
-              <div
-                className="flex ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg "
-                onClick={handleP}
-              >
-                <BiSolidMessageDetail className="mt-3 ml-3" />
-                <p className="text-[15px] ml-3 mt-1 ">Inbox</p>
-              </div>
-              <div className="flex text-green-500 ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg">
-                <RiLogoutCircleLine className="mt-3 ml-3" />
-                <p className="text-[15px] ml-3 mt-2 font-bold">Logout</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex ml-6  w-[500px] mt-3 ">
-          <div>
-            <ImLocation className=" text-[40px]    font-bold text-green-500 " />
-            <h3>ይህ የGPS </h3>
-            <h3>ግምታዊ</h3>
-            <h3>አድራሻዎት</h3>
-            <h3 className="ml-4">ነው</h3>
-          </div>
-
-          {location}
-        </div>
-        <div className="mt-3">
-          {" "}
-          <div className={disp3}>
-            <MdEditLocationAlt
-              onClick={makeVisible}
-              className=" text-[40px] text-green-500   hover:text-pink-600  font-bold cursor-pointer"
+            <div
+              id="map"
+              ref={mapRef}
+              className={
+                "  absolute   mt-[50px] sm:mt-[150px] w-full sm:w-[580px] h-[700px] sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
+                disp6
+              }
             />
-            <h3>አድራሻዎትን </h3>
-            <h3 className="ml-2">ያስተካክሉ</h3>
-            <ToastContainer />
-          </div>
-        </div>
-        <div
-          className={
-            " w-96 h-[450px] absolute mt-24 ml-[576px] rounded-lg border-2 bg-slate-100 " +
-            disp8
-          }
-        >
-          <div className="mt-5 ml-8 text-2xl ">Notifications</div>
-          {array3.map((d, index) => (
-            <div className="w-96 h-28 hover:bg-yellow-100 mt-8" key={index}>
-              {notify == 0 ? (
-                <div className="text-[15px] font-bold" key={index}>
-                  <p className="text-[15px] font-bold" key={index}>
-                    {d.Customer_firstname}
-                  </p>
-                  <p className="text-[15px] font-bold" key={index}>
-                    {d.Customer_lastname}
-                  </p>
-                  <p className="text-[15px] font-bold" key={index}>
-                    {d.Customer_location}
-                  </p>
-                  <p className="text-[15px] font-bold" key={index}>
-                    {d.Customer_phonenumber}
-                  </p>
-                  <p className="text-[15px] font-bold" key={index}>
-                    {d.department}
-                  </p>
-                  <p className="text-[15px] font-bold" key={index}>
-                    {d.typeOfProblem}
-                  </p>
-                </div>
-              ) : null}
-              {viewer && (
-                <div className="flex space-x-4">
-                  {" "}
-                  <button
-                    onClick={() => accepted(d)}
-                    disabled={disabled}
-                    className=" text-[12px] w-20 h-6 bg-green-400 rounded-lg hover:bg-green-300"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={declined}
-                    disabled={disabled}
-                    className="text-[12px] w-20 h-6 bg-red-500 rounded-lg hover:bg-red-400"
-                  >
-                    Decline
-                  </button>
+            <div className={"hidden "} id="MyHistory">
+              {" "}
+              {Json && (
+                <div className="ml-36">
+                  <h1 className="ml-56 text-3xl font-bold">
+                    Your Work History
+                  </h1>
+                  {Json.map((r, index) => (
+                    <div
+                      key={index}
+                      className=" bg-gray-200 space-y-9 cursor-pointer hover:bg-cyan-300 border-[1px] border-y-black text-2xl font-mono"
+                    >
+                      <ul>
+                        <li>{r.Customer_firstname}</li>
+                        <li>{r.Customer_phonenumber}</li>
+                        <li>{r.Customer_location}</li>
+                        <li>{r.department}</li>
+                        <li>{r.createdAt}</li>
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
-          ))}
-        </div>
-        <div className=" w-[300px]">
-          <div className=" ">
-            <div className={disp2}>
-              <div className="flex mr-10">
-                <input
-                  type="text"
-                  onChange={handleInputChange}
-                  onFocus={() => setdisplay("visible")}
-                  value={query}
-                  placeholder="Location"
-                  className="bg-transparent   h-[35px] w-[300px]  border-2 block focus:outline-none focus:border-black  rounded-2xl   px-4 placeholder-black "
-                />
-                <ImLocation className=" mt-2 absolute ml-[270px] text-green-500" />
-              </div>
-            </div>
-
-            <ul id="mylist" className={disp}>
-              {suggestions.map((suggestion) => (
-                <li
-                  key={suggestion.place_id}
-                  onClick={() => handleChoiceChange(suggestion.display_name)}
-                  className=" "
-                >
-                  <div className="flex">
-                    <ImLocation className="text-2xl p-1 text-green-500 " />
-                    {suggestion.display_name}
+            <div className={disp5}>
+              <div className="flex ">
+                <div className="flex w-60  border-r-gray-200 h-[740px]">
+                  <div className="mt-[120px] ml-3 font-bold flex">
+                    <MdAccountCircle className=" ml-24 text-[65px] hover:text-green-200 text-green-500 " />
+                    <div className="mt-2 ml-2">Personal Informations</div>
                   </div>
-                </li>
-              ))}
-            </ul>
-            {/* {error && <p>Error: {error}</p>} */}
-          </div>
-          <div
-            className="  h-32 w-[313px] mt-7  "
-            onClick={handleChoiceChange2}
-          ></div>
-        </div>
+                  <div className="flex">
+                    <div className=" ml-28  w-96 mt-10 ">
+                      <div className=" border-b-gray-300 ml-10  h-16">
+                        <h1 className="text-2xl font-bold">
+                          Personal Information's
+                        </h1>
+                      </div>
+                      <div>
+                        <div className="flex ml-10">
+                          <FaTools className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            Department
+                          </h1>
+                        </div>
+                        <div className=" border-b-gray-300 ml-10  h-16 mt-7 overflow-y-scroll">
+                          {Department2 != "" &&
+                            Department2.map((p) => (
+                              <div className="font-bold">{p}</div>
+                            ))}
+                        </div>
+                      </div>
+                      <div className=" border-b-gray-300 ml-10  h-16 mt-7">
+                        <div className="flex">
+                          <FaUser className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            First Name
+                          </h1>
+                        </div>
+                        {Firstname}
+                      </div>
+                      <div className=" border-b-gray-300 ml-10  h-16 mt-7">
+                        <div className="flex">
+                          <FaUser className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            Lastname
+                          </h1>
+                        </div>
+                        {Lastname}
+                      </div>
 
-        <div className=" flex space-x-3 text-3xl  mt-3 text-black  ">
-          <div
-            className={" h-96 w-[500px] relative mt-6 overflow-y-scroll hidden"}
-            id="MyMoney"
-          >
-            <div className="bg-red-600">
-              <label className="ml-14 text-[20px] ">Your Balace is Low!</label>
-            </div>
-
-            <div className="text-[20px] space-y-3">
-              {CustomerList.length !== 0 ? (
-                <h3>
-                  These are the last {CustomerList.length} places that you have
-                  worked
-                </h3>
-              ) : null}
-              {CustomerList.length !== 0
-                ? CustomerList.map((r, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-200  cursor-pointer hover:bg-pink-500 text-[13px] "
-                    >
-                      {" "}
-                      {
-                        <ul>
-                          <li>First_Name: {r.Customer_firstname}</li>
-                          <li>Last_Name: {r.Customer_lastname}</li>
-                          <li>Phone_Number: {r.Customer_phonenumber}</li>
-                          <li>Location: {r.Customer_location}</li>
-                          <li>Date: {r.createdAt}</li>
-                        </ul>
-                      }
+                      <div className=" border-b-gray-300 ml-10  h-16 mt-7">
+                        <div className="flex">
+                          <PiGenderFemaleDuotone className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            Gender
+                          </h1>
+                        </div>
+                        {Gender}
+                      </div>
+                      <div className=" border-b-gray-300 ml-10  h-16 mt-7">
+                        <div className="flex">
+                          <AiFillPhone className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            Phonenumber
+                          </h1>
+                        </div>
+                        {Phonenumber}
+                      </div>
+                      <div className=" border-b-gray-300 ml-10  h-16 mt-7">
+                        <div className="flex">
+                          <MdEmail className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            Email
+                          </h1>
+                        </div>
+                        {Email}
+                      </div>
+                      <div className=" border-b-gray-300 ml-10  h-16 mt-7">
+                        <div className="flex">
+                          <ImLocation className="text-2xl text-green-500" />
+                          <h1 className="text-[18] font-semibold ml-2">
+                            Location
+                          </h1>
+                        </div>
+                        {Location}
+                      </div>
                     </div>
-                  ))
-                : null}
+                    <div className="  w-96">
+                      <div className="ml-24 mt-5 text-[18px]">
+                        Update Profile
+                      </div>
+                      <div className="absolute mt-44 ml-48  ">
+                        <FaPen className="absolute ml-2 mt-2 text-white text-[13px]" />
+                        <FaCircle className="text-green-500 text-3xl" />
+                      </div>
+                      <div className="mt-14 ml-24">
+                        <img
+                          src={profile}
+                          className="w-[150px] h-[150px] rounded-full "
+                          onClick={handleChoiceChange3}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
-            <FaMoon className="ml-3 mt-3" />
-          </div>
-
-          {(status == "free" || status == "") && status2 == "not" ? (
-            <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
-              {/* "absolute text-[19px] ml-6 mt-3 text-red-600 flex" */}
-              <div
-                className={
-                  notify == 0
-                    ? "hidden"
-                    : "absolute text-[19px] ml-6 mt-3 text-red-600 flex"
-                }
-              >
-                <FaCircle />
+          <div className=" flex mt-7 ">
+            <div
+              className={" w-[1400px]  absolute  " + disp4}
+              onClick={handleChoiceChange4}
+            >
+              <div className="bg-gray-200 mt-32 ml-[1000px] w-80 h-96  text-2xl space-y-4 rounded-lg">
+                <div className="absolute space-y-4">
+                  <div
+                    className="flex ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg"
+                    onClick={handleChoiceChange5}
+                  >
+                    <CgProfile className="mt-3 ml-3" />
+                    <p className="text-[15px] ml-3 mt-2">My Profile</p>
+                  </div>
+                  <div
+                    className="flex ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg "
+                    onClick={handleP}
+                  >
+                    <BiSolidMessageDetail className="mt-3 ml-3" />
+                    <p className="text-[15px] ml-3 mt-1 ">Inbox</p>
+                  </div>
+                  <div className="flex text-green-500 ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg">
+                    <RiLogoutCircleLine className="mt-3 ml-3" />
+                    <p className="text-[15px] ml-3 mt-2 font-bold">Logout</p>
+                  </div>
+                </div>
               </div>
-              <div
-                className="absolute text-white ml-7 mt-1 text-[14px] font-bold  "
-                onClick={handleChoiceChange8}
-              >
-                {notify == 0 ? null : notify}
-              </div>
-
+            </div>
+            <div className="flex ml-6  w-[500px] mt-3 ">
               <div>
-                {" "}
-                <IoMdNotifications className={"ml-2 mt-3 " + disp10} />
+                <ImLocation className=" text-[40px]    font-bold text-green-500 " />
+                <h3>ይህ የGPS </h3>
+                <h3>ግምታዊ</h3>
+                <h3>አድራሻዎት</h3>
+                <h3 className="ml-4">ነው</h3>
+              </div>
+
+              {location}
+            </div>
+            <div className="mt-3">
+              {" "}
+              <div className={disp3}>
+                <MdEditLocationAlt
+                  onClick={makeVisible}
+                  className=" text-[40px] text-green-500   hover:text-pink-600  font-bold cursor-pointer"
+                />
+                <h3>አድራሻዎትን </h3>
+                <h3 className="ml-2">ያስተካክሉ</h3>
+                <ToastContainer />
               </div>
             </div>
-          ) : (
             <div
               className={
-                " border-[1px]  border-green-400 cursor-pointer bg-orange-500 w-14 h-[54px]  text-[18px] relative rounded-lg hover:bg-green-500 "
+                " w-96 h-[450px] absolute mt-24 ml-[576px] rounded-lg border-2 bg-slate-100 " +
+                disp8
               }
             >
+              <div className="mt-5 ml-8 text-2xl ">Notifications</div>
+              {array3.map((d, index) => (
+                <div className="w-96 h-28 hover:bg-yellow-100 mt-8" key={index}>
+                  {notify == 0 ? (
+                    <div className="text-[15px] font-bold" key={index}>
+                      <p className="text-[15px] font-bold" key={index}>
+                        {d.Customer_firstname}
+                      </p>
+                      <p className="text-[15px] font-bold" key={index}>
+                        {d.Customer_lastname}
+                      </p>
+                      <p className="text-[15px] font-bold" key={index}>
+                        {d.Customer_location}
+                      </p>
+                      <p className="text-[15px] font-bold" key={index}>
+                        {d.Customer_phonenumber}
+                      </p>
+                      <p className="text-[15px] font-bold" key={index}>
+                        {d.department}
+                      </p>
+                      <p className="text-[15px] font-bold" key={index}>
+                        {d.typeOfProblem}
+                      </p>
+                    </div>
+                  ) : null}
+                  {viewer && (
+                    <div className="flex space-x-4">
+                      {" "}
+                      <button
+                        onClick={() => accepted(d)}
+                        disabled={disabled}
+                        className=" text-[12px] w-20 h-6 bg-green-400 rounded-lg hover:bg-green-300"
+                      >
+                        Accept
+                      </button>
+                      <button
+                        onClick={declined}
+                        disabled={disabled}
+                        className="text-[12px] w-20 h-6 bg-red-500 rounded-lg hover:bg-red-400"
+                      >
+                        Decline
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className=" w-[300px]">
+              <div className=" ">
+                <div className={disp2}>
+                  <div className="flex mr-10">
+                    <input
+                      type="text"
+                      onChange={handleInputChange}
+                      onFocus={() => setdisplay("visible")}
+                      value={query}
+                      placeholder="Location"
+                      className="bg-transparent   h-[35px] w-[300px]  border-2 block focus:outline-none focus:border-black  rounded-2xl   px-4 placeholder-black "
+                    />
+                    <ImLocation className=" mt-2 absolute ml-[270px] text-green-500" />
+                  </div>
+                </div>
+
+                <ul id="mylist" className={disp}>
+                  {suggestions.map((suggestion) => (
+                    <li
+                      key={suggestion.place_id}
+                      onClick={() =>
+                        handleChoiceChange(suggestion.display_name)
+                      }
+                      className=" "
+                    >
+                      <div className="flex">
+                        <ImLocation className="text-2xl p-1 text-green-500 " />
+                        {suggestion.display_name}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {/* {error && <p>Error: {error}</p>} */}
+              </div>
               <div
-                className=" ml-1 font-bold text-white cursor-pointer"
-                onClick={() => Finished()}
+                className="  h-32 w-[313px] mt-7  "
+                onClick={handleChoiceChange2}
+              ></div>
+            </div>
+
+            <div className=" flex space-x-3 text-3xl  mt-3 text-black  ">
+              <div
+                className={
+                  " h-96 w-[500px] relative mt-6 overflow-y-scroll hidden"
+                }
+                id="MyMoney"
               >
-                Finish
+                <div className="bg-red-600">
+                  <label className="ml-14 text-[20px] ">
+                    Your Balace is Low!
+                  </label>
+                </div>
+
+                <div className="text-[20px] space-y-3">
+                  {CustomerList.length !== 0 ? (
+                    <h3>
+                      These are the last {CustomerList.length} places that you
+                      have worked
+                    </h3>
+                  ) : null}
+                  {CustomerList.length !== 0
+                    ? CustomerList.map((r, index) => (
+                        <div
+                          key={index}
+                          className="bg-gray-200  cursor-pointer hover:bg-pink-500 text-[13px] "
+                        >
+                          {" "}
+                          {
+                            <ul>
+                              <li>First_Name: {r.Customer_firstname}</li>
+                              <li>Last_Name: {r.Customer_lastname}</li>
+                              <li>Phone_Number: {r.Customer_phonenumber}</li>
+                              <li>Location: {r.Customer_location}</li>
+                              <li>Date: {r.createdAt}</li>
+                            </ul>
+                          }
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+
+              <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
+                <FaMoon className="ml-3 mt-3" />
+              </div>
+
+              {(status == "free" || status == "") && status2 == "not" ? (
+                <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
+                  {/* "absolute text-[19px] ml-6 mt-3 text-red-600 flex" */}
+                  <div
+                    className={
+                      notify == 0
+                        ? "hidden"
+                        : "absolute text-[19px] ml-6 mt-3 text-red-600 flex"
+                    }
+                  >
+                    <FaCircle />
+                  </div>
+                  <div
+                    className="absolute text-white ml-7 mt-1 text-[14px] font-bold  "
+                    onClick={handleChoiceChange8}
+                  >
+                    {notify == 0 ? null : notify}
+                  </div>
+
+                  <div>
+                    {" "}
+                    <IoMdNotifications className={"ml-2 mt-3 " + disp10} />
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={
+                    " border-[1px]  border-green-400 cursor-pointer bg-orange-500 w-14 h-[54px]  text-[18px] relative rounded-lg hover:bg-green-500 "
+                  }
+                >
+                  <div
+                    className=" ml-1 font-bold text-white cursor-pointer"
+                    onClick={() => Finished()}
+                  >
+                    Finish
+                  </div>
+                </div>
+              )}
+              <div
+                className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer"
+                onClick={handleP}
+              >
+                <BiSolidMessageDetail className="ml-2 mt-3" />
+              </div>
+
+              <div
+                className={
+                  (Deposite <= 200 &&
+                    (Department2.includes("TV") ||
+                      Department2.includes("FRIDGE"))) ||
+                  (Deposite <= 30 && Department2.includes("DISH")) ||
+                  (Deposite <= 200 &&
+                    Department2.includes("DISH") &&
+                    Department2.includes("TV")) ||
+                  (Deposite <= 200 &&
+                    Department2.includes("STOVE") &&
+                    Department2.includes("TV")) ||
+                  (Deposite <= 100 && Department2.includes("STOVE")) ||
+                  Department2.includes("MITAD")
+                    ? "flex bg-red-600 animate-pulse w-24 h-11 mt-1 rounded-lg cursor-pointer"
+                    : "flex bg-green-500 w-24 h-11 mt-1 rounded-lg"
+                }
+                onClick={notify2 == 0 ? null : handleChoiceChange6}
+              >
+                {/* {deposite} */}
+                <p className="text-[20px] text-white mt-1 ml-1">
+                  {Deposite}Birr
+                </p>
+              </div>
+              <div className="rounded-2xl ml-2 ">
+                <img
+                  src={profile}
+                  className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
+                  onClick={handleChoiceChange3}
+                />
               </div>
             </div>
-          )}
-          <div
-            className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer"
-            onClick={handleP}
-          >
-            <BiSolidMessageDetail className="ml-2 mt-3" />
-          </div>
 
-          <div
-            className={
-              (Deposite <= 200 &&
-                (Department2.includes("TV") ||
-                  Department2.includes("FRIDGE"))) ||
-              (Deposite <= 30 && Department2.includes("DISH")) ||
-              (Deposite <= 200 &&
-                Department2.includes("DISH") &&
-                Department2.includes("TV")) ||
-              (Deposite <= 200 &&
-                Department2.includes("STOVE") &&
-                Department2.includes("TV")) ||
-              (Deposite <= 100 && Department2.includes("STOVE")) ||
-              Department2.includes("MITAD")
-                ? "flex bg-red-600 animate-pulse w-24 h-11 mt-1 rounded-lg cursor-pointer"
-                : "flex bg-green-500 w-24 h-11 mt-1 rounded-lg"
-            }
-            onClick={notify2 == 0 ? null : handleChoiceChange6}
-          >
-            {/* {deposite} */}
-            <p className="text-[20px] text-white mt-1 ml-1">{Deposite}Birr</p>
+            <div>
+              <button onClick={calculateDistance2}>
+                {<div>{CustomerList.length == 0 ? notify2 : null}</div>}
+              </button>
+            </div>
           </div>
-          <div className="rounded-2xl ml-2 ">
-            <img
-              src={profile}
-              className="w-[70px] h-[70px] rounded-2xl cursor-pointer"
-              onClick={handleChoiceChange3}
-            />
-          </div>
-        </div>
-
-        <div>
-          <button onClick={calculateDistance2}>
-            {<div>{CustomerList.length == 0 ? notify2 : null}</div>}
-          </button>
-        </div>
-      </div>
-      <div className="mt-12  w-32 sm:w-full">
-        <div className="border-[1px] sm:w-72 w-32">
-          <h2 className="ml-16">Menu</h2>
-        </div>
-        <div className="ml-14 mt-8 space-y-4">
-          <div className="flex cursor-pointer" onClick={handleChoiceChange7}>
-            <FaHome className="text-3xl text-green-500" />
-            <h1 className="text-[20px] ml-2">Home</h1>
-          </div>
-          <div className="flex cursor-pointer" onClick={handleP}>
-            <IoMdNotifications className="text-3xl text-green-500" />
-            <h1 className="text-[20px] ml-2">Inbox</h1>
-          </div>
-          <div className="flex">
-            <RiChatHistoryFill className="text-3xl text-green-500" />
-            <h1 className="text-[20px] ml-2" onClick={featcher}>
-              History
-            </h1>
+          <div className="mt-12  w-32 sm:w-full">
+            <div className="border-[1px] sm:w-72 w-32">
+              <h2 className="ml-16">Menu</h2>
+            </div>
+            <div className="ml-14 mt-8 space-y-4">
+              <div
+                className="flex cursor-pointer"
+                onClick={handleChoiceChange7}
+              >
+                <FaHome className="text-3xl text-green-500" />
+                <h1 className="text-[20px] ml-2">Home</h1>
+              </div>
+              <div className="flex cursor-pointer" onClick={handleP}>
+                <IoMdNotifications className="text-3xl text-green-500" />
+                <h1 className="text-[20px] ml-2">Inbox</h1>
+              </div>
+              <div className="flex">
+                <RiChatHistoryFill className="text-3xl text-green-500" />
+                <h1 className="text-[20px] ml-2" onClick={featcher}>
+                  History
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
