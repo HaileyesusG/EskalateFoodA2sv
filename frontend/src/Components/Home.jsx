@@ -617,9 +617,9 @@ const Home = ({ user3 }) => {
     <div className={""}>
       <div className="App p-4">
         {/* Modal that shows if task is accepted */}
-        {isTaskAccepted && <TaskAcceptedModal />}
+        <TaskAcceptedModal />
       </div>
-      {!isTaskAccepted && (
+      {false && (
         <div>
           <div className=" overflow-y-auto   m-3 absolute  w-[1010px] h-[470px] mt-[138px] ml-72">
             <div className={disp7}>
