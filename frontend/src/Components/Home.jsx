@@ -481,34 +481,36 @@ const Home = ({ user3 }) => {
       clearInterval(interval);
     };
   }, []);
-  useEffect(() => {
-    response2();
-    socket.emit("locationChange", "change");
-    dispatch2(
-      updateTech({
-        id: Id,
-        department: Department,
-        firstname: Firstname,
-        lastname: Lastname,
-        gender: Gender,
-        phonenumber: Phonenumber,
-        deposit: Deposite,
-        email: Email,
-        image: profile,
-        status: status,
-        status2: status2,
-        location: location,
-        _id: _id,
-      })
-    );
-  }, [location]);
-  const response2 = () =>
-    fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ location: location }),
-    });
   if (!isTaskAccepted) {
+    useEffect(() => {
+      response2();
+      socket.emit("locationChange", "change");
+      dispatch2(
+        updateTech({
+          id: Id,
+          department: Department,
+          firstname: Firstname,
+          lastname: Lastname,
+          gender: Gender,
+          phonenumber: Phonenumber,
+          deposit: Deposite,
+          email: Email,
+          image: profile,
+          status: status,
+          status2: status2,
+          location: location,
+          _id: _id,
+        })
+      );
+    }, [location]);
+
+    const response2 = () =>
+      fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ location: location }),
+      });
+
     useEffect(() => {
       map.innerHTML =
         '<iframe border-radius="50%" overflow="hidden"  width="1330" height="800" src="https://maps.google.com/maps?q=' +
