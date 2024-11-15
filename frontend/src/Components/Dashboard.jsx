@@ -309,7 +309,12 @@ const Dashboard = () => {
     socket.emit("cancel", IDS);
   };
   //
-
+  const handleCancelOrder2 = () => {
+    setIsOpen(false);
+    setIsLoading2(false);
+    setIsAccept(false);
+    setIsButtonHidden(false);
+  };
   //booking
   const handleOrderNow = async (e) => {
     e.preventDefault();
@@ -344,6 +349,7 @@ const Dashboard = () => {
       if (phonenumber === MyCustomer.Customer_phonenumber) {
         setIsAccept(true);
         setIsLoading2(false);
+        setIsLoading3(false);
         setTechEmail(Technicians.email);
         console.log("the is loading2 is", isLoading2);
         array3.push(Technicians);
@@ -599,6 +605,14 @@ const Dashboard = () => {
           >
             Cancel Order
           </button>
+          {!isLoading3 && (
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px] ml-36 sm:ml-[720px]"
+              onClick={handleCancelOrder2}
+            >
+              Close
+            </button>
+          )}
         </div>
       )}
       <div

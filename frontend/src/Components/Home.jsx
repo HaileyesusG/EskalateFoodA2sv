@@ -1031,8 +1031,10 @@ const Home = ({ user3 }) => {
           </div>
         </div>
       </div>
-      {/* Modal that shows if task is accepted */}
-      {isTaskAccepted && <TaskAcceptedModal />}
+      <div className="App p-4">
+        {/* Modal that shows if task is accepted */}
+        {isTaskAccepted && <TaskAcceptedModal />}
+      </div>
     </div>
   );
 };
