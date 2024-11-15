@@ -113,7 +113,7 @@ const Dashboard = () => {
         }
       } catch (error) {
         // Handle network or other errors
-        console.error("Error occurred:", error);
+        console.log("Error occurred:", error);
         toastify("An error occurred while processing your request.");
       } finally {
         setIsLoading2(false); // Ensure loading state is set to false

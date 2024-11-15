@@ -273,7 +273,7 @@ const BookCreate = async (req, res) => {
       customerBody,
     });
   } catch (err) {
-    console.error("Error during driver reassignment:", err);
+    console.log("Error during driver reassignment:", err);
   } finally {
     // const result = await Technician.updateMany(
     //   { status: "free", status2: { $ne: "not" } }, // Additional condition to check status2

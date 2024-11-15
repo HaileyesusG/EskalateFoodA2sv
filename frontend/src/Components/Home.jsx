@@ -508,16 +508,15 @@ const Home = ({ user3 }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ location: location }),
     });
-  if (!isTaskAccepted) {
-    useEffect(() => {
-      map.innerHTML =
-        '<iframe border-radius="50%" overflow="hidden"  width="1330" height="800" src="https://maps.google.com/maps?q=' +
-        latitude +
-        "," +
-        longitude +
-        '&amp;z=15&amp;output=embed"></iframe>';
-    });
-  }
+
+  useEffect(() => {
+    map.innerHTML =
+      '<iframe border-radius="50%" overflow="hidden"  width="1330" height="800" src="https://maps.google.com/maps?q=' +
+      latitude +
+      "," +
+      longitude +
+      '&amp;z=15&amp;output=embed"></iframe>';
+  });
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
@@ -617,7 +616,7 @@ const Home = ({ user3 }) => {
   };
   return (
     <div className={""}>
-      {!isTaskAccepted && (
+      {
         <div>
           <div className=" overflow-y-auto   m-3 absolute  w-[1010px] h-[470px] mt-[138px] ml-72">
             <div className={disp7}>
@@ -1059,13 +1058,11 @@ const Home = ({ user3 }) => {
             </div>
           </div>
         </div>
-      )}
+      }
       {isTaskAccepted && (
-        <div className="App p-4">
+        <div className="absolute App p-4">
           {/* Modal that shows if task is accepted */}
-          <div className={disp7}>
-            <ChatTech user={user4} />
-          </div>
+
           {<TaskAcceptedModal />}
         </div>
       )}

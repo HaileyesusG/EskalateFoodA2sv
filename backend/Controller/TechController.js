@@ -81,7 +81,7 @@ const TechCreate = async (req, res) => {
       image4,
     });
   } catch (err) {
-    console.error("Failed to send Email:", err);
+    console.log("Failed to send Email:", err);
     res.status(400).json({ message: err.message });
   }
 };
