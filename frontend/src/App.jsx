@@ -21,7 +21,6 @@ import { setTech } from "./features/tech/techSlice";
 import { setAdmin } from "./features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import New from "./Components/new";
 const socket = io(API_BASE_URL);
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -97,7 +96,7 @@ function App() {
         </center> */}
 
         <Routes>
-          {/* <Route
+          <Route
             path="/"
             element={
               user || todo2.length > 0 ? (
@@ -154,8 +153,7 @@ function App() {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/SignUpA" element={<SignUpA />} />
           <Route path="/SignUpC" element={<SignUpC />} />
-          <Route path="/FrontPage" element={<FrontPage />} /> */}
-          <Route path="/" element={<Home />} />
+          <Route path="/FrontPage" element={<FrontPage />} />
         </Routes>
       </BrowserRouter>
     </div>
