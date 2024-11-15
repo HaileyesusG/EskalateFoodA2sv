@@ -313,6 +313,8 @@ const Dashboard = () => {
     setIsOpen(false);
     setIsLoading2(false);
     setIsAccept(false);
+    setIsLoading3(true);
+    setSignup3(true);
     setIsButtonHidden(false);
   };
   //booking
@@ -600,7 +602,11 @@ const Dashboard = () => {
       {(isLoading2 || isAccept) && (
         <div className="flex ml-28 sm:ml-0 ">
           <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px]  sm:ml-[530px] ml-10"
+            className={
+              isLoading3
+                ? "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px]  sm:ml-[530px] ml-10"
+                : "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute mt-[500px]  sm:ml-[520px]"
+            }
             onClick={handleCancelOrder}
           >
             Cancel Order
