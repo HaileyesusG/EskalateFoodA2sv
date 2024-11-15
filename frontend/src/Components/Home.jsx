@@ -1060,10 +1060,15 @@ const Home = ({ user3 }) => {
           </div>
         </div>
       )}
-      <div className="App p-4">
-        {/* Modal that shows if task is accepted */}
-        {isTaskAccepted && <TaskAcceptedModal />}
-      </div>
+      {isTaskAccepted && (
+        <div className="App p-4">
+          {/* Modal that shows if task is accepted */}
+          <div className={disp7}>
+            <ChatTech user={user4} />
+          </div>
+          {<TaskAcceptedModal />}
+        </div>
+      )}
     </div>
   );
 };
