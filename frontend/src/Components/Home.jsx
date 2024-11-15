@@ -481,36 +481,34 @@ const Home = ({ user3 }) => {
       clearInterval(interval);
     };
   }, []);
+  useEffect(() => {
+    response2();
+    socket.emit("locationChange", "change");
+    dispatch2(
+      updateTech({
+        id: Id,
+        department: Department,
+        firstname: Firstname,
+        lastname: Lastname,
+        gender: Gender,
+        phonenumber: Phonenumber,
+        deposit: Deposite,
+        email: Email,
+        image: profile,
+        status: status,
+        status2: status2,
+        location: location,
+        _id: _id,
+      })
+    );
+  }, [location]);
+  const response2 = () =>
+    fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ location: location }),
+    });
   if (!isTaskAccepted) {
-    useEffect(() => {
-      response2();
-      socket.emit("locationChange", "change");
-      dispatch2(
-        updateTech({
-          id: Id,
-          department: Department,
-          firstname: Firstname,
-          lastname: Lastname,
-          gender: Gender,
-          phonenumber: Phonenumber,
-          deposit: Deposite,
-          email: Email,
-          image: profile,
-          status: status,
-          status2: status2,
-          location: location,
-          _id: _id,
-        })
-      );
-    }, [location]);
-
-    const response2 = () =>
-      fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ location: location }),
-      });
-
     useEffect(() => {
       map.innerHTML =
         '<iframe border-radius="50%" overflow="hidden"  width="1330" height="800" src="https://maps.google.com/maps?q=' +
@@ -621,12 +619,12 @@ const Home = ({ user3 }) => {
   return (
     <div className={""}>
       {isTaskAccepted && (
-        <div className="App p-4">
+        <div className="App p-4 justify-center">
           {/* Modal that shows if task is accepted */}
           {<TaskAcceptedModal />}
         </div>
       )}
-      {!isTaskAccepted && (
+      {
         <div className="hidden">
           <div className=" overflow-y-auto   m-3 absolute  w-[1010px] h-[470px] mt-[138px] ml-72">
             <div className={disp7}>
@@ -1068,7 +1066,7 @@ const Home = ({ user3 }) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 };
