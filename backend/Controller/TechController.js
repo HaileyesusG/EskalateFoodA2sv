@@ -277,7 +277,6 @@ const updateFinish = async (req, res) => {
         { status2: "loading" },
         { $set: { status2: "not" } }
       );
-      b;
       throw Error("Unexpected Server Error");
     }
   } catch (err) {
