@@ -277,7 +277,9 @@ const updateFinish = async (req, res) => {
         { status2: "loading" },
         { $set: { status2: "not" } }
       );
-      throw Error("Unexpected Server Error");
+      const Respon = await Technician.findById(id);
+      res.status(200).json(Respon);
+      return;
     }
   } catch (err) {
     res.status(400).json({ message: err });

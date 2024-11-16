@@ -75,7 +75,7 @@ const GenerateOtp = async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       try {
         if (error) {
-          throw Error("Failed to send OTP");
+          throw Error(error);
         }
         res.status(200).json({ message: "OTP sent successfully" });
         console.log("OTP sent successfully");

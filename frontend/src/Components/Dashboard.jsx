@@ -337,7 +337,7 @@ const Dashboard = () => {
       killBooking();
       clearInterval(intervalRef.current); // Clear the interval after killBooking is called
       intervalRef.current = null; // Optional: Reset ref to prevent potential re-clear errors
-    }, 1 * 60 * 1000); // 3 minutes
+    }, 1.5 * 60 * 1000); // 3 minutes
     //return;
     socket.emit("loggedIn", customer);
     await CustomerForm(typeOfProblem, department);

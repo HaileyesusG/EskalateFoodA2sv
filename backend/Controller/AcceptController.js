@@ -1,5 +1,6 @@
 const Accepted = require("../Model/Accepted");
 const ToFinish = require("../Model/ToFinish");
+const Technician = require("../Model/Technician");
 const toBeFinished = async (req, res) => {
   const { id } = req.params;
   const { department, customerId } = req.body;
@@ -13,7 +14,11 @@ const toBeFinished = async (req, res) => {
 const DeleteLatestAccept = async (req, res) => {
   const { id } = req.params;
   const df = await ToFinish.findOne({ techId: id });
-  const cv = await ToFinish.findByIdAndDelete(df._id);
+  if (df) {
+    const cv = await ToFinish.findByIdAndDelete(df._id);
+  } else {
+    return;
+  }
 };
 
 //Get all(if Super Admin is Available for the future)
@@ -40,6 +45,7 @@ const GetLatestAccept = async (req, res) => {
     createdAt: -1,
   });
   if (latestCv) {
+    console.log("in cv lre");
     res.status(200).json(latestCv);
   } else {
     const status = "free";
