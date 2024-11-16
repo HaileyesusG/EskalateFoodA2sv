@@ -619,7 +619,7 @@ const Home = ({ user3 }) => {
       {
         <div>
           {isTaskAccepted && (
-            <div className="absolute App p-4">
+            <div className=" App p-4">
               {/* Modal that shows if task is accepted */}
 
               {<TaskAcceptedModal />}
