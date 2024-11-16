@@ -618,6 +618,13 @@ const Home = ({ user3 }) => {
     <div className={""}>
       {
         <div>
+          {isTaskAccepted && (
+            <div className="absolute App p-4">
+              {/* Modal that shows if task is accepted */}
+
+              {<TaskAcceptedModal />}
+            </div>
+          )}
           <div className=" overflow-y-auto   m-3 absolute  w-[1010px] h-[470px] mt-[138px] ml-72">
             <div className={disp7}>
               <ChatTech user={user4} />
@@ -1059,13 +1066,6 @@ const Home = ({ user3 }) => {
           </div>
         </div>
       }
-      {isTaskAccepted && (
-        <div className="absolute App p-4">
-          {/* Modal that shows if task is accepted */}
-
-          {<TaskAcceptedModal />}
-        </div>
-      )}
     </div>
   );
 };

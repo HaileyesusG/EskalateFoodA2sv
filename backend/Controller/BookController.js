@@ -687,9 +687,12 @@ const killBooking = async (req, res) => {
   try {
     const updateBook = await model.updateMany(
       { customer_id: id, Status: "pending" },
-      { $set: { Status: "faild" } }
+      { $set: { Status: "failed" } }
     );
-    if (updateBook) throw Error("NO Technician found");
+    if (updateBook.modifiedCount > 0) throw Error("NO Technician found");
+    else {
+      return;
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
