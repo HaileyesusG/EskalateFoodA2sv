@@ -39,7 +39,17 @@ const GetLatestAccept = async (req, res) => {
   const latestCv = await ToFinish.findOne({ techId: id }).sort({
     createdAt: -1,
   });
-  res.status(200).json(latestCv);
+  if (latestCv) {
+    res.status(200).json(latestCv);
+  } else {
+    const status = "free";
+    const status2 = "not";
+    const minperson45 = await Technician.findByIdAndUpdate(
+      { _id: id },
+      { status, status2 }
+    );
+    res.status(200).json(minperson45);
+  }
 };
 
 const DeleteCustomer = async (req, res) => {
