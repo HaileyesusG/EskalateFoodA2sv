@@ -956,7 +956,8 @@ const Home = ({ user3 }) => {
                 <FaMoon className="ml-3 mt-3" />
               </div>
 
-              {(status == "free" || status == "") && status2 == "not" ? (
+              {(status == "free" || status == "") &&
+              (status2 == "not" || status2 == "") ? (
                 <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
                   {/* "absolute text-[19px] ml-6 mt-3 text-red-600 flex" */}
                   <div
