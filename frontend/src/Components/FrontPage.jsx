@@ -7,6 +7,7 @@ import hiloe2 from "../assets/AiM2.jpeg";
 import hiloe3 from "../assets/logo.jpg";
 import hiloe4 from "../assets/AiM4.jpeg";
 import hiloe5 from "../assets/Ai_6.jfif";
+import hiloe6 from "../assets/bgl.jpg";
 import {
   Navigation,
   Pagination,
@@ -255,7 +256,11 @@ const FrontPage = () => {
       </div>
 
       <div id="home">
-        <h2 className="text-center mt-8 text-3xl">Home Section</h2>
+        <img
+          src={hiloe6}
+          alt="Profile"
+          className=" object-cover w-full h-[50vh] md:h-[80vh] lg:h-screen"
+        />
         {/* Add your Home section content here */}
       </div>
 
