@@ -144,7 +144,7 @@ const SignUpC = ({ onConfirm, onCancel }) => {
                       type="text"
                       onChange={handlePhoneNumberChange}
                       value={phonenumber}
-                      className="bg-transparent h-[45px] w-[90%] max-w-[280px] border-2 block focus:outline-none focus:outline-blue-400 rounded-2xl px-4"
+                      className="bg-transparent h-[45px] w-[93%] max-w-[283px] border-2 block focus:outline-none focus:outline-blue-400 rounded-2xl px-4"
                     />
                     <AiFillPhone className=" absolute right-4 top-1/2 transform -translate-y-1/2" />
                   </div>
