@@ -64,7 +64,7 @@ const BookCreate = async (req, res) => {
         const data = await response.json();
         if (!response.ok) {
           console.log("The error response is", data);
-          return res.status(200).json({ message: "No Internet Connection1" });
+          return res.status(200).json({ message: "No Internet Connection" });
         }
 
         if (data.length > 0) {
@@ -77,7 +77,7 @@ const BookCreate = async (req, res) => {
           console.log("No results found");
         }
       } catch (error) {
-        return res.status(400).json({ message: "No Internet Connection2" });
+        return res.status(400).json({ message: "No Internet Connection" });
       }
       const customerCoords = {
         latitude: slat,
@@ -150,7 +150,7 @@ const BookCreate = async (req, res) => {
             console.log("No results found");
           }
         } catch (error) {
-          res.status(400).json({ message: "No Internet Connection3" });
+          res.status(400).json({ message: "No Internet Connection" });
           return;
         }
       }
@@ -365,7 +365,7 @@ const BookCreate = async (req, res) => {
           );
           const data = await response.json();
           if (!response.ok) {
-            console.log({ message: "No Internet Connection4" });
+            console.log({ message: "No Internet Connection" });
           }
 
           if (data.length > 0) {
@@ -421,7 +421,7 @@ const BookCreate = async (req, res) => {
               console.log("No results found2");
             }
           } catch (error) {
-            console.log({ message: "No Internet Connection5" });
+            console.log({ message: "No Internet Connection" });
             return;
           }
         }
