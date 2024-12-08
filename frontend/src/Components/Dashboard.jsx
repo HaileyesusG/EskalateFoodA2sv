@@ -24,7 +24,7 @@ import LogOutC from "./logOutC";
 import { IoMdClose } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { GiGasStove } from "react-icons/gi";
-import hiloe6 from "../assets/Ai_6.jfif";
+import hiloe6 from "../assets/lg1.webp";
 import { MdEditLocationAlt } from "react-icons/md";
 import { ImLocation } from "react-icons/im";
 let array3 = [];
