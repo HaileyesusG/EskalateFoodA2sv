@@ -56,28 +56,28 @@ const BookCreate = async (req, res) => {
 
       try {
         const response = await fetch(
-          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+          `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
             Customer_location
-          )}&key=9ddcd8b5269349368ef7069e700d9e77`
+          )}&format=json`
         );
         //console.log("Abebe", response.json);
         const data = await response.json();
         if (!response.ok) {
-          console.log("the error response is", data);
-          return res.status(200).json({ message: "No Internet Connection" });
+          console.log("The error response is", data);
+          return res.status(200).json({ message: "No Internet Connection1" });
         }
 
-        if (data.results.length > 0) {
-          const { lat, lng } = data.results[0].geometry;
-          slat = lat;
-          slon = lng;
+        if (data.length > 0) {
+          const { lat, lon } = data[0];
+          slat = parseFloat(lat);
+          slon = parseFloat(lon);
           console.log("slat", slat);
           console.log("slon", slon);
         } else {
           console.log("No results found");
         }
       } catch (error) {
-        return res.status(400).json({ message: "No Internet Connection" });
+        return res.status(400).json({ message: "No Internet Connection2" });
       }
       const customerCoords = {
         latitude: slat,
@@ -124,19 +124,20 @@ const BookCreate = async (req, res) => {
       for (const person of newTech2) {
         try {
           const response2 = await fetch(
-            `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+            ` https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
               person.location
-            )}&key=9ddcd8b5269349368ef7069e700d9e77`
+            )}&format=json`
           );
+
           const data2 = await response2.json();
-          if (data2.results.length > 0) {
-            const { lat, lng } = data2.results[0].geometry;
+          if (data2.length > 0) {
+            const { lat, lon } = data2[0];
             const driverCoords = {
-              latitude: lat,
-              longitude: lng,
+              latitude: parseFloat(lat),
+              longitude: parseFloat(lon),
             };
             console.log("lat", lat);
-            console.log("lng", lng);
+            console.log("lon", lon);
 
             const distance = haversine(customerCoords, driverCoords);
             if (distance < nearestDistance) {
@@ -149,7 +150,7 @@ const BookCreate = async (req, res) => {
             console.log("No results found");
           }
         } catch (error) {
-          res.status(400).json({ message: "No Internet Connection" });
+          res.status(400).json({ message: "No Internet Connection3" });
           return;
         }
       }
@@ -358,23 +359,23 @@ const BookCreate = async (req, res) => {
       for (const Pend of bookers) {
         try {
           const response = await fetch(
-            `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+            `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
               Pend.Customer_location
-            )}&key=9ddcd8b5269349368ef7069e700d9e77`
+            )}&format=json`
           );
           const data = await response.json();
           if (!response.ok) {
-            console.log({ message: "No Internet Connection" });
+            console.log({ message: "No Internet Connection4" });
           }
 
-          if (data.results.length > 0) {
-            const { lat, lng } = data.results[0].geometry;
-            slat = lat;
-            slon = lng;
+          if (data.length > 0) {
+            const { lat, lon } = data[0];
+            slat = parseFloat(lat);
+            slon = parseFloat(lon);
             console.log("slat", slat);
             console.log("slon", slon);
           } else {
-            console.log("No results found1");
+            console.log("No results found");
           }
         } catch (error) {
           //return res.status(400).json({ message: "No Internet Connection5" });
@@ -390,35 +391,37 @@ const BookCreate = async (req, res) => {
         for (const p of person) {
           try {
             const response2 = await fetch(
-              `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+              `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
                 p.location
-              )}&key=9ddcd8b5269349368ef7069e700d9e77`
+              )}&format=json`
             );
             const data2 = await response2.json();
             console.log("the person location is ", person);
             console.log("the data2 is ", data2);
-            if (data2.results.length > 0) {
-              const { lat, lng } = data2.results[0].geometry;
-              console.log("lat", lat);
-              console.log("lng", lng);
+            if (data2.length > 0) {
+              const { lat, lon } = data2[0];
+              slat = parseFloat(lat);
+              slon = parseFloat(lon);
+              console.log("slat", slat);
+              console.log("slon", slon);
               const driverCoords = {
                 latitude: lat,
-                longitude: lng,
+                longitude: lon,
               };
               for (const custCord of customerCor) {
                 const distance = haversine(custCord, driverCoords);
                 if (distance < nearestDistance) {
                   nearestDistance = distance;
-                  nearestDriver = [person];
+                  nearestDriver = [p];
                 } else if (distance === nearestDistance) {
-                  nearestDriver.push(person); // Add this driver to the list of nearest drivers
+                  nearestDriver.push(p); // Add this driver to the list of nearest drivers
                 }
               }
             } else {
               console.log("No results found2");
             }
           } catch (error) {
-            console.log({ message: "No Internet Connection" });
+            console.log({ message: "No Internet Connection5" });
             return;
           }
         }
@@ -432,13 +435,11 @@ const BookCreate = async (req, res) => {
 
       console.log("the nearestDriver 2 ", nearestDriver);
       for (const driver of nearestDriver) {
-        for (const p of driver) {
-          const minperson45 = await Technician.findByIdAndUpdate(
-            { _id: p._id },
-            { status2: "loading" },
-            { new: true }
-          );
-        }
+        const minperson45 = await Technician.findByIdAndUpdate(
+          { _id: driver._id },
+          { status2: "loading" },
+          { new: true }
+        );
       }
 
       //Assign All
@@ -473,13 +474,11 @@ const BookCreate = async (req, res) => {
       requestTimeouts[RequestId] = setTimeout(async () => {
         // socket.emit("UnAccept", phone);
         for (const tech of nearestDriver) {
-          for (const p of tech) {
-            if (p.status == "free") {
-              await Technician.updateOne(
-                { _id: p._id },
-                { $set: { status2: "not" } }
-              );
-            }
+          if (tech.status == "free") {
+            await Technician.updateOne(
+              { _id: tech._id },
+              { $set: { status2: "not" } }
+            );
           }
         }
 
