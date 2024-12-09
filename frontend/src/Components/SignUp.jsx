@@ -75,23 +75,28 @@ const SignUp = () => {
     setError2("");
     if (selectedChoices.length == 0) {
       setdepError("Department is Required");
+      setLoading(false);
       return;
     }
 
     if (gender == "" || gender == "Gender") {
       setgenError("Gender is Required");
+      setLoading(false);
       return;
     }
     if (!testImage) {
       setimError("Profile Photo is Required");
+      setLoading(false);
       return;
     }
     if (!testImage2) {
       setim2Error("Front side of Id is Required");
+      setLoading(false);
       return;
     }
     if (!testImage3) {
       setim3Error("Back side of Id is Required");
+      setLoading(false);
       return;
     }
 
@@ -285,7 +290,11 @@ const SignUp = () => {
                       </label>
                     </div>
                   )}
-
+                  <div className="bg-red-500 ml-10 w-52 mt-2 rounded-sm">
+                    {depError && (
+                      <div className="ml-2 text-white ">{depError}</div>
+                    )}
+                  </div>
                   <div className="space-y-4">
                     <div className="flex flex-col">
                       <input
