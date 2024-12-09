@@ -123,7 +123,7 @@ const SignUp = () => {
   };
   const handleSumit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     await signup(
       selectedChoices,
       firstname,
