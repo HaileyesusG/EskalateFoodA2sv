@@ -114,7 +114,7 @@ const SignUp = () => {
     const json = await response.json();
     if (!response.ok) {
       setError2(json.message);
-
+      setLoading(false);
       console.log(json.message);
       return;
     }
@@ -528,6 +528,12 @@ const SignUp = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="bg-red-500 ml-10 w-56 mt-2 rounded-md">
+                      {error && <div className="ml-5 text-white ">{error}</div>}
+                      {error2 && (
+                        <div className="ml-5 text-white ">{error2}</div>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-center mt-8">
@@ -577,10 +583,6 @@ const SignUp = () => {
               </button>
             </div>
           )}
-          <div className="bg-red-500 ml-10 w-56 mt-2 rounded-md">
-            {error && <div className="ml-5 text-white ">{error}</div>}
-            {error2 && <div className="ml-5 text-white ">{error2}</div>}
-          </div>
         </div>
       )}
       {View && <SuccessMessage />}
