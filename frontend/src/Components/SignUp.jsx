@@ -170,7 +170,7 @@ const SignUp = () => {
   return (
     <div>
       {View2 && (
-        <div className="mt-12 h-auto w-full md:w-[700px] mx-auto md:ml-[300px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border border-white px-4 py-6 md:py-8">
+        <div className="mt-12 h-auto w-full md:w-[700px] mx-auto md:ml-[300px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm   px-4 py-6 md:py-8">
           {!isOtpSent ? (
             <div className="absolute inset-0 p-4">
               <form onSubmit={generateOtp} className="to-blue-100">
@@ -290,7 +290,7 @@ const SignUp = () => {
                         type="text"
                         onChange={(e) => setFirstname(e.target.value)}
                         value={firstname}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none  rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -300,7 +300,7 @@ const SignUp = () => {
                         type="text"
                         onChange={(e) => setLastname(e.target.value)}
                         value={lastname}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none  rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -310,7 +310,7 @@ const SignUp = () => {
                         type="text"
                         onChange={(e) => setPhonenumber(e.target.value)}
                         value={phonenumber}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none  rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -320,7 +320,7 @@ const SignUp = () => {
                         type="email"
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none  rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -330,7 +330,7 @@ const SignUp = () => {
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none  rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div>
@@ -352,11 +352,170 @@ const SignUp = () => {
                       </select>
                     </div>
                   </div>
+                  <div className="flex flex-wrap sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                    {/* Upload Profile */}
+                    <div className="flex flex-col items-center">
+                      <div className="bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-green-400">
+                        <label htmlFor="fileInput">
+                          {testImage ? (
+                            <img
+                              src={URL.createObjectURL(testImage)}
+                              alt="Uploaded"
+                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                            />
+                          ) : (
+                            <IoMdPersonAdd className="text-[40px] sm:text-[60px] ml-2 sm:ml-4 mt-2 sm:mt-4  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
+                          )}
+                        </label>
+                        <input
+                          id="fileInput"
+                          placeholder="National Id"
+                          name="file"
+                          type="file"
+                          ref={inputRef}
+                          onChange={(e) => settestImage(e.target.files[0])}
+                          className="hidden"
+                        />
+                      </div>
+                      <div className="bg-green-400 mt-2 sm:mt-3 w-20 sm:w-28 rounded-lg text-center">
+                        <label className="text-[10px] sm:text-[12px] font-bold">
+                          Upload
+                        </label>
+                        <div className="text-[10px] sm:text-[12px] font-bold">
+                          <label>Profile</label>
+                        </div>
+                        <div className="text-[10px] sm:text-[12px] font-bold">
+                          <label>Picture</label>
+                        </div>
+                      </div>
+                      {imError && (
+                        <div className="bg-red-500 mt-2 p-1 rounded-md w-full text-center">
+                          <div className="text-[10px] sm:text-[12px] ">
+                            {imError}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* Upload Front Side */}
+                    <div className="flex flex-col items-center">
+                      <div className="bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-green-400">
+                        <label htmlFor="fileInput2">
+                          {testImage2 ? (
+                            <img
+                              src={URL.createObjectURL(testImage2)}
+                              alt="Uploaded"
+                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                            />
+                          ) : (
+                            <FaIdCard className="text-[40px] sm:text-[60px] ml-2 sm:ml-4 mt-2 sm:mt-4  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
+                          )}
+                        </label>
+                        <input
+                          id="fileInput2"
+                          placeholder="National Id"
+                          name="file"
+                          type="file"
+                          ref={inputRef}
+                          onChange={(e) => settestImage2(e.target.files[0])}
+                          className="hidden"
+                        />
+                      </div>
+                      <div className="bg-green-400 mt-2 sm:mt-3 w-20 sm:w-28 rounded-lg text-center">
+                        <label className="text-[10px] sm:text-[12px] font-bold">
+                          Upload Front Side
+                        </label>
+                        <div className="text-[10px] sm:text-[12px] font-bold">
+                          <label>Of National Id</label>
+                        </div>
+                      </div>
+                      {imError2 && (
+                        <div className="bg-red-500 mt-2 p-1 rounded-md w-full text-center">
+                          <div className="text-[10px] sm:text-[12px] ">
+                            {imError2}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Upload Back Side */}
+                    <div className="flex flex-col items-center">
+                      <div className="bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-green-400">
+                        <label htmlFor="fileInput3">
+                          {testImage3 ? (
+                            <img
+                              src={URL.createObjectURL(testImage3)}
+                              alt="Uploaded"
+                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                            />
+                          ) : (
+                            <FaIdCard className="text-[40px] sm:text-[60px] ml-2 sm:ml-5 mt-2 sm:mt-5  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
+                          )}
+                        </label>
+                        <input
+                          id="fileInput3"
+                          placeholder="National Id"
+                          name="file"
+                          type="file"
+                          ref={inputRef}
+                          onChange={(e) => settestImage3(e.target.files[0])}
+                          className="hidden"
+                        />
+                      </div>
+                      <div className="bg-green-400 mt-2 sm:mt-3 w-20 sm:w-28 rounded-lg text-center">
+                        <label className="text-[10px] sm:text-[12px] font-bold">
+                          Upload Back Side
+                        </label>
+                        <div className="text-[10px] sm:text-[12px] font-bold">
+                          <label>Of National Id</label>
+                        </div>
+                      </div>
+                      {imError3 && (
+                        <div className="bg-red-500 mt-2 p-1 rounded-md w-full text-center">
+                          <div className="text-[10px] sm:text-[12px] ">
+                            {imError3}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* Certificate */}
+                    <div className="flex flex-col items-center">
+                      <div className="bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-green-400">
+                        <label htmlFor="fileInput4">
+                          {testImage4 ? (
+                            <img
+                              src={URL.createObjectURL(testImage4)}
+                              alt="Uploaded"
+                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                            />
+                          ) : (
+                            <GrCertificate className="text-[40px] sm:text-[60px] ml-2 sm:ml-5 mt-2 sm:mt-5  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
+                          )}
+                        </label>
+                        <input
+                          id="fileInput4"
+                          placeholder="Certificate"
+                          name="file"
+                          type="file"
+                          ref={inputRef}
+                          onChange={(e) => settestImage4(e.target.files[0])}
+                          className="hidden"
+                        />
+                      </div>
+                      <div className="bg-green-400 mt-2 sm:mt-3 w-20 sm:w-28 rounded-lg text-center">
+                        <label className="text-[10px] sm:text-[12px] font-bold">
+                          Upload Certificate
+                        </label>
+                        <div className="text-[10px] sm:text-[12px] font-bold">
+                          <label>If Any (Optional)</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex justify-center mt-8">
                   <button
                     disabled={false}
-                    className="bg-yellow-400 hover: h-[48px] w-full md:w-96 border-2 from-white rounded-3xl font-bold hover:to-purple-800 transition delay-200"
+                    className="bg-yellow-400  hover:from-purple-400 hover:to-purple-800 text-sm md:text-base h-12 md:h-14 w-full max-w-xs md:max-w-md border-2 rounded-3xl font-bold transition-transform transform hover:scale-105 duration-200"
                   >
                     Apply
                   </button>
@@ -371,11 +530,11 @@ const SignUp = () => {
                 onChange={(e) => setOtp(e.target.value)}
                 placeholder="Enter OTP"
                 required
-                className="bg-transparent h-[55px] w-full md:w-[300px] border-2 focus:outline-none  px-4  "
+                className="bg-transparent h-[50px] w-[90%] max-w-[300px] border-2 focus:outline-none focus:border-yellow-300 px-4 text-sm md:h-[55px] md:text-base"
               />
               <button
-                onClick={handleSubmit}
-                className="bg-green-400 hover: h-[48px] w-[200px] border-2 rounded-3xl font-bold hover:bg-yellow-400 transition delay-200"
+                onClick={handleSumit}
+                className="bg-green-400 h-[45px] w-[70%] max-w-[200px] rounded-3xl font-bold hover:bg-yellow-400 transition delay-200 md:h-[48px]"
               >
                 Verify OTP
               </button>
