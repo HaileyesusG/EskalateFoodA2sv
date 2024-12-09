@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSignUp } from "../Hooks/useSignUp";
 import { FaIdCard } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
+import { BounceLoader } from "react-spinners";
 import { FaUser } from "react-icons/fa";
 import { AiFillPhone } from "react-icons/ai";
 import { GrCertificate } from "react-icons/gr";
@@ -17,6 +18,7 @@ const socket = io(API_BASE_URL);
 const SignUp = () => {
   const { signup, isLoading, error } = useSignUp();
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error2, setError2] = useState(null);
   const [password, setPassword] = useState("");
   const [department, setDepartment] = useState("");
@@ -68,6 +70,7 @@ const SignUp = () => {
   }, [testImage3]);
   //Generate OTP
   const generateOtp = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setError2("");
     if (selectedChoices.length == 0) {
@@ -110,7 +113,7 @@ const SignUp = () => {
       console.log(json.message);
       return;
     }
-
+    setLoading(false);
     setIsOtpSent(true);
   };
   const handleSumit = async (e) => {
@@ -141,6 +144,7 @@ const SignUp = () => {
       if (msg == email) {
         setView(true);
         setView2(false);
+        setLoading(false);
         console.log("in loading ", msg);
       }
     });
@@ -519,10 +523,21 @@ const SignUp = () => {
                 </div>
                 <div className="flex justify-center mt-8">
                   <button
-                    disabled={false}
+                    disabled={loading}
                     className="bg-yellow-400  hover:from-purple-400 hover:to-purple-800 text-sm md:text-base h-12 md:h-14 w-full max-w-xs md:max-w-md border-2 rounded-3xl font-bold transition-transform transform hover:scale-105 duration-200"
                   >
-                    Apply
+                    {loading ? (
+                      <span className="flex justify-center items-center">
+                        <BounceLoader
+                          size={20}
+                          color="#ffffff"
+                          loading={loading}
+                        />
+                        Processing...
+                      </span>
+                    ) : (
+                      "Apply"
+                    )}
                   </button>
                 </div>
               </form>
@@ -539,12 +554,24 @@ const SignUp = () => {
               />
               <button
                 onClick={handleSumit}
+                disabled={loading}
                 className="bg-green-400 h-[45px] w-[70%] max-w-[200px] rounded-3xl font-bold hover:bg-yellow-400 transition delay-200 md:h-[48px]"
               >
-                Verify OTP
+                {loading ? (
+                  <span className="flex justify-center items-center">
+                    <BounceLoader size={20} color="#ffffff" loading={loading} />
+                    Processing...
+                  </span>
+                ) : (
+                  "Verify OTP"
+                )}
               </button>
             </div>
           )}
+          <div className="bg-red-500 ml-10 w-56 mt-2 rounded-md">
+            {error && <div className="ml-5 text-white ">{error}</div>}
+            {error2 && <div className="ml-5 text-white ">{error2}</div>}
+          </div>
         </div>
       )}
       {View && <SuccessMessage />}
