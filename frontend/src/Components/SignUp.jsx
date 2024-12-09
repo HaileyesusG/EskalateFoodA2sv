@@ -3,6 +3,8 @@ import { useSignUp } from "../Hooks/useSignUp";
 import { FaIdCard } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 import { BounceLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FaUser } from "react-icons/fa";
 import { AiFillPhone } from "react-icons/ai";
 import { GrCertificate } from "react-icons/gr";
@@ -43,59 +45,34 @@ const SignUp = () => {
   const [selectedChoices, setSelectedChoices] = useState([]);
   const GenderOption = ["Male", "Female"];
   const DepartmentOption = ["DISH", "TV"];
-  useEffect(() => {
-    if (selectedChoices.length !== 0) {
-      setdepError("");
-    }
-  }, [selectedChoices]);
-  useEffect(() => {
-    if (gender !== "" || gender !== "Gender") {
-      setgenError("");
-    }
-  }, [gender]);
-  useEffect(() => {
-    if (testImage) {
-      setimError("");
-    }
-  }, [testImage]);
-  useEffect(() => {
-    if (testImage2) {
-      setim2Error("");
-    }
-  }, [testImage2]);
-  useEffect(() => {
-    if (testImage3) {
-      setim3Error("");
-    }
-  }, [testImage3]);
+
   //Generate OTP
   const generateOtp = async (e) => {
     setLoading(true);
     e.preventDefault();
-    setError2("");
     if (selectedChoices.length == 0) {
-      setdepError("Department is Required");
+      toastify("Department is Required");
       setLoading(false);
       return;
     }
 
     if (gender == "" || gender == "Gender") {
-      setgenError("Gender is Required");
+      toastify("Gender is Required");
       setLoading(false);
       return;
     }
     if (!testImage) {
-      setimError("Profile Photo is Required");
+      toastify("Profile Photo is Required");
       setLoading(false);
       return;
     }
     if (!testImage2) {
-      setim2Error("Front side of Id is Required");
+      toastify("Front side of Id is Required");
       setLoading(false);
       return;
     }
     if (!testImage3) {
-      setim3Error("Back side of Id is Required");
+      toastify("Back side of Id is Required");
       setLoading(false);
       return;
     }
@@ -113,7 +90,7 @@ const SignUp = () => {
     });
     const json = await response.json();
     if (!response.ok) {
-      setError2(json.message);
+      toastify(json.message);
       setLoading(false);
       console.log(json.message);
       return;
@@ -155,6 +132,28 @@ const SignUp = () => {
     });
     return () => {
       socket.off("isLoading");
+    };
+  }, [socket, email]);
+
+  //toastify
+  const toastify = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
+    });
+  };
+  //
+  useEffect(() => {
+    socket.on("notSuccess2", (msg) => {
+      const { Email, error } = msg;
+      console.log("the email", phonenumber);
+      if (email == Email) {
+        toastify(error);
+        setLoading(false);
+      }
+    });
+    return () => {
+      socket.off("notSuccess2");
     };
   }, [socket, email]);
 
@@ -290,11 +289,7 @@ const SignUp = () => {
                       </label>
                     </div>
                   )}
-                  <div className="bg-red-500 ml-10 w-52 mt-2 rounded-sm">
-                    {depError && (
-                      <div className="ml-2 text-white ">{depError}</div>
-                    )}
-                  </div>
+                  <div className="bg-red-500 ml-10 w-52 mt-2 rounded-sm"></div>
                   <div className="space-y-4">
                     <div className="flex flex-col">
                       <input
@@ -363,11 +358,7 @@ const SignUp = () => {
                           </option>
                         ))}
                       </select>
-                      <div className="bg-red-500 ml-10 w-52 mt-2 rounded-sm">
-                        {genError && (
-                          <div className="ml-2 text-white ">{genError}</div>
-                        )}
-                      </div>
+                      <div className="bg-red-500 ml-10 w-52 mt-2 rounded-sm"></div>
                     </div>
                   </div>
                   <div className="flex flex-wrap sm:flex-row items-center justify-center gap-4 sm:gap-6">
@@ -406,13 +397,6 @@ const SignUp = () => {
                           <label>Picture</label>
                         </div>
                       </div>
-                      {imError && (
-                        <div className="bg-red-500 mt-2 p-1 rounded-md w-full text-center">
-                          <div className="text-[10px] sm:text-[12px] ">
-                            {imError}
-                          </div>
-                        </div>
-                      )}
                     </div>
                     {/* Upload Front Side */}
                     <div className="flex flex-col items-center">
@@ -446,13 +430,6 @@ const SignUp = () => {
                           <label>Of National Id</label>
                         </div>
                       </div>
-                      {imError2 && (
-                        <div className="bg-red-500 mt-2 p-1 rounded-md w-full text-center">
-                          <div className="text-[10px] sm:text-[12px] ">
-                            {imError2}
-                          </div>
-                        </div>
-                      )}
                     </div>
 
                     {/* Upload Back Side */}
@@ -487,13 +464,6 @@ const SignUp = () => {
                           <label>Of National Id</label>
                         </div>
                       </div>
-                      {imError3 && (
-                        <div className="bg-red-500 mt-2 p-1 rounded-md w-full text-center">
-                          <div className="text-[10px] sm:text-[12px] ">
-                            {imError3}
-                          </div>
-                        </div>
-                      )}
                     </div>
                     {/* Certificate */}
                     <div className="flex flex-col items-center">
@@ -533,6 +503,7 @@ const SignUp = () => {
                       {error2 && (
                         <div className="ml-5 text-white ">{error2}</div>
                       )}
+                      <ToastContainer />
                     </div>
                   </div>
                 </div>

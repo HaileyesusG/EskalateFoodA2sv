@@ -48,6 +48,10 @@ export const useSignUp = () => {
       setIsLoading(false);
       setError(json.message);
       console.log("the error is ", json.message);
+      const error = json.message;
+      const Email = email;
+      const data = { Email, error };
+      socket.emit("notSuccess2", data);
     }
     if (response.ok) {
       setIsLoading(false);

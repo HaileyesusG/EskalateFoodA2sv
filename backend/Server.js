@@ -132,6 +132,12 @@ io.on("connection", (socket) => {
       socket.off("notSuccess");
     };
   });
+  socket.on("notSuccess2", (msg) => {
+    io.emit("notSuccess2", msg);
+    return () => {
+      socket.off("notSuccess2");
+    };
+  });
 
   socket.on("Respon", (msg) => {
     io.emit("respon2", msg);
