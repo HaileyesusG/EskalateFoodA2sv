@@ -498,13 +498,7 @@ const SignUp = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-red-500 ml-10 w-56 mt-2 rounded-md">
-                      {error && <div className="ml-5 text-white ">{error}</div>}
-                      {error2 && (
-                        <div className="ml-5 text-white ">{error2}</div>
-                      )}
-                      <ToastContainer />
-                    </div>
+                    <div className="bg-red-500 ml-10 w-56 mt-2 rounded-md"></div>
                   </div>
                 </div>
                 <div className="flex justify-center mt-8">
@@ -556,6 +550,7 @@ const SignUp = () => {
           )}
         </div>
       )}
+      <ToastContainer />
       {View && <SuccessMessage />}
     </div>
   );
