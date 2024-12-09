@@ -350,6 +350,11 @@ const SignUp = () => {
                           </option>
                         ))}
                       </select>
+                      <div className="bg-red-500 ml-10 w-52 mt-2 rounded-sm">
+                        {genError && (
+                          <div className="ml-2 text-white ">{genError}</div>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="flex flex-wrap sm:flex-row items-center justify-center gap-4 sm:gap-6">
