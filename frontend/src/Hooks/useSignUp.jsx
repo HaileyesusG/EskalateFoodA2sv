@@ -51,7 +51,7 @@ export const useSignUp = () => {
     }
     if (response.ok) {
       setIsLoading(false);
-      socket.emit("isLoading", true);
+      socket.emit("isLoading", email);
       // red("/login");
       //save the user on local storage
       //localStorage.setItem('user')
