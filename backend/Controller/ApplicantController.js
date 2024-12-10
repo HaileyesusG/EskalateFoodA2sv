@@ -3,6 +3,7 @@ const Admin = require("../Model/Admin");
 const Tech = require("../Model/Technician");
 const validator = require("validator");
 const otpGenerator = require("otp-generator");
+const { setOtp } = require("../utils/otpStore");
 const bcryptjs = require("bcryptjs");
 const nodemailer = require("nodemailer");
 let otpStore = {}; // Temporary store for OTPs
@@ -24,24 +25,6 @@ const ApplicantCreate = async (req, res) => {
   const [image1, image2, image3, image4] = req.files["testImages"];
   const departmentArray = department.split(",");
   try {
-    const storedOtpData = otpStore[email];
-
-    if (!storedOtpData) {
-      return res.status(400).send({ message: "OTP not generated or expired" });
-    }
-
-    const isOtpValid = await bcryptjs.compare(otp, storedOtpData.otp);
-    const isOtpExpired = Date.now() > storedOtpData.otpExpiry;
-
-    if (isOtpExpired) {
-      delete otpStore[email];
-      return res.status(400).send({ message: "OTP expired" });
-    }
-
-    if (!isOtpValid) {
-      return res.status(400).send({ message: "Invalid OTP" });
-    }
-
     // Register the user
 
     ////
@@ -122,15 +105,12 @@ const GenerateOtp = async (req, res) => {
       throw Error("Phonenumber already in use");
     }
     // Generate OTP
-    const otp = otpGenerator.generate(6, {
-      upperCase: false,
-      specialChars: false,
-    });
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generates a 6-digit OTPy
     console.log("the opt is", otp);
     console.log("the email", email);
     const hashedOtp = await bcryptjs.hash(otp, 10);
     // Store OTP and its expiration time in memory
-    otpStore[email] = { otp: hashedOtp, otpExpiry: Date.now() + 300000 }; // 5 minutes expiry
+    setOtp(email, { otp: hashedOtp, otpExpiry: Date.now() + 300000 }); // 5 minutes expiry
 
     const transporter = nodemailer.createTransport({
       service: "Gmail",
