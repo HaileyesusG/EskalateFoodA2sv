@@ -38,7 +38,7 @@ const validateOtp = async (req, res, next) => {
           .send({ message: "OTP not generated or expired" });
       }
 
-      const isOtpValid = bcryptjs.compare(otp, storedOtpData.otp);
+      const isOtpValid = await bcryptjs.compare(otp, storedOtpData.otp);
       const isOtpExpired = Date.now() > storedOtpData.otpExpiry;
 
       if (isOtpExpired) {
