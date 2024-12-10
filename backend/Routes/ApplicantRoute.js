@@ -49,9 +49,7 @@ router.route("/ApplicantCreate").post(
       // OTP is valid, upload files
       upload2(req, res, (err) => {
         if (err) {
-          return res
-            .status(500)
-            .json({ message: "File upload error", error: err.message });
+          return res.status(500).json({ message: err.message });
         }
 
         // Forward request to the controller
