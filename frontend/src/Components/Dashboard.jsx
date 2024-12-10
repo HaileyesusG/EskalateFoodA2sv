@@ -424,7 +424,7 @@ const Dashboard = () => {
           <img src={hiloe6} alt="" className="rounded-full" />
         </div>
         <h2 className="ml-2 sm:ml-3 mt-[130px] sm:mt-[140px] text-[8px] sm:text-[20px]">
-          Africa Customer Service
+          MasterFix Ethiopia
         </h2>
         <div className="h-[40px] sm:h-[50px] w-[40px] sm:w-[50px] rounded-full border-2 border-gray-300 ml-[340px] mt-[-40px] sm:mt-[130px] md:ml-[750px]">
           {Customer && customer.length > 0 ? (

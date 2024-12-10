@@ -12,7 +12,7 @@ const socket = io("https://africadeploybackend.onrender.com");
 //Sign Up
 const ApplicantCreate = async (req, res) => {
   let leastWork = Infinity;
-  const {
+  let {
     department,
     firstname,
     lastname,
@@ -20,8 +20,18 @@ const ApplicantCreate = async (req, res) => {
     phonenumber,
     email,
     password,
+    images,
   } = req.body;
-  const [image1, image2, image3, image4] = req.files["testImages"];
+  //console.log("req.body is ,", req.body);
+  // Extract the first value if any field is an array
+  department = Array.isArray(department) ? department[0] : department;
+  const fname = Array.isArray(firstname) ? firstname[0] : firstname;
+  const lname = Array.isArray(lastname) ? lastname[0] : lastname;
+  const gen = Array.isArray(gender) ? gender[0] : gender;
+  const phone = Array.isArray(phonenumber) ? phonenumber[0] : phonenumber;
+  const mail = Array.isArray(email) ? email[0] : email;
+  const pass = Array.isArray(password) ? password[0] : password;
+  const [image1, image2, image3, image4] = images;
   const departmentArray = department.split(",");
   try {
     // Register the user
@@ -29,16 +39,16 @@ const ApplicantCreate = async (req, res) => {
     ////
     const applicants = await Applicant.create({
       department: [],
-      firstname,
-      lastname,
-      gender,
-      phonenumber,
-      email,
-      password,
-      image: image1.path,
-      image2: image2.path,
-      image3: image3.path,
-      image4: image4 ? image4.path : "",
+      firstname: fname,
+      lastname: lname,
+      gender: gen,
+      phonenumber: phone,
+      email: mail,
+      password: pass,
+      image: image1,
+      image2: image2,
+      image3: image3,
+      image4: image4 ? image4 : "",
     });
     departmentArray.forEach((value) => {
       applicants.department.push(value);
@@ -69,9 +79,9 @@ const ApplicantCreate = async (req, res) => {
     });
     socket.once("Rejected", async (msg) => {});
     // Clean up the OTP store
-    delete otpStore[email];
     res.status(200).json({ message: "User registered successfully" });
   } catch (error) {
+    console.log("message is", error);
     res.status(400).json({ message: error.message });
     //console.log("error", error);
   }

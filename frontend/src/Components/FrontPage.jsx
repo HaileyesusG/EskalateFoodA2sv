@@ -83,7 +83,7 @@ const FrontPage = () => {
         <div className="container mx-auto flex flex-wrap items-center justify-between p-4">
           <div className="text-2xl font-bold text-black flex justify-between w-full md:w-auto">
             <Link to="home" smooth={true} duration={500} offset={-50}>
-              Africa
+              Master
             </Link>
             <div className="md:hidden">
               <button
@@ -176,10 +176,8 @@ const FrontPage = () => {
             />
           </div>
           <div className="mt-4 md:mt-0 lg:ml-[-500px] text-center md:text-left">
-            <p className="text-xl md:text-4xl font-bold text-black">Africa</p>
-            <p className="text-xl md:text-4xl text-yellow-400 font-bold">
-              CustomerService
-            </p>
+            <p className="text-xl md:text-4xl font-bold text-black">Master</p>
+            <p className="text-xl md:text-4xl text-yellow-400 font-bold">Fix</p>
           </div>
           <div className="flex flex-col mt-4 md:flex-row md:items-center md:space-x-4">
             <div className="mb-4 md:mb-0">
