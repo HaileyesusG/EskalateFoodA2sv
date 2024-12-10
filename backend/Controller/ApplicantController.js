@@ -20,7 +20,6 @@ const ApplicantCreate = async (req, res) => {
     phonenumber,
     email,
     password,
-    otp,
   } = req.body;
   const [image1, image2, image3, image4] = req.files["testImages"];
   const departmentArray = department.split(",");

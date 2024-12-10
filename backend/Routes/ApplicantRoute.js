@@ -43,6 +43,8 @@ router.route("/ApplicantCreate").post(
       if (!isOtpValid) {
         return res.status(400).send({ message: "Invalid OTP" });
       }
+      // OTP is valid, remove from store
+      deleteOtp(email);
 
       // OTP is valid, upload files
       upload2(req, res, (err) => {
@@ -56,9 +58,7 @@ router.route("/ApplicantCreate").post(
         next();
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ message: "Server error", error: error.message });
+      return res.status(500).json({ message: error.message });
     }
   },
   ApplicantCreate
