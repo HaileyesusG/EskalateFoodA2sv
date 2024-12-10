@@ -5,7 +5,7 @@ const {
   GenerateOtp,
   deleteApplicant,
 } = require("../Controller/ApplicantController");
-
+const bcryptjs = require("bcryptjs");
 const multer = require("multer");
 const { storage } = require("../MiddleWare/cloudinary");
 const { getOtp, deleteOtp } = require("../utils/otpStore");
