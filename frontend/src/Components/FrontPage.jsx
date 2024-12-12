@@ -79,19 +79,16 @@ const FrontPage = () => {
       });
     };
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if(storedUser)
-    {
+    if (storedUser) {
       const user = JSON.parse(storedUser);
-      setUser(user)
-      console.log("yes")
+      setUser(user);
+      console.log("yes");
+    } else {
+      console.log("No");
     }
-    else{
-      console.log("No")
-    }
-    
-  },[])
+  }, []);
 
   return (
     <div>
@@ -144,17 +141,29 @@ const FrontPage = () => {
             </a>
           </div>
           <div className="flex space-x-3">
-            {user?<button
-              className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
-              onClick={handleHome}
-            >
-              Home
-            </button>:<button
-              className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
-              onClick={handleSignIn}
-            >
-              LogIn
-            </button>}
+            {user ? (
+              <button
+                className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                onClick={handleHome}
+              >
+                Home
+              </button>
+            ) : (
+              <div className="flex space-x-3">
+                <button
+                  className="w-32 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                  onClick={handleSignUpT}
+                >
+                  SignUp/የባለሙያዎች መመዝገቢያ
+                </button>
+                <button
+                  className="w-32 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                  onClick={handleSignIn}
+                >
+                  LogIn/የባለሙያዎች መግቢያ
+                </button>
+              </div>
+            )}
             <button
               className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
