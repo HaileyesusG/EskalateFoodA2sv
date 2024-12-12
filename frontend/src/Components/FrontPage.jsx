@@ -154,13 +154,13 @@ const FrontPage = () => {
                   className="w-32 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignUpT}
                 >
-                  SignUp/የባለሙያዎች መመዝገቢያ
+                  SignUp/የባለሙያ መመዝገቢያ
                 </button>
                 <button
                   className="w-32 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignIn}
                 >
-                  LogIn/የባለሙያዎች መግቢያ
+                  LogIn/የባለሙያ መግቢያ
                 </button>
               </div>
             )}
@@ -168,7 +168,7 @@ const FrontPage = () => {
               className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
             >
-              Order Online
+              Order Online/ባለሙያ መጥሪያ
             </button>
           </div>
         </div>
