@@ -98,15 +98,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              user || todo2.length > 0 ? (
-                <Home user3={user || todo2[0]} />
-              ) : admin || todo.length > 0 ? (
-                <Admin user3={admin || todo[0]} />
-              ) : (
-                <Navigate to={"/FrontPage"} />
-              )
-            }
+            element={<FrontPage/>}
           />
           <Route path="/Login" element={<Login />} />
           <Route
