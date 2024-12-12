@@ -103,15 +103,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route
             path="/FrontPage"
-            element={
-              user || todo2.length > 0 ? (
-                <Home user3={user || todo2[0]} />
-              ) : admin || todo.length > 0 ? (
-                <Admin user3={admin || todo[0]} />
-              ) : (
-                <FrontPage />
-              )
-            }
+            element={<FrontPage/>}
           />
           <Route path="/Transition" element={<Transition />} />
           <Route path="/Transition2" element={<Transition2 />} />
