@@ -31,6 +31,9 @@ const FrontPage = () => {
   const handleSignIn = () => {
     red("/LogIn");
   };
+  const handleHome = () => {
+    red("/Home");
+  };
   const handleSignUp = () => {
     red("/SignUpA");
   };
@@ -45,7 +48,7 @@ const FrontPage = () => {
   };
   const red = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [user, setUser] = useState("");
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -76,6 +79,15 @@ const FrontPage = () => {
       });
     };
   }, []);
+  useEffect(()=>{
+    const storedUser = localStorage.getItem("user");
+    if(storedUser)
+    {
+      const user = JSON.parse(storedUser);
+      setUser(user)
+    }
+    
+  },[])
 
   return (
     <div>
@@ -128,12 +140,17 @@ const FrontPage = () => {
             </a>
           </div>
           <div className="flex space-x-3">
-            <button
+            {user?<button
+              className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+              onClick={handleHome}
+            >
+              Home
+            </button>:<button
               className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleSignIn}
             >
               LogIn
-            </button>
+            </button>}
             <button
               className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
