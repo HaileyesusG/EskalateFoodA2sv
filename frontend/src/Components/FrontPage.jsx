@@ -85,6 +85,10 @@ const FrontPage = () => {
     {
       const user = JSON.parse(storedUser);
       setUser(user)
+      console.log("yes")
+    }
+    else{
+      console.log("No")
     }
     
   },[])
