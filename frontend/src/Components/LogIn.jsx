@@ -83,9 +83,11 @@ const Login = () => {
                     )}
                 
               </button>
-             {error&& <ToastContainer />}
+             {error&&toastify(error) }
+
             </div>
           </form>
+          <ToastContainer />
         </div>
       </div>
       <img className="object-cover w-full h-full" src={hiloe5} alt="" />
