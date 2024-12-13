@@ -23,10 +23,7 @@ const Login = () => {
   const handleSumit = async (e) => {
     e.preventDefault();
     await signin(email, password);
-    if(error)
-      {
-        toastify(error)
-      }
+    
 
     if (image) setViewer(true);
   };
@@ -44,6 +41,10 @@ const Login = () => {
         setError(null)
       }
   }
+  if(error)
+    {
+      toastify(error)
+    }
 
   return (
     <div className="relative w-full h-screen">
