@@ -23,6 +23,10 @@ const Login = () => {
   const handleSumit = async (e) => {
     e.preventDefault();
     await signin(email, password);
+    if(error)
+      {
+        toastify(error)
+      }
 
     if (image) setViewer(true);
   };
@@ -32,12 +36,15 @@ const Login = () => {
   useEffect(() => {
     socket?.emit("newUser", email);
   }, [email]);
-if(error)
-{
-  toastify(error)
-  setError(null)
+  //
+  const handleInputChange=(e,setValue)=>{
+    setValue(e.target.value)
+    if(error)
+      {
+        setError(null)
+      }
+  }
 
-}
   return (
     <div className="relative w-full h-screen">
       <div className="mt-20 ml-5 sm:mt-56 h-auto sm:h-[500px] w-[90%] sm:w-[700px] mx-auto sm:ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white md:ml-24 lg:ml-64">
@@ -54,7 +61,7 @@ if(error)
                 <input
                   type="email"
                   placeholder="Email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleInputChange(e,setEmail)}
                   value={email}
                   className="bg-transparent h-[35px] w-full sm:w-[300px] border-b-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white text-white"
                 />
@@ -63,7 +70,7 @@ if(error)
               <div className="flex w-[90%] sm:w-auto justify-center relative">
                 <input
                   type="password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handleInputChange(e,setPassword)}
                   value={password}
                   placeholder="Password"
                   className="bg-transparent h-[35px] w-full sm:w-[300px] border-b-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white text-white"
