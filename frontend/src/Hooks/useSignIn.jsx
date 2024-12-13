@@ -38,5 +38,6 @@ export const useSignIn = () => {
       console.log("not log in");
     }
   };
+  setError(null);
   return { signin, isLoading, error };
 };
