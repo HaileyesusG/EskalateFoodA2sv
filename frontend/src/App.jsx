@@ -129,6 +129,16 @@ function App() {
               )
             }
           />
+          <Route
+            path="/Signup"
+            element={
+              user || todo2.length > 0 ? (
+                <FrontPage />
+              ) : (
+                <SignUp/>
+              )
+            }
+          />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Dashboard2" element={<Dashboard2 />} />
           <Route path="/Chat" element={<Chat />} />
@@ -144,7 +154,6 @@ function App() {
           />
           <Route path="/AdminChat" element={<AdminChat />} />
           <Route path="/ChatTech" element={<ChatTech />} />
-          <Route path="/SignUp" element={<SignUp />} />
           <Route path="/SignUpA" element={<SignUpA />} />
           <Route path="/SignUpC" element={<SignUpC />} />
           <Route path="/FrontPage" element={<FrontPage />} />
