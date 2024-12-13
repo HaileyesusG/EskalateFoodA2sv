@@ -569,7 +569,7 @@ const Admin = ({ user3 }) => {
                     <FaPen className="absolute ml-2 mt-2 text-white text-[13px]" />
                     <FaCircle className="text-green-500 text-3xl" />
                   </div>
-                  <div className="mt-14 ml-24">
+                  <div className="mt-14 ml-14">
                     <img
                       src={profile}
                       className="w-[150px] h-[150px] rounded-full "
