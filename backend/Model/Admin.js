@@ -102,7 +102,7 @@ adminSchema.statics.Login = async function (email, password) {
   if (!email || !password) {
     throw Error("All files are required");
   }
-  const admin = await this.findOne({ email });
+  const admin = await this.findOne({ email:{$regex:new RegExp(`^${email}$`,'i')} });
   if (!admin) {
     throw Error("Incorrect email ");
   }

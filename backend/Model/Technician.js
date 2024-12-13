@@ -141,7 +141,7 @@ techSchema.statics.Login = async function (email, password) {
   if (!email || !password) {
     throw Error("All files are required");
   }
-  const tech = await this.findOne({ email });
+  const tech = await this.findOne({ email:{$regex:new RegExp(`^${email}$`,'i')} });
   if (!tech) {
     throw Error("Incorrect email ");
   }
