@@ -32,10 +32,7 @@ const Login = () => {
   useEffect(() => {
     socket?.emit("newUser", email);
   }, [email]);
-if(error)
-{
-  toastify(error)
-}
+
   return (
     <div className="relative w-full h-screen">
       <div className="mt-20 ml-5 sm:mt-56 h-auto sm:h-[500px] w-[90%] sm:w-[700px] mx-auto sm:ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white md:ml-24 lg:ml-64">
@@ -86,7 +83,7 @@ if(error)
                     )}
                 
               </button>
-              <ToastContainer />
+             {error&& <ToastContainer />}
             </div>
           </form>
         </div>
