@@ -16,7 +16,7 @@ const Login = () => {
   const [socket, setSocket] = useState(null);
   const toastify = (message) => {
     toast.error(message, {
-      position: "top-right",
+      position: "top-center",
       style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
     });
   };
