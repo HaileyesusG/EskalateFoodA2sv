@@ -298,7 +298,7 @@ const SignUp = () => {
                         type="text"
                         onChange={(e) => setFirstname(e.target.value)}
                         value={firstname}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 border-black  focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -308,7 +308,7 @@ const SignUp = () => {
                         type="text"
                         onChange={(e) => setLastname(e.target.value)}
                         value={lastname}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 border-black focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -318,7 +318,7 @@ const SignUp = () => {
                         type="text"
                         onChange={(e) => setPhonenumber(e.target.value)}
                         value={phonenumber}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 border-black focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -328,7 +328,7 @@ const SignUp = () => {
                         type="email"
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 border-black focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div className="flex flex-col">
@@ -338,7 +338,7 @@ const SignUp = () => {
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none focus:border-yellow-300 rounded-2xl px-4  "
+                        className="bg-transparent h-[35px] w-full border-2 border-black focus:border-yellow-300 rounded-2xl px-4  "
                       />
                     </div>
                     <div>
@@ -346,7 +346,7 @@ const SignUp = () => {
                         required
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
-                        className="bg-transparent h-[35px] w-full border-2 focus:outline-none rounded-2xl px-4 "
+                        className="bg-transparent h-[35px] w-full border-2 border-black rounded-2xl px-4 "
                       >
                         <option className="text-black">Gender</option>
                         {GenderOption.map((option) => (
@@ -370,7 +370,7 @@ const SignUp = () => {
                             <img
                               src={URL.createObjectURL(testImage)}
                               alt="Uploaded"
-                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                              className="cursor-pointer w-20 h-20 sm:w-[92px] sm:h-[92px] rounded-full"
                             />
                           ) : (
                             <IoMdPersonAdd className="text-[40px] sm:text-[60px] ml-2 sm:ml-4 mt-2 sm:mt-4  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
@@ -406,7 +406,7 @@ const SignUp = () => {
                             <img
                               src={URL.createObjectURL(testImage2)}
                               alt="Uploaded"
-                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                              className="cursor-pointer w-20 h-20  sm:w-[92px] sm:h-[92px] rounded-full"
                             />
                           ) : (
                             <FaIdCard className="text-[40px] sm:text-[60px] ml-2 sm:ml-4 mt-2 sm:mt-4  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
@@ -440,7 +440,7 @@ const SignUp = () => {
                             <img
                               src={URL.createObjectURL(testImage3)}
                               alt="Uploaded"
-                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                              className="cursor-pointer w-20 h-20  sm:w-[92px] sm:h-[92px] rounded-full"
                             />
                           ) : (
                             <FaIdCard className="text-[40px] sm:text-[60px] ml-2 sm:ml-5 mt-2 sm:mt-5  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
@@ -473,7 +473,7 @@ const SignUp = () => {
                             <img
                               src={URL.createObjectURL(testImage4)}
                               alt="Uploaded"
-                              className="cursor-pointer w-16 h-16 sm:w-[92px] sm:h-[92px] rounded-full"
+                              className="cursor-pointer w-20 h-20  sm:w-[92px] sm:h-[92px] rounded-full"
                             />
                           ) : (
                             <GrCertificate className="text-[40px] sm:text-[60px] ml-2 sm:ml-5 mt-2 sm:mt-5  cursor-pointer hover:text-[50px] sm:hover:text-[75px]" />
@@ -530,7 +530,7 @@ const SignUp = () => {
                 onChange={(e) => setOtp(e.target.value)}
                 placeholder="Enter OTP"
                 required
-                className="bg-transparent h-[50px] w-[90%] max-w-[300px] border-2 focus:outline-none focus:border-yellow-300 px-4 text-sm md:h-[55px] md:text-base"
+                className="bg-transparent h-[50px] w-[90%] max-w-[300px] border-2 border-black focus:border-yellow-300 px-4 text-sm md:h-[55px] md:text-base"
               />
               <button
                 onClick={handleSumit}
