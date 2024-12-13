@@ -14,6 +14,7 @@ export const useSignIn = () => {
   const signin = async (email, password) => {
     setIsLoading(true);
     setError(null);
+    console.log("yes no")
 
     const response = await fetch(`${API_BASE_URL}/api/tech/LoginTech`, {
       headers: { "Content-Type": "application/json" },
@@ -38,6 +39,6 @@ export const useSignIn = () => {
       console.log("not log in");
     }
   };
-  setError(null);
-  return { signin, isLoading, error };
+  
+  return { signin, isLoading, error ,setError};
 };
