@@ -5,20 +5,21 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import hiloe5 from "../assets/dish.jfif";
 import { BounceLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Login = () => {
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [viewr, setViewer] = useState(null);
   const [password, setPassword] = useState("");
   const { signin, isLoading, error, image, name } = useSignIn();
   const [socket, setSocket] = useState(null);
   const toastify = (message) => {
-      toast.error(message, {
-        position: "top-right",
-        style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
-      });
-    };
+    toast.error(message, {
+      position: "top-right",
+      style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
+    });
+  };
   const handleSumit = async (e) => {
     e.preventDefault();
     await signin(email, password);
@@ -31,20 +32,10 @@ const Login = () => {
   useEffect(() => {
     socket?.emit("newUser", email);
   }, [email]);
-
-useEffect(() => {
-    socket.on("userNotSuccess", (msg) => {
-      const  { Email, error }=msg;
-      console.log("the email", phonenumber);
-      if (Email == email) {
-        setLoading(false)
-        toastify(error);
-      }
-    });
-    return () => {
-      socket.off("userNotSuccess");
-    };
-  }, [socket, phonenumber]);
+if(error)
+{
+  toastify(error)
+}
   return (
     <div className="relative w-full h-screen">
       <div className="mt-20 ml-5 sm:mt-56 h-auto sm:h-[500px] w-[90%] sm:w-[700px] mx-auto sm:ml-[310px] absolute bg-opacity-50 backdrop-filter backdrop-blur-sm border-[1px] border-white md:ml-24 lg:ml-64">
@@ -81,12 +72,12 @@ useEffect(() => {
                 disabled={isLoading}
                 className="bg-gradient-to-b hover:text-black h-[35px] w-[90%] sm:w-[300px] border-2 from-orange-300 rounded-3xl font-bold hover:to-purple-500 transition delay-200 text-white"
               >
-                {loading ? (
+                {isLoading ? (
                       <span className="flex justify-center items-center">
                         <BounceLoader
                           size={20}
                           color="#ffffff"
-                          loading={loading}
+                          loading={isLoading}
                         />
                         Processing...
                       </span>
@@ -95,7 +86,7 @@ useEffect(() => {
                     )}
                 
               </button>
-              {error && <div className="text-red-500 text-sm">{error}</div>}
+              <ToastContainer />
             </div>
           </form>
         </div>

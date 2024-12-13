@@ -25,10 +25,6 @@ export const useSignIn = () => {
     if (!response.ok) {
       setIsLoading(false);
       setError(json.message);
-      const error = json.message;
-      const Email = email;
-      const data = { Email, error };
-      socket.emit("userNotSuccess", data);
     }
     if (response.ok) {
       setIsLoading(false);
