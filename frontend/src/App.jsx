@@ -24,8 +24,8 @@ import { io } from "socket.io-client";
 const socket = io(API_BASE_URL);
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState();
-  const [admin, setAdmin2] = useState();
+  const [user, setUser] = useState("");
+  const [admin, setAdmin2] = useState("");
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.admin.admin);
   const todo2 = useSelector((state) => state.tech.tech);
@@ -103,7 +103,15 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route
             path="/FrontPage"
-            element={<FrontPage/>}
+            element={
+              user || todo2.length > 0 ? (
+                <Home user3={user || todo2[0]} />
+              ) : admin || todo.length > 0 ? (
+                <Admin user3={admin || todo[0]} />
+              ) : (
+                <FrontPage />
+              )
+            }
           />
           <Route path="/Transition" element={<Transition />} />
           <Route path="/Transition2" element={<Transition2 />} />
