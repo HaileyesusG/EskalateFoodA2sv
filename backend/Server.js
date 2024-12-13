@@ -138,6 +138,13 @@ io.on("connection", (socket) => {
       socket.off("notSuccess2");
     };
   });
+  //
+  socket.on("userNotSuccess", (msg) => {
+    io.emit("userNotSuccess", msg);
+    return () => {
+      socket.off("userNotSuccess");
+    };
+  });
 
   socket.on("Respon", (msg) => {
     io.emit("respon2", msg);
