@@ -183,9 +183,9 @@ const SignUp = () => {
             <div className="absolute inset-0 p-4">
               <form onSubmit={generateOtp} className="to-blue-100">
                 <div className="flex flex-col items-center mb-6">
-                  <h3 className="font-bold text-2xl md:text-3xl text-green-400 ">
+                  <p className="font-bold text-2xl md:text-4xl text-green-600 ">
                     Online Application Form
-                  </h3>
+                  </p>
                 </div>
                 <div className="space-y-6">
                   <div className="">
@@ -427,7 +427,7 @@ const SignUp = () => {
                           Upload Front Side
                         </label>
                         <div className="text-[10px] sm:text-[12px] font-bold">
-                          <label>Of National Id</label>
+                          <label>Of Kebele Id</label>
                         </div>
                       </div>
                     </div>
@@ -461,7 +461,7 @@ const SignUp = () => {
                           Upload Back Side
                         </label>
                         <div className="text-[10px] sm:text-[12px] font-bold">
-                          <label>Of National Id</label>
+                          <label>Of Of Kebele Id</label>
                         </div>
                       </div>
                     </div>
