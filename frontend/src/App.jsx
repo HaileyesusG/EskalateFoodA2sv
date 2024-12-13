@@ -24,6 +24,7 @@ import { io } from "socket.io-client";
 const socket = io(API_BASE_URL);
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading,setIsLoading]=useState(true)
   const [user, setUser] = useState("");
   const [admin, setAdmin2] = useState("");
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
     } else {
       console.log("not found2");
     }
+    setIsLoading(false)
   }, []);
   //user
   const featch = async (id) => {
@@ -88,6 +90,10 @@ function App() {
       console.log("not log in");
     }
   };
+  if(isLoading)
+  {
+    return <div>Loading...</div>
+  }
   return (
     <div>
       <BrowserRouter>
