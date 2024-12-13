@@ -167,8 +167,9 @@ const FrontPage = () => {
             <button
               className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
+              disabled={true}
             >
-              Order Online/ባለሙያ መጥሪያ
+              በቅርብ ቀን ይጀምራል/ Order Online/ባለሙያ መጥሪያ
             </button>
           </div>
         </div>
