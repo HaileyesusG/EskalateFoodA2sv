@@ -21,7 +21,7 @@ import { FaCircle } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { updateTech, setTech } from "../features/tech/techSlice";
+import { updateTech, setTech,logOut } from "../features/tech/techSlice";
 import { useDispatch } from "react-redux";
 import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
@@ -104,7 +104,11 @@ const Home = ({ user3 }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const red = useNavigate();
-
+  const handleLogOutA = () => {
+    localStorage.removeItem("user");
+    dispatch2(logOut([]));
+    red("/FrontPage");
+  };
   const handleP = () => {
     setdisplay7("visible");
     setdisplay6("hidden");
@@ -787,7 +791,7 @@ const Home = ({ user3 }) => {
                     <BiSolidMessageDetail className="mt-3 ml-3" />
                     <p className="text-[15px] ml-3 mt-1 ">Inbox</p>
                   </div>
-                  <div className="flex text-green-500 ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg">
+                  <div className="flex text-green-500 ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg" onClick={handleLogOutA}>
                     <RiLogoutCircleLine className="mt-3 ml-3" />
                     <p className="text-[15px] ml-3 mt-2 font-bold">Logout</p>
                   </div>
