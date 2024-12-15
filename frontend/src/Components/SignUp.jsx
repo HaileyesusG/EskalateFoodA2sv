@@ -546,6 +546,10 @@ const SignUp = () => {
                   "Verify OTP"
                 )}
               </button>
+              <span className="flex justify-center items-center">
+                     Please Wait a Minute...
+                    <BounceLoader size={20} color="#ffffff" loading={true} />
+              </span>
             </div>
           )}
         </div>
