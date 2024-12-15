@@ -174,13 +174,8 @@ const FrontPage = () => {
             <button
               className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
-              
             >
-<<<<<<< HEAD
-              በቅርብ ቀን ይጀምራል/ Order Online
-=======
-               Order Online/ባለሙያ መጥሪያ
->>>>>>> bb0e261868fe98824585638bde88b445d128015e
+              በቅርብ ቀን ይጀምራል/ Order Online/ባለሙያ መጥሪያ
             </button>
           </div>
         </div>
@@ -296,157 +291,167 @@ const FrontPage = () => {
       </div>
 
       <div id="home">
-      <Swiper
-        autoplay={{
-          delay: 3500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        effect="fade"
-        modules={[Autoplay, Pagination, EffectFade]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-800 text-white">
-            <p className="text-lg font-bold mb-4">Satellite Dish</p>
-            <FaSatelliteDish size={150} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-            <p className="text-lg font-bold mb-4">Television</p>
-            <PiTelevisionFill size={150}  />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-600 text-white">
-            <p className="text-lg font-bold mb-4">Plumbing</p>
-            <MdOutlinePlumbing size={150} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-500 text-white">
-            <p className="text-lg font-bold mb-4">Refrigerator</p>
-            <CgSmartHomeRefrigerator size={150} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-400 text-white">
-            <p className="text-lg font-bold mb-4">Cooking Pot</p>
-            <GiCampCookingPot size={150} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-300 text-black">
-            <p className="text-lg font-bold mb-4">Paint Roller</p>
-            <FaPaintRoller size={150} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-200 text-black">
-            <p className="text-lg font-bold mb-4">Roofing</p>
-            <MdRoofing size={150} />
-          </div>
-        </SwiperSlide>
-      </Swiper>
-    </div>
+        <Swiper
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          effect="fade"
+          modules={[Autoplay, Pagination, EffectFade]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-800 text-white">
+              <p className="text-lg font-bold mb-4">Satellite Dish</p>
+              <FaSatelliteDish size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <p className="text-lg font-bold mb-4">Television</p>
+              <PiTelevisionFill size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-600 text-white">
+              <p className="text-lg font-bold mb-4">Plumbing</p>
+              <MdOutlinePlumbing size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-500 text-white">
+              <p className="text-lg font-bold mb-4">Refrigerator</p>
+              <CgSmartHomeRefrigerator size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-400 text-white">
+              <p className="text-lg font-bold mb-4">Cooking Pot</p>
+              <GiCampCookingPot size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-300 text-black">
+              <p className="text-lg font-bold mb-4">Paint Roller</p>
+              <FaPaintRoller size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-200 text-black">
+              <p className="text-lg font-bold mb-4">Roofing</p>
+              <MdRoofing size={150} />
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
 
-    <div id="services">
-      <Swiper
-        autoplay={{
-          delay: 3500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        effect="fade"
-        modules={[Autoplay, Pagination, EffectFade]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-        <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-            <span className="text-lg font-bold mb-4 flex"><h1>🛰</h1><p>Amos 4°W Satellite</p></span>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-              alt="Amos 4°W Satellite Logo"
-              className="w-40 h-40 object-contain mb-4"
-            />
-            <p className="text-center text-sm md:text-lg">
-              Call us now to install the Amos 4°W satellite dish and enjoy top-notch services.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-            <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-              alt="Amos 4°W Satellite Logo"
-              className="w-40 h-40 object-contain mb-4"
-            />
-            <p className="text-center text-sm md:text-lg">
-              Call us now to install the Amos 4°W satellite dish and enjoy top-notch services.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-        <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-            <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-              alt="Amos 4°W Satellite Logo"
-              className="w-40 h-40 object-contain mb-4"
-            />
-            <p className="text-center text-sm md:text-lg">
-              Call us now to install the Amos 4°W satellite dish and enjoy top-notch services.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-        <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-            <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-              alt="Amos 4°W Satellite Logo"
-              className="w-40 h-40 object-contain mb-4"
-            />
-            <p className="text-center text-sm md:text-lg">
-              Call us now to install the Amos 4°W satellite dish and enjoy top-notch services.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-        <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-            <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-              alt="Amos 4°W Satellite Logo"
-              className="w-40 h-40 object-contain mb-4"
-            />
-            <p className="text-center text-sm md:text-lg">
-              Call us now to install the Amos 4°W satellite dish and enjoy top-notch services.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-300 text-black">
-            <p className="text-lg font-bold mb-4">Paint Roller</p>
-            <FaPaintRoller size={150} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-200 text-black">
-            <p className="text-lg font-bold mb-4">Roofing</p>
-            <MdRoofing size={150} />
-          </div>
-        </SwiperSlide>
-      </Swiper>
-    </div>
+      <div id="services">
+        <Swiper
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          effect="fade"
+          modules={[Autoplay, Pagination, EffectFade]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <span className="text-lg font-bold mb-4 flex">
+                <h1>🛰</h1>
+                <p>Amos 4°W Satellite</p>
+              </span>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
+                alt="Amos 4°W Satellite Logo"
+                className="w-40 h-40 object-contain mb-4"
+              />
+              <p className="text-center text-sm md:text-lg">
+                Call us now to install the Amos 4°W satellite dish and enjoy
+                top-notch services.
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
+                alt="Amos 4°W Satellite Logo"
+                className="w-40 h-40 object-contain mb-4"
+              />
+              <p className="text-center text-sm md:text-lg">
+                Call us now to install the Amos 4°W satellite dish and enjoy
+                top-notch services.
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
+                alt="Amos 4°W Satellite Logo"
+                className="w-40 h-40 object-contain mb-4"
+              />
+              <p className="text-center text-sm md:text-lg">
+                Call us now to install the Amos 4°W satellite dish and enjoy
+                top-notch services.
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
+                alt="Amos 4°W Satellite Logo"
+                className="w-40 h-40 object-contain mb-4"
+              />
+              <p className="text-center text-sm md:text-lg">
+                Call us now to install the Amos 4°W satellite dish and enjoy
+                top-notch services.
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
+                alt="Amos 4°W Satellite Logo"
+                className="w-40 h-40 object-contain mb-4"
+              />
+              <p className="text-center text-sm md:text-lg">
+                Call us now to install the Amos 4°W satellite dish and enjoy
+                top-notch services.
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-300 text-black">
+              <p className="text-lg font-bold mb-4">Paint Roller</p>
+              <FaPaintRoller size={150} />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-200 text-black">
+              <p className="text-lg font-bold mb-4">Roofing</p>
+              <MdRoofing size={150} />
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
       <div id="about">
-      <h2 className="text-center mt-8 text-3xl">Live Football Matches Streamings</h2>
+        <h2 className="text-center mt-8 text-3xl">
+          Live Football Matches Streamings
+        </h2>
         <h2 className="text-center mt-8 text-3xl">Comming Soon</h2>
         {/* Add your About section content here */}
       </div>
