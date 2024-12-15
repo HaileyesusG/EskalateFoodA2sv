@@ -169,7 +169,7 @@ const FrontPage = () => {
               onClick={handleOrder}
               disabled={true}
             >
-              በቅርብ ቀን ይጀምራል/ Order Online/ባለሙያ መጥሪያ
+              በቅርብ ቀን ይጀምራል/ Order Online
             </button>
           </div>
         </div>

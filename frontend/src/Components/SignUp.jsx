@@ -504,7 +504,7 @@ const SignUp = () => {
                 <div className="flex justify-center mt-8">
                   <button
                     disabled={loading}
-                    className="bg-yellow-400  hover:from-purple-400 hover:to-purple-800 text-sm md:text-base h-12 md:h-14 w-full max-w-xs md:max-w-md border-2 rounded-3xl font-bold transition-transform transform hover:scale-105 duration-200"
+                    className="bg-green-500  hover:from-purple-400 hover:to-purple-800 text-sm md:text-base h-12 md:h-14 w-full max-w-xs md:max-w-md border-2 rounded-3xl font-bold transition-transform transform hover:scale-105 duration-200"
                   >
                     {loading ? (
                       <span className="flex justify-center items-center">
