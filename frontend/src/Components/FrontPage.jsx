@@ -374,30 +374,31 @@ const FrontPage = () => {
                 <img
                   src={sport2} // Replace with your own image URL if needed
                   alt="Amos 4°W Satellite Logo"
-                  className="w-52 h-52 object-contain mb-4"
+                  className="w-28 h-28 object-contain mb-4"
                 />
                 <img
                   src={sport3} // Replace with your own image URL if needed
                   alt="Amos 4°W Satellite Logo"
-                  className="w-52 h-52 object-contain mb-4"
+                  className="w-28 h-28 object-contain mb-4"
                 />
                 <img
                   src={sport4} // Replace with your own image URL if needed
                   alt="Amos 4°W Satellite Logo"
-                  className="w-52 h-52 object-contain mb-4"
+                  className="w-28 h-28 object-contain mb-4"
                 />
               </div>
-              <div>
-                <p>
+              <div className="flex justify-center items-center w-11/12">
+                <p className="text-center text-sm md:text-lg ">
                   ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ምርጥ የሆነ የ ስፖርት እና መዝናኛ ሳተላይት ለማሰራት
                   ቢፈልጉ አሁኑኑ ከታች ባለው ስልክ ይደውሉልን ወይም ባለሙያ ይዘዙ የሚለውን ተጭነው አሁኑኑ
                   አቅራቢያዎ ያለ ባለሙያ ይጥሩ
                 </p>
               </div>
-              <p className="text-center text-sm md:text-lg">
+              <p className="text-center text-sm md:text-lg mt-2">
                 Call us now to install the Amos 4°W satellite dish and enjoy
                 top-notch services.
               </p>
+     
               <div></div>
             </div>
           </SwiperSlide>
