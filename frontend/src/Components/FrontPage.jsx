@@ -4,7 +4,10 @@ import { IoMail } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import hiloe from "../assets/AiM.jpeg";
 import hiloe2 from "../assets/AiM2.jpeg";
-import hiloe3 from "../assets/logo.jpg";
+import sport3 from "../assets/sport3.jpg";
+import sport2 from "../assets/sport2.jpg";
+import sport1 from "../assets/sport1.jpg";
+import sport4 from "../assets/sport4.jpg";
 import hiloe4 from "../assets/AiM4.jpeg";
 import hiloe5 from "../assets/lg1.webp";
 import hiloe6 from "../assets/bgl.jpg";
@@ -367,25 +370,58 @@ const FrontPage = () => {
                 <h1>🛰</h1>
                 <p>Amos 4°W Satellite</p>
               </span>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-                alt="Amos 4°W Satellite Logo"
-                className="w-40 h-40 object-contain mb-4"
-              />
+              <div className="flex space-x-3">
+                <img
+                  src={sport2} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-52 h-52 object-contain mb-4"
+                />
+                <img
+                  src={sport3} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-52 h-52 object-contain mb-4"
+                />
+                <img
+                  src={sport4} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-52 h-52 object-contain mb-4"
+                />
+              </div>
+              <div>
+                <p>
+                  ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ምርጥ የሆነ የ ስፖርት እና መዝናኛ ሳተላይት ለማሰራት
+                  ቢፈልጉ አሁኑኑ ከታች ባለው ስልክ ይደውሉልን ወይም ባለሙያ ይዘዙ የሚለውን ተጭነው አሁኑኑ
+                  አቅራቢያዎ ያለ ባለሙያ ይጥሩ
+                </p>
+              </div>
               <p className="text-center text-sm md:text-lg">
                 Call us now to install the Amos 4°W satellite dish and enjoy
                 top-notch services.
               </p>
+              <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
               <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-                alt="Amos 4°W Satellite Logo"
-                className="w-40 h-40 object-contain mb-4"
-              />
+              <div className="flex space-x-3">
+                <img
+                  src={sport2} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-52 h-52 object-contain mb-4"
+                />
+                <img
+                  src={sport3} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-52 h-52 object-contain mb-4"
+                />
+                <img
+                  src={sport4} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-52 h-52 object-contain mb-4"
+                />
+              </div>
+
               <p className="text-center text-sm md:text-lg">
                 Call us now to install the Amos 4°W satellite dish and enjoy
                 top-notch services.
