@@ -10,7 +10,7 @@ import sport4 from "../assets/SPORT4.png";
 import hiloe4 from "../assets/AiM4.jpeg";
 import hiloe5 from "../assets/lg1.webp";
 import Varzish from "../assets/VARZISH.jpg";
-import Football from "../assets/FOOTBALL9.jpg";
+import Football from "../assets/FOOTBALL.jpg";
 import SPTV1 from "../assets/SPTV1.jpg";
 import SPTV2 from "../assets/SPTV2.jpg";
 import SUPERSPORT from "../assets/SUPERSPORT.jpg";
