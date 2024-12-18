@@ -4,13 +4,21 @@ import { IoMail } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import hiloe from "../assets/AiM.jpeg";
 import hiloe2 from "../assets/AiM2.jpeg";
-import sport3 from "../assets/sport3.jpg";
-import sport2 from "../assets/sport2.jpg";
-import sport1 from "../assets/sport1.jpg";
-import sport4 from "../assets/sport4.jpg";
+import sport3 from "../assets/sport3.PNG";
+import sport2 from "../assets/sport2.PNG";
+import sport4 from "../assets/sport4.PNG";
 import hiloe4 from "../assets/AiM4.jpeg";
 import hiloe5 from "../assets/lg1.webp";
-import hiloe6 from "../assets/bgl.jpg";
+import Varzish from "../assets/Varzish.jpg";
+import Football from "../assets/Football.jpg";
+import SPTV1 from "../assets/SPTV1.jpg";
+import SPTV2 from "../assets/SPTV2.jpg";
+import SUPERSPORT from "../assets/SUPERSPORT.jpg";
+import MNET from "../assets/MNET.jpg";
+import ABOL from "../assets/ABOL.jpg";
+import BEIN from "../assets/BEIN.pNg";
+import BMOVIES from "../assets/BMOVIES.Jpg";
+import PTV from "../assets/PTV.Jpg";
 import { FaSatelliteDish } from "react-icons/fa";
 import { PiTelevisionFill } from "react-icons/pi";
 import { MdOutlinePlumbing } from "react-icons/md";
@@ -365,10 +373,10 @@ const FrontPage = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
               <span className="text-lg font-bold mb-4 flex">
                 <h1>🛰</h1>
-                <p>Amos 4°W Satellite</p>
+                <p>AMOS 4°W Satellite</p>
               </span>
               <div className="flex space-x-3">
                 <img
@@ -389,98 +397,328 @@ const FrontPage = () => {
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
-                  ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ምርጥ የሆነ የ ስፖርት እና መዝናኛ ሳተላይት ለማሰራት
-                  ቢፈልጉ አሁኑኑ ከታች ባለው ስልክ ይደውሉልን ወይም ባለሙያ ይዘዙ የሚለውን ተጭነው አሁኑኑ
-                  አቅራቢያዎ ያለ ባለሙያ ይጥሩ
+                  ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="https://t.me/africa_dish/3028"
+                  >
+                    እነዚህን እቃዎች አሟልተው
+                  </a>{" "}
+                  ከታች ባለው{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="tel:+251960295512"
+                  >
+                    ስልክ ቢደውሉልን
+                  </a>{" "}
+                  አጠገባችሁ ስለሆንን አሁኑኑ እንደርሳለን
                 </p>
               </div>
               <p className="text-center text-sm md:text-lg mt-2">
-                Call us now to install the Amos 4°W satellite dish and enjoy
-                top-notch services.
+                <a
+                  style={{ color: "blue", textDecoration: "underline" }}
+                  href="tel:+251960295512"
+                >
+                  Call us
+                </a>{" "}
+                now to install AMOS 4°W Satellite dish and enjoy top-notch
+                services.
               </p>
-     
+
               <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
+              <span className="text-lg font-bold mb-4 flex">
+                <h1>🛰</h1>
+                <p>EthioSat 57°E Satellite</p>
+              </span>
               <div className="flex space-x-3">
-                <img
-                  src={sport2} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-52 h-52 object-contain mb-4"
+                <diV>
+                  <h1 className="ml-3">SPTV 1 </h1>
+                  <img
+                  src={SPTV1} // Replace with your own image URL if needed
+                  alt="ETHIO 57°E Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
                 />
-                <img
-                  src={sport3} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-52 h-52 object-contain mb-4"
+                </diV>
+                
+                <diV>
+                  <h1 className="ml-3">SPTV 2</h1>
+                  <img
+                  src={SPTV2} // Replace with your own image URL if needed
+                  alt="ETHIO 57°E Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
                 />
-                <img
-                  src={sport4} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-52 h-52 object-contain mb-4"
-                />
+                </diV>
+                
               </div>
+              <div className="flex justify-center items-center w-11/12">
+                <p className="text-center text-sm md:text-lg ">
+                  ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="https://t.me/africa_dish/114"
+                  >
+                    እነዚህን እቃዎች አሟልተው
+                  </a>{" "}
+                  ከታች ባለው{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="tel:+251960295512"
+                  >
+                    ስልክ ቢደውሉልን
+                  </a>{" "}
+                  አጠገባችሁ ስለሆንን አሁኑኑ እንደርሳለን
+                </p>
+              </div>
+              <p className="text-center text-sm md:text-lg mt-2">
+                <a
+                  style={{ color: "blue", textDecoration: "underline" }}
+                  href="tel:+251960295512"
+                >
+                  Call us
+                </a>{" "}
+                now to install EthioSat 57°E satellite dish and enjoy top-notch
+                services.
+              </p>
 
-              <p className="text-center text-sm md:text-lg">
-                Call us now to install the Amos 4°W satellite dish and enjoy
-                top-notch services.
-              </p>
+              <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-                alt="Amos 4°W Satellite Logo"
-                className="w-40 h-40 object-contain mb-4"
-              />
-              <p className="text-center text-sm md:text-lg">
-                Call us now to install the Amos 4°W satellite dish and enjoy
-                top-notch services.
+              <span className="text-lg font-bold mb-4 flex">
+                <h1>🛰</h1>
+                <p>YAHSAT 52.5°E Satellite</p>
+              </span>
+              <div className="flex space-x-3">
+                <diV>
+                  <h1 className="ml-3">Varzish HD</h1>
+                  <img
+                  src={Varzish} // Replace with your own image URL if needed
+                  alt="Varzish Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
+                />
+                </diV>
+                
+                <diV>
+                  <h1 className="ml-3">Football HD</h1>
+                  <img
+                  src={Football} // Replace with your own image URL if needed
+                  alt="Football Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
+                />
+                </diV>
+                
+              </div>
+              <div className="flex justify-center items-center w-11/12">
+                <p className="text-center text-sm md:text-lg ">
+                  ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="https://t.me/africa_dish/522"
+                  >
+                    እነዚህን እቃዎች አሟልተው
+                  </a>{" "}
+                  ከታች ባለው{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="tel:+251960295512"
+                  >
+                    ስልክ ቢደውሉልን
+                  </a>{" "}
+                  አጠገባችሁ ስለሆንን አሁኑኑ እንደርሳለን
+                </p>
+              </div>
+              <p className="text-center text-sm md:text-lg mt-2">
+                <a
+                  style={{ color: "blue", textDecoration: "underline" }}
+                  href="tel:+251960295512"
+                >
+                  Call us
+                </a>{" "}
+                now to install YAHSAT 52.5°E Satellite dish and enjoy top-notch
+                services.
               </p>
+
+              <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-                alt="Amos 4°W Satellite Logo"
-                className="w-40 h-40 object-contain mb-4"
-              />
-              <p className="text-center text-sm md:text-lg">
-                Call us now to install the Amos 4°W satellite dish and enjoy
-                top-notch services.
+              <span className="text-lg font-bold mb-4 flex">
+                <h1>🛰</h1>
+                <p>DSTV 36°E Satellite</p>
+              </span>
+              <div className="flex space-x-3">
+                <diV>
+                  <h1 className="ml-3">SuperSports HD</h1>
+                  <img
+                  src={SUPERSPORT} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
+                />
+                </diV>
+                
+                <diV>
+                  <h1 className="ml-3">MNET HD</h1>
+                  <img
+                  src={MNET} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
+                />
+                </diV>
+                <diV>
+                  <h1 className="ml-3">ABOL HD</h1>
+                  <img
+                  src={ABOL} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-28 h-28 object-contain mb-4"
+                />
+                </diV>
+              </div>
+              <div className="flex justify-center items-center w-11/12">
+                <p className="text-center text-sm md:text-lg ">
+                  ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="https://t.me/africa_dish/711"
+                  >
+                    እነዚህን እቃዎች አሟልተው
+                  </a>{" "}
+                  ከታች ባለው{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="tel:+251960295512"
+                  >
+                    ስልክ ቢደውሉልን
+                  </a>{" "}
+                  አጠገባችሁ ስለሆንን አሁኑኑ እንደርሳለን
+                </p>
+              </div>
+              <p className="text-center text-sm md:text-lg mt-2">
+                <a
+                  style={{ color: "blue", textDecoration: "underline" }}
+                  href="tel:+251960295512"
+                >
+                  Call us
+                </a>{" "}
+                now to install DSTV 36°E Satellite dish and enjoy top-notch
+                services.
               </p>
+
+              <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
-              <p className="text-lg font-bold mb-4">Amos 4°W Satellite</p>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AMOS_Spacecom_logo.png/600px-AMOS_Spacecom_logo.png" // Replace with your own image URL if needed
-                alt="Amos 4°W Satellite Logo"
-                className="w-40 h-40 object-contain mb-4"
-              />
-              <p className="text-center text-sm md:text-lg">
-                Call us now to install the Amos 4°W satellite dish and enjoy
-                top-notch services.
+          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <span className="text-lg font-bold mb-4 flex">
+                <h1>🛰</h1>
+                <p>beIN SPORTS 36°E/7°W Satellite</p>
+              </span>
+              <div className="flex space-x-3">
+                <diV>
+                  <h1 className="ml-3">beIN SPORTS HD</h1>
+                  <img
+                  src={BEIN} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-40 h-40 object-contain mb-4"
+                />
+                </diV>
+                <diV>
+                  <h1 className="ml-3">beIN MOVIES HD</h1>
+                  <img
+                  src={BMOVIES} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-40 h-40 object-contain mb-4"
+                />
+                </diV>
+                
+              </div>
+             
+              <div className="flex justify-center items-center w-11/12">
+                <p className="text-center text-sm md:text-lg ">
+                  ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="https://t.me/africa_dish/3645"
+                  >
+                    እነዚህን እቃዎች አሟልተው
+                  </a>{" "}
+                  ከታች ባለው{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="tel:+251960295512"
+                  >
+                    ስልክ ቢደውሉልን
+                  </a>{" "}
+                  አጠገባችሁ ስለሆንን አሁኑኑ እንደርሳለን
+                </p>
+              </div>
+              <p className="text-center text-sm md:text-lg mt-2">
+                <a
+                  style={{ color: "blue", textDecoration: "underline" }}
+                  href="tel:+251960295512"
+                >
+                  Call us
+                </a>{" "}
+                now to install beIN SPORTS 36°E/7°W Satellite dish and enjoy top-notch
+                services.
               </p>
+
+              <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-300 text-black">
-              <p className="text-lg font-bold mb-4">Paint Roller</p>
-              <FaPaintRoller size={150} />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-200 text-black">
-              <p className="text-lg font-bold mb-4">Roofing</p>
-              <MdRoofing size={150} />
+          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+              <span className="text-lg font-bold mb-4 flex">
+                <h1>🛰</h1>
+                <p>PackSat 38°E Satellite</p>
+              </span>
+              <div className="flex space-x-3">
+                <diV>
+                  <h1 className="ml-3">PTV SPORTS HD</h1>
+                  <img
+                  src={PTV} // Replace with your own image URL if needed
+                  alt="Amos 4°W Satellite Logo"
+                  className="w-40 h-40 object-contain mb-4"
+                />
+                </diV>
+                
+              </div>
+              <div className="flex justify-center items-center w-11/12">
+                <p className="text-center text-sm md:text-lg ">
+                  ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="https://t.me/africa_dish/426"
+                  >
+                    እነዚህን እቃዎች አሟልተው
+                  </a>{" "}
+                  ከታች ባለው{" "}
+                  <a
+                    style={{ color: "blue", textDecoration: "underline" }}
+                    href="tel:+251960295512"
+                  >
+                    ስልክ ቢደውሉልን
+                  </a>{" "}
+                  አጠገባችሁ ስለሆንን አሁኑኑ እንደርሳለን
+                </p>
+              </div>
+              <p className="text-center text-sm md:text-lg mt-2">
+                <a
+                  style={{ color: "blue", textDecoration: "underline" }}
+                  href="tel:+251960295512"
+                >
+                  Call us
+                </a>{" "}
+                now to install PackSat 38°E satellite dish and enjoy top-notch
+                services.
+              </p>
+
+              <div></div>
             </div>
           </SwiperSlide>
         </Swiper>
