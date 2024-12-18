@@ -3,7 +3,6 @@ import { IoCall } from "react-icons/io5";
 import { IoMail } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import hiloe from "../assets/AiM.jpeg";
-import x from '../assets/'
 import hiloe2 from "../assets/AiM2.jpeg";
 import sport3 from "../assets/SPORT3.png";
 import sport2 from "../assets/SPORT2.png";
