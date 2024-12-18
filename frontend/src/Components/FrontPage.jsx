@@ -16,7 +16,7 @@ import SPTV2 from "../assets/SPTV2.jpg";
 import SUPERSPORT from "../assets/SUPERSPORT.jpg";
 import MNET from "../assets/MNET.jpg";
 import ABOL from "../assets/ABOL.jpg";
-import BEIN from "../assets/BEIN.pNg";
+import BEIN from "../assets/BEIN.png";
 import BMOVIES from "../assets/BMOVIES.Jpg";
 import PTV from "../assets/PTV.Jpg";
 import { FaSatelliteDish } from "react-icons/fa";
