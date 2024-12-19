@@ -39,7 +39,7 @@ const Footer = () => {
           <FaTelegram size={30} />
         </a>
         <a
-          href="https://t.me/africa_dish"
+          href="https://www.youtube.com/@africainfotec6061"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-blue-300 transition"

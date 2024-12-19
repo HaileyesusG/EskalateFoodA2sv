@@ -672,7 +672,7 @@ const FrontPage = () => {
                 >
                   Call us
                 </a>{" "}
-                now to install beIN SPORTS 36°E/7°W Satellite dish and enjoy top-notch
+                now to install ArabSat 26°E/7°W Satellite dish and enjoy top-notch
                 services.
               </p>
 
