@@ -170,16 +170,16 @@ const FrontPage = () => {
             ) : (
               <div className="flex space-x-3">
                 <button
-                  className="w-32 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                  className="w-28 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignUpT}
                 >
-                  SignUp/የባለሙያ መመዝገቢያ
+                  SignUp/የባለሙያ 
                 </button>
                 <button
-                  className="w-32 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                  className="w-28 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignIn}
                 >
-                  LogIn/የባለሙያ መግቢያ
+                  LogIn/የባለሙያ
                 </button>
               </div>
             )}
