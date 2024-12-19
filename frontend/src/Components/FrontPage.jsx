@@ -625,7 +625,7 @@ const FrontPage = () => {
                   <img
                   src={BEIN} // Replace with your own image URL if needed
                   alt="Amos 4°W Satellite Logo"
-                  className="w-40 h-40 object-contain mb-4"
+                  className="w-28 h-28 object-contain mb-4"
                 />
                 </diV>
                 <diV>
@@ -633,7 +633,7 @@ const FrontPage = () => {
                   <img
                   src={BMOVIES} // Replace with your own image URL if needed
                   alt="Amos 4°W Satellite Logo"
-                  className="w-40 h-40 object-contain mb-4"
+                  className="w-28 h-28 object-contain mb-4"
                 />
                 </diV>
                 
@@ -684,7 +684,7 @@ const FrontPage = () => {
                   <img
                   src={PTV} // Replace with your own image URL if needed
                   alt="Amos 4°W Satellite Logo"
-                  className="w-40 h-40 object-contain mb-4"
+                  className="w-28 h-28 object-contain mb-4"
                 />
                 </diV>
                 
