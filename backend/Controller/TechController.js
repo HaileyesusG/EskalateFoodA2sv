@@ -352,6 +352,17 @@ const DeleteTech = async (req, res) => {
   res.status(200).json(result);
 };
 
+const changeStatus = async (req, res) => {
+  const { id } = req.params;
+  const { isOnline } = req.body;
+  let result = await Tech.findByIdAndUpdate(
+    { _id: id },
+    { status2: isOnline },
+    { new: true }
+  );
+  res.status(200).json(result);
+};
+
 module.exports = {
   TechCreate,
   GetTech,
@@ -362,4 +373,5 @@ module.exports = {
   LoginTech,
   GetOneTech1,
   updateFinish,
+  changeStatus
 };
