@@ -170,25 +170,26 @@ const FrontPage = () => {
             ) : (
               <div className="flex space-x-3">
                 <button
-                  className="w-28 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                  className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignUpT}
                 >
                   SignUp/የባለሙያ 
                 </button>
                 <button
-                  className="w-28 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
+                  className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignIn}
                 >
                   LogIn/የባለሙያ
                 </button>
-              </div>
-            )}
-            <button
-              className="w-20 h-16 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
+                <button
+              className="w-28 h-16 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
             >
              Order Online/ባለሙያ መጥሪያ
             </button>
+              </div>
+            )}
+           
           </div>
         </div>
         {isMenuOpen && (
