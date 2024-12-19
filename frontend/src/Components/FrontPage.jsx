@@ -184,7 +184,7 @@ const FrontPage = () => {
               </div>
             )}
             <button
-              className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
+              className="w-20 h-16 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
             >
              Order Online/ባለሙያ መጥሪያ
@@ -233,12 +233,18 @@ const FrontPage = () => {
               <div className="flex">
                 <IoCall /> <h4 className="text-center md:text-left">CALL US</h4>
               </div>
-
-              <h4 className="text-center md:text-left">+251960295512</h4>
+              <a
+                    
+                    href="tel:+251960295512"
+                  >
+                    <h4 className="text-center md:text-left">+251960295512</h4>
+                  </a>
+              
             </div>
             <div>
               <div className="flex">
                 <IoMail />
+                
                 <h4 className="text-center md:text-left">MAIL US</h4>
               </div>
 
