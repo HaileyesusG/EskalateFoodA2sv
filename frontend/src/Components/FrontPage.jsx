@@ -187,7 +187,7 @@ const FrontPage = () => {
               className="w-24 h-14 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
               onClick={handleOrder}
             >
-              በቅርብ ቀን ይጀምራል/ Order Online/ባለሙያ መጥሪያ
+             Order Online/ባለሙያ መጥሪያ
             </button>
           </div>
         </div>
