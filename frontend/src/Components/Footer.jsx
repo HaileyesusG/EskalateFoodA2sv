@@ -1,6 +1,6 @@
 // Footer.js
 import React from "react";
-import { FaTiktok, FaInstagram, FaFacebook, FaTelegram } from "react-icons/fa";
+import { FaTiktok, FaInstagram, FaFacebook, FaTelegram, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -38,8 +38,16 @@ const Footer = () => {
         >
           <FaTelegram size={30} />
         </a>
+        <a
+          href="https://t.me/africa_dish"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-300 transition"
+        >
+          <FaYoutube size={30} />
+        </a>
       </div>
-      <p className="text-sm">© 2024 Your Company. All rights reserved.</p>
+      <p className="text-sm">© 2024 MasterFix. All rights reserved.</p>
     </footer>
   );
 };
