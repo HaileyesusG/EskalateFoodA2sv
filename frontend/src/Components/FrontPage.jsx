@@ -18,6 +18,7 @@ import MNET from "../assets/MNET.jpg";
 import ABOL from "../assets/ABOL.jpg";
 import BEIN from "../assets/BEIN.png";
 import BMOVIES from "../assets/BMOVIES.jpg";
+import Footer from "./Footer";
 import PTV from "../assets/PTV.jpg";
 import { FaSatelliteDish } from "react-icons/fa";
 import { PiTelevisionFill } from "react-icons/pi";
@@ -732,24 +733,10 @@ const FrontPage = () => {
       </div>
 
       <div id="page">
-        <h2 className="text-center mt-8 text-3xl">Comming Soon</h2>
-        {/* Add your Page section content here */}
+      <Footer/>
       </div>
 
-      <div id="package">
-        <h2 className="text-center mt-8 text-3xl">Comming Soon</h2>
-        {/* Add your Package section content here */}
-      </div>
 
-      <div id="contact">
-        <h2 className="text-center mt-8 text-3xl">Comming Soon</h2>
-        {/* Add your Contact section content here */}
-      </div>
-
-      <div id="order">
-        <h2 className="text-center mt-8 text-3xl">Comming Soon</h2>
-        {/* Add your Order Online section content here */}
-      </div>
     </div>
   );
 };
