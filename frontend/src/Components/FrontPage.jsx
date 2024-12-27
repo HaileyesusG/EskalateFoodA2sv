@@ -3,7 +3,6 @@ import { IoCall } from "react-icons/io5";
 import { IoMail } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 import hiloe from "../assets/AiM.jpeg";
-import ToggleButton from "./Toggle";
 import hiloe2 from "../assets/AiM2.jpeg";
 import sport3 from "../assets/SPORT3.png";
 import sport2 from "../assets/SPORT2.png";
@@ -174,7 +173,7 @@ const FrontPage = () => {
                   className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
                   onClick={handleSignUpT}
                 >
-                  SignUp/የባለሙያ 
+                  SignUp/የባለሙያ
                 </button>
                 <button
                   className="w-20 h-10 bg-yellow-500 rounded-2xl mt-2 text-[15px] hover:bg-yellow-300 hover:text-black"
@@ -183,14 +182,13 @@ const FrontPage = () => {
                   LogIn/የባለሙያ
                 </button>
                 <button
-              className="w-28 h-16 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
-              onClick={handleOrder}
-            >
-             Order Online/ባለሙያ መጥሪያ
-            </button>
+                  className="w-28 h-16 bg-yellow-500 rounded-2xl text-[15px] hover:bg-yellow-300 hover:text-black"
+                  onClick={handleOrder}
+                >
+                  Order Online/ባለሙያ መጥሪያ
+                </button>
               </div>
             )}
-           
           </div>
         </div>
         {isMenuOpen && (
@@ -235,18 +233,14 @@ const FrontPage = () => {
               <div className="flex">
                 <IoCall /> <h4 className="text-center md:text-left">CALL US</h4>
               </div>
-              <a
-                    
-                    href="tel:+251960295512"
-                  >
-                    <h4 className="text-center md:text-left">+251960295512</h4>
-                  </a>
-              
+              <a href="tel:+251960295512">
+                <h4 className="text-center md:text-left">+251960295512</h4>
+              </a>
             </div>
             <div>
               <div className="flex">
                 <IoMail />
-                
+
                 <h4 className="text-center md:text-left">MAIL US</h4>
               </div>
 
@@ -382,7 +376,7 @@ const FrontPage = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
               <span className="text-lg font-bold mb-4 flex">
                 <h1>🛰</h1>
                 <p>AMOS 4°W Satellite</p>
@@ -447,21 +441,20 @@ const FrontPage = () => {
                 <diV>
                   <h1 className="ml-3">SPTV 1 </h1>
                   <img
-                  src={SPTV1} // Replace with your own image URL if needed
-                  alt="ETHIO 57°E Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={SPTV1} // Replace with your own image URL if needed
+                    alt="ETHIO 57°E Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
+
                 <diV>
                   <h1 className="ml-3">SPTV 2</h1>
                   <img
-                  src={SPTV2} // Replace with your own image URL if needed
-                  alt="ETHIO 57°E Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={SPTV2} // Replace with your own image URL if needed
+                    alt="ETHIO 57°E Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
@@ -506,21 +499,20 @@ const FrontPage = () => {
                 <diV>
                   <h1 className="ml-3">Varzish HD</h1>
                   <img
-                  src={Varzish} // Replace with your own image URL if needed
-                  alt="Varzish Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={Varzish} // Replace with your own image URL if needed
+                    alt="Varzish Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
+
                 <diV>
                   <h1 className="ml-3">Football HD</h1>
                   <img
-                  src={Football} // Replace with your own image URL if needed
-                  alt="Football Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={Football} // Replace with your own image URL if needed
+                    alt="Football Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
@@ -565,27 +557,27 @@ const FrontPage = () => {
                 <diV>
                   <h1 className="ml-3">SuperSports HD</h1>
                   <img
-                  src={SUPERSPORT} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={SUPERSPORT} // Replace with your own image URL if needed
+                    alt="Amos 4°W Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
+
                 <diV>
                   <h1 className="ml-3">MNET HD</h1>
                   <img
-                  src={MNET} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={MNET} // Replace with your own image URL if needed
+                    alt="Amos 4°W Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
                 <diV>
                   <h1 className="ml-3">ABOL HD</h1>
                   <img
-                  src={ABOL} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={ABOL} // Replace with your own image URL if needed
+                    alt="Amos 4°W Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
               </div>
               <div className="flex justify-center items-center w-11/12">
@@ -622,7 +614,7 @@ const FrontPage = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
               <span className="text-lg font-bold mb-4 flex">
                 <h1>🛰</h1>
                 <p>beIN SPORTS 36°E/7°W Satellite</p>
@@ -631,22 +623,21 @@ const FrontPage = () => {
                 <diV>
                   <h1 className="ml-3">beIN SPORTS HD</h1>
                   <img
-                  src={BEIN} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={BEIN} // Replace with your own image URL if needed
+                    alt="Amos 4°W Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
                 <diV>
                   <h1 className="ml-3">beIN MOVIES HD</h1>
                   <img
-                  src={BMOVIES} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={BMOVIES} // Replace with your own image URL if needed
+                    alt="Amos 4°W Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
               </div>
-             
+
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
                   ⭕️ከየትኛውም የኢትዮጵያ ክፍል ሆነው ይህን ሳተላይት ለማሰራተት መጀመሪያ{" "}
@@ -673,15 +664,15 @@ const FrontPage = () => {
                 >
                   Call us
                 </a>{" "}
-                now to install ArabSat 26°E/7°W Satellite dish and enjoy top-notch
-                services.
+                now to install ArabSat 26°E/7°W Satellite dish and enjoy
+                top-notch services.
               </p>
 
               <div></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-          <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
+            <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[80vh] lg:h-screen bg-gray-700 text-white">
               <span className="text-lg font-bold mb-4 flex">
                 <h1>🛰</h1>
                 <p>PackSat 38°E Satellite</p>
@@ -690,12 +681,11 @@ const FrontPage = () => {
                 <diV>
                   <h1 className="ml-3">PTV SPORTS HD</h1>
                   <img
-                  src={PTV} // Replace with your own image URL if needed
-                  alt="Amos 4°W Satellite Logo"
-                  className="w-28 h-28 object-contain mb-4"
-                />
+                    src={PTV} // Replace with your own image URL if needed
+                    alt="Amos 4°W Satellite Logo"
+                    className="w-28 h-28 object-contain mb-4"
+                  />
                 </diV>
-                
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
@@ -741,12 +731,8 @@ const FrontPage = () => {
       </div>
 
       <div id="page">
-      <Footer/>
+        <Footer />
       </div>
-      <div id="page">
-      <ToggleButton/>
-      </div>
-
     </div>
   );
 };

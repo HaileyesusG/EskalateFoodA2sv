@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { FaTools } from "react-icons/fa";
-import { FaMoon, FaPerson } from "react-icons/fa6";
+import ToggleButton from "./Toggle";
 import { AiFillPhone } from "react-icons/ai";
 import { MdEditLocationAlt } from "react-icons/md";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -21,7 +21,7 @@ import { FaCircle } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { updateTech, setTech,logOut } from "../features/tech/techSlice";
+import { updateTech, setTech, logOut } from "../features/tech/techSlice";
 import { useDispatch } from "react-redux";
 import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
@@ -40,7 +40,7 @@ const Home = ({ user3 }) => {
   const dispatch2 = useDispatch();
   const todo = useSelector((state) => state.tech.tech);
   //dispatch2(setTech(todo));
-
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   // let { user, dispatch } = useUserContext();
   const [notify, setNotify] = useState(0);
@@ -324,74 +324,81 @@ const Home = ({ user3 }) => {
     };
   }, [socket]);
   const Finished = async () => {
-    const response1 = await fetch(
-      `${API_BASE_URL}/api/Accepted/GetLatestAccept/${_id}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    const json = await response1.json();
-    const departmentt = json.department;
-    const myId = json.customerId;
-    const work = { myId };
-    const response = await fetch(
-      `${API_BASE_URL}/api/tech/updateFinish/${_id}`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "PATCH",
-        body: JSON.stringify({
-          work,
-          departmentt,
-        }),
-      }
-    );
-    if (response.ok) {
-      const json = await response.json();
-      const {
-        department,
-        firstname,
-        lastname,
-        gender,
-        phonenumber,
-        deposit,
-        email,
-        image,
-        location,
-        status,
-        status2,
-        _id,
-      } = json;
-      dispatch2(
-        updateTech({
-          id: Id,
-          department: department,
-          firstname: firstname,
-          lastname: lastname,
-          gender: gender,
-          phonenumber: phonenumber,
-          deposit: deposit,
-          email: email,
-          image: image,
-          status: status,
-          status2: status2,
-          location: location,
-          _id: _id,
-        })
+    try {
+      setLoading(true);
+      const response1 = await fetch(
+        `${API_BASE_URL}/api/Accepted/GetLatestAccept/${_id}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
       );
-    } else {
-      const json = await response.json();
-      toastify(json.message);
-    }
-    setdisplay10("visible");
-    const resp = await fetch(
-      `${API_BASE_URL}/api/Accepted/DeleteLatestAccept/${_id}`,
-      {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+
+      const json = await response1.json();
+      const departmentt = json.department;
+      const myId = json.customerId;
+      const work = { myId };
+      const response = await fetch(
+        `${API_BASE_URL}/api/tech/updateFinish/${_id}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "PATCH",
+          body: JSON.stringify({
+            work,
+            departmentt,
+          }),
+        }
+      );
+      if (response.ok) {
+        const json = await response.json();
+        const {
+          department,
+          firstname,
+          lastname,
+          gender,
+          phonenumber,
+          deposit,
+          email,
+          image,
+          location,
+          status,
+          status2,
+          _id,
+        } = json;
+        dispatch2(
+          updateTech({
+            id: Id,
+            department: department,
+            firstname: firstname,
+            lastname: lastname,
+            gender: gender,
+            phonenumber: phonenumber,
+            deposit: deposit,
+            email: email,
+            image: image,
+            status: status,
+            status2: status2,
+            location: location,
+            _id: _id,
+          })
+        );
+      } else {
+        const json = await response.json();
+        toastify(json.message);
       }
-    );
+      setdisplay10("visible");
+      const resp = await fetch(
+        `${API_BASE_URL}/api/Accepted/DeleteLatestAccept/${_id}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    } catch (err) {
+      console.log("Failed to update status:", err);
+    } finally {
+      setLoading(false);
+    }
   };
   const declined = () => {
     // socket.emit("Decline", "Declined");
@@ -791,7 +798,10 @@ const Home = ({ user3 }) => {
                     <BiSolidMessageDetail className="mt-3 ml-3" />
                     <p className="text-[15px] ml-3 mt-1 ">Inbox</p>
                   </div>
-                  <div className="flex text-green-500 ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg" onClick={handleLogOutA}>
+                  <div
+                    className="flex text-green-500 ml-3 mt-11 cursor-pointer bg-gray-200 hover:bg-white w-72 h-12 rounded-lg"
+                    onClick={handleLogOutA}
+                  >
                     <RiLogoutCircleLine className="mt-3 ml-3" />
                     <p className="text-[15px] ml-3 mt-2 font-bold">Logout</p>
                   </div>
@@ -821,6 +831,7 @@ const Home = ({ user3 }) => {
                 <ToastContainer />
               </div>
             </div>
+
             <div
               className={
                 " w-96 h-[450px] absolute mt-24 ml-[576px] rounded-lg border-2 bg-slate-100 " +
@@ -955,15 +966,26 @@ const Home = ({ user3 }) => {
                     : null}
                 </div>
               </div>
-
-              <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
-                <FaMoon className="ml-3 mt-3" />
+              <div
+                className={
+                  status2 == "offline"
+                    ? "bg-red-600 w-28 h-14 rounded-md"
+                    : "bg-green-600 w-28 h-14 rounded-md"
+                }
+              >
+                <p className="mt-3 text-white text-[15px] ml-2">
+                  <strong>
+                    {status2 == "offline" ? "You areOffline" : "You are Online"}
+                  </strong>
+                </p>
+              </div>
+              <div className=" w-36 h-12    cursor-pointer ">
+                <ToggleButton nanoId={Id} userId={_id} state={status2} />
               </div>
 
               {(status == "free" || status == "") &&
-              (status2 == "not" || status2 == "") ? (
+              (status2 == "not" || status2 == "" || status2 == "offline") ? (
                 <div className=" w-14 h-14 border-[1px] rounded-xl border-green-400 cursor-pointer">
-                  {/* "absolute text-[19px] ml-6 mt-3 text-red-600 flex" */}
                   <div
                     className={
                       notify == 0
@@ -986,17 +1008,16 @@ const Home = ({ user3 }) => {
                   </div>
                 </div>
               ) : (
-                <div
-                  className={
-                    " border-[1px]  border-green-400 cursor-pointer bg-orange-500 w-14 h-[54px]  text-[18px] relative rounded-lg hover:bg-green-500 "
-                  }
-                >
-                  <div
-                    className=" ml-1 font-bold text-white cursor-pointer"
+                <div className="text-center mt-1">
+                  <button
                     onClick={() => Finished()}
+                    disabled={loading}
+                    className={`px-6 py-2 text-lg font-semibold text-white rounded-md transition-colors ${"bg-green-500 hover:bg-green-600"} ${
+                      loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                   >
-                    Finish
-                  </div>
+                    {loading ? "Updating..." : "Done"}
+                  </button>
                 </div>
               )}
               <div

@@ -1,17 +1,64 @@
 import React, { useState } from "react";
-import axios from "axios";
-
-const ToggleButton = () => {
+import { updateTech, setTech, logOut } from "../features/tech/techSlice";
+import { useDispatch } from "react-redux";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const ToggleButton = ({ nanoId, userId, state }) => {
   const [isOn, setIsOn] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const dispatch2 = useDispatch();
   const handleToggle = async () => {
+    let newStatus;
     try {
       setLoading(true);
-      const newStatus = !isOn;
-      console.log("the status ",newStatus)
-      await axios.post("http://localhost:5000/toggle-status", { isOn: newStatus });
-      setIsOn(newStatus); // Update the local state only if the request is successful
+      if (state == "not" || state == "loading") {
+        newStatus = "offline";
+      } else {
+        newStatus = "not";
+      }
+
+      console.log("the status ", newStatus);
+      const response2 = await fetch(
+        `${API_BASE_URL}/api/Tech/changeStatus/${userId}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ isOnline: newStatus }),
+        }
+      );
+      if (response2.ok) {
+        const json = await response2.json();
+        const {
+          department,
+          firstname,
+          lastname,
+          gender,
+          phonenumber,
+          deposit,
+          email,
+          image,
+          location,
+          status,
+          status2,
+          _id,
+        } = json;
+        dispatch2(
+          updateTech({
+            id: nanoId,
+            department: department,
+            firstname: firstname,
+            lastname: lastname,
+            gender: gender,
+            phonenumber: phonenumber,
+            deposit: deposit,
+            email: email,
+            image: image,
+            status: status,
+            status2: status2,
+            location: location,
+            _id: _id,
+          })
+        );
+      }
     } catch (error) {
       console.log("Failed to update status:", error);
     } finally {
@@ -20,22 +67,22 @@ const ToggleButton = () => {
   };
 
   return (
-    <div className="text-center mt-12">
+    <div className="text-center mt-1">
       <button
         onClick={handleToggle}
         disabled={loading}
-        className={`px-6 py-2 text-lg font-semibold text-white rounded-md transition-colors ${
-          isOn ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"
+        className={`px-1 py-1 text-[15px] font-semibold text-white rounded-md transition-colors ${
+          state == "not" || state == "loading"
+            ? "bg-red-500 hover:bg-red-600"
+            : "bg-green-500 hover:bg-green-600"
         } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
       >
-        {loading ? "Updating..." : isOn ? "ON" : "OFF"}
+        {loading
+          ? "Updating..."
+          : state == "not" || state == "loading"
+          ? "Change to OFFLINE"
+          : "Change to ONLINE"}
       </button>
-      <p className="mt-4">
-        The switch is currently:{" "}
-        <strong className={isOn ? "text-green-600" : "text-red-600"}>
-          {isOn ? "ON" : "OFF"}
-        </strong>
-      </p>
     </div>
   );
 };

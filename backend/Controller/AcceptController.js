@@ -61,7 +61,32 @@ const GetLatestAccept = async (req, res) => {
 const DeleteCustomer = async (req, res) => {
   res.status(200).json({ message: "this is delete" });
 };
-
+// Fetch jobs by isChecked status
+const jobFetch = async (req, res) => {
+  try {
+    const isChecked = req.params.isChecked;
+    const jobs = await ToFinish.find({ isChecked })
+      .populate("customerId")
+      .populate("techId");
+    res.status(200).json(jobs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+// Update isChecked
+const jobUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const job = await ToFinish.findByIdAndUpdate(
+      id,
+      { isChecked: true },
+      { new: true }
+    );
+    res.status(200).json(job);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 module.exports = {
   GetOneCustomer,
   GetOneTech,
@@ -69,4 +94,6 @@ module.exports = {
   GetLatestAccept,
   toBeFinished,
   DeleteLatestAccept,
+  jobFetch,
+  jobUpdate,
 };

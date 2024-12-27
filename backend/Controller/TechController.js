@@ -353,14 +353,19 @@ const DeleteTech = async (req, res) => {
 };
 
 const changeStatus = async (req, res) => {
-  const { id } = req.params;
-  const { isOnline } = req.body;
-  let result = await Tech.findByIdAndUpdate(
-    { _id: id },
-    { status2: isOnline },
-    { new: true }
-  );
-  res.status(200).json(result);
+  try {
+    const { id } = req.params;
+    console.log("the id is ", id);
+    const { isOnline } = req.body;
+    let result = await Tech.findByIdAndUpdate(
+      { _id: id },
+      { status2: isOnline },
+      { new: true }
+    );
+    res.status(200).json(result);
+  } catch (err) {
+    console.log("the error is ", err);
+  }
 };
 
 module.exports = {
@@ -373,5 +378,5 @@ module.exports = {
   LoginTech,
   GetOneTech1,
   updateFinish,
-  changeStatus
+  changeStatus,
 };
