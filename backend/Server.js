@@ -37,9 +37,6 @@ app.use("/api/Accepted", path4);
 app.use("/api/Admin", path5);
 app.use("/api/Chat", path6);
 app.use("/api/Applicants", ApplicantRoute);
-app.get("*", (req, res) => {
-  res.sendFile(paz.resolve(__dirname, "build", index.html));
-});
 let logged = [];
 let boddy = [];
 const serv = http.createServer(app);
