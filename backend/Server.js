@@ -21,15 +21,13 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://masterfix.onrender.com",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: "Content-Type,Authorization",
   })
 );
 app.options("/api/*", cors());
-
-app.use(express.static(paz.join(__dirname, "build")));
 app.use("/api/Customer", path);
 app.use("/api/Tech", path2);
 app.use("/api/Book", path3);
@@ -42,7 +40,7 @@ let boddy = [];
 const serv = http.createServer(app);
 const io = new Server(serv, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://masterfix.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   },
