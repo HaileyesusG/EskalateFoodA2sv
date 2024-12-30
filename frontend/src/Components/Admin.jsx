@@ -27,8 +27,7 @@ import { FaHome } from "react-icons/fa";
 import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import AdminChat from "./AdminChat";
-import { IoBatteryHalf } from "react-icons/io5";
-
+import AdminDashboard from "./TechFetch";
 {
   /* <AdminChat />; */
 }
@@ -95,7 +94,7 @@ const Admin = ({ user3 }) => {
   let [CustomerList, setCustomerList] = useState([]);
 
   const [searchText, setSearchText] = useState("");
-  const [disp2, setdisplay2] = useState("hidden");
+  const [disp2, setdisplay2] = useState("visible");
   const [disp3, setdisplay3] = useState("visible");
   const [disp4, setdisplay4] = useState("hidden");
   const [disp5, setdisplay5] = useState("hidden");
@@ -119,6 +118,7 @@ const Admin = ({ user3 }) => {
     setdisplay6("hidden");
     setdisplay4("hidden");
     setdisplay5("hidden");
+    setdisplay2("hidden");
   };
 
   let array = [];
@@ -150,8 +150,6 @@ const Admin = ({ user3 }) => {
   }, []);
 
   const handleChoiceChange2 = () => {
-    setdisplay2("hidden");
-    setdisplay3("visible");
     setdisplay8("hidden");
   };
   const handleChoiceChange3 = () => {
@@ -175,6 +173,7 @@ const Admin = ({ user3 }) => {
     setdisplay4("hidden");
     setdisplay14("hidden");
     setdisplay13("hidden");
+    setdisplay2("visible");
   };
   const handleChoiceChange8 = () => {
     setdisplay8("visible");
@@ -297,6 +296,7 @@ const Admin = ({ user3 }) => {
     setJson([]);
     setTitle("Users");
     setdisplay6("visible");
+    setdisplay2("hidden");
     setIsCustomer(true);
     const user = JSON.parse(localStorage.getItem("admin"));
     const token = "Bearer " + user.token;
@@ -313,6 +313,7 @@ const Admin = ({ user3 }) => {
     setJson([]);
     setTitle("ServiceProviders");
     setdisplay6("visible");
+    setdisplay2("hidden");
     setIsCustomer(false);
     const user = JSON.parse(localStorage.getItem("admin"));
     const token = "Bearer " + user.token;
@@ -392,6 +393,9 @@ const Admin = ({ user3 }) => {
         {/* <h1>{amount2.map((r) => r)}</h1> */}
         <div className={disp7}>
           <AdminChat user3={user4} />
+        </div>
+        <div className={disp2}>
+          <AdminDashboard />
         </div>
         <div id="last" className={"hidden"}>
           <input

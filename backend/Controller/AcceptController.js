@@ -65,9 +65,9 @@ const DeleteCustomer = async (req, res) => {
 const jobFetch = async (req, res) => {
   try {
     const isChecked = req.params.isChecked;
-    const jobs = await ToFinish.find({ isChecked })
-      .populate("customerId")
-      .populate("techId");
+    const jobs = await Accepted.find({ isChecked })
+      .populate("Customer_id")
+      .populate("Technician_id");
     res.status(200).json(jobs);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -76,11 +76,31 @@ const jobFetch = async (req, res) => {
 // Update isChecked
 const jobUpdate = async (req, res) => {
   try {
+    let job;
     const { id } = req.params;
-    const job = await ToFinish.findByIdAndUpdate(
-      id,
-      { isChecked: true },
-      { new: true }
+    const { amount } = req.body;
+    const percent = amount * 0.1;
+    if (amount == 0) {
+      job = await Accepted.findByIdAndUpdate(
+        id,
+        { isChecked: true },
+        { new: true }
+      );
+    } else {
+      job = await Accepted.findByIdAndUpdate(
+        id,
+        { isChecked: true, deducted: percent },
+        { new: true }
+      );
+    }
+
+    const techId = job.Technician_id;
+    const tech = await Technician.findById(techId);
+    const Deposit = tech.deposit;
+    const deposit = Deposit - percent;
+    const minperson45 = await Technician.findByIdAndUpdate(
+      { _id: techId },
+      { deposit }
     );
     res.status(200).json(job);
   } catch (err) {

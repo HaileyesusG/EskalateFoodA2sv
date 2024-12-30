@@ -20,11 +20,12 @@ import { useEffect, useState } from "react";
 import { setTech } from "./features/tech/techSlice";
 import { setAdmin } from "./features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
+import JobCompletionModal from "./Components/ConfirmModal";
 import { io } from "socket.io-client";
 const socket = io(API_BASE_URL);
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading,setIsLoading]=useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState("");
   const [admin, setAdmin2] = useState("");
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function App() {
     } else {
       console.log("not found2");
     }
-    setIsLoading(false)
+    setIsLoading(false);
   }, []);
   //user
   const featch = async (id) => {
@@ -90,9 +91,8 @@ function App() {
       console.log("not log in");
     }
   };
-  if(isLoading)
-  {
-    return <div>Loading...</div>
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
   return (
     <div>
@@ -102,19 +102,9 @@ function App() {
         </center> */}
 
         <Routes>
-          <Route
-            path="/"
-            element={<FrontPage/>}
-          />
+          <Route path="/" element={<FrontPage />} />
           <Route path="/Login" element={<Login />} />
-          <Route
-            path="/FrontPage"
-            element={
-              
-                <FrontPage />
-              
-            }
-          />
+          <Route path="/FrontPage" element={<FrontPage />} />
           <Route path="/Transition" element={<Transition />} />
           <Route path="/Transition2" element={<Transition2 />} />
           <Route path="/LoginC" element={<LoginC />} />
@@ -131,13 +121,7 @@ function App() {
           />
           <Route
             path="/Signup"
-            element={
-              user || todo2.length > 0 ? (
-                <FrontPage />
-              ) : (
-                <SignUp/>
-              )
-            }
+            element={user || todo2.length > 0 ? <FrontPage /> : <SignUp />}
           />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Dashboard2" element={<Dashboard2 />} />
@@ -153,6 +137,7 @@ function App() {
             }
           />
           <Route path="/AdminChat" element={<AdminChat />} />
+          <Route path="/JobCompletionModal" element={<JobCompletionModal />} />
           <Route path="/ChatTech" element={<ChatTech />} />
           <Route path="/SignUpA" element={<SignUpA />} />
           <Route path="/SignUpC" element={<SignUpC />} />

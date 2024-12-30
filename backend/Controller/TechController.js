@@ -148,7 +148,7 @@ const GetOneTech1 = async (req, res) => {
 
 const updateFinish = async (req, res) => {
   const { id } = req.params;
-  const { work, departmentt } = req.body;
+  const { work, departmentt, amount } = req.body;
   try {
     console.log("the id is is", id);
     console.log("the work is", work);
@@ -189,6 +189,7 @@ const updateFinish = async (req, res) => {
       let customer = await Customers.findById(work.myId);
 
       if (customer) {
+        const Tech_phonenumber = minperson45.phonenumber || "";
         const Customer_firstname = customer.firstname || "";
         const Customer_lastname = customer.lastname || "";
         const Customer_id = customer._id || "";
@@ -201,6 +202,7 @@ const updateFinish = async (req, res) => {
         const Customer_location = customer.location || "";
 
         const report = await Accepted.create({
+          amount: amount,
           Customer_id: Customer_id,
           Customer_firstname: Customer_firstname,
           Customer_lastname: Customer_lastname,
@@ -208,6 +210,7 @@ const updateFinish = async (req, res) => {
           Technician_firstname: Technician_firstname,
           Technician_lastname: Technician_lastname,
           Technician_email: Technician_email,
+          Tech_phonenumber: Tech_phonenumber,
           department: department,
           Customer_phonenumber: Customer_phonenumber,
           Customer_location: Customer_location,

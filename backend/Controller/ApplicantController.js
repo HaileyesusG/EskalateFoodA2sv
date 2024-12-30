@@ -7,8 +7,9 @@ const { setOtp } = require("../utils/otpStore");
 const bcryptjs = require("bcryptjs");
 const nodemailer = require("nodemailer");
 let otpStore = {}; // Temporary store for OTPs
+const backEndUrl = process.env.VITE_API_BASE_URL;
 const io = require("socket.io-client");
-const socket = io("https://africadeploybackend.onrender.com");
+const socket = io(backEndUrl);
 //Sign Up
 const ApplicantCreate = async (req, res) => {
   let leastWork = Infinity;

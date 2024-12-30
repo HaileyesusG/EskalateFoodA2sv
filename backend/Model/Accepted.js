@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 const acceptSchema = mongoose.Schema(
   {
+    isChecked: { type: Boolean, default: false },
+    amount: {
+      type: Number,
+      default: 0,
+    },
+    deducted: {
+      type: Number,
+      default: 0,
+    },
     Customer_firstname: {
       type: String,
       default: "",
@@ -36,6 +45,10 @@ const acceptSchema = mongoose.Schema(
       required: [true, "Please enter department"],
     },
     Customer_phonenumber: {
+      type: String,
+      required: [true, "Please enter phone number"],
+    },
+    Tech_phonenumber: {
       type: String,
       required: [true, "Please enter phone number"],
     },

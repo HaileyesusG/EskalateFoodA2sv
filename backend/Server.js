@@ -74,7 +74,9 @@ io.on("connection", (socket) => {
   });
   socket.on("booking1", (msg) => {
     const { db, latestMember } = msg;
-
+    console.log(
+      "in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone"
+    );
     // Flatten the array of arrays into a single array of objects
     const flattenedArray = latestMember.flat();
 

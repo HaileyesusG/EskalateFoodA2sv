@@ -26,6 +26,8 @@ import { useDispatch } from "react-redux";
 import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import ChatTech from "./ChatTech";
+import JobCompletionModal from "./ConfirmModal";
+import History from "./History";
 const socket = io(API_BASE_URL);
 let array3 = [];
 let timeoutId = null;
@@ -35,6 +37,13 @@ const Home = ({ user3 }) => {
       position: "top-right",
       style: { backgroundColor: "#EEEEEE", color: "black", fontWeight: "bold" },
     });
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const Closed = () => {
+    setIsModalOpen(false);
   };
   const mapRef = useRef(null);
   const dispatch2 = useDispatch();
@@ -85,7 +94,7 @@ const Home = ({ user3 }) => {
   let [viewer, setViwer] = useState(null);
   let [CustomerList, setCustomerList] = useState([]);
   const [tosend, setTosend] = useState("");
-  const [Customer__id, setCustomer_id] = useState("");
+  const [disp9, setdisplay9] = useState("hidden");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [location, setLocationName] = useState("");
@@ -114,22 +123,14 @@ const Home = ({ user3 }) => {
     setdisplay6("hidden");
     setdisplay4("hidden");
     setdisplay5("hidden");
-    const History = document.getElementById("MyHistory");
-    History.classList.toggle("hidden");
+    setdisplay9("hidden");
   };
-  let featcher = async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = "Bearer " + user.token;
-    response = await fetch(`${API_BASE_URL}/api/Accepted/GetOneTech`, {
-      headers: { authorization: token },
-    });
-    const d = await response.json();
-    setJson(d);
-    const History = document.getElementById("MyHistory");
-    History.classList.toggle("hidden");
+  const featcher = () => {
     setdisplay7("hidden");
     setdisplay6("hidden");
+    setdisplay4("hidden");
     setdisplay5("hidden");
+    setdisplay9("visible");
   };
 
   useEffect(() => {
@@ -146,7 +147,6 @@ const Home = ({ user3 }) => {
       });
 
       if (emailExists) {
-        setCustomer_id(db.customer_id);
         array3.push(db);
         setNotify(array3.length);
         setViwer(null);
@@ -323,7 +323,8 @@ const Home = ({ user3 }) => {
       socket.off("warning");
     };
   }, [socket]);
-  const Finished = async () => {
+  const Finished = async (amount) => {
+    console.log("in finished ", amount);
     try {
       setLoading(true);
       const response1 = await fetch(
@@ -344,6 +345,7 @@ const Home = ({ user3 }) => {
           headers: { "Content-Type": "application/json" },
           method: "PATCH",
           body: JSON.stringify({
+            amount,
             work,
             departmentt,
           }),
@@ -618,8 +620,7 @@ const Home = ({ user3 }) => {
     setdisplay6("visible");
     setdisplay7("hidden");
     setdisplay4("hidden");
-    const History = document.getElementById("MyHistory");
-    History.classList.toggle("hidden");
+    setdisplay9("hidden");
   };
   const handleChoiceChange8 = () => {
     setdisplay8("visible");
@@ -629,6 +630,14 @@ const Home = ({ user3 }) => {
     <div className={""}>
       {
         <div>
+          {isModalOpen && (
+            <div className=" App p-4">
+              {/* Modal that shows if task is accepted */}
+
+              <JobCompletionModal onFinish={Finished} onClose={Closed} />
+            </div>
+          )}
+
           {isTaskAccepted && (
             <div className=" App p-4">
               {/* Modal that shows if task is accepted */}
@@ -648,29 +657,8 @@ const Home = ({ user3 }) => {
                 disp6
               }
             />
-            <div className={"hidden "} id="MyHistory">
-              {" "}
-              {Json && (
-                <div className="ml-36">
-                  <h1 className="ml-56 text-3xl font-bold">
-                    Your Work History
-                  </h1>
-                  {Json.map((r, index) => (
-                    <div
-                      key={index}
-                      className=" bg-gray-200 space-y-9 cursor-pointer hover:bg-cyan-300 border-[1px] border-y-black text-2xl font-mono"
-                    >
-                      <ul>
-                        <li>{r.Customer_firstname}</li>
-                        <li>{r.Customer_phonenumber}</li>
-                        <li>{r.Customer_location}</li>
-                        <li>{r.department}</li>
-                        <li>{r.createdAt}</li>
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )}
+            <div className={disp9}>
+              <History user={user4} />
             </div>
             <div className={disp5}>
               <div className="flex ">
@@ -1010,7 +998,7 @@ const Home = ({ user3 }) => {
               ) : (
                 <div className="text-center mt-1">
                   <button
-                    onClick={() => Finished()}
+                    onClick={handleOpenModal}
                     disabled={loading}
                     className={`px-6 py-2 text-lg font-semibold text-white rounded-md transition-colors ${"bg-green-500 hover:bg-green-600"} ${
                       loading ? "opacity-50 cursor-not-allowed" : ""
@@ -1082,7 +1070,7 @@ const Home = ({ user3 }) => {
                 <IoMdNotifications className="text-3xl text-green-500" />
                 <h1 className="text-[20px] ml-2">Inbox</h1>
               </div>
-              <div className="flex">
+              <div className="flex cursor-pointer">
                 <RiChatHistoryFill className="text-3xl text-green-500" />
                 <h1 className="text-[20px] ml-2" onClick={featcher}>
                   History
