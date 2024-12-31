@@ -1,0 +1,26 @@
+import React from "react";
+
+const TermsAndConditions = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl w-full">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          Terms and Conditions
+        </h1>
+        <p className="text-gray-600 leading-7">
+          Every technician is required to report their earnings from each job to
+          the company accurately. Failure to do so, or providing falsified
+          information, will result in the company having the right to deduct the
+          technician's deposit.
+        </p>
+        <div className="mt-6 text-center">
+          <a href="/signup" className="text-blue-500 hover:underline text-sm">
+            Back to Sign Up
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TermsAndConditions;

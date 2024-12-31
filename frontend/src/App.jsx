@@ -21,6 +21,7 @@ import { setTech } from "./features/tech/techSlice";
 import { setAdmin } from "./features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
 import JobCompletionModal from "./Components/ConfirmModal";
+import TermsAndConditions from "./Components/Terms";
 import { io } from "socket.io-client";
 const socket = io(API_BASE_URL);
 function App() {
@@ -142,6 +143,7 @@ function App() {
           <Route path="/SignUpA" element={<SignUpA />} />
           <Route path="/SignUpC" element={<SignUpC />} />
           <Route path="/FrontPage" element={<FrontPage />} />
+          <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         </Routes>
       </BrowserRouter>
     </div>

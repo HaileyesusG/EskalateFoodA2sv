@@ -5,6 +5,7 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { BounceLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TermsAndConditions from "./Terms";
 import { FaUser } from "react-icons/fa";
 import { AiFillPhone } from "react-icons/ai";
 import { GrCertificate } from "react-icons/gr";
@@ -32,11 +33,12 @@ const SignUp = () => {
   const [testImage2, settestImage2] = useState(null);
   const [testImage3, settestImage3] = useState(null);
   const [testImage4, settestImage4] = useState("");
-  const [depError, setdepError] = useState("");
+  const [hasAgreed, setHasAgreed] = useState(false);
   const [genError, setgenError] = useState("");
   const [imError, setimError] = useState("");
   const [imError2, setim2Error] = useState("");
-  const [imError3, setim3Error] = useState("");
+  const [validPhoneNumber, setValidPhoneNumber] = useState(true);
+  const [validPhoneNumber2, setValidPhoneNumber2] = useState(true);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [View, setView] = useState(false);
   const [View2, setView2] = useState(true);
@@ -44,14 +46,43 @@ const SignUp = () => {
   const [category, setCategory] = useState("");
   const [selectedChoices, setSelectedChoices] = useState([]);
   const GenderOption = ["Male", "Female"];
-  const DepartmentOption = ["DISH", "TV"];
+  const handlePhoneNumberChange = (event) => {
+    const { value } = event.target;
+
+    // Trim leading and trailing spaces from the phone number
+    const trimmedValue = value.replace(/\s+/g, "");
+
+    setValidPhoneNumber2(true);
+    setPhonenumber(trimmedValue); // Store the trimmed phone number
+
+    // Validate phone number
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+    const isValid = phoneRegex.test(trimmedValue);
+    console.log("isValid", isValid);
+    setValidPhoneNumber(isValid);
+
+    if (trimmedValue === "") {
+      console.log("abebe");
+      setValidPhoneNumber(true);
+    }
+  };
 
   //Generate OTP
   const generateOtp = async (e) => {
     setLoading(true);
     e.preventDefault();
+    setValidPhoneNumber2(validPhoneNumber);
+    if (!validPhoneNumber) {
+      setLoading(false);
+      return;
+    }
     if (selectedChoices.length == 0) {
       toastify("Department is Required");
+      setLoading(false);
+      return;
+    }
+    if (!hasAgreed) {
+      alert("You must agree to the terms and conditions to proceed.");
       setLoading(false);
       return;
     }
@@ -316,7 +347,7 @@ const SignUp = () => {
                         required
                         placeholder="PhoneNumber"
                         type="text"
-                        onChange={(e) => setPhonenumber(e.target.value)}
+                        onChange={handlePhoneNumberChange}
                         value={phonenumber}
                         className="bg-transparent h-[35px] w-full border-2 border-black focus:border-yellow-300 rounded-2xl px-4  "
                       />
@@ -500,7 +531,32 @@ const SignUp = () => {
                     </div>
                     <div className="bg-red-500 ml-10 w-56 mt-2 rounded-md"></div>
                   </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      checked={hasAgreed}
+                      onChange={() => setHasAgreed(!hasAgreed)}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <label htmlFor="terms" className="text-sm text-gray-600">
+                      I have read and agree to the{" "}
+                      <a
+                        href="/TermsAndConditions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline"
+                      >
+                        terms and conditions
+                      </a>
+                    </label>
+                  </div>
                 </div>
+                {!validPhoneNumber2 && (
+                  <div className="bg-red-500 mt-2 rounded-lg text-white p-1 mx-4">
+                    <p className="text-center">PhoneNumber is invalid.</p>
+                  </div>
+                )}
                 <div className="flex justify-center mt-8">
                   <button
                     disabled={loading}
@@ -547,8 +603,8 @@ const SignUp = () => {
                 )}
               </button>
               <span className="flex justify-center items-center">
-                     Please Wait a Minute...
-                    <BounceLoader size={20} color="#ffffff" loading={true} />
+                Please Wait a Minute...
+                <BounceLoader size={20} color="#ffffff" loading={true} />
               </span>
             </div>
           )}
