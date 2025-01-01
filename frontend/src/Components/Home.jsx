@@ -418,12 +418,6 @@ const Home = ({ user3 }) => {
   };
   let calculateDistance2 = () => {
     setNotify2(0);
-    setNotify3(0);
-    const timer = setTimeout(() => {
-      setNotify2(1);
-      setNotify3(1);
-    }, 20000);
-    setViwer2(true);
   };
 
   socket.on("UnAccept2", (msg) => {
@@ -443,11 +437,10 @@ const Home = ({ user3 }) => {
           setLongitude(position.coords.longitude);
 
           try {
-            const apiKey = "3f6fbb502a5f47d4b45b5b3673b4e788";
-            const geocodeUrl = `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=${apiKey}`;
+            const apiKey = "pk.450a22b0630d7ca73b134cd78223a0ec"; // Replace with your LocationIQ API key
+            const geocodeUrl = `https://us1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`;
             const response = await axios.get(geocodeUrl);
-            const { results } = response.data;
-            const address = results[0].formatted;
+            const address = response.data.display_name;
             setLocationName(address);
           } catch (error) {
             setError2("Error retrieving location name.");
@@ -552,16 +545,16 @@ const Home = ({ user3 }) => {
     let slon;
     try {
       const response = await fetch(
-        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+        `https://us1.locationiq.com/v1/search.php?key=pk.450a22b0630d7ca73b134cd78223a0ec&q=${encodeURIComponent(
           event
-        )}&key=d8ef50e3e7d946cfa6c0e208e47dddb3`
+        )}&format=json`
       );
       const data = await response.json();
 
-      if (data.results.length > 0) {
-        const { lat, lng } = data.results[0].geometry;
-        slat = lat;
-        slon = lng;
+      if (data.length > 0) {
+        const { lat, lon } = data[0];
+        slat = parseFloat(lat);
+        slon = parseFloat(lon);
         setLatitude(slat);
         setLongitude(slon);
         console.log("slat", slat);
@@ -570,7 +563,7 @@ const Home = ({ user3 }) => {
         console.log("No results found");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   };
   const makeVisible = () => {
