@@ -863,11 +863,14 @@ const Home = ({ user3 }) => {
                           </span>
                         </p>
                         {isAccepted && (
-                          <p className="font-semibold text-gray-700 ">
+                          <p className="font-semibold text-gray-700">
                             Phone Number:{" "}
-                            <span className="font-normal">
+                            <a
+                              href={`tel:${d.Customer_phonenumber}`}
+                              className="font-normal text-blue-600 hover:underline"
+                            >
                               {d.Customer_phonenumber}
-                            </span>
+                            </a>
                           </p>
                         )}
                         <p className="font-semibold text-gray-700">
