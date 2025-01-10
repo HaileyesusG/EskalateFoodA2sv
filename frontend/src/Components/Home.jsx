@@ -85,7 +85,8 @@ const Home = ({ user3 }) => {
     user4 = user3;
   }
   const [isTaskAccepted, setIsTaskAccepted] = useState(false);
-
+  const [isAccepted, setIsAccepted] = useState(false);
+  const [hideDecline, setHideDecline] = useState(true);
   // Function to handle task acceptance
   const handleTaskAccept = () => {
     setIsTaskAccepted(true); // Update state to show modal to other technicians
@@ -93,6 +94,7 @@ const Home = ({ user3 }) => {
   let response;
   let [viewer, setViwer] = useState(null);
   let [CustomerList, setCustomerList] = useState([]);
+  const [CustomerL, setCustomerL] = useState("");
   const [tosend, setTosend] = useState("");
   const [disp9, setdisplay9] = useState("hidden");
   const [latitude, setLatitude] = useState("");
@@ -148,6 +150,7 @@ const Home = ({ user3 }) => {
 
       if (emailExists) {
         array3.push(db);
+        setCustomerL(db.Customer_location);
         setNotify(array3.length);
         setViwer(null);
         setDisabled(false);
@@ -239,7 +242,15 @@ const Home = ({ user3 }) => {
     };
   }, [socket, Email]);
 
+  const openGoogleMaps = () => {
+    const encodedLocation = encodeURIComponent(CustomerL);
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+    window.open(googleMapsUrl, "_blank"); // Opens in a new tab
+  };
+
   const accepted = async (Customer) => {
+    setIsAccepted(true);
+    setHideDecline(false);
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
@@ -307,6 +318,8 @@ const Home = ({ user3 }) => {
       }
     } catch (err) {
       console.log("The error is", err);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -820,51 +833,76 @@ const Home = ({ user3 }) => {
               }
             >
               <div className="mt-5 ml-8 text-2xl ">Notifications</div>
-              {array3.map((d, index) => (
-                <div className="w-96 h-28 hover:bg-yellow-100 mt-8" key={index}>
-                  {notify == 0 ? (
-                    <div className="text-[15px] font-bold" key={index}>
-                      <p className="text-[15px] font-bold" key={index}>
-                        {d.Customer_firstname}
-                      </p>
-                      <p className="text-[15px] font-bold" key={index}>
-                        {d.Customer_lastname}
-                      </p>
-                      <p className="text-[15px] font-bold" key={index}>
-                        {d.Customer_location}
-                      </p>
-                      <p className="text-[15px] font-bold" key={index}>
-                        {d.Customer_phonenumber}
-                      </p>
-                      <p className="text-[15px] font-bold" key={index}>
-                        {d.department}
-                      </p>
-                      <p className="text-[15px] font-bold" key={index}>
-                        {d.typeOfProblem}
-                      </p>
-                    </div>
-                  ) : null}
-                  {viewer && (
-                    <div className="flex space-x-4">
-                      {" "}
-                      <button
-                        onClick={() => accepted(d)}
-                        disabled={disabled}
-                        className=" text-[12px] w-20 h-6 bg-green-400 rounded-lg hover:bg-green-300"
-                      >
-                        Accept
-                      </button>
-                      <button
-                        onClick={declined}
-                        disabled={disabled}
-                        className="text-[12px] w-20 h-6 bg-red-500 rounded-lg hover:bg-red-400"
-                      >
-                        Decline
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ))}
+              <div className="grid grid-cols-1 gap-8 p-4">
+                {array3.map((d, index) => (
+                  <div
+                    key={index}
+                    className="w-96 p-4 bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-yellow-50 transition-all"
+                  >
+                    {notify == 0 && (
+                      <div className="text-sm space-y-2">
+                        <p className="font-semibold text-gray-700">
+                          First Name:{" "}
+                          <span className="font-normal">
+                            {d.Customer_firstname}
+                          </span>
+                        </p>
+                        <p className="font-semibold text-gray-700">
+                          Last Name:{" "}
+                          <span className="font-normal">
+                            {d.Customer_lastname}
+                          </span>
+                        </p>
+                        <p
+                          className="font-semibold  cursor-pointer text-blue-500"
+                          onClick={openGoogleMaps}
+                        >
+                          Location:{" "}
+                          <span className="font-normal text-blue-500">
+                            {d.Customer_location}
+                          </span>
+                        </p>
+                        {isAccepted && (
+                          <p className="font-semibold text-gray-700 ">
+                            Phone Number:{" "}
+                            <span className="font-normal">
+                              {d.Customer_phonenumber}
+                            </span>
+                          </p>
+                        )}
+                        <p className="font-semibold text-gray-700">
+                          Department:{" "}
+                          <span className="font-normal">{d.department}</span>
+                        </p>
+                        <p className="font-semibold text-gray-700">
+                          Problem Type:{" "}
+                          <span className="font-normal">{d.typeOfProblem}</span>
+                        </p>
+                      </div>
+                    )}
+
+                    {viewer && (
+                      <div className="mt-4 flex justify-between">
+                        <button
+                          onClick={() => accepted(d)}
+                          disabled={disabled}
+                          className="w-24 py-1 text-xs text-white bg-green-500 rounded-lg hover:bg-green-400 disabled:opacity-50"
+                        >
+                          {hideDecline ? "Accept" : "Accepted"}
+                        </button>
+
+                        <button
+                          onClick={declined}
+                          disabled={disabled}
+                          className="w-24 py-1 text-xs text-white bg-red-500 rounded-lg hover:bg-red-400 disabled:opacity-50"
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className=" w-[300px]">
               <div className=" ">

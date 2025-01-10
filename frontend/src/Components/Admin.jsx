@@ -28,6 +28,7 @@ import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import AdminChat from "./AdminChat";
 import AdminDashboard from "./TechFetch";
+import RechargeModal from "./RechargeModal";
 {
   /* <AdminChat />; */
 }
@@ -38,13 +39,52 @@ const Admin = ({ user3 }) => {
   const todo = useSelector((state) => state.admin.admin);
   const [achat, setAchat] = useState("");
   //setAchat(user3);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCustomerId, setSelectedCustomerId] = useState(null);
+  const [rechargeAmount, setRechargeAmount] = useState("");
 
-  //let { admin, dispatch } = useUserContextA();
+  const openRechargeModal = (id) => {
+    setSelectedCustomerId(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setRechargeAmount("");
+    setIsLoading(false); // Reset loading state when modal closes
+  };
+
+  const handleRecharge = async () => {
+    if (rechargeAmount == "") {
+      alert("Please insert amount");
+      return;
+    }
+    setIsLoading(true); // Show loading
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/Admin/RechargeBalance/${selectedCustomerId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            amount: rechargeAmount,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        setJson(data);
+        alert("Recharge successful!");
+      }
+      closeModal();
+    } catch (err) {
+      console.log("Recharge failed:", err);
+      alert("Recharge failed:", err);
+    }
+  };
 
   const [notify, setNotify] = useState(0);
-  const [notify2, setNotify2] = useState(0);
-  const [disable, setDisable] = useState(true);
-  const [disabled, setDisabled] = useState(true);
   const [array3, setArray3] = useState([]);
   const [iView, setIView] = useState(false);
   const [iView2, setIView2] = useState(false);
@@ -71,7 +111,7 @@ const Admin = ({ user3 }) => {
   if (user3 !== "") {
     user4 = user3;
   }
-  const { register, isLoading, error } = useRegister();
+  const { register, error } = useRegister();
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState(null);
   let response;
@@ -437,61 +477,85 @@ const Admin = ({ user3 }) => {
                   className="rounded-lg focus:outline-none px-2 w-60 h-11"
                 />
               </div>
-
+              Haileyesus Getnet ®, [1/6/2025 7:22 PM]
               {filteredCustomers.length > 0 ? (
                 filteredCustomers.map((r, index) => (
                   <div
                     key={index}
-                    className=" bg-gray-200 ml-10 mb-5 cursor-pointer  border-[1px]  text-[18px] flex h-28 rounded-lg w-[800px] "
+                    className="bg-white shadow-lg hover:shadow-2xl ml-10 mb-5 cursor-pointer border border-gray-300 text-lg flex h-28 rounded-lg w-[800px] transition-all duration-300"
                   >
-                    <div className="ml-3 mt-1">
-                      <div className="flex ">
+                    <div className="ml-4 mt-2">
+                      <div className="flex items-center">
                         <img
                           src={r.image}
-                          className="mr-2 w-14 h-14 rounded-full"
+                          className="mr-4 w-16 h-16 rounded-full border border-gray-300"
                         />
-                        <div className="mt-2">{r.firstname}</div>
+                        <div className="mt-2 font-semibold">{r.firstname}</div>
                       </div>
-                      <div className="flex">
-                        <AiFillPhone className="text-2xl mr-2 text-cyan-600" />
+                      <div className="flex items-center mt-2 text-gray-600">
+                        <AiFillPhone
+                          className="text-2
+
+Haileyesus Getnet ®, [1/6/2025 7:23 PM]
+text-cyan-600 mr-2"
+                        />
                         {r.phonenumber}
                       </div>
                     </div>
-                    <div className="flex   ml-5  w-40 h-28 border-2 overflow-y-scroll">
-                      {title == "ServiceProviders"
-                        ? r.department.map((p) => (
-                            <div className="ml-[5px]  mt-5 h-20 text-[15px]">
-                              {p + ","}
-                            </div>
-                          ))
-                        : ""}
+
+                    <div className="flex flex-col justify-center ml-5 w-40 h-28 border border-gray-200 rounded-lg overflow-y-scroll p-2 bg-gray-50">
+                      {title === "ServiceProviders" &&
+                        r.department.map((p, depIndex) => (
+                          <div key={depIndex} className="text-sm text-gray-700">
+                            {p}
+                          </div>
+                        ))}
                     </div>
-                    <div className="flex   ml-5  w-40 h-28 text-[15px] overflow-y-scroll">
-                      <div className="ml-[5px]  mt-1 h-20">{r.location}</div>
+
+                    <div className="flex flex-col justify-center ml-5 w-40 h-28 text-sm overflow-y-scroll p-2 bg-gray-50 border border-gray-200 rounded-lg">
+                      <div>{r.location}</div>
                     </div>
-                    <div className="bg-green-200 ml-10 rounded-lg mt-8 h-7 w-[75px]  ">
-                      <h3 className="text-green-600  ml-5  cursor-pointer">
-                        {r.status}
+
+                    <div className="bg-green-100 ml-10 rounded-lg flex items-center justify-center mt-8 h-7 w-[75px]">
+                      <h3 className="text-green-600 font-medium">{r.status}</h3>
+                    </div>
+
+                    <div className="bg-yellow-100 ml-5 rounded-lg flex items-center justify-center mt-8 h-7 w-[75px]">
+                      <h3 className="text-yellow-600 font-medium">
+                        {r.deposit} ብር
                       </h3>
                     </div>
-                    <div className="bg-yellow-200 ml-5 rounded-lg mt-8 h-7 w-[75px]  ">
-                      <h3 className="text-green-600  ml-5  cursor-pointer">
-                        {r.deposit + "ብር"}
-                      </h3>
-                    </div>
-                    <div className="bg-red-400 ml-5 rounded-lg mt-7 h-9 w-[60px] hover:bg-yellow-400 ">
-                      <div
-                        className="text-white hover:text-black ml-1 mt-1 cursor-pointer"
+
+                    <div className="flex items-center space-x-4 mt-6 ml-5">
+                      {/* <button
+                        className="bg-red-500 hover:bg-red-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"
                         onClick={() => featcher2(r._id)}
                       >
                         Delete
-                      </div>
+                      </button> */}
+
+                      <button
+                        className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"
+                        onClick={() => openRechargeModal(r._id)}
+                      >
+                        Recharge
+                      </button>
                     </div>
                   </div>
                 ))
               ) : (
-                <p className="ml-44">No matching {title} found.</p>
+                <p className="ml-44 text-gray-600 font-medium">
+                  No matching {title} found.
+                </p>
               )}
+              <RechargeModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                onRecharge={handleRecharge}
+                amount={rechargeAmount}
+                setAmount={setRechargeAmount}
+                isLoading={isLoading}
+              />
             </div>
           )}
         </div>

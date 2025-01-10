@@ -32,7 +32,7 @@ export const useCustomerForm = () => {
       setError(json.message);
       setWho(null);
       socket.emit("Error", "error");
-      console.log("not alright");
+      console.log("not alright ", json.message);
     }
     if (response.ok) {
       //dispatch2({ type: "CREATE_TASK", payload: json });

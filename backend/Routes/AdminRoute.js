@@ -16,7 +16,7 @@ router.route("/GetAdmin").get(GetAdmin);
 //router.route("/GetOneTech").get(AuthenticationTech, GetOneTech);
 router.route("/AdminCreate").post(upload2, AdminCreate);
 router.route("/LoginAdmin").post(LoginAdmin);
-router.route("/RechargeBalance").post(RechargeBalance);
+router.route("/RechargeBalance/:id").patch(RechargeBalance);
 router.route("/GetOneAdminById/:id").get(GetOneAdminById);
 //   router.route("/:id").patch(upload, UpdateTech);
 //   router.route("/:id").get(GetOneTech).delete(DeleteTech).patch(UpdateTech);

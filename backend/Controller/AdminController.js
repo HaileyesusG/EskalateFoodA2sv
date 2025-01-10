@@ -1,4 +1,5 @@
 const Admin = require("../Model/Admin");
+const Technician = require("../Model/Technician");
 const jwt = require("jsonwebtoken");
 //Token Generator
 const createToken = (_id) => {
@@ -89,21 +90,19 @@ const GetAdmin = async (req, res) => {
   res.status(200).json(cv);
 };
 const RechargeBalance = async (req, res) => {
-  const { amountt } = req.body;
-  function generateRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  function generateRandomNumberWithAmount(min, max, amount) {
-    const randomNumber = generateRandomNumber(min, max);
-    return {
-      number: randomNumber,
-      amount: randomNumber * amount,
-    };
-  }
-  const randomData = generateRandomNumberWithAmount(1, 10, amountt);
-  console.log(randomData.number); // The generated random number
-  console.log(randomData.amount); // The associated amount of money
-  res.status(200).json(randomData);
+  let { amount } = req.body;
+  amount = Number(amount);
+  const { id } = req.params;
+  const person = await Technician.findById(id);
+  const money = person.deposit;
+  const tDeposit = amount + money;
+  const minperson45 = await Technician.findByIdAndUpdate(
+    { _id: id },
+    { deposit: tDeposit },
+    { new: true }
+  );
+  const allTech = await Technician.find({});
+  res.status(200).json(allTech);
 };
 const GetOneAdminById = async (req, res) => {
   const { id } = req.params;
