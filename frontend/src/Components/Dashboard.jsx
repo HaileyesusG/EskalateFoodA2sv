@@ -363,7 +363,7 @@ const Dashboard = () => {
   }, [socket, phonenumber]);
   return (
     <div key={refereshKey}>
-      <div className="absolute mt-5 ml-4 sm:mt-8 sm:ml-6 flex flex-wrap w-full items-center space-x-4 sm:space-x-8 lg:space-x-10 container">
+      <div className="relative mt-5 ml-4 sm:mt-8 sm:ml-6 flex flex-wrap w-full items-center space-x-4 sm:space-x-8 lg:space-x-10 container">
         <div>
           <ImLocation className="text-[20px] sm:text-[30px] text-pink-600 shadow font-bold" />
           <p className="text-[8px] sm:text-[10px]">ይህ የGPS </p>
@@ -374,7 +374,7 @@ const Dashboard = () => {
         <div className="w-[90px] md:w-[300px] lg:w-[400px] ml-2 sm:ml-3">
           <h3 className="text-xs sm:text-sm md:text-base">{location}</h3>
         </div>
-        <div className="ml-6 sm:ml-20 lg:ml-40">
+        <div className="ml-6 sm:ml-20 lg:ml-40 ">
           <div className={disp2}>
             <div className="flex mr-4 sm:mr-10">
               <input
@@ -383,7 +383,7 @@ const Dashboard = () => {
                 onFocus={() => setdisplay("visible")}
                 value={query}
                 placeholder="Location"
-                className="bg-transparent h-[30px] sm:h-[35px] w-[200px] sm:w-[250px] md:w-[300px] border-2 block focus:outline-none focus:border-white rounded-2xl px-2 sm:px-4 placeholder-white"
+                className="bg-transparent h-[30px] sm:h-[35px] w-[200px] sm:w-[250px] md:w-[300px] border-2 block focus:outline-none  rounded-2xl px-2 sm:px-4 "
               />
               <ImLocation className="mt-1 sm:mt-2 absolute ml-[170px] sm:ml-[230px]" />
             </div>

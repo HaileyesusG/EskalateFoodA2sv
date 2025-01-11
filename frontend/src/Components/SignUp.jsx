@@ -458,7 +458,7 @@ const SignUp = () => {
                           Upload Front Side
                         </label>
                         <div className="text-[10px] sm:text-[12px] font-bold">
-                          <label>Of Kebele Id</label>
+                          <label>Of Kebele Id(National id or PassPort)</label>
                         </div>
                       </div>
                     </div>
@@ -492,7 +492,9 @@ const SignUp = () => {
                           Upload Back Side
                         </label>
                         <div className="text-[10px] sm:text-[12px] font-bold">
-                          <label>Of Of Kebele Id</label>
+                          <label>
+                            Of Of Kebele Id(National id or PassPort)
+                          </label>
                         </div>
                       </div>
                     </div>

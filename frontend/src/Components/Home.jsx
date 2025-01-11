@@ -454,6 +454,7 @@ const Home = ({ user3 }) => {
             const geocodeUrl = `https://us1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`;
             const response = await axios.get(geocodeUrl);
             const address = response.data.display_name;
+            console.log("address is ", address);
             setLocationName(address);
           } catch (error) {
             setError2("Error retrieving location name.");
@@ -689,8 +690,10 @@ const Home = ({ user3 }) => {
                         </div>
                         <div className=" border-b-gray-300 ml-10  h-16 mt-7 overflow-y-scroll">
                           {Department2 != "" &&
-                            Department2.map((p) => (
-                              <div className="font-bold">{p}</div>
+                            Department2.map((p, i) => (
+                              <div key={i} className="font-bold">
+                                {p}
+                              </div>
                             ))}
                         </div>
                       </div>

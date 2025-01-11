@@ -18,6 +18,7 @@ let isProcessingQueue2 = false;
 let Counter = 0;
 let addToAssignQueue;
 let addToAssignQueue2;
+const maxDistance = 7; // Maximum allowed distance in km
 //Create
 const BookCreate = async (req, res) => {
   // Acquire the lock before proceeding
@@ -123,39 +124,58 @@ const BookCreate = async (req, res) => {
 
       for (const person of newTech2) {
         try {
-          const response2 = await fetch(
+          // Fetch the driver's location data
+          const response = await fetch(
             ` https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
               person.location
             )}&format=json`
           );
 
-          const data2 = await response2.json();
-          if (data2.length > 0) {
-            const { lat, lon } = data2[0];
+          const data = await response.json();
+
+          if (data.length > 0) {
+            const { lat, lon } = data[0];
             const driverCoords = {
               latitude: parseFloat(lat),
               longitude: parseFloat(lon),
             };
-            console.log("lat", lat);
-            console.log("lon", lon);
 
+            console.log("Driver latitude:", lat);
+            console.log("Driver longitude:", lon);
+
+            // Calculate the distance to the customer
             const distance = haversine(customerCoords, driverCoords);
-            if (distance < nearestDistance) {
-              nearestDistance = distance;
-              nearestDriver = [person];
-            } else if (distance === nearestDistance) {
-              nearestDriver.push(person); // Add this driver to the list of nearest drivers
+
+            // Check if the distance is within the 7 km limit
+            if (distance <= maxDistance) {
+              if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestDriver = [person]; // Update nearest driver
+              } else if (distance === nearestDistance) {
+                nearestDriver.push(person); // Add to list of nearest drivers
+              }
+            } else {
+              console.log(
+                `Driver at ${person.location} is beyond the 7 km limit.`
+              );
             }
           } else {
-            console.log("No results found");
+            console.log(`No location data found for ${person.location}.`);
           }
         } catch (error) {
+          console.error(
+            `Error fetching location for ${person.location}:, error`
+          );
           res.status(400).json({ message: "No Internet Connection" });
           return;
         }
       }
-      if (nearestDriver.length == 0) {
-        res.status(404).send({ error: "NO Technician found" });
+
+      // Log the results
+      if (nearestDriver.length > 0) {
+        console.log("Nearest driver(s) within 7 km:", nearestDriver);
+      } else {
+        res.status(400).send({ message: "NO Technician found" });
         return;
       }
 
@@ -173,7 +193,7 @@ const BookCreate = async (req, res) => {
         //res.status(200).json(db);
         //console.log(db);
       } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ message: error.message });
         return;
       }
       for (const driver of nearestDriver) {
@@ -183,9 +203,9 @@ const BookCreate = async (req, res) => {
           { new: true }
         );
       }
-      console.log("the aba wde ", db);
+      // console.log("the aba wde ", db);
 
-      console.log("the nearestDriver ", nearestDriver);
+      // console.log("the nearestDriver ", nearestDriver);
       let latestMember = [...nearestDriver];
       socket.emit("booking1", { db, latestMember });
       //
@@ -353,82 +373,88 @@ const BookCreate = async (req, res) => {
         return;
       }
 
-      let slat;
-      let slon;
-      let customerCor = [];
-      for (const Pend of bookers) {
+      let customerCoordsList = []; // To store coordinates of customers
+
+      // Fetch customer coordinates
+      for (const booker of bookers) {
         try {
           const response = await fetch(
             `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
-              Pend.Customer_location
+              booker.Customer_location
             )}&format=json`
           );
+
           const data = await response.json();
-          if (!response.ok) {
-            console.log({ message: "No Internet Connection" });
+
+          if (!response.ok || data.length === 0) {
+            console.log(`No results found for ${booker.Customer_location}`);
+            continue;
           }
 
-          if (data.length > 0) {
-            const { lat, lon } = data[0];
-            slat = parseFloat(lat);
-            slon = parseFloat(lon);
-            console.log("slat", slat);
-            console.log("slon", slon);
-          } else {
-            console.log("No results found");
-          }
+          const { lat, lon } = data[0];
+          const customerCoords = {
+            latitude: parseFloat(lat),
+            longitude: parseFloat(lon),
+          };
+
+          customerCoordsList.push(customerCoords); // Save valid customer coordinates
         } catch (error) {
-          //return res.status(400).json({ message: "No Internet Connection5" });
+          console.log(
+            `Error fetching location for ${booker.Customer_location}:, error`
+          );
         }
-        const customerCoords = {
-          latitude: slat,
-          longitude: slon,
-        };
-        customerCor.push(customerCoords);
       }
 
-      for (const person of filter3) {
-        for (const p of person) {
+      // Fetch driver coordinates and find the nearest
+      for (const personGroup of filter3) {
+        for (const driver of personGroup) {
           try {
-            const response2 = await fetch(
+            const response = await fetch(
               `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
-                p.location
+                driver.location
               )}&format=json`
             );
-            const data2 = await response2.json();
-            console.log("the person location is ", person);
-            console.log("the data2 is ", data2);
-            if (data2.length > 0) {
-              const { lat, lon } = data2[0];
-              slat = parseFloat(lat);
-              slon = parseFloat(lon);
-              console.log("slat", slat);
-              console.log("slon", slon);
-              const driverCoords = {
-                latitude: lat,
-                longitude: lon,
-              };
-              for (const custCord of customerCor) {
-                const distance = haversine(custCord, driverCoords);
+
+            const data = await response.json();
+
+            if (!response.ok || data.length === 0) {
+              console.log(`No results found for ${driver.location}`);
+              continue;
+            }
+
+            const { lat, lon } = data[0];
+            const driverCoords = {
+              latitude: parseFloat(lat),
+              longitude: parseFloat(lon),
+            };
+
+            // Compare the driver's location with all customer locations
+            for (const customerCoords of customerCoordsList) {
+              const distance = haversine(customerCoords, driverCoords);
+
+              // Only consider drivers within the max distance
+              if (distance <= maxDistance) {
                 if (distance < nearestDistance) {
                   nearestDistance = distance;
-                  nearestDriver = [p];
+                  nearestDriver = [driver];
                 } else if (distance === nearestDistance) {
-                  nearestDriver.push(p); // Add this driver to the list of nearest drivers
+                  nearestDriver.push(driver); // Add to the nearest driver list if same distance
                 }
               }
-            } else {
-              console.log("No results found2");
             }
           } catch (error) {
-            console.log({ message: "No Internet Connection" });
-            return;
+            console.error(
+              `Error fetching location for ${driver.location}:, error`
+            );
           }
         }
       }
-      if (nearestDriver.length == 0) {
+
+      if (nearestDriver.length > 0) {
+        console.log("Nearest driver(s):", nearestDriver);
+      } else {
         await model.findByIdAndDelete(RequestId);
-        res.status(404).send({ error: "NO Technician found" });
+        res.status(400).send({ error: "NO Technician found" });
         console.log({ error: "NO Technician found" });
         return;
       }
@@ -486,7 +512,7 @@ const BookCreate = async (req, res) => {
         await addToAssignQueue(RequestId);
       }, 30000);
     } catch (err) {
-      console.error("Error during driver reassignment:", err);
+      console.log("Error during driver reassignment:", err);
     } finally {
       // const result = await Technician.updateMany(
       //   { status: "free", status2: { $ne: "not" } }, // Additional condition to check status2
