@@ -343,9 +343,10 @@ const SignUp = () => {
                       />
                     </div>
                     <div className="flex flex-col">
+                      <p>E.g: +251960295512</p>
                       <input
                         required
-                        placeholder="PhoneNumber"
+                        placeholder="PhoneNumber(+251)"
                         type="text"
                         onChange={handlePhoneNumberChange}
                         value={phonenumber}
@@ -605,7 +606,7 @@ const SignUp = () => {
                 )}
               </button>
               <span className="flex justify-center items-center">
-                Please Wait a Minute...
+                We have sent an OTP to your email. Please check your email
                 <BounceLoader size={20} color="#ffffff" loading={true} />
               </span>
             </div>
