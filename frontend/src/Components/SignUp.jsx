@@ -364,9 +364,9 @@ const SignUp = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <p>it should contains special characters like @,?,/,.</p>
-                      <p>Capital and small letters</p>
-                      <p>Numbers and the length should be 8</p>
+                      <p>It should contains special characters like @,?,/,.</p>
+                      <p>Capital,small letters and Numbers</p>
+                      <p>The length should be 8</p>
                       <p>E.g: Kebede@123</p>
                       <input
                         required
