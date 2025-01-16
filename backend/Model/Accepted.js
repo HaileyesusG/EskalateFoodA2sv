@@ -20,7 +20,7 @@ const acceptSchema = mongoose.Schema(
     },
     Customer_id: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: "Customer",
     },
     Technician_id: {

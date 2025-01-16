@@ -95,9 +95,9 @@ const GenerateOtp = async (req, res) => {
     if (!validator.isEmail(email)) {
       throw Error("Email is not valid");
     }
-    if (!validator.isStrongPassword(password)) {
-      throw Error("Password not strong enough");
-    }
+    // if (!validator.isStrongPassword(password)) {
+    //   throw Error("Password not strong enough");
+    // }
     const exists = await Tech.findOne({ email });
     if (exists) {
       throw Error("email already in use");
