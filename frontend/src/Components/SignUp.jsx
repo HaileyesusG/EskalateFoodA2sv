@@ -364,10 +364,6 @@ const SignUp = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <p>It should contains special characters like @,?,/,.</p>
-                      <p>Capital,small letters and Numbers</p>
-                      <p>The length should be 8</p>
-                      <p>E.g: Kebede@123</p>
                       <input
                         required
                         placeholder="Password"
