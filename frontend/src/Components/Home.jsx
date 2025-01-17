@@ -1071,9 +1071,7 @@ const Home = ({ user3 }) => {
                 }
               >
                 <p className="mt-3 text-white text-[15px] ml-2">
-                  <strong>
-                    {status2 == "offline" ? "You areOffline" : "You are Online"}
-                  </strong>
+                  <strong>{status2 == "offline" ? "Offline" : "Online"}</strong>
                 </p>
               </div>
               <div className=" w-36 h-12    cursor-pointer ">
