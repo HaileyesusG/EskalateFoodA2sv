@@ -549,7 +549,7 @@ const Admin = ({ user3 }) => {
                 filteredCustomers.map((r, index) => (
                   <div
                     key={index}
-                    className="bg-white shadow-lg hover:shadow-2xl ml-10 mb-5 cursor-pointer border border-gray-300 text-lg flex h-28 rounded-lg w-[800px] transition-all duration-300"
+                    className="bg-white shadow-lg hover:shadow-2xl ml-10 mb-5 cursor-pointer border border-gray-300 text-lg flex h-40 rounded-lg w-full transition-all duration-300"
                   >
                     <div className="ml-4 mt-2">
                       <div className="flex items-center">
