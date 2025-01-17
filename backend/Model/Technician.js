@@ -108,9 +108,9 @@ techSchema.statics.SignUp = async function (
   if (!validator.isEmail(email)) {
     throw Error("Email is not valid");
   }
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
-  }
+  // if (!validator.isStrongPassword(password)) {
+  //   throw Error("Password not strong enough");
+  // }
   const exists = await this.findOne({ email });
   if (exists) {
     throw Error("email already in use");
@@ -141,7 +141,9 @@ techSchema.statics.Login = async function (email, password) {
   if (!email || !password) {
     throw Error("All files are required");
   }
-  const tech = await this.findOne({ email:{$regex:new RegExp(`^${email}$`,'i')} });
+  const tech = await this.findOne({
+    email: { $regex: new RegExp(`^${email}$`, "i") },
+  });
   if (!tech) {
     throw Error("Incorrect email ");
   }
