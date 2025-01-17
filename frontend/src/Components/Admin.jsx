@@ -579,7 +579,7 @@ text-cyan-600 mr-2"
                         ))}
                     </div>
 
-                    <div className="flex flex-col justify-center ml-5 w-40 h-28 text-sm overflow-y-scroll p-2 bg-gray-50 border border-gray-200 rounded-lg">
+                    <div className="flex flex-col justify-center ml-5 w-52 h-40 text-sm overflow-y-scroll p-2 bg-gray-50 border border-gray-200 rounded-lg">
                       <div>{r.location}</div>
                     </div>
 
