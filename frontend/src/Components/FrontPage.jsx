@@ -439,23 +439,23 @@ const FrontPage = () => {
                 <p>EthioSat 57°E Satellite</p>
               </span>
               <div className="flex space-x-3">
-                <diV>
+                <div>
                   <h1 className="ml-3">SPTV 1 </h1>
                   <img
                     src={SPTV1} // Replace with your own image URL if needed
                     alt="ETHIO 57°E Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
 
-                <diV>
+                <div>
                   <h1 className="ml-3">SPTV 2</h1>
                   <img
                     src={SPTV2} // Replace with your own image URL if needed
                     alt="ETHIO 57°E Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
@@ -497,23 +497,23 @@ const FrontPage = () => {
                 <p>YAHSAT 52.5°E Satellite</p>
               </span>
               <div className="flex space-x-3">
-                <diV>
+                <div>
                   <h1 className="ml-3">Varzish HD</h1>
                   <img
                     src={Varzish} // Replace with your own image URL if needed
                     alt="Varzish Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
 
-                <diV>
+                <div>
                   <h1 className="ml-3">Football HD</h1>
                   <img
                     src={Football} // Replace with your own image URL if needed
                     alt="Football Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
@@ -555,31 +555,31 @@ const FrontPage = () => {
                 <p>DSTV 36°E Satellite</p>
               </span>
               <div className="flex space-x-3">
-                <diV>
+                <div>
                   <h1 className="ml-3">SuperSports HD</h1>
                   <img
                     src={SUPERSPORT} // Replace with your own image URL if needed
                     alt="Amos 4°W Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
 
-                <diV>
+                <div>
                   <h1 className="ml-3">MNET HD</h1>
                   <img
                     src={MNET} // Replace with your own image URL if needed
                     alt="Amos 4°W Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
-                <diV>
+                </div>
+                <div>
                   <h1 className="ml-3">ABOL HD</h1>
                   <img
                     src={ABOL} // Replace with your own image URL if needed
                     alt="Amos 4°W Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">
@@ -621,22 +621,22 @@ const FrontPage = () => {
                 <p>beIN SPORTS 36°E/7°W Satellite</p>
               </span>
               <div className="flex space-x-3">
-                <diV>
+                <div>
                   <h1 className="ml-3">beIN SPORTS HD</h1>
                   <img
                     src={BEIN} // Replace with your own image URL if needed
                     alt="Amos 4°W Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
-                <diV>
+                </div>
+                <div>
                   <h1 className="ml-3">beIN MOVIES HD</h1>
                   <img
                     src={BMOVIES} // Replace with your own image URL if needed
                     alt="Amos 4°W Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
               </div>
 
               <div className="flex justify-center items-center w-11/12">
@@ -679,14 +679,14 @@ const FrontPage = () => {
                 <p>PackSat 38°E Satellite</p>
               </span>
               <div className="flex space-x-3">
-                <diV>
+                <div>
                   <h1 className="ml-3">PTV SPORTS HD</h1>
                   <img
                     src={PTV} // Replace with your own image URL if needed
                     alt="Amos 4°W Satellite Logo"
                     className="w-28 h-28 object-contain mb-4"
                   />
-                </diV>
+                </div>
               </div>
               <div className="flex justify-center items-center w-11/12">
                 <p className="text-center text-sm md:text-lg ">

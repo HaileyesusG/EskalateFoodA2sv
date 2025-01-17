@@ -3,7 +3,7 @@ const Technician = require("../Model/Technician");
 const jwt = require("jsonwebtoken");
 //Token Generator
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id }, process.env.SECRET);
 };
 
 //Sign Up

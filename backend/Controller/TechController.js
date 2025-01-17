@@ -8,6 +8,7 @@ const socket = io(backEndUrl);
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const model = require("../Model/Book");
+const directBook = require("../Model/directBook");
 //Token Generator
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET);
@@ -370,8 +371,95 @@ const changeStatus = async (req, res) => {
     console.log("the error is ", err);
   }
 };
+//make tech bba
+const techBba = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const {
+      Customer_firstname,
+      typeOfProblem,
+      department2,
+      Customer_phonenumber,
+      Customer_location,
+    } = req.body;
+    const db = await directBook.create({
+      Customer_firstname,
+      Customer_phonenumber,
+      typeOfProblem,
+      department: department2,
+      Customer_location,
+      Status: "accepted",
+      tech_id: id,
+    });
+    const data = await Technician.findByIdAndUpdate(
+      { _id: id },
+      { status: "bba" },
+      { new: true }
+    );
+    const allTech = await Technician.find({});
+    res.status(200).json(allTech);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+};
+//complete
+const finishBba = async (req, res) => {
+  const { id } = req.params;
+  const { amount } = req.body;
+  try {
+    const status = "free";
+    const status2 = "not";
+    const minperson45 = await Technician.findByIdAndUpdate(
+      { _id: id },
+      { status, status2 }
+    );
+
+    const UpdateB = await directBook
+      .findOne({
+        tech_id: id,
+        Status: "accepted",
+      })
+      .sort({ createdAt: -1 });
+    const UpdateS = await directBook.findByIdAndUpdate(
+      { _id: UpdateB._id },
+      { Status: "completed" }
+    );
+
+    const Tech_phonenumber = minperson45.phonenumber || "";
+    const Customer_firstname = UpdateS.Customer_firstname || "";
+    const Customer_lastname = UpdateS.Customer_lastname || "";
+    const Technician_id = id || "";
+    const Technician_firstname = minperson45.firstname || "";
+    const Technician_lastname = minperson45.lastname || "";
+    const Technician_email = minperson45.email || "";
+    const department = UpdateS.department;
+    const Customer_phonenumber = UpdateS.Customer_phonenumber || "";
+    const Customer_location = UpdateS.Customer_location || "";
+
+    const report = await Accepted.create({
+      amount: amount,
+      Customer_firstname: Customer_firstname,
+      Customer_lastname: Customer_lastname,
+      Technician_id: Technician_id,
+      Technician_firstname: Technician_firstname,
+      Technician_lastname: Technician_lastname,
+      Technician_email: Technician_email,
+      Tech_phonenumber: Tech_phonenumber,
+      department: department,
+      Customer_phonenumber: Customer_phonenumber,
+      Customer_location: Customer_location,
+    });
+    const Respon = await Technician.findById(id);
+    res.status(200).json(Respon);
+  } catch (err) {
+    console.log("the error is ", err);
+    res.status(400).json({ message: err });
+  }
+};
 
 module.exports = {
+  techBba,
+  finishBba,
   TechCreate,
   GetTech,
   GetOneTechById,

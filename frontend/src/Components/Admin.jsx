@@ -29,6 +29,7 @@ import { MdEmail } from "react-icons/md";
 import AdminChat from "./AdminChat";
 import AdminDashboard from "./TechFetch";
 import RechargeModal from "./RechargeModal";
+import AssignModal from "./AssignModal";
 {
   /* <AdminChat />; */
 }
@@ -41,20 +42,31 @@ const Admin = ({ user3 }) => {
   //setAchat(user3);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenA, setIsModalOpenA] = useState(false);
   const [selectedCustomerId, setSelectedCustomerId] = useState(null);
   const [rechargeAmount, setRechargeAmount] = useState("");
+  const [Customer_firstname, setCustomer_firstname] = useState("");
+  const [Customer_phonenumber, setCustomer_phonenumber] = useState("");
+  const [department2, setDepartment2] = useState("");
+  const [Customer_location, setCustomer_location] = useState("");
 
   const openRechargeModal = (id) => {
     setSelectedCustomerId(id);
     setIsModalOpen(true);
   };
 
+  const openAssignModal = (id) => {
+    setSelectedCustomerId(id);
+    setIsModalOpenA(true);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
+    setIsModalOpenA(false);
     setRechargeAmount("");
     setIsLoading(false); // Reset loading state when modal closes
   };
-
+  //Recharge
   const handleRecharge = async () => {
     if (rechargeAmount == "") {
       alert("Please insert amount");
@@ -81,6 +93,50 @@ const Admin = ({ user3 }) => {
     } catch (err) {
       console.log("Recharge failed:", err);
       alert("Recharge failed:", err);
+    }
+  };
+  //Assign
+  const handleAssign = async () => {
+    if (department2 == "") {
+      alert("Please insert department");
+      return;
+    }
+    if (Customer_firstname == "") {
+      alert("Please insert Customer_firstname");
+      return;
+    }
+    if (Customer_location == "") {
+      alert("Please insert Customer_location");
+      return;
+    }
+    if (Customer_phonenumber == "") {
+      alert("Please insert Customer_phonenumber");
+      return;
+    }
+    setIsLoading(true); // Show loading
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/tech/techBba/${selectedCustomerId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            Customer_firstname,
+            department2,
+            Customer_phonenumber,
+            Customer_location,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        setJson(data);
+        alert("Assign successful!");
+      }
+      closeModal();
+    } catch (err) {
+      console.log("Assign failed:", err);
+      alert("Assign failed:", err);
     }
   };
 
@@ -393,6 +449,17 @@ const Admin = ({ user3 }) => {
       setJson(await response.json());
     }
   };
+  //AssgnJob
+  // const assignJob = async (id) => {
+
+  //   const  response = await fetch(`${API_BASE_URL}/api/tech/assignJob/${id}`, {
+  //       method: "POST",
+  //       body
+  //       headers: { "Content-Type": "application/json" },
+  //     });
+  //     setJson(await response.json());
+  //   }
+  // };
   // Handle search text change
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
@@ -519,6 +586,11 @@ text-cyan-600 mr-2"
                     <div className="bg-green-100 ml-10 rounded-lg flex items-center justify-center mt-8 h-7 w-[75px]">
                       <h3 className="text-green-600 font-medium">{r.status}</h3>
                     </div>
+                    <div className="bg-green-100 ml-10 rounded-lg flex items-center justify-center mt-8 h-7 w-[75px]">
+                      <h3 className="text-green-600 font-medium">
+                        {r.status2}
+                      </h3>
+                    </div>
 
                     <div className="bg-yellow-100 ml-5 rounded-lg flex items-center justify-center mt-8 h-7 w-[75px]">
                       <h3 className="text-yellow-600 font-medium">
@@ -533,6 +605,12 @@ text-cyan-600 mr-2"
                       >
                         Delete
                       </button> */}
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"
+                        onClick={() => openAssignModal(r._id)}
+                      >
+                        Assign Job
+                      </button>
 
                       <button
                         className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"
@@ -554,6 +632,20 @@ text-cyan-600 mr-2"
                 onRecharge={handleRecharge}
                 amount={rechargeAmount}
                 setAmount={setRechargeAmount}
+                isLoading={isLoading}
+              />
+              <AssignModal
+                isOpen={isModalOpenA}
+                onClose={closeModal}
+                onAssign={handleAssign}
+                Customer_firstname={Customer_firstname}
+                setCustomer_firstname={setCustomer_firstname}
+                department2={department2}
+                setDepartment2={setDepartment2}
+                Customer_phonenumber={Customer_phonenumber}
+                setCustomer_phonenumber={setCustomer_phonenumber}
+                Customer_location={Customer_location}
+                setCustomer_location={setCustomer_location}
                 isLoading={isLoading}
               />
             </div>

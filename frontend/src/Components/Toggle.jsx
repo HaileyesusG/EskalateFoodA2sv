@@ -67,22 +67,39 @@ const ToggleButton = ({ nanoId, userId, state }) => {
   };
 
   return (
-    <div className="text-center mt-1">
-      <button
+    // <div className="text-center mt-1">
+    //   <button
+    //     onClick={handleToggle}
+    //     disabled={loading}
+    //     className={`px-1 py-1 text-[15px] font-semibold text-white rounded-md transition-colors ${
+    //       state == "not" || state == "loading"
+    //         ? "bg-red-500 hover:bg-red-600"
+    //         : "bg-green-500 hover:bg-green-600"
+    //     } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+    //   >
+    //     {loading
+    //       ? "Updating..."
+    //       : state == "not" || state == "loading"
+    //       ? "Change to OFFLINE"
+    //       : "Change to ONLINE"}
+    //   </button>
+    // </div>
+    <div className="flex items-center gap-3 mt-2 ml-2">
+      <div
+        className={`w-16 h-8 rounded-full p-1 cursor-pointer flex items-center transition-colors duration-300 ${
+          state == "not" || state == "loading" ? "bg-sky-950" : "bg-gray-300"
+        }`}
         onClick={handleToggle}
-        disabled={loading}
-        className={`px-1 py-1 text-[15px] font-semibold text-white rounded-md transition-colors ${
-          state == "not" || state == "loading"
-            ? "bg-red-500 hover:bg-red-600"
-            : "bg-green-500 hover:bg-green-600"
-        } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
       >
-        {loading
-          ? "Updating..."
-          : state == "not" || state == "loading"
-          ? "Change to OFFLINE"
-          : "Change to ONLINE"}
-      </button>
+        <div
+          className={`w-6 h-6 rounded-full bg-white transition-transform duration-300 ${
+            state == "not" || state == "loading"
+              ? "transform translate-x-8"
+              : ""
+          }`}
+        />
+      </div>
+      {/* <span className="text-xl">Instant booking</span> */}
     </div>
   );
 };

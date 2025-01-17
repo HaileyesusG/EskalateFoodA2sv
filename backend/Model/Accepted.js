@@ -38,7 +38,7 @@ const acceptSchema = mongoose.Schema(
     },
     Technician_email: {
       type: String,
-      required: [true, "Please enter Tech email"],
+      required: false,
     },
     department: {
       type: String,

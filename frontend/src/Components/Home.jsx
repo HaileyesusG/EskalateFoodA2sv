@@ -39,11 +39,16 @@ const Home = ({ user3 }) => {
     });
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
+  const handleOpenAssignModal = () => {
+    setIsModalOpen2(true);
+  };
   const Closed = () => {
     setIsModalOpen(false);
+    setIsModalOpen2(false);
   };
   const mapRef = useRef(null);
   const dispatch2 = useDispatch();
@@ -415,6 +420,65 @@ const Home = ({ user3 }) => {
       setLoading(false);
     }
   };
+  //Assign Job
+  const AssignJob = async (amount) => {
+    console.log("in finished ", amount);
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `${API_BASE_URL}/api/tech/finishBba/${_id}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "PATCH",
+          body: JSON.stringify({
+            amount,
+          }),
+        }
+      );
+      if (response.ok) {
+        const json = await response.json();
+        const {
+          department,
+          firstname,
+          lastname,
+          gender,
+          phonenumber,
+          deposit,
+          email,
+          image,
+          location,
+          status,
+          status2,
+          _id,
+        } = json;
+        dispatch2(
+          updateTech({
+            id: Id,
+            department: department,
+            firstname: firstname,
+            lastname: lastname,
+            gender: gender,
+            phonenumber: phonenumber,
+            deposit: deposit,
+            email: email,
+            image: image,
+            status: status,
+            status2: status2,
+            location: location,
+            _id: _id,
+          })
+        );
+      } else {
+        const json = await response.json();
+        toastify(json.message);
+      }
+      setdisplay10("visible");
+    } catch (err) {
+      console.log("Failed to update status:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
   const declined = () => {
     // socket.emit("Decline", "Declined");
     // socket.emit("info", user);
@@ -642,6 +706,14 @@ const Home = ({ user3 }) => {
               {/* Modal that shows if task is accepted */}
 
               <JobCompletionModal onFinish={Finished} onClose={Closed} />
+            </div>
+          )}
+
+          {isModalOpen2 && (
+            <div className=" App p-4">
+              {/* Modal that shows if task is accepted */}
+
+              <JobCompletionModal onFinish={AssignJob} onClose={Closed} />
             </div>
           )}
 
@@ -1031,6 +1103,18 @@ const Home = ({ user3 }) => {
                     {" "}
                     <IoMdNotifications className={"ml-2 mt-3 " + disp10} />
                   </div>
+                </div>
+              ) : status == "bba" ? (
+                <div className="text-center mt-1">
+                  <button
+                    onClick={handleOpenAssignModal}
+                    disabled={loading}
+                    className={`px-6 py-2 text-lg font-semibold text-white rounded-md transition-colors ${"bg-green-500 hover:bg-green-600"} ${
+                      loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {loading ? "Updating..." : "Done"}
+                  </button>
                 </div>
               ) : (
                 <div className="text-center mt-1">

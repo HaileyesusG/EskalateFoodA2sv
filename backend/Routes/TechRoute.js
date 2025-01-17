@@ -1,4 +1,6 @@
 const {
+  techBba,
+  finishBba,
   TechCreate,
   GetTech,
   GetOneTech1,
@@ -8,7 +10,7 @@ const {
   UpdateOneTech,
   GetOneTechById,
   updateFinish,
-  changeStatus
+  changeStatus,
 } = require("../Controller/TechController");
 
 const multer = require("multer");
@@ -37,5 +39,7 @@ router.route("/:id").patch(UpdateOneTech);
 router.route("/GetOneTechById/:id").get(GetOneTechById);
 router.route("/changeStatus/:id").patch(changeStatus);
 router.route("/:id").delete(DeleteTech);
+router.route("/techBba/:id").patch(techBba);
+router.route("/finishBba/:id").patch(finishBba);
 
 module.exports = router;

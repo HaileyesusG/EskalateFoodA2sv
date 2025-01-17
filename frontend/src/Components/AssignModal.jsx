@@ -23,32 +23,28 @@ const AssignModal = ({
           Assign Technician
         </h2>
         <input
-          type="number"
-          placeholder="Enter Amount"
+          placeholder="Enter Customer_firstname"
           className="w-full border border-gray-300 p-2 rounded-md mb-4 focus:outline-none focus:ring focus:ring-blue-200"
           value={Customer_firstname}
           onChange={(e) => setCustomer_firstname(e.target.value)}
           disabled={isLoading} // Disable input while loading
         />
         <input
-          type="number"
-          placeholder="Enter Amount"
+          placeholder="Enter department"
           className="w-full border border-gray-300 p-2 rounded-md mb-4 focus:outline-none focus:ring focus:ring-blue-200"
           value={department2}
           onChange={(e) => setDepartment2(e.target.value)}
           disabled={isLoading} // Disable input while loading
         />
         <input
-          type="number"
-          placeholder="Enter Amount"
+          placeholder="Enter Customer_phonenumber"
           className="w-full border border-gray-300 p-2 rounded-md mb-4 focus:outline-none focus:ring focus:ring-blue-200"
           value={Customer_phonenumber}
           onChange={(e) => setCustomer_phonenumber(e.target.value)}
           disabled={isLoading} // Disable input while loading
         />
         <input
-          type="number"
-          placeholder="Enter Amount"
+          placeholder="Enter Customer_location"
           className="w-full border border-gray-300 p-2 rounded-md mb-4 focus:outline-none focus:ring focus:ring-blue-200"
           value={Customer_location}
           onChange={(e) => setCustomer_location(e.target.value)}
