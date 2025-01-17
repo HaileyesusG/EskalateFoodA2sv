@@ -570,7 +570,7 @@ text-cyan-600 mr-2"
                       </div>
                     </div>
 
-                    <div className="flex flex-col justify-center ml-5 w-40 h-28 border border-gray-200 rounded-lg overflow-y-scroll p-2 bg-gray-50">
+                    <div className="flex flex-col justify-center ml-5 w-72 h-28 border border-gray-200 rounded-lg overflow-y-scroll p-2 bg-gray-50">
                       {title === "ServiceProviders" &&
                         r.department.map((p, depIndex) => (
                           <div key={depIndex} className="text-sm text-gray-700">
