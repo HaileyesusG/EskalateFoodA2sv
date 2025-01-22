@@ -290,6 +290,16 @@ const SignUp = () => {
                         />
                         FRIDGE
                       </label>
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value="WASH"
+                          checked={selectedChoices.includes("WASH")}
+                          onChange={handleCheckboxChange}
+                          className="mr-2"
+                        />
+                        WASHING MACHINE
+                      </label>
                     </div>
                   )}
 
