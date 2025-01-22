@@ -280,6 +280,16 @@ const SignUp = () => {
                         />
                         Electric Stove
                       </label>
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value="FRIDGE"
+                          checked={selectedChoices.includes("FRIDGE")}
+                          onChange={handleCheckboxChange}
+                          className="mr-2"
+                        />
+                        FRIDGE
+                      </label>
                     </div>
                   )}
 
