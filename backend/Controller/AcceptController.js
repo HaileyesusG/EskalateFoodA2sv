@@ -79,7 +79,7 @@ const jobUpdate = async (req, res) => {
     let job;
     const { id } = req.params;
     const { amount } = req.body;
-    const percent = amount * 0.1;
+    const percent = amount * 0.09;
     if (amount == 0) {
       job = await Accepted.findByIdAndUpdate(
         id,
