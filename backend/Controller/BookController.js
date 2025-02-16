@@ -240,6 +240,7 @@ const BookCreate = async (req, res) => {
 
   // Lock variable to ensure AssignOther runs sequentially
   let AssignOther = async (RequestId) => {
+    const socket = getSocketClient();
     // Acquire the lock before proceeding
     const release2 = await assignOtherMutex.acquire();
     let nearestDistance = Infinity;
@@ -440,6 +441,7 @@ const BookCreate = async (req, res) => {
 //Update Tech
 
 const UpdateTechBook = async (req, res) => {
+  const socket = getSocketClient();
   const { id } = req.params;
   const { email, technicians } = req.body;
   console.log("the id is becase ", id);
