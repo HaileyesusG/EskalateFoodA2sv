@@ -80,12 +80,8 @@ io.on("connection", (socket) => {
     const clients = onlineuser.filter((user) =>
       flattenedArray.some((member) => member.email === user.email)
     );
-
-    if (clients.length > 0) {
-      console.log(clients);
-      console.log(flattenedArray.map((member) => member.email));
-      io.emit("booking", msg);
-    }
+    console.log(flattenedArray.map((member) => member.email));
+    io.emit("booking", msg);
     return () => {
       socket.off("booking1");
     };
