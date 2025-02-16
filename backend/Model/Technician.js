@@ -72,6 +72,16 @@ const techSchema = mongoose.Schema(
       type: String,
       default: " ",
     },
+    locationN: {
+      type: {
+        type: String,
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        default: [0, 0],
+      },
+    },
     location: {
       type: String,
       default: "Null",
@@ -79,6 +89,7 @@ const techSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+techSchema.index({ locationN: "2dsphere" });
 //static
 techSchema.statics.SignUp = async function (
   department,

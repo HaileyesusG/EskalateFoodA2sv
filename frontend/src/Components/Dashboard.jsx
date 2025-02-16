@@ -123,7 +123,7 @@ const Dashboard = () => {
     GPS();
     const interval = setInterval(() => {
       GPS();
-    }, 3 * 60 * 1000); // 3 minutes in milliseconds
+    }, 360 * 60 * 1000); // 3 minutes in milliseconds
 
     // Clean up the interval on component unmount
     return () => {
@@ -145,12 +145,16 @@ const Dashboard = () => {
       dispatch2({ type: "LOGIN", payload: Customer });
 
       if (Customer) {
+        console.log("in customer if ", Customer);
         const response2 = fetch(
           `${API_BASE_URL}/api/Customer/${Customer._id}`,
           {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ location: location }),
+            body: JSON.stringify({
+              location: location,
+              locationN: { type: "Point", coordinates: [longitude, latitude] },
+            }),
           }
         );
       }
@@ -336,7 +340,7 @@ const Dashboard = () => {
       killBooking();
       clearInterval(intervalRef.current); // Clear the interval after killBooking is called
       intervalRef.current = null; // Optional: Reset ref to prevent potential re-clear errors
-    }, 1.5 * 60 * 1000); // 3 minutes
+    }, 1.7 * 60 * 1000); // 3 minutes
     //return;
     socket.emit("loggedIn", customer);
     await CustomerForm(typeOfProblem, department);

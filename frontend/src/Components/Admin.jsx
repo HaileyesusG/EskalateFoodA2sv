@@ -605,12 +605,17 @@ text-cyan-600 mr-2"
                       >
                         Delete
                       </button> */}
-                      <button
-                        className="bg-red-500 hover:bg-red-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"
-                        onClick={() => openAssignModal(r._id)}
-                      >
-                        Assign Job
-                      </button>
+
+                      {r.status == "free" ? (
+                        <button
+                          className="bg-red-500 hover:bg-red-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"
+                          onClick={() => openAssignModal(r._id)}
+                        >
+                          Assign Job
+                        </button>
+                      ) : (
+                        ""
+                      )}
 
                       <button
                         className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-1 h-9 w-[70px] transition-colors duration-300"

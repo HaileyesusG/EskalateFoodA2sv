@@ -43,9 +43,20 @@ const customerSchema = mongoose.Schema(
       type: String,
       default: "Null",
     },
+    locationN: {
+      type: {
+        type: String,
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        default: [0, 0],
+      },
+    },
   },
   { timestamps: true }
 );
+customerSchema.index({ locationN: "2dsphere" });
 //static Sign Up
 customerSchema.statics.SignUp = async function (phonenumber) {
   if (!phonenumber) {

@@ -292,12 +292,27 @@ const updateFinish = async (req, res) => {
 //update one
 
 const UpdateOneTech = async (req, res) => {
-  const { location } = req.body;
+  const { location, locationN } = req.body;
+  console.log("locationN ", locationN);
+
+  if (
+    !locationN ||
+    !locationN.type ||
+    locationN.type !== "Point" || // Ensure type is 'Point'
+    !locationN.coordinates ||
+    !Array.isArray(locationN.coordinates) || // Ensure coordinates is an array
+    locationN.coordinates.length !== 2 || // Ensure exactly 2 elements
+    !locationN.coordinates.every((coord) => typeof coord === "number") // Ensure both are numbers
+  ) {
+    console.log("invalid location ");
+    return;
+  }
+  console.log("in UpdateOneTech ");
 
   const { id } = req.params;
   const updated = await Tech.findByIdAndUpdate(
     { _id: id },
-    { location: location },
+    { locationN: locationN, location: location },
     { new: true }
   );
   const updated_2 = await Tech.findById(id);

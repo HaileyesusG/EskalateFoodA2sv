@@ -18,7 +18,7 @@ const AdminChat = ({ user3 }) => {
   const [collector, setCollector] = useState([]);
   const [bench, setBench] = useState(null);
   const [bench2, setBench2] = useState(null);
-  const [idd, setIdd] = useState("");
+  const [idd, setIdd] = useState("67af490dd9208aa26b91ecd1");
   const [name, setname] = useState("");
   const [visible, setVisible] = useState(false);
   const [Counter, setCounter] = useState(0);
@@ -48,7 +48,7 @@ const AdminChat = ({ user3 }) => {
     };
     featcher();
     featcher3(idd);
-  }, [dispatch2]);
+  }, [dispatch2, idd]);
 
   const featcher3 = async (id) => {
     response = await fetch(`${API_BASE_URL}/api/Chat/GetChat`, {

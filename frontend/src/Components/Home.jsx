@@ -558,7 +558,7 @@ const Home = ({ user3 }) => {
     GPS();
     const interval = setInterval(() => {
       GPS();
-    }, 2 * 60 * 1000); // 5 minutes in milliseconds
+    }, 20 * 60 * 1000); // 20 minutes in milliseconds
 
     // Clean up the interval on component unmount
     return () => {
@@ -586,12 +586,17 @@ const Home = ({ user3 }) => {
       })
     );
   }, [location]);
-  const response2 = () =>
+  const response2 = () => {
+    console.log("in response 2");
     fetch(`${API_BASE_URL}/api/Tech/${_id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ location: location }),
+      body: JSON.stringify({
+        location: location,
+        locationN: { type: "Point", coordinates: [longitude, latitude] },
+      }),
     });
+  };
 
   useEffect(() => {
     map.innerHTML =
@@ -718,7 +723,7 @@ const Home = ({ user3 }) => {
           )}
 
           {isTaskAccepted && (
-            <div className=" App p-4">
+            <div className=" App p-4 ">
               {/* Modal that shows if task is accepted */}
 
               {<TaskAcceptedModal />}
@@ -732,7 +737,7 @@ const Home = ({ user3 }) => {
               id="map"
               ref={mapRef}
               className={
-                "  absolute   mt-[50px] sm:mt-[150px] w-full sm:w-[580px] h-[700px] sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
+                "    mt-[50px] sm:mt-[150px] w-full sm:w-[580px] h-[700px] sm:ml-[50px] rounded-xl md:w-[780px] md:h-[400px] overflow-hidden " +
                 disp6
               }
             />
@@ -891,12 +896,12 @@ const Home = ({ user3 }) => {
             <div className="mt-3">
               {" "}
               <div className={disp3}>
-                <MdEditLocationAlt
+                {/* <MdEditLocationAlt
                   onClick={makeVisible}
                   className=" text-[40px] text-green-500   hover:text-pink-600  font-bold cursor-pointer"
                 />
                 <h3>አድራሻዎትን </h3>
-                <h3 className="ml-2">ያስተካክሉ</h3>
+                <h3 className="ml-2">ያስተካክሉ</h3> */}
                 <ToastContainer />
               </div>
             </div>
@@ -1205,7 +1210,7 @@ const Home = ({ user3 }) => {
 // Modal component
 function TaskAcceptedModal() {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div className=" fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 max-w-full sm:max-w-md mx-4 sm:mx-auto">
         <h2 className="text-lg sm:text-2xl font-bold mb-4 text-center">
           Task Already Accepted

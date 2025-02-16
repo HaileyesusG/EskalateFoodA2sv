@@ -30,6 +30,16 @@ const bookSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter location"],
     },
+    Customer_locationN: {
+      type: {
+        type: String,
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        default: [0, 0],
+      },
+    },
     typeOfProblem: {
       type: String,
       default: "Not Mentioned Yet",
@@ -41,5 +51,6 @@ const bookSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+bookSchema.index({ Customer_locationN: "2dsphere" });
 module.exports = mongoose.model("Book", bookSchema);
 //static Sign Up

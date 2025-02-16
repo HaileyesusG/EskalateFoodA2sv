@@ -48,6 +48,8 @@ const BookCreate = async (req, res) => {
       const Customer_firstname = customerBody.firstname;
       const Customer_lastname = customerBody.lastname;
       const Customer_phonenumber = customerBody.phonenumber;
+      const Customer_locationN = customerBody.locationN.coordinates;
+      const Customer_locationN2 = customerBody.locationN;
       const Customer_location = customerBody.location;
       const Customer_email = customerBody.email;
       const Customer_status = customerBody.status;
@@ -55,41 +57,26 @@ const BookCreate = async (req, res) => {
       let slat;
       let slon;
 
-      try {
-        const response = await fetch(
-          `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
-            Customer_location
-          )}&format=json`
-        );
-        //console.log("Abebe", response.json);
-        const data = await response.json();
-        if (!response.ok) {
-          console.log("The error response is", data);
-          return res.status(200).json({ message: "No Internet Connection" });
-        }
-
-        if (data.length > 0) {
-          const { lat, lon } = data[0];
-          slat = parseFloat(lat);
-          slon = parseFloat(lon);
-          console.log("slat", slat);
-          console.log("slon", slon);
-        } else {
-          console.log("No results found");
-        }
-      } catch (error) {
-        return res.status(400).json({ message: "No Internet Connection" });
-      }
-      const customerCoords = {
-        latitude: slat,
-        longitude: slon,
-      };
+      // const [longitude, latitude] = Customer_location;
+      // const customerCoords = {
+      //   latitude: latitude,
+      //   longitude: longitude,
+      // };
 
       //tech
       const tech2 = await Technician.find({
         department: { $in: departmentArray },
         status: "free",
         status2: "not",
+        locationN: {
+          $near: {
+            $geometry: {
+              type: "Point",
+              coordinates: Customer_locationN,
+            },
+            $maxDistance: 7000, // 5 km
+          },
+        },
         __v: { $eq: 0 },
       });
       let newTech2;
@@ -122,63 +109,6 @@ const BookCreate = async (req, res) => {
         return;
       }
 
-      for (const person of newTech2) {
-        try {
-          // Fetch the driver's location data
-          const response = await fetch(
-            ` https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
-              person.location
-            )}&format=json`
-          );
-
-          const data = await response.json();
-
-          if (data.length > 0) {
-            const { lat, lon } = data[0];
-            const driverCoords = {
-              latitude: parseFloat(lat),
-              longitude: parseFloat(lon),
-            };
-
-            console.log("Driver latitude:", lat);
-            console.log("Driver longitude:", lon);
-
-            // Calculate the distance to the customer
-            const distance = haversine(customerCoords, driverCoords);
-
-            // Check if the distance is within the 7 km limit
-            if (distance <= maxDistance) {
-              if (distance < nearestDistance) {
-                nearestDistance = distance;
-                nearestDriver = [person]; // Update nearest driver
-              } else if (distance === nearestDistance) {
-                nearestDriver.push(person); // Add to list of nearest drivers
-              }
-            } else {
-              console.log(
-                `Driver at ${person.location} is beyond the 7 km limit.`
-              );
-            }
-          } else {
-            console.log(`No location data found for ${person.location}.`);
-          }
-        } catch (error) {
-          console.error(
-            `Error fetching location for ${person.location}:, error`
-          );
-          res.status(400).json({ message: "No Internet Connection" });
-          return;
-        }
-      }
-
-      // Log the results
-      if (nearestDriver.length > 0) {
-        console.log("Nearest driver(s) within 7 km:", nearestDriver);
-      } else {
-        res.status(400).send({ message: "NO Technician found" });
-        return;
-      }
-
       let db;
       try {
         db = await model.create({
@@ -186,7 +116,8 @@ const BookCreate = async (req, res) => {
           Customer_phonenumber,
           typeOfProblem,
           department,
-          Customer_location,
+          Customer_location: Customer_location,
+          Customer_locationN: Customer_locationN2,
           customer_id,
         });
 
@@ -196,7 +127,7 @@ const BookCreate = async (req, res) => {
         res.status(400).json({ message: error.message });
         return;
       }
-      for (const driver of nearestDriver) {
+      for (const driver of newTech2) {
         const minperson45 = await Technician.findByIdAndUpdate(
           { _id: driver._id },
           { status2: "loading" },
@@ -205,8 +136,8 @@ const BookCreate = async (req, res) => {
       }
       // console.log("the aba wde ", db);
 
-      // console.log("the nearestDriver ", nearestDriver);
-      let latestMember = [...nearestDriver];
+      console.log("the nearest newTech2 ", newTech2);
+      let latestMember = [...newTech2];
       socket.emit("booking1", { db, latestMember });
       //
 
@@ -223,7 +154,7 @@ const BookCreate = async (req, res) => {
       const RequestId = Request._id;
       //Timeout
       requestTimeouts[RequestId] = setTimeout(async () => {
-        for (const tech of nearestDriver) {
+        for (const tech of newTech2) {
           if (tech.status == "free") {
             await Technician.updateOne(
               { _id: tech._id },
@@ -331,6 +262,7 @@ const BookCreate = async (req, res) => {
       let Customer_lastname;
       let Customer_phonenumber;
       let Customer_location;
+      let Customer_locationN;
       let customer_id;
       let department;
       let typeOfProblem;
@@ -348,6 +280,15 @@ const BookCreate = async (req, res) => {
             status: status,
             status2: "not",
             deposit: { $gte: 200 },
+            locationN: {
+              $near: {
+                $geometry: {
+                  type: "Point",
+                  coordinates: Pend.Customer_locationN.coordinates,
+                },
+                $maxDistance: 7000, // 7 km
+              },
+            },
           });
           filter3.push(filter);
         }
@@ -357,6 +298,15 @@ const BookCreate = async (req, res) => {
             status: status,
             status2: "not",
             deposit: { $gte: 50 },
+            locationN: {
+              $near: {
+                $geometry: {
+                  type: "Point",
+                  coordinates: Pend.Customer_locationN.coordinates,
+                },
+                $maxDistance: 7000, // 7 km
+              },
+            },
           });
           filter3.push(filter);
         }
@@ -373,99 +323,16 @@ const BookCreate = async (req, res) => {
         return;
       }
 
-      let customerCoordsList = []; // To store coordinates of customers
+      console.log("the nearestfilter3  ", filter3);
 
-      // Fetch customer coordinates
-      for (const booker of bookers) {
-        try {
-          const response = await fetch(
-            `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
-              booker.Customer_location
-            )}&format=json`
-          );
-
-          const data = await response.json();
-
-          if (!response.ok || data.length === 0) {
-            console.log(`No results found for ${booker.Customer_location}`);
-            continue;
-          }
-
-          const { lat, lon } = data[0];
-          const customerCoords = {
-            latitude: parseFloat(lat),
-            longitude: parseFloat(lon),
-          };
-
-          customerCoordsList.push(customerCoords); // Save valid customer coordinates
-        } catch (error) {
-          console.log(
-            `Error fetching location for ${booker.Customer_location}:, error`
-          );
-        }
-      }
-
-      // Fetch driver coordinates and find the nearest
       for (const personGroup of filter3) {
         for (const driver of personGroup) {
-          try {
-            const response = await fetch(
-              `https://us1.locationiq.com/v1/search.php?key=pk.c5e06b64f368498929045de583b10a7c&q=${encodeURIComponent(
-                driver.location
-              )}&format=json`
-            );
-
-            const data = await response.json();
-
-            if (!response.ok || data.length === 0) {
-              console.log(`No results found for ${driver.location}`);
-              continue;
-            }
-
-            const { lat, lon } = data[0];
-            const driverCoords = {
-              latitude: parseFloat(lat),
-              longitude: parseFloat(lon),
-            };
-
-            // Compare the driver's location with all customer locations
-            for (const customerCoords of customerCoordsList) {
-              const distance = haversine(customerCoords, driverCoords);
-
-              // Only consider drivers within the max distance
-              if (distance <= maxDistance) {
-                if (distance < nearestDistance) {
-                  nearestDistance = distance;
-                  nearestDriver = [driver];
-                } else if (distance === nearestDistance) {
-                  nearestDriver.push(driver); // Add to the nearest driver list if same distance
-                }
-              }
-            }
-          } catch (error) {
-            console.error(
-              `Error fetching location for ${driver.location}:, error`
-            );
-          }
+          const minperson45 = await Technician.findByIdAndUpdate(
+            { _id: driver._id },
+            { status2: "loading" },
+            { new: true }
+          );
         }
-      }
-
-      if (nearestDriver.length > 0) {
-        console.log("Nearest driver(s):", nearestDriver);
-      } else {
-        await model.findByIdAndDelete(RequestId);
-        res.status(400).send({ error: "NO Technician found" });
-        console.log({ error: "NO Technician found" });
-        return;
-      }
-
-      console.log("the nearestDriver 2 ", nearestDriver);
-      for (const driver of nearestDriver) {
-        const minperson45 = await Technician.findByIdAndUpdate(
-          { _id: driver._id },
-          { status2: "loading" },
-          { new: true }
-        );
       }
 
       //Assign All
@@ -474,8 +341,10 @@ const BookCreate = async (req, res) => {
         Customer_lastname = Pend.Customer_lastname;
         Customer_phonenumber = Pend.Customer_phonenumber;
         Customer_location = Pend.Customer_location;
+        Customer_locationN = Pend.Customer_locationN;
         customer_id = Pend.customer_id;
         department = Pend.department;
+
         typeOfProblem = Pend.typeOfProblem;
 
         const db = {
@@ -483,11 +352,12 @@ const BookCreate = async (req, res) => {
           Customer_lastname,
           Customer_phonenumber,
           Customer_location,
+          Customer_locationN,
           customer_id,
           department,
           typeOfProblem,
         };
-        latestMember = [...nearestDriver];
+        latestMember = [...filter3.flat()];
         console.log("the target customer", db);
         socket.emit("booking1", { db, latestMember });
         console.log("end of Assign Other");
@@ -499,15 +369,16 @@ const BookCreate = async (req, res) => {
       }
       requestTimeouts[RequestId] = setTimeout(async () => {
         // socket.emit("UnAccept", phone);
-        for (const tech of nearestDriver) {
-          if (tech.status == "free") {
-            await Technician.updateOne(
-              { _id: tech._id },
-              { $set: { status2: "not" } }
-            );
+        for (const personGroup of filter3) {
+          for (const driver of personGroup) {
+            if (driver.status == "free") {
+              await Technician.updateOne(
+                { _id: driver._id },
+                { $set: { status2: "not" } }
+              );
+            }
           }
         }
-
         console.log("he did not accept too 2", RequestId);
         await addToAssignQueue(RequestId);
       }, 30000);

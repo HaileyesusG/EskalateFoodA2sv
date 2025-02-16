@@ -94,5 +94,6 @@ export const techReducer = createSlice({
     },
   },
 });
-export const { addTech, removeTech, setTech, updateTech,logOut } = techReducer.actions;
+export const { addTech, removeTech, setTech, updateTech, logOut } =
+  techReducer.actions;
 export default techReducer.reducer;

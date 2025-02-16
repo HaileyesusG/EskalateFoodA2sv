@@ -134,13 +134,30 @@ const UpdateCustomer = async (req, res) => {
 //Update one
 
 const UpdateOneCustomer = async (req, res) => {
-  const { location } = req.body;
+  const { location, locationN } = req.body;
+  console.log("locationN ", locationN);
+  console.log("location ", location);
+
+  // Validate the location object
+  if (
+    !locationN ||
+    !locationN.type ||
+    locationN.type !== "Point" || // Ensure type is 'Point'
+    !locationN.coordinates ||
+    !Array.isArray(locationN.coordinates) || // Ensure coordinates is an array
+    locationN.coordinates.length !== 2 || // Ensure exactly 2 elements
+    !locationN.coordinates.every((coord) => typeof coord === "number") // Ensure both are numbers
+  ) {
+    console.log("invalid location ");
+    return res.status(400).json({ message: "Invalid location data" });
+  }
+  console.log("in UpdateOneTech ", locationN);
 
   const { id } = req.params;
 
   const updated = await Customer.findByIdAndUpdate(
     { _id: id },
-    { location: location },
+    { locationN: locationN, location: location },
     { new: true }
   );
   const updated_2 = await Customer.findById(id);

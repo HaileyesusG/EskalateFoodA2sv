@@ -19,7 +19,7 @@ const ChatTech = ({ user }) => {
   const [collector2, setCollector2] = useState([]);
   const [bench, setBench] = useState(null);
   const [bench2, setBench2] = useState(null);
-  const [idd, setIdd] = useState("");
+  const [idd, setIdd] = useState("67af490dd9208aa26b91ecd1");
   const [name, setname] = useState("");
   const [width, setWidth] = useState("");
   const [mMSG, setMMSG] = useState("");
@@ -55,7 +55,7 @@ const ChatTech = ({ user }) => {
     };
     //featcher();
     featcher3(idd);
-  }, [socket, dispatch2]);
+  }, [socket, dispatch2, idd]);
 
   const featcher2 = async () => {
     response = await fetch(`${API_BASE_URL}/api/admin/GetAdmin`, {});
