@@ -4,7 +4,9 @@ const Customers = require("../Model/Customer");
 const haversine = require("haversine-distance");
 const io = require("socket.io-client");
 const backEndUrl = process.env.VITE_API_BASE_URL;
-const socket = io(backEndUrl);
+const socket = io(backEndUrl, {
+  transports: ["websocket"],
+});
 const { Mutex } = require("async-mutex");
 const technicianMutex = new Mutex();
 const assignOtherMutex = new Mutex();

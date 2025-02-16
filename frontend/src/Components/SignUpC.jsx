@@ -7,7 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { BounceLoader } from "react-spinners"; // Import the spinner
 import { io } from "socket.io-client";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const socket = io(API_BASE_URL);
+const socket = io(API_BASE_URL, {
+  transports: ["websocket"],
+});
 import hiloe5 from "../assets/bg1.avif";
 const SignUpC = ({ onConfirm, onCancel }) => {
   const length = 6;

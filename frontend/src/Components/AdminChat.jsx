@@ -22,7 +22,9 @@ const AdminChat = ({ user3 }) => {
   const [name, setname] = useState("");
   const [visible, setVisible] = useState(false);
   const [Counter, setCounter] = useState(0);
-  let socket = io(API_BASE_URL);
+  let socket = io(API_BASE_URL, {
+    transports: ["websocket"],
+  });
   //let { admin, dispatch } = useUserContextA();
   let { chat5, dispatchChat } = useUserContextChat();
   let chat = todo;

@@ -16,7 +16,9 @@ import { GiCampCookingPot } from "react-icons/gi";
 import { FaPaintRoller } from "react-icons/fa6";
 import { MdRoofing } from "react-icons/md";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-let socket = io(API_BASE_URL);
+let socket = io(API_BASE_URL, {
+  transports: ["websocket"],
+});
 import axios from "axios";
 import { FaUser } from "react-icons/fa6";
 import SignUpC from "./SignUpC";

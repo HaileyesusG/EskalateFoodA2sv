@@ -19,7 +19,11 @@ const LoginC = () => {
     if (image) setViewer(true);
   };
   useEffect(() => {
-    setSocket(io(API_BASE_URL));
+    setSocket(
+      io(API_BASE_URL, {
+        transports: ["websocket"],
+      })
+    );
   }, []);
   useEffect(() => {
     socket?.emit("newUser", email);

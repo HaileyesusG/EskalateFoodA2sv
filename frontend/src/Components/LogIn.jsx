@@ -23,28 +23,29 @@ const Login = () => {
   const handleSumit = async (e) => {
     e.preventDefault();
     await signin(email, password);
-    
 
     if (image) setViewer(true);
   };
   useEffect(() => {
-    setSocket(io(API_BASE_URL));
+    setSocket(
+      io(API_BASE_URL, {
+        transports: ["websocket"],
+      })
+    );
   }, []);
   useEffect(() => {
     socket?.emit("newUser", email);
   }, [email]);
   //
-  const handleInputChange=(e,setValue)=>{
-    setValue(e.target.value)
-    if(error)
-      {
-        setError(null)
-      }
-  }
-  if(error)
-    {
-      toastify(error)
+  const handleInputChange = (e, setValue) => {
+    setValue(e.target.value);
+    if (error) {
+      setError(null);
     }
+  };
+  if (error) {
+    toastify(error);
+  }
 
   return (
     <div className="relative w-full h-screen">
@@ -62,7 +63,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="Email"
-                  onChange={(e) => handleInputChange(e,setEmail)}
+                  onChange={(e) => handleInputChange(e, setEmail)}
                   value={email}
                   className="bg-transparent h-[35px] w-full sm:w-[300px] border-b-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white text-white"
                 />
@@ -71,7 +72,7 @@ const Login = () => {
               <div className="flex w-[90%] sm:w-auto justify-center relative">
                 <input
                   type="password"
-                  onChange={(e) => handleInputChange(e,setPassword)}
+                  onChange={(e) => handleInputChange(e, setPassword)}
                   value={password}
                   placeholder="Password"
                   className="bg-transparent h-[35px] w-full sm:w-[300px] border-b-2 block focus:outline-none focus:border-white rounded-2xl px-4 placeholder-white text-white"
@@ -83,20 +84,19 @@ const Login = () => {
                 className="bg-gradient-to-b hover:text-black h-[35px] w-[90%] sm:w-[300px] border-2 from-orange-300 rounded-3xl font-bold hover:to-purple-500 transition delay-200 text-white"
               >
                 {isLoading ? (
-                      <span className="flex justify-center items-center">
-                        <BounceLoader
-                          size={20}
-                          color="#ffffff"
-                          loading={isLoading}
-                        />
-                        Processing...
-                      </span>
-                    ) : (
-                      "Log In"
-                    )}
-                
+                  <span className="flex justify-center items-center">
+                    <BounceLoader
+                      size={20}
+                      color="#ffffff"
+                      loading={isLoading}
+                    />
+                    Processing...
+                  </span>
+                ) : (
+                  "Log In"
+                )}
               </button>
-             {error&& <ToastContainer />}
+              {error && <ToastContainer />}
             </div>
           </form>
         </div>

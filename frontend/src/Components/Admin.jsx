@@ -4,7 +4,9 @@ import { useUserContextA } from "../Hooks/useUserContextA";
 import { useRegister } from "../Hooks/useRegister";
 import { useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const socket = io(API_BASE_URL);
+const socket = io(API_BASE_URL, {
+  transports: ["websocket"],
+});
 import { FaCheckCircle } from "react-icons/fa";
 import { FaTools } from "react-icons/fa";
 import { FaMoon, FaPerson } from "react-icons/fa6";

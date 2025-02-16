@@ -23,7 +23,9 @@ import { useDispatch, useSelector } from "react-redux";
 import JobCompletionModal from "./Components/ConfirmModal";
 import TermsAndConditions from "./Components/Terms";
 import { io } from "socket.io-client";
-const socket = io(API_BASE_URL);
+const socket = io(API_BASE_URL, {
+  transports: ["websocket"],
+});
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
