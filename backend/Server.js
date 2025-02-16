@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
       socket.off("newUser");
     };
   });
-  socket.on("booking1", (msg) => {
+  socket.once("booking1", (msg) => {
     const { db, latestMember } = msg;
     console.log(
       "in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone"
@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
     const clients = onlineuser.filter((user) =>
       flattenedArray.some((member) => member.email === user.email)
     );
-    console.log(flattenedArray.map((member) => member.email));
+    console.log("i am i booking server.js ");
     io.emit("booking", msg);
     return () => {
       socket.off("booking1");
