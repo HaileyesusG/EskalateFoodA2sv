@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
       socket.off("newUser");
     };
   });
-  socket.once("booking1", (msg) => {
+  socket.on("booking1", (msg) => {
     const { db, latestMember } = msg;
     console.log(
       "in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone"

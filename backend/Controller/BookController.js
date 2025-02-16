@@ -2,11 +2,12 @@ const model = require("../Model/Book");
 const Technician = require("../Model/Technician");
 const Customers = require("../Model/Customer");
 const haversine = require("haversine-distance");
-const io = require("socket.io-client");
-const backEndUrl = process.env.VITE_API_BASE_URL;
-const socket = io(backEndUrl, {
-  transports: ["websocket"],
-});
+const getSocketClient = require("../socketClient");
+// const io = require("socket.io-client");
+// const backEndUrl = process.env.VITE_API_BASE_URL;
+// const socket = io(backEndUrl, {
+//   transports: ["websocket"],
+// });
 const { Mutex } = require("async-mutex");
 const technicianMutex = new Mutex();
 const assignOtherMutex = new Mutex();
@@ -137,7 +138,7 @@ const BookCreate = async (req, res) => {
         );
       }
       // console.log("the aba wde ", db);
-
+      const socket = getSocketClient();
       console.log("the nearest newTech2 ", newTech2);
       let latestMember = [...newTech2];
       socket.emit("booking1", { db, latestMember });
