@@ -142,19 +142,19 @@ const Home = ({ user3 }) => {
 
   useEffect(() => {
     socket.on("booking", async (msg) => {
-      const { db, latestMember } = msg;
+      const { db } = msg;
 
       // Flattening the array of arrays into a single array of objects
-      const flattenedArray = latestMember.flat();
+      const flattenedArray = db.flat();
       setTechnicians(flattenedArray);
       console.log("flattenedArray ", flattenedArray);
       // Check if Email exists in any of the objects
-      const emailExists = flattenedArray.some((member) => {
-        return member.email === Email;
+      const emailExists = flattenedArray.find((member) => {
+        return member.driver?.email === Email;
       });
 
       if (emailExists) {
-        array3.push(db);
+        array3.push(emailExists.db1);
         setCustomerL(db.Customer_location);
         setNotify(array3.length);
         setViwer(null);

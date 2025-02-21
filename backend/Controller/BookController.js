@@ -21,14 +21,15 @@ let isProcessingQueue2 = false;
 let Counter = 0;
 let addToAssignQueue;
 let addToAssignQueue2;
-const maxDistance = 7; // Maximum allowed distance in km
+const socket = getSocketClient();
+
 //Create
 const BookCreate = async (req, res) => {
   // Acquire the lock before proceeding
+  let newTech2;
   const release = await technicianMutex.acquire();
   continueBooking = true;
   Counter++;
-  let nearestDriver = [];
 
   try {
     const { typeOfProblem, department } = req.body;
@@ -44,9 +45,6 @@ const BookCreate = async (req, res) => {
         customerBody,
       } = RequestId2;
       const { typeOfProblem } = requestBody;
-      let nearestDistance = Infinity;
-      let leastWork = Infinity;
-      let leastTime = Infinity;
       const customer_id = customerBody._id;
       const Customer_firstname = customerBody.firstname;
       const Customer_lastname = customerBody.lastname;
@@ -56,15 +54,6 @@ const BookCreate = async (req, res) => {
       const Customer_location = customerBody.location;
       const Customer_email = customerBody.email;
       const Customer_status = customerBody.status;
-      let notytimeout;
-      let slat;
-      let slon;
-
-      // const [longitude, latitude] = Customer_location;
-      // const customerCoords = {
-      //   latitude: latitude,
-      //   longitude: longitude,
-      // };
 
       //tech
       const tech2 = await Technician.find({
@@ -77,30 +66,32 @@ const BookCreate = async (req, res) => {
               type: "Point",
               coordinates: Customer_locationN,
             },
-            $maxDistance: 7000, // 5 km
+            $maxDistance: 7000, // 7 km
           },
         },
         __v: { $eq: 0 },
+      }).lean();
+
+      newTech2 = tech2.filter((d) => {
+        if (
+          department === "TV" ||
+          department === "FRIDGE" ||
+          department === "WASHING" ||
+          department === "PAINTING"
+        ) {
+          return d.deposit >= 200;
+        }
+        if (department === "DISH") {
+          return d.deposit >= 50;
+        }
+        if (
+          department === "STOVE" ||
+          department === "MITAD" ||
+          department === "PLUMBING"
+        ) {
+          return d.deposit >= 100;
+        }
       });
-      let newTech2;
-      if (
-        department === "TV" ||
-        department === "FRIDGE" ||
-        department === "WASHING" ||
-        department === "PAINTING"
-      ) {
-        newTech2 = tech2.filter((d) => d.deposit >= 200);
-      }
-      if (department === "DISH") {
-        newTech2 = tech2.filter((d) => d.deposit >= 50);
-      }
-      if (
-        department === "STOVE" ||
-        department === "MITAD" ||
-        department === "PLUMBING"
-      ) {
-        newTech2 = tech2.filter((d) => d.deposit >= 100);
-      }
 
       try {
         if (newTech2.length === 0) {
@@ -112,9 +103,9 @@ const BookCreate = async (req, res) => {
         return;
       }
 
-      let db;
+      let db1;
       try {
-        db = await model.create({
+        db1 = await model.create({
           Customer_firstname,
           Customer_phonenumber,
           typeOfProblem,
@@ -125,27 +116,45 @@ const BookCreate = async (req, res) => {
         });
 
         //res.status(200).json(db);
-        //console.log(db);
+        // console.log("the first db is ", db1);
       } catch (error) {
         res.status(400).json({ message: error.message });
         return;
       }
-      for (const driver of newTech2) {
-        const minperson45 = await Technician.findByIdAndUpdate(
-          { _id: driver._id },
-          { status2: "loading" },
-          { new: true }
-        );
-      }
-      // console.log("the aba wde ", db);
-      const socket = getSocketClient();
-      console.log("the nearest newTech2 ", newTech2);
-      let latestMember = [...newTech2];
-      socket.emit("booking1", { db, latestMember });
-      //
+      // Track assigned technicians to avoid duplicates
+      const driver = new Set();
 
+      // Prepare an array of assigned requests
+      const db = [];
+
+      for (const driver2 of newTech2) {
+        if (!driver.has(driver2._id)) {
+          // Mark technician as assigned
+          driver.add(driver2._id);
+
+          // Lock the technician (set status to "loading")
+          await Technician.findByIdAndUpdate(
+            { _id: driver2._id },
+            { status2: "loading" },
+            { new: true }
+          ).catch((err) => console.error("Failed to lock technician:", err));
+
+          // Add the request with assigned technician info
+          db.push({
+            db1,
+            driver: driver2,
+          });
+        }
+      }
+
+      socket.emit("booking1", { db });
+      console.log(
+        "Emitted new booking requests with assigned technicians ",
+        db
+      );
+      //
       const minperson9 = await model.findByIdAndUpdate(
-        { _id: db._id },
+        { _id: db1._id },
         { Status: "pending" }
       );
 
@@ -168,6 +177,7 @@ const BookCreate = async (req, res) => {
         await addToAssignQueue(RequestId);
       }, 30000);
       addToAssignQueue = async (RequestId) => {
+        console.log("in Booking .");
         if (continueBooking == false) {
           console.log("Booking process stopped.");
           return; // Stop booking process
@@ -230,24 +240,42 @@ const BookCreate = async (req, res) => {
   } catch (err) {
     console.log("Error during driver reassignment:", err);
   } finally {
-    // const result = await Technician.updateMany(
-    //   { status: "free", status2: { $ne: "not" } }, // Additional condition to check status2
-    //   { $set: { status2: "not" } }
-    // );
+    // for (const tech of newTech2) {
+    //   try {
+    //     await Technician.updateOne(
+    //       { _id: tech._id },
+    //       { $set: { status2: "not" } }
+    //     );
+    //   } catch (err) {
+    //     console.error("Failed to reset status for technician:", tech._id, err);
+    //   }
+    // }
     // Release the lock
     release();
   }
 
   // Lock variable to ensure AssignOther runs sequentially
   let AssignOther = async (RequestId) => {
-    const socket = getSocketClient();
+    //reset
+    // const resetTechnicianStatus = async (technicians) => {
+    //   for (const tech of technicians) {
+    //     try {
+    //       await Technician.updateOne(
+    //         { _id: tech._id },
+    //         { $set: { status2: "not" } }
+    //       );
+    //     } catch (err) {
+    //       console.error(
+    //         "Failed to reset status for technician:",
+    //         tech._id,
+    //         err
+    //       );
+    //     }
+    //   }
+    // };
     // Acquire the lock before proceeding
     const release2 = await assignOtherMutex.acquire();
-    let nearestDistance = Infinity;
-    let leastTime = Infinity;
-    let leastWork = Infinity;
-    let nearestDriver = [];
-
+    let filter3 = [];
     try {
       let bookers = await model.find({ _id: RequestId, Status: "pending" });
       if (bookers.length === 0) {
@@ -272,7 +300,7 @@ const BookCreate = async (req, res) => {
       let typeOfProblem;
 
       const status = "free";
-      let filter3 = [];
+
       for (const Pend of bookers) {
         if (
           Pend.department == "TV" ||
@@ -293,7 +321,7 @@ const BookCreate = async (req, res) => {
                 $maxDistance: 7000, // 7 km
               },
             },
-          });
+          }).lean();
           filter3.push(filter);
         }
         if (Pend.department == "DISH") {
@@ -311,7 +339,7 @@ const BookCreate = async (req, res) => {
                 $maxDistance: 7000, // 7 km
               },
             },
-          });
+          }).lean();
           filter3.push(filter);
         }
       }
@@ -327,45 +355,67 @@ const BookCreate = async (req, res) => {
         return;
       }
 
-      console.log("the nearestfilter3  ", filter3);
+      // console.log("the nearestfilter3  ", filter3);
 
-      for (const personGroup of filter3) {
-        for (const driver of personGroup) {
-          const minperson45 = await Technician.findByIdAndUpdate(
-            { _id: driver._id },
-            { status2: "loading" },
-            { new: true }
-          );
-        }
-      }
+      // for (const personGroup of filter3) {
+      //   for (const driver of personGroup) {
+      //     const minperson45 = await Technician.findByIdAndUpdate(
+      //       { _id: driver._id },
+      //       { status2: "loading" },
+      //       { new: true }
+      //     );
+      //   }
+      // }
+      latestMember = [...filter3.flat()];
 
-      //Assign All
+      // Track which technicians have been notified
+      const notifiedTechnicians = new Set();
+      latestMember = latestMember.filter(
+        (tech) => !notifiedTechnicians.has(tech._id)
+      );
+
+      // Prepare an array of assigned requests
+      const db = [];
+
       for (const Pend of bookers) {
-        Customer_firstname = Pend.Customer_firstname;
-        Customer_lastname = Pend.Customer_lastname;
-        Customer_phonenumber = Pend.Customer_phonenumber;
-        Customer_location = Pend.Customer_location;
-        Customer_locationN = Pend.Customer_locationN;
-        customer_id = Pend.customer_id;
-        department = Pend.department;
+        // Find the first available technician
+        const driver = latestMember.shift();
 
-        typeOfProblem = Pend.typeOfProblem;
+        if (!driver) {
+          console.log(`No available technician for request ${Pend._id}`);
+          continue; // Skip if no technicians are available
+        }
 
-        const db = {
-          Customer_firstname,
-          Customer_lastname,
-          Customer_phonenumber,
-          Customer_location,
-          Customer_locationN,
-          customer_id,
-          department,
-          typeOfProblem,
+        // Mark this technician as assigned
+        notifiedTechnicians.add(driver._id);
+
+        // Lock the technician immediately
+        await Technician.findByIdAndUpdate(
+          driver._id,
+          { status2: "loading" },
+          { new: true }
+        ).catch((err) => console.log("Failed to lock technician:", err));
+
+        // Assign the request data to db1
+        let db1 = {
+          Customer_firstname: Pend.Customer_firstname,
+          Customer_lastname: Pend.Customer_lastname,
+          Customer_phonenumber: Pend.Customer_phonenumber,
+          Customer_location: Pend.Customer_location,
+          Customer_locationN: Pend.Customer_locationN,
+          customer_id: Pend.customer_id,
+          department: Pend.department,
+          typeOfProblem: Pend.typeOfProblem,
         };
-        latestMember = [...filter3.flat()];
-        console.log("the target customer", db);
-        socket.emit("booking1", { db, latestMember });
-        console.log("end of Assign Other");
+
+        // Push both db1 and driver into the db array
+        db.push({ db1, driver });
       }
+
+      // Emit the data after processing all assignments
+      socket.emit("booking1", { db });
+
+      console.log("end of Assign Other");
 
       if (requestTimeouts[RequestId]) {
         clearTimeout(requestTimeouts[RequestId]);
@@ -389,10 +439,7 @@ const BookCreate = async (req, res) => {
     } catch (err) {
       console.log("Error during driver reassignment:", err);
     } finally {
-      // const result = await Technician.updateMany(
-      //   { status: "free", status2: { $ne: "not" } }, // Additional condition to check status2
-      //   { $set: { status2: "not" } }
-      // );
+      // resetTechnicianStatus(filter3.flat());
       // Release the lock
       release2();
     }
@@ -441,7 +488,6 @@ const BookCreate = async (req, res) => {
 //Update Tech
 
 const UpdateTechBook = async (req, res) => {
-  const socket = getSocketClient();
   const { id } = req.params;
   const { email, technicians } = req.body;
   console.log("the id is becase ", id);

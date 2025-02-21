@@ -7,6 +7,7 @@ const paz = require("path");
 const { Server } = require("socket.io");
 const app = express();
 const DbConnection = require("./Config/DbConnection");
+const startCleanupJob = require("./Config/cleanupService");
 const path = require("./Routes/CustomerRoute");
 const ApplicantRoute = require("./Routes/ApplicantRoute");
 const path2 = require("./Routes/TechRoute");
@@ -17,6 +18,8 @@ const path6 = require("./Routes/ChatRoute");
 //const path3 = require("./Routes/UserRoute");
 const bodyParser = require("body-parser");
 DbConnection();
+//Start the periodic cleanup job
+// startCleanupJob();
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(
@@ -69,17 +72,15 @@ io.on("connection", (socket) => {
     };
   });
   socket.on("booking1", (msg) => {
-    const { db, latestMember } = msg;
-    console.log(
-      "in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone in booking 1 is gone"
-    );
+    const { db } = msg;
+    // console.log("in booking 1 of db latest ", db);
     // Flatten the array of arrays into a single array of objects
-    const flattenedArray = latestMember.flat();
+    // const flattenedArray = latestMember.flat();
 
-    // Check if any email from the flattened array exists in the onlineuser array
-    const clients = onlineuser.filter((user) =>
-      flattenedArray.some((member) => member.email === user.email)
-    );
+    // // Check if any email from the flattened array exists in the onlineuser array
+    // const clients = onlineuser.filter((user) =>
+    //   flattenedArray.some((member) => member.email === user.email)
+    // );
     console.log("i am i booking server.js ");
     io.emit("booking", msg);
     return () => {
