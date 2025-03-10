@@ -4,6 +4,8 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const http = require("http");
 const paz = require("path");
+const { Expo } = require("expo-server-sdk");
+const expo = new Expo();
 const { Server } = require("socket.io");
 const app = express();
 const DbConnection = require("./Config/DbConnection");
@@ -45,11 +47,12 @@ const serv = http.createServer(app);
 const io = new Server(serv, {
   cors: {
     origin: "https://masterfix.onrender.com",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   },
 });
 let onlineuser = [];
+const activeUsers = {}; // Store active users and their push tokens
 const addNewUser = (email) => {
   !onlineuser.some((user) => user.email === email) &&
     onlineuser.push({ email });
@@ -65,15 +68,20 @@ io.on("connection", (socket) => {
   console.log("user connected", socket.id);
   console.log("user con", onlineuser);
   isFirstConnection = false;
+  socket.on("registerPushToken", ({ email, token }) => {
+    console.log("this is the email and token ", email, token);
+    activeUsers[email.toLowerCase()] = token;
+  });
   socket.on("newUser", (email) => {
     addNewUser(email);
     return () => {
       socket.off("newUser");
     };
   });
-  socket.on("booking1", (msg) => {
+  socket.on("booking1", async (msg) => {
     const { db } = msg;
-    // console.log("in booking 1 of db latest ", db);
+    // const bookings = db[0];
+    console.log("in booking 1 ", db);
     // Flatten the array of arrays into a single array of objects
     // const flattenedArray = latestMember.flat();
 
@@ -83,6 +91,31 @@ io.on("connection", (socket) => {
     // );
     console.log("i am i booking server.js ");
     io.emit("booking", msg);
+    // Loop through each object inside dbArray[0]
+    for (const booking of db) {
+      const technicianEmail = booking?.driver?.email?.toLowerCase();
+      console.log("the tech email is ", technicianEmail);
+      const pushToken = activeUsers[technicianEmail];
+      console.log("the token is ", pushToken);
+      if (pushToken && Expo.isExpoPushToken(pushToken)) {
+        console.log("i ill notify");
+        const message = {
+          to: pushToken,
+          sound: "default",
+          title: "New Job Request",
+          body: `Booking request from ${booking.db1.Customer_location}`,
+          data: { jobDetails: booking },
+        };
+
+        try {
+          await expo.sendPushNotificationsAsync([message]);
+          console.log(`Push notification sent to ${technicianEmail}`);
+        } catch (error) {
+          console.error("Error sending push notification:", error);
+        }
+      }
+    }
+
     return () => {
       socket.off("booking1");
     };
