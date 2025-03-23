@@ -18,6 +18,7 @@ const path4 = require("./Routes/AcceptedRoute");
 const path5 = require("./Routes/AdminRoute");
 const path6 = require("./Routes/ChatRoute");
 //const path3 = require("./Routes/UserRoute");
+const PushToken = require("./Model/PushToken"); // Import the model
 const bodyParser = require("body-parser");
 DbConnection();
 //Start the periodic cleanup job
@@ -47,7 +48,7 @@ const serv = http.createServer(app);
 const io = new Server(serv, {
   cors: {
     origin: "https://masterfix.onrender.com",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST"],
     credentials: true,
   },
 });
@@ -68,9 +69,22 @@ io.on("connection", (socket) => {
   console.log("user connected", socket.id);
   console.log("user con", onlineuser);
   isFirstConnection = false;
-  socket.on("registerPushToken", ({ email, token }) => {
-    console.log("this is the email and token ", email, token);
-    activeUsers[email.toLowerCase()] = token;
+  socket.on("registerPushToken", async ({ email, expoPushToken }) => {
+    try {
+      console.log("Received token:", email, expoPushToken);
+      const processedEmail = email.toLowerCase();
+
+      // Upsert (update if exists, insert if not)
+      await PushToken.findOneAndUpdate(
+        { email: processedEmail },
+        { expoPushToken },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+      );
+
+      console.log("Push token stored successfully!");
+    } catch (error) {
+      console.error("Error storing push token:", error);
+    }
   });
   socket.on("newUser", (email) => {
     addNewUser(email);
@@ -78,41 +92,49 @@ io.on("connection", (socket) => {
       socket.off("newUser");
     };
   });
+  const { Expo } = require("expo-server-sdk");
+  const expo = new Expo();
+
   socket.on("booking1", async (msg) => {
     const { db } = msg;
-    // const bookings = db[0];
-    console.log("in booking 1 ", db);
-    // Flatten the array of arrays into a single array of objects
-    // const flattenedArray = latestMember.flat();
+    console.log("Received booking1 event:", db);
 
-    // // Check if any email from the flattened array exists in the onlineuser array
-    // const clients = onlineuser.filter((user) =>
-    //   flattenedArray.some((member) => member.email === user.email)
-    // );
-    console.log("i am i booking server.js ");
     io.emit("booking", msg);
-    // Loop through each object inside dbArray[0]
+
     for (const booking of db) {
       const technicianEmail = booking?.driver?.email?.toLowerCase();
-      console.log("the tech email is ", technicianEmail);
-      const pushToken = activeUsers[technicianEmail];
-      console.log("the token is ", pushToken);
-      if (pushToken && Expo.isExpoPushToken(pushToken)) {
-        console.log("i ill notify");
-        const message = {
-          to: pushToken,
-          sound: "default",
-          title: "New Job Request",
-          body: `Booking request from ${booking.db1.Customer_location}`,
-          data: { jobDetails: booking },
-        };
+      console.log("Technician email:", technicianEmail);
 
-        try {
-          await expo.sendPushNotificationsAsync([message]);
-          console.log(`Push notification sent to ${technicianEmail}`);
-        } catch (error) {
-          console.error("Error sending push notification:", error);
+      if (!technicianEmail) continue;
+
+      try {
+        // Retrieve push token from MongoDB
+        const technician = await PushToken.findOne({ email: technicianEmail });
+
+        if (technician && Expo.isExpoPushToken(technician.expoPushToken)) {
+          console.log("Valid Expo push token found:", technician.expoPushToken);
+
+          const message = {
+            to: technician.expoPushToken,
+            sound: "default",
+            title: "New Job Request",
+            body: `Booking request from ${booking.db1.Customer_location}`,
+            data: { jobDetails: booking, deservedTech: db },
+          };
+
+          try {
+            await expo.sendPushNotificationsAsync([message]);
+            console.log(`Push notification sent to ${technicianEmail}`);
+          } catch (error) {
+            console.error("Error sending push notification:", error);
+          }
+        } else {
+          console.log(`No valid push token found for ${technicianEmail}`);
         }
+      } catch (error) {
+        console.error(
+          `Error retrieving push token for ${technicianEmail}:, error`
+        );
       }
     }
 

@@ -13,11 +13,16 @@ const toBeFinished = async (req, res) => {
 };
 const DeleteLatestAccept = async (req, res) => {
   const { id } = req.params;
-  const df = await ToFinish.findOne({ techId: id });
-  if (df) {
-    const cv = await ToFinish.findByIdAndDelete(df._id);
-  } else {
-    return;
+  try {
+    const df = await ToFinish.findOne({ techId: id });
+    if (df) {
+      const cv = await ToFinish.findByIdAndDelete(df._id);
+      res.status(200).json(cv);
+    } else {
+      return;
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 

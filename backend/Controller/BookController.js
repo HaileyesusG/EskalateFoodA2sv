@@ -493,7 +493,9 @@ const UpdateTechBook = async (req, res) => {
   console.log("the id is becase ", id);
   console.log("the email becase ", email);
   try {
-    const Techid = await Technician.findOne({ email: email });
+    const Techid = await Technician.findOne({
+      email: { $regex: new RegExp(`^${email}$`, "i") },
+    });
     const data = await Technician.findByIdAndUpdate(
       { _id: Techid._id },
       { status: "busy" },
