@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
   console.log("user connected", socket.id);
   console.log("user con", onlineuser);
   isFirstConnection = false;
-  socket.on("registerPushToken", async ({ email, expoPushToken }) => {
+  socket.on("registerPushToken", async ({ email, _id, expoPushToken }) => {
     try {
       console.log("Received token:", email, expoPushToken);
       const processedEmail = email.toLowerCase();
@@ -77,7 +77,7 @@ io.on("connection", (socket) => {
       // Upsert (update if exists, insert if not)
       await PushToken.findOneAndUpdate(
         { email: processedEmail },
-        { expoPushToken },
+        { expoPushToken, Tech_id: _id },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
