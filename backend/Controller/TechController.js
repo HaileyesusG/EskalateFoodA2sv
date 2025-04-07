@@ -6,9 +6,11 @@ const io = require("socket.io-client");
 const backEndUrl = process.env.VITE_API_BASE_URL;
 const socket = io(backEndUrl);
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 const nodemailer = require("nodemailer");
 const model = require("../Model/Book");
 const directBook = require("../Model/directBook");
+const apiKey = "pk.450a22b0630d7ca73b134cd78223a0ec"; // Replace with your LocationIQ API key
 //Token Generator
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET);
@@ -293,7 +295,9 @@ const updateFinish = async (req, res) => {
 
 const UpdateOneTech = async (req, res) => {
   const { location, locationN } = req.body;
+  const { id } = req.params;
   console.log("locationN ", locationN);
+  console.log("The id is ", id);
 
   if (
     !locationN ||
@@ -309,14 +313,31 @@ const UpdateOneTech = async (req, res) => {
   }
   console.log("in UpdateOneTech ");
 
-  const { id } = req.params;
-  const updated = await Tech.findByIdAndUpdate(
-    { _id: id },
-    { locationN: locationN, location: location },
-    { new: true }
-  );
-  const updated_2 = await Tech.findById(id);
-  res.status(200).json(updated_2);
+  if (location == "NotKnown") {
+    try {
+      const [lng, lat] = locationN.coordinates;
+      const geocodeUrl = `https://us1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${lat}&lon=${lng}&format=json`;
+      const response = await axios.get(geocodeUrl);
+      const address = response.data.display_name;
+      const updated = await Tech.findByIdAndUpdate(
+        { _id: id },
+        { locationN: locationN, location: address },
+        { new: true }
+      );
+      const updated_2 = await Tech.findById(id);
+      res.status(200).json(updated_2);
+    } catch (error) {
+      console.log("Error retrieving location name.", error);
+    }
+  } else {
+    const updated = await Tech.findByIdAndUpdate(
+      { _id: id },
+      { locationN: locationN, location: location },
+      { new: true }
+    );
+    const updated_2 = await Tech.findById(id);
+    res.status(200).json(updated_2);
+  }
 };
 
 //Update(For password, username and avatar change for the future)
