@@ -9,25 +9,19 @@ const expo = new Expo();
 const { Server } = require("socket.io");
 const app = express();
 const DbConnection = require("./Config/DbConnection");
-const startCleanupJob = require("./Config/cleanupService");
-const path = require("./Routes/CustomerRoute");
-const ApplicantRoute = require("./Routes/ApplicantRoute");
-const path2 = require("./Routes/TechRoute");
-const path3 = require("./Routes/BookRoute");
-const path4 = require("./Routes/AcceptedRoute");
-const path5 = require("./Routes/AdminRoute");
-const path6 = require("./Routes/ChatRoute");
+const seed = require("./utils/seed").default;
+const path = require("./Routes/Foodroute");
+const path2 = require("./Routes/RestaurantRoute");
 //const path3 = require("./Routes/UserRoute");
-const PushToken = require("./Model/PushToken"); // Import the model
 const bodyParser = require("body-parser");
 DbConnection();
 //Start the periodic cleanup job
-// startCleanupJob();
+seed();
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://masterfix.onrender.com",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: "Content-Type,Authorization",
@@ -35,19 +29,14 @@ app.use(
 );
 app.options("/api/*", cors());
 app.set("trust proxy", 1);
-app.use("/api/Customer", path);
-app.use("/api/Tech", path2);
-app.use("/api/Book", path3);
-app.use("/api/Accepted", path4);
-app.use("/api/Admin", path5);
-app.use("/api/Chat", path6);
-app.use("/api/Applicants", ApplicantRoute);
+app.use("/api/foods", path);
+app.use("/api/restaurants", path2);
 let logged = [];
 let boddy = [];
 const serv = http.createServer(app);
 const io = new Server(serv, {
   cors: {
-    origin: "https://masterfix.onrender.com",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -95,53 +84,6 @@ io.on("connection", (socket) => {
   const { Expo } = require("expo-server-sdk");
   const expo = new Expo();
 
-  socket.on("booking1", async (msg) => {
-    const { db } = msg;
-    console.log("Received booking1 event:", db);
-
-    io.emit("booking", msg);
-
-    for (const booking of db) {
-      const technicianEmail = booking?.driver?.email?.toLowerCase();
-      console.log("Technician email:", technicianEmail);
-
-      if (!technicianEmail) continue;
-
-      try {
-        // Retrieve push token from MongoDB
-        const technician = await PushToken.findOne({ email: technicianEmail });
-
-        if (technician && Expo.isExpoPushToken(technician.expoPushToken)) {
-          console.log("Valid Expo push token found:", technician.expoPushToken);
-
-          const message = {
-            to: technician.expoPushToken,
-            sound: "default",
-            title: "New Job Request",
-            body: `Booking request from ${booking.db1.Customer_location}`,
-            data: { jobDetails: booking, deservedTech: db },
-          };
-
-          try {
-            await expo.sendPushNotificationsAsync([message]);
-            console.log(`Push notification sent to ${technicianEmail}`);
-          } catch (error) {
-            console.error("Error sending push notification:", error);
-          }
-        } else {
-          console.log(`No valid push token found for ${technicianEmail}`);
-        }
-      } catch (error) {
-        console.error(
-          `Error retrieving push token for ${technicianEmail}:, error`
-        );
-      }
-    }
-
-    return () => {
-      socket.off("booking1");
-    };
-  });
   socket.on("IsAccept", (msg) => {
     io.emit("IsAccept", msg);
     return () => {
