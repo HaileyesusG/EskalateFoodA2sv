@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function FoodForm({ onAdd }) {
   const [food_name, setFoodName] = useState('');
   const [food_rating, setFoodRating] = useState('');
   const [food_image, setFoodImage] = useState('');
+  const [error, setError] = useState(''); // state for server errors
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // clear old errors
 
     if (!food_name || !food_rating) {
-      alert('Please fill in required fields');
+      setError('Please fill in all required fields.');
       return;
     }
 
@@ -17,21 +20,41 @@ function FoodForm({ onAdd }) {
       const res = await fetch(`${API_BASE_URL}/api/foods`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ food_name, food_rating: Number(food_rating), food_image }),
+        body: JSON.stringify({
+          food_name,
+          food_rating: Number(food_rating),
+          food_image
+        }),
       });
-      if (!res.ok) throw new Error('Failed to add food');
 
+      const data = await res.json(); // read response body
+
+      if (!res.ok) {
+        // Try to use server's message, fallback to generic
+        setError(data?.message || 'Failed to add food.');
+        return;
+      }
+
+      // success
       setFoodName('');
       setFoodRating('');
       setFoodImage('');
       onAdd();
     } catch (error) {
       console.error(error);
+      setError('Something went wrong. Please try again later.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+      {/* Show error message */}
+      {error && (
+        <div className="p-3 bg-red-100 text-red-700 border border-red-300 rounded">
+          {error}
+        </div>
+      )}
+
       <input
         name="food_name"
         type="text"
